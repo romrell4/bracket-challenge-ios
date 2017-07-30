@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C15E5B11F2E397B00E6E4A5 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 0C15E5B01F2E397B00E6E4A5 /* Podfile */; };
 		0C5085C61F2E357D00C4A04D /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0C5085BC1F2E357D00C4A04D /* Info.plist */; };
 		0C5085C71F2E357D00C4A04D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C5085BE1F2E357D00C4A04D /* Assets.xcassets */; };
 		0C5085C81F2E357D00C4A04D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C5085BF1F2E357D00C4A04D /* LaunchScreen.storyboard */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C15E5B01F2E397B00E6E4A5 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		0C5085A61F2E34E300C4A04D /* BracketChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BracketChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C5085BC1F2E357D00C4A04D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0C5085BE1F2E357D00C4A04D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -39,6 +41,7 @@
 		0C50859D1F2E34E300C4A04D = {
 			isa = PBXGroup;
 			children = (
+				0C15E5B01F2E397B00E6E4A5 /* Podfile */,
 				0C5085A81F2E34E300C4A04D /* BracketChallenge */,
 				0C5085A71F2E34E300C4A04D /* Products */,
 			);
@@ -165,6 +168,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C15E5B11F2E397B00E6E4A5 /* Podfile in Resources */,
 				0C5085C91F2E357D00C4A04D /* Main.storyboard in Resources */,
 				0C5085C61F2E357D00C4A04D /* Info.plist in Resources */,
 				0C5085C81F2E357D00C4A04D /* LaunchScreen.storyboard in Resources */,
@@ -327,6 +331,7 @@
 				0C5085BA1F2E34E300C4A04D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
