@@ -18,6 +18,7 @@
 
 /* Begin PBXFileReference section */
 		0C15E5B01F2E397B00E6E4A5 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		0C15EB251F2E530100E6E4A5 /* BracketChallenge.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BracketChallenge.entitlements; sourceTree = "<group>"; };
 		0C5085A61F2E34E300C4A04D /* BracketChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BracketChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C5085BC1F2E357D00C4A04D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0C5085BE1F2E357D00C4A04D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -64,6 +65,7 @@
 		0C5085A81F2E34E300C4A04D /* BracketChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				0C15EB251F2E530100E6E4A5 /* BracketChallenge.entitlements */,
 				0C5085BD1F2E357D00C4A04D /* view */,
 				0C5085C31F2E357D00C4A04D /* controller */,
 				0C5085C51F2E357D00C4A04D /* model */,
@@ -168,6 +170,11 @@
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = G9JN5J3VZ9;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -364,6 +371,7 @@
 			baseConfigurationReference = 4D7185542C0E4E1151157A56 /* Pods-BracketChallenge.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = BracketChallenge/BracketChallenge.entitlements;
 				DEVELOPMENT_TEAM = G9JN5J3VZ9;
 				INFOPLIST_FILE = "$(SRCROOT)/BracketChallenge/res/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -378,6 +386,7 @@
 			baseConfigurationReference = 832DB5FC271697BEEB9C135D /* Pods-BracketChallenge.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = BracketChallenge/BracketChallenge.entitlements;
 				DEVELOPMENT_TEAM = G9JN5J3VZ9;
 				INFOPLIST_FILE = "$(SRCROOT)/BracketChallenge/res/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
