@@ -17,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        SDKApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         return true
     }
 
@@ -43,8 +44,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        print("Logged in!")
-        return SDKApplicationDelegate.shared.application(app, open: url, options: options)
+        if let scheme = url.scheme, scheme.hasPrefix("fb\(SDKSettings.appId)"), url.host == "authorize" {
+            return SDKApplicationDelegate.shared.application(app, open: url, options: options)
+        }
+        
+        return false
     }
+    
+    
 }
 
