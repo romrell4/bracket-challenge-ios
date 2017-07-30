@@ -45,11 +45,11 @@
 		0C50859D1F2E34E300C4A04D = {
 			isa = PBXGroup;
 			children = (
-				0C15E5B01F2E397B00E6E4A5 /* Podfile */,
 				0C5085A81F2E34E300C4A04D /* BracketChallenge */,
 				0C5085A71F2E34E300C4A04D /* Products */,
-				2268C7A49CA0CE22E11CD8E4 /* Pods */,
 				A4A6139EA080A3099091748E /* Frameworks */,
+				2268C7A49CA0CE22E11CD8E4 /* Pods */,
+				0C15E5B01F2E397B00E6E4A5 /* Podfile */,
 			);
 			sourceTree = "<group>";
 		};
