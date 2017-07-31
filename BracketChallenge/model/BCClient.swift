@@ -6,13 +6,13 @@
 //  Copyright © 2017 Eric Romrell. All rights reserved.
 //
 
-import UIKit
+import FacebookCore
 
 private let BASE_URL = "https://3vxcifd2rc.execute-api.us-west-2.amazonaws.com/PROD/"
 
 class BCClient {
-    static func login(username: String, callback: @escaping (User?, BCError?) -> Void) {
-        makeRequest(endpoint: "login/\(username)", method: "POST") { (response) in
+    static func login(callback: @escaping (User?, BCError?) -> Void) {
+        makeRequest(endpoint: "users", method: "POST") { (response) in
             if response.succeeded, let dict = response.getDataJson() as? [String: Any] {
                 callback(User(dict: dict), nil)
             } else {
@@ -22,10 +22,19 @@ class BCClient {
     }
     
     private static func makeRequest(endpoint: String, method: String, completionHandler: @escaping ((BCResponse) -> Void)) {
-        guard let url = URL(string: "\(BASE_URL)\(endpoint)") else { return }
+        let urlString = "\(BASE_URL)\(endpoint)"
+        guard let url = URL(string: urlString) else {
+            completionHandler(BCResponse(error: BCError(readableMessage: "Invalid URL: \(urlString)")))
+            return
+        }
+        guard let token = AccessToken.current?.authenticationToken else {
+            completionHandler(BCResponse(error: BCError(readableMessage: "No valid token. Please log out and back in.")))
+            return
+        }
 
         var request = URLRequest(url: url)
         request.httpMethod = method
+        request.addValue(token, forHTTPHeaderField: "Token")
         
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             OperationQueue.main.addOperation {

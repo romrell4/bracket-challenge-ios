@@ -8,13 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		0C15E5B11F2E397B00E6E4A5 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 0C15E5B01F2E397B00E6E4A5 /* Podfile */; };
-		0C15EB271F2E548500E6E4A5 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C15EB261F2E548500E6E4A5 /* MainViewController.swift */; };
+		0C15EB271F2E548500E6E4A5 /* TournamentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C15EB261F2E548500E6E4A5 /* TournamentsViewController.swift */; };
 		0C15EB291F2EAA5C00E6E4A5 /* BCClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C15EB281F2EAA5C00E6E4A5 /* BCClient.swift */; };
 		0C15EB2B1F2EAAA300E6E4A5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C15EB2A1F2EAAA300E6E4A5 /* User.swift */; };
-		0C15EB2E1F2EB00700E6E4A5 /* BCResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C15EB2D1F2EB00700E6E4A5 /* BCResponse.swift */; };
 		0C15EB321F2EC30B00E6E4A5 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C15EB311F2EC30B00E6E4A5 /* Extensions.swift */; };
-		0C15EB361F2EC50100E6E4A5 /* BCError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C15EB351F2EC50100E6E4A5 /* BCError.swift */; };
-		0C213FAB1F2EC9F5007F25CA /* BCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C213FAA1F2EC9F5007F25CA /* BCViewController.swift */; };
+		0C213FB41F2FCEC3007F25CA /* BCError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C213FAF1F2FCEC3007F25CA /* BCError.swift */; };
+		0C213FB51F2FCEC3007F25CA /* BCResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C213FB01F2FCEC3007F25CA /* BCResponse.swift */; };
+		0C213FB61F2FCEC3007F25CA /* BCNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C213FB21F2FCEC3007F25CA /* BCNavigationViewController.swift */; };
+		0C213FB71F2FCEC3007F25CA /* BCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C213FB31F2FCEC3007F25CA /* BCViewController.swift */; };
 		0C5085C71F2E357D00C4A04D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C5085BE1F2E357D00C4A04D /* Assets.xcassets */; };
 		0C5085C81F2E357D00C4A04D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C5085BF1F2E357D00C4A04D /* LaunchScreen.storyboard */; };
 		0C5085C91F2E357D00C4A04D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C5085C01F2E357D00C4A04D /* Main.storyboard */; };
@@ -26,13 +27,14 @@
 /* Begin PBXFileReference section */
 		0C15E5B01F2E397B00E6E4A5 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		0C15EB251F2E530100E6E4A5 /* BracketChallenge.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BracketChallenge.entitlements; sourceTree = "<group>"; };
-		0C15EB261F2E548500E6E4A5 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		0C15EB261F2E548500E6E4A5 /* TournamentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TournamentsViewController.swift; sourceTree = "<group>"; };
 		0C15EB281F2EAA5C00E6E4A5 /* BCClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BCClient.swift; sourceTree = "<group>"; };
 		0C15EB2A1F2EAAA300E6E4A5 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		0C15EB2D1F2EB00700E6E4A5 /* BCResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BCResponse.swift; sourceTree = "<group>"; };
 		0C15EB311F2EC30B00E6E4A5 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		0C15EB351F2EC50100E6E4A5 /* BCError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BCError.swift; sourceTree = "<group>"; };
-		0C213FAA1F2EC9F5007F25CA /* BCViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BCViewController.swift; sourceTree = "<group>"; };
+		0C213FAF1F2FCEC3007F25CA /* BCError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BCError.swift; sourceTree = "<group>"; };
+		0C213FB01F2FCEC3007F25CA /* BCResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BCResponse.swift; sourceTree = "<group>"; };
+		0C213FB21F2FCEC3007F25CA /* BCNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BCNavigationViewController.swift; sourceTree = "<group>"; };
+		0C213FB31F2FCEC3007F25CA /* BCViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BCViewController.swift; sourceTree = "<group>"; };
 		0C5085A61F2E34E300C4A04D /* BracketChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BracketChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C5085BC1F2E357D00C4A04D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0C5085BE1F2E357D00C4A04D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -57,6 +59,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0C213FAE1F2FCEC3007F25CA /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				0C213FAF1F2FCEC3007F25CA /* BCError.swift */,
+				0C213FB01F2FCEC3007F25CA /* BCResponse.swift */,
+			);
+			path = Requests;
+			sourceTree = "<group>";
+		};
+		0C213FB11F2FCEC3007F25CA /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				0C213FB21F2FCEC3007F25CA /* BCNavigationViewController.swift */,
+				0C213FB31F2FCEC3007F25CA /* BCViewController.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 		0C50859D1F2E34E300C4A04D = {
 			isa = PBXGroup;
 			children = (
@@ -110,11 +130,10 @@
 		0C5085C11F2E357D00C4A04D /* support */ = {
 			isa = PBXGroup;
 			children = (
+				0C213FAE1F2FCEC3007F25CA /* Requests */,
+				0C213FB11F2FCEC3007F25CA /* UI */,
 				0C5085C21F2E357D00C4A04D /* AppDelegate.swift */,
-				0C15EB2D1F2EB00700E6E4A5 /* BCResponse.swift */,
-				0C15EB351F2EC50100E6E4A5 /* BCError.swift */,
 				0C15EB311F2EC30B00E6E4A5 /* Extensions.swift */,
-				0C213FAA1F2EC9F5007F25CA /* BCViewController.swift */,
 			);
 			path = support;
 			sourceTree = "<group>";
@@ -123,7 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				0C5085C41F2E357D00C4A04D /* LoginViewController.swift */,
-				0C15EB261F2E548500E6E4A5 /* MainViewController.swift */,
+				0C15EB261F2E548500E6E4A5 /* TournamentsViewController.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -284,15 +303,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C15EB271F2E548500E6E4A5 /* MainViewController.swift in Sources */,
-				0C213FAB1F2EC9F5007F25CA /* BCViewController.swift in Sources */,
+				0C213FB41F2FCEC3007F25CA /* BCError.swift in Sources */,
+				0C15EB271F2E548500E6E4A5 /* TournamentsViewController.swift in Sources */,
+				0C213FB61F2FCEC3007F25CA /* BCNavigationViewController.swift in Sources */,
 				0C5085CA1F2E357D00C4A04D /* AppDelegate.swift in Sources */,
 				0C15EB321F2EC30B00E6E4A5 /* Extensions.swift in Sources */,
+				0C213FB71F2FCEC3007F25CA /* BCViewController.swift in Sources */,
 				0C15EB291F2EAA5C00E6E4A5 /* BCClient.swift in Sources */,
 				0C15EB2B1F2EAAA300E6E4A5 /* User.swift in Sources */,
-				0C15EB2E1F2EB00700E6E4A5 /* BCResponse.swift in Sources */,
 				0C5085CB1F2E357D00C4A04D /* LoginViewController.swift in Sources */,
-				0C15EB361F2EC50100E6E4A5 /* BCError.swift in Sources */,
+				0C213FB51F2FCEC3007F25CA /* BCResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

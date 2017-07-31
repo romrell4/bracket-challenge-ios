@@ -23,30 +23,49 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
-                        <segue destination="SVl-A3-Qpo" kind="show" identifier="loggedIn" id="kwL-sf-Pzk"/>
+                        <segue destination="rJX-Ce-ZrQ" kind="show" identifier="loggedIn" id="w4U-cq-Wgb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="32.799999999999997" y="43.628185907046479"/>
         </scene>
-        <!--Main View Controller-->
-        <scene sceneID="27J-Gf-GlN">
+        <!--User-->
+        <scene sceneID="c87-jS-EJh">
             <objects>
-                <viewController id="SVl-A3-Qpo" customClass="MainViewController" customModule="BracketChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="njm-U6-VZ6" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="DPW-2H-PZc"/>
-                        <viewControllerLayoutGuide type="bottom" id="7uc-H5-1mC"/>
+                        <viewControllerLayoutGuide type="top" id="Gnk-nj-tJ2"/>
+                        <viewControllerLayoutGuide type="bottom" id="nA4-S2-e2F"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="k4G-ld-RUe">
+                    <view key="view" contentMode="scaleToFill" id="45V-4D-nTK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" title="User" id="u9K-8V-IL8"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Zct-0I-oTf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NiF-Yc-xyF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1041" y="44"/>
+            <point key="canvasLocation" x="1844" y="43.628185907046479"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Cxy-b1-P0C">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rJX-Ce-ZrQ" customClass="BCNavigationController" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="egX-Z0-H05">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="njm-U6-VZ6" kind="relationship" relationship="rootViewController" id="DUM-KF-w6j"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eUo-EB-PgN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="904.79999999999995" y="43.628185907046479"/>
         </scene>
     </scenes>
 </document>

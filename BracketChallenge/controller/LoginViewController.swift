@@ -11,6 +11,7 @@ import FacebookCore
 
 class LoginViewController: BCViewController, LoginButtonDelegate {
     
+    //MARK: Properties
     private var user: User?
     
     override func viewDidLoad() {
@@ -21,45 +22,45 @@ class LoginViewController: BCViewController, LoginButtonDelegate {
         checkForLogin()
     }
     
-    //MARK: Listeners
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "loggedIn", let navVc = segue.destination as? UINavigationController, let vc = navVc.viewControllers[0] as? TournamentsViewController, let user = user {
+            vc.user = user
+        }
+    }
+    
+    //MARK: LoginButtonDelegate callbacks
     
     func loginButtonDidCompleteLogin(_ loginButton: LoginButton, result: LoginResult) {
         checkForLogin()
     }
     
     func loginButtonDidLogOut(_ loginButton: LoginButton) {
-        print("Logged out")
+        loggedInLabel.isHidden = true
     }
     
     //MARK: Private Functions
     
     private func createFacebookLoginButton() {
         let loginButton = LoginButton(readPermissions: [.publicProfile, .email])
-        loginButton.center = view.center
+        loginButton.translatesAutoresizingMaskIntoConstraints = false
         loginButton.delegate = self
         view.addSubview(loginButton)
+        view.addConstraints([
+            NSLayoutConstraint(item: view, attr1: .centerX, toItem: loginButton, attr2: .centerX),
+            NSLayoutConstraint(item: view, attr1: .centerY, toItem: loginButton, attr2: .centerY)
+        ])
     }
     
     private func checkForLogin() {
         if AccessToken.current != nil {
-            GraphRequest(graphPath: "me", parameters: ["fields": "first_name,email, picture.type(large)"]).start { (_, result) in
-                switch result {
-                case .success(let response):
-                    let dict = response.dictionaryValue
-                    if let email = dict?["email"] as? String {
-                        BCClient.login(username: email, callback: { (user, error) in
-                            if user != nil {
-                                self.performSegue(withIdentifier: "loggedIn", sender: nil)
-                            } else {
-                                super.displayAlert(error: error)
-                            }
-                        })
-                    }
-                case .failed(let error):
-                    super.displayAlert(error: BCError(error: error))
+            BCClient.login(callback: { (user, error) in
+                if let user = user {
+                    self.user = user
+                    self.performSegue(withIdentifier: "loggedIn", sender: nil)
+                } else {
+                    super.displayAlert(error: error)
                 }
-            }
-
+            })
         }
     }
 }

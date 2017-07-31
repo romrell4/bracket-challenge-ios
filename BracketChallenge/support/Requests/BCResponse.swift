@@ -34,6 +34,10 @@ class BCResponse {
         }
     }
     
+    init(error: BCError?) {
+        self.error = error
+    }
+    
     //MARK: Public functions
     
     func getDataJson() -> Any? {

@@ -1,5 +1,5 @@
 //
-//  MainViewController.swift
+//  TournamentsViewController.swift
 //  BracketChallenge
 //
 //  Created by Eric Romrell on 7/30/17.
@@ -8,12 +8,14 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+class TournamentsViewController: UIViewController {
+    
+    //MARK: Public properties
+    var user: User!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("Made it!")
-
+        
     }    
 }
