@@ -35,7 +35,7 @@ class LoginViewController: BCViewController, LoginButtonDelegate {
     }
     
     func loginButtonDidLogOut(_ loginButton: LoginButton) {
-        loggedInLabel.isHidden = true
+        print("Logged out")
     }
     
     //MARK: Private Functions
