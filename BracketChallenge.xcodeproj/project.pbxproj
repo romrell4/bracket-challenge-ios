@@ -16,6 +16,9 @@
 		0C213FB51F2FCEC3007F25CA /* BCResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C213FB01F2FCEC3007F25CA /* BCResponse.swift */; };
 		0C213FB61F2FCEC3007F25CA /* BCNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C213FB21F2FCEC3007F25CA /* BCNavigationViewController.swift */; };
 		0C213FB71F2FCEC3007F25CA /* BCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C213FB31F2FCEC3007F25CA /* BCViewController.swift */; };
+		0C42A0F41F30F45C00BF26CE /* Bracket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C42A0F31F30F45C00BF26CE /* Bracket.swift */; };
+		0C42A0F61F30FCA700BF26CE /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C42A0F51F30FCA700BF26CE /* Match.swift */; };
+		0C42A0F81F311D7300BF26CE /* MatchHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C42A0F71F311D7300BF26CE /* MatchHelper.swift */; };
 		0C5085C71F2E357D00C4A04D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C5085BE1F2E357D00C4A04D /* Assets.xcassets */; };
 		0C5085C81F2E357D00C4A04D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C5085BF1F2E357D00C4A04D /* LaunchScreen.storyboard */; };
 		0C5085C91F2E357D00C4A04D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C5085C01F2E357D00C4A04D /* Main.storyboard */; };
@@ -41,6 +44,9 @@
 		0C213FB01F2FCEC3007F25CA /* BCResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BCResponse.swift; sourceTree = "<group>"; };
 		0C213FB21F2FCEC3007F25CA /* BCNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BCNavigationViewController.swift; sourceTree = "<group>"; };
 		0C213FB31F2FCEC3007F25CA /* BCViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BCViewController.swift; sourceTree = "<group>"; };
+		0C42A0F31F30F45C00BF26CE /* Bracket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bracket.swift; sourceTree = "<group>"; };
+		0C42A0F51F30FCA700BF26CE /* Match.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
+		0C42A0F71F311D7300BF26CE /* MatchHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchHelper.swift; sourceTree = "<group>"; };
 		0C5085A61F2E34E300C4A04D /* BracketChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BracketChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C5085BC1F2E357D00C4A04D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0C5085BE1F2E357D00C4A04D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -170,6 +176,9 @@
 				0C15EB2A1F2EAAA300E6E4A5 /* User.swift */,
 				0C9FD7771F2FD9B4005174F4 /* Tournament.swift */,
 				0C9FD7821F302098005174F4 /* Player.swift */,
+				0C42A0F31F30F45C00BF26CE /* Bracket.swift */,
+				0C42A0F51F30FCA700BF26CE /* Match.swift */,
+				0C42A0F71F311D7300BF26CE /* MatchHelper.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -324,7 +333,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C213FB41F2FCEC3007F25CA /* BCError.swift in Sources */,
+				0C42A0F41F30F45C00BF26CE /* Bracket.swift in Sources */,
 				0C9FD7781F2FD9B4005174F4 /* Tournament.swift in Sources */,
+				0C42A0F61F30FCA700BF26CE /* Match.swift in Sources */,
 				0C15EB271F2E548500E6E4A5 /* TournamentsViewController.swift in Sources */,
 				0C213FB61F2FCEC3007F25CA /* BCNavigationViewController.swift in Sources */,
 				0C9FD7831F302098005174F4 /* Player.swift in Sources */,
@@ -332,6 +343,7 @@
 				0C9FD7811F301B31005174F4 /* BracketViewController.swift in Sources */,
 				0C5085CA1F2E357D00C4A04D /* AppDelegate.swift in Sources */,
 				0C15EB321F2EC30B00E6E4A5 /* Extensions.swift in Sources */,
+				0C42A0F81F311D7300BF26CE /* MatchHelper.swift in Sources */,
 				0C213FB71F2FCEC3007F25CA /* BCViewController.swift in Sources */,
 				0C15EB291F2EAA5C00E6E4A5 /* BCClient.swift in Sources */,
 				0C15EB2B1F2EAAA300E6E4A5 /* User.swift in Sources */,

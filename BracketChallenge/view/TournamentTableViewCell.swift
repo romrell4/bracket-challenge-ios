@@ -8,8 +8,8 @@
 
 import UIKit
 
-private let ANIMATION_DURATION = 0.25
-private let SELECTED_ALPHA: CGFloat = 0.75
+private let ANIMATION_DURATION = 0.4
+private let SELECTED_ALPHA: CGFloat = 0.80
 private let UNSELECTED_ALPHA: CGFloat = 0.4
 
 class TournamentTableViewCell: UITableViewCell {
@@ -29,5 +29,9 @@ class TournamentTableViewCell: UITableViewCell {
         UIView.animate(withDuration: ANIMATION_DURATION) {
             self.overlayView.alpha = selected ? SELECTED_ALPHA : UNSELECTED_ALPHA
         }
+    }
+    
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        //Do nothing. Just override it so that they don't highlight it when the user clicks.
     }
 }

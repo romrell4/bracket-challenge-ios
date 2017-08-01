@@ -22,7 +22,7 @@ class BCClient {
     }
     
     static func getTournaments(callback: @escaping ([Tournament]?, BCError?) -> Void) {
-        makeRequest(endpoint: "tournaments", method: "GET") { (response) in
+        makeRequest(endpoint: "tournaments") { (response) in
             if response.succeeded, let array = response.getDataJson() as? [[String: Any]] {
                 callback(array.map({ Tournament(dict: $0) }), nil)
             } else {
@@ -31,7 +31,17 @@ class BCClient {
         }
     }
     
-    private static func makeRequest(endpoint: String, method: String, completionHandler: @escaping ((BCResponse) -> Void)) {
+    static func getBracket(tournamentId: Int, bracketId: Int, callback: @escaping (Bracket?, BCError?) -> Void) {
+        makeRequest(endpoint: "/tournaments/\(tournamentId)/brackets/\(bracketId)") { (response) in
+            if response.succeeded, let dict = response.getDataJson() as? [String: Any] {
+                callback(Bracket(dict: dict), nil)
+            } else {
+                callback(nil, response.error)
+            }
+        }
+    }
+    
+    private static func makeRequest(endpoint: String, method: String = "GET", completionHandler: @escaping ((BCResponse) -> Void)) {
         let urlString = "\(BASE_URL)\(endpoint)"
         guard let url = URL(string: urlString) else {
             completionHandler(BCResponse(error: BCError(readableMessage: "Invalid URL: \(urlString)")))

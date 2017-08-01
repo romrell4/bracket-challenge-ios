@@ -25,9 +25,18 @@ class TournamentsViewController: BCViewController, UITableViewDataSource, UITabl
         loadData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let indexPath = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "bracket", let vc = segue.destination as? BracketViewController, let masterBracketId = sender as? Int {
-            vc.bracketId = masterBracketId
+        if segue.identifier == "bracket", let vc = segue.destination as? BracketViewController, let tournament = sender as? Tournament {
+            vc.tournamentId = tournament.tournamentId
+            vc.bracketId = tournament.masterBracketId
         }
     }
     
@@ -50,8 +59,8 @@ class TournamentsViewController: BCViewController, UITableViewDataSource, UITabl
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let tournament = tournaments[indexPath.row]
-        if let masterBracketId = tournament.masterBracketId {
-            performSegue(withIdentifier: "bracket", sender: masterBracketId)
+        if tournament.masterBracketId != nil {
+            performSegue(withIdentifier: "bracket", sender: tournament)
         } else {
             super.displayAlert(title: "Bracket Unavailable", message: "The draws for this tournament have not yet been published. Brackets cannot be made until the draw is complete.", alertHandler: { (_) in
                 self.tableView.deselectRow(at: indexPath, animated: true)

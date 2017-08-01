@@ -79,10 +79,10 @@
             </objects>
             <point key="canvasLocation" x="2036" y="44"/>
         </scene>
-        <!--View Controller-->
+        <!--Bracket View Controller-->
         <scene sceneID="W2l-Nd-L3c">
             <objects>
-                <viewController id="ziG-oX-rGW" sceneMemberID="viewController">
+                <viewController id="ziG-oX-rGW" customClass="BracketViewController" customModule="BracketChallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6wZ-xf-BY9"/>
                         <viewControllerLayoutGuide type="bottom" id="sVo-nE-0rL"/>
@@ -90,10 +90,54 @@
                     <view key="view" contentMode="scaleToFill" id="Adf-WY-rqh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yeJ-4K-XWa">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="USw-0G-irb">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="USw-0G-irb" id="zgh-6o-XZC">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="ziG-oX-rGW" id="DIa-HE-cLg"/>
+                                    <outlet property="delegate" destination="ziG-oX-rGW" id="6br-Tl-EEp"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="yeJ-4K-XWa" firstAttribute="leading" secondItem="Adf-WY-rqh" secondAttribute="leading" id="GBT-kZ-Hs9"/>
+                            <constraint firstItem="yeJ-4K-XWa" firstAttribute="top" secondItem="Adf-WY-rqh" secondAttribute="top" id="QGM-6y-DQM"/>
+                            <constraint firstItem="sVo-nE-0rL" firstAttribute="top" secondItem="yeJ-4K-XWa" secondAttribute="bottom" id="bO7-W6-1HY"/>
+                            <constraint firstAttribute="trailing" secondItem="yeJ-4K-XWa" secondAttribute="trailing" id="tiP-9i-WpC"/>
+                        </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="doM-cJ-jh2" appends="YES" id="AAl-yg-luE"/>
+                            <outletCollection property="gestureRecognizers" destination="UEB-5J-bWQ" appends="YES" id="98E-ed-JDn"/>
+                        </connections>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="yeJ-4K-XWa" id="BD6-qz-cwK"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B98-hI-8DC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="left" id="doM-cJ-jh2">
+                    <connections>
+                        <action selector="swipeLeft:" destination="ziG-oX-rGW" id="64K-ph-Lkb"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="right" id="UEB-5J-bWQ">
+                    <connections>
+                        <action selector="swipeRight:" destination="ziG-oX-rGW" id="iwa-Ry-9bm"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2776.8000000000002" y="43.628185907046479"/>
         </scene>
