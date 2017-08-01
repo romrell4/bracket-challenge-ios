@@ -21,6 +21,16 @@ class BCClient {
         }
     }
     
+    static func getTournaments(callback: @escaping ([Tournament]?, BCError?) -> Void) {
+        makeRequest(endpoint: "tournaments", method: "GET") { (response) in
+            if response.succeeded, let array = response.getDataJson() as? [[String: Any]] {
+                callback(array.map({ Tournament(dict: $0) }), nil)
+            } else {
+                callback(nil, response.error)
+            }
+        }
+    }
+    
     private static func makeRequest(endpoint: String, method: String, completionHandler: @escaping ((BCResponse) -> Void)) {
         let urlString = "\(BASE_URL)\(endpoint)"
         guard let url = URL(string: urlString) else {

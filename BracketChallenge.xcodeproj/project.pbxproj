@@ -21,6 +21,12 @@
 		0C5085C91F2E357D00C4A04D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C5085C01F2E357D00C4A04D /* Main.storyboard */; };
 		0C5085CA1F2E357D00C4A04D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5085C21F2E357D00C4A04D /* AppDelegate.swift */; };
 		0C5085CB1F2E357D00C4A04D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5085C41F2E357D00C4A04D /* LoginViewController.swift */; };
+		0C9FD7781F2FD9B4005174F4 /* Tournament.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9FD7771F2FD9B4005174F4 /* Tournament.swift */; };
+		0C9FD77A1F2FE45F005174F4 /* TournamentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9FD7791F2FE45F005174F4 /* TournamentTableViewCell.swift */; };
+		0C9FD77D1F2FE498005174F4 /* TournamentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C9FD77C1F2FE498005174F4 /* TournamentTableViewCell.xib */; };
+		0C9FD77F1F2FEDD9005174F4 /* wimbledon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0C9FD77E1F2FEDD9005174F4 /* wimbledon.jpg */; };
+		0C9FD7811F301B31005174F4 /* BracketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9FD7801F301B31005174F4 /* BracketViewController.swift */; };
+		0C9FD7831F302098005174F4 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9FD7821F302098005174F4 /* Player.swift */; };
 		FD30427A253E69BA5DB0240F /* Pods_BracketChallenge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F29F7997F141AA3D3B8A33D9 /* Pods_BracketChallenge.framework */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +48,12 @@
 		0C5085C01F2E357D00C4A04D /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		0C5085C21F2E357D00C4A04D /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0C5085C41F2E357D00C4A04D /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		0C9FD7771F2FD9B4005174F4 /* Tournament.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tournament.swift; sourceTree = "<group>"; };
+		0C9FD7791F2FE45F005174F4 /* TournamentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TournamentTableViewCell.swift; sourceTree = "<group>"; };
+		0C9FD77C1F2FE498005174F4 /* TournamentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TournamentTableViewCell.xib; sourceTree = "<group>"; };
+		0C9FD77E1F2FEDD9005174F4 /* wimbledon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = wimbledon.jpg; sourceTree = "<group>"; };
+		0C9FD7801F301B31005174F4 /* BracketViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BracketViewController.swift; sourceTree = "<group>"; };
+		0C9FD7821F302098005174F4 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		4D7185542C0E4E1151157A56 /* Pods-BracketChallenge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BracketChallenge.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BracketChallenge/Pods-BracketChallenge.debug.xcconfig"; sourceTree = "<group>"; };
 		832DB5FC271697BEEB9C135D /* Pods-BracketChallenge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BracketChallenge.release.xcconfig"; path = "Pods/Target Support Files/Pods-BracketChallenge/Pods-BracketChallenge.release.xcconfig"; sourceTree = "<group>"; };
 		F29F7997F141AA3D3B8A33D9 /* Pods_BracketChallenge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BracketChallenge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -120,9 +132,12 @@
 		0C5085BD1F2E357D00C4A04D /* view */ = {
 			isa = PBXGroup;
 			children = (
+				0C9FD77E1F2FEDD9005174F4 /* wimbledon.jpg */,
 				0C5085BE1F2E357D00C4A04D /* Assets.xcassets */,
 				0C5085BF1F2E357D00C4A04D /* LaunchScreen.storyboard */,
 				0C5085C01F2E357D00C4A04D /* Main.storyboard */,
+				0C9FD7791F2FE45F005174F4 /* TournamentTableViewCell.swift */,
+				0C9FD77C1F2FE498005174F4 /* TournamentTableViewCell.xib */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -143,6 +158,7 @@
 			children = (
 				0C5085C41F2E357D00C4A04D /* LoginViewController.swift */,
 				0C15EB261F2E548500E6E4A5 /* TournamentsViewController.swift */,
+				0C9FD7801F301B31005174F4 /* BracketViewController.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -152,6 +168,8 @@
 			children = (
 				0C15EB281F2EAA5C00E6E4A5 /* BCClient.swift */,
 				0C15EB2A1F2EAAA300E6E4A5 /* User.swift */,
+				0C9FD7771F2FD9B4005174F4 /* Tournament.swift */,
+				0C9FD7821F302098005174F4 /* Player.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -242,7 +260,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C15E5B11F2E397B00E6E4A5 /* Podfile in Resources */,
+				0C9FD77F1F2FEDD9005174F4 /* wimbledon.jpg in Resources */,
 				0C5085C91F2E357D00C4A04D /* Main.storyboard in Resources */,
+				0C9FD77D1F2FE498005174F4 /* TournamentTableViewCell.xib in Resources */,
 				0C5085C81F2E357D00C4A04D /* LaunchScreen.storyboard in Resources */,
 				0C5085C71F2E357D00C4A04D /* Assets.xcassets in Resources */,
 			);
@@ -304,8 +324,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C213FB41F2FCEC3007F25CA /* BCError.swift in Sources */,
+				0C9FD7781F2FD9B4005174F4 /* Tournament.swift in Sources */,
 				0C15EB271F2E548500E6E4A5 /* TournamentsViewController.swift in Sources */,
 				0C213FB61F2FCEC3007F25CA /* BCNavigationViewController.swift in Sources */,
+				0C9FD7831F302098005174F4 /* Player.swift in Sources */,
+				0C9FD77A1F2FE45F005174F4 /* TournamentTableViewCell.swift in Sources */,
+				0C9FD7811F301B31005174F4 /* BracketViewController.swift in Sources */,
 				0C5085CA1F2E357D00C4A04D /* AppDelegate.swift in Sources */,
 				0C15EB321F2EC30B00E6E4A5 /* Extensions.swift in Sources */,
 				0C213FB71F2FCEC3007F25CA /* BCViewController.swift in Sources */,
@@ -422,6 +446,7 @@
 				CODE_SIGN_ENTITLEMENTS = BracketChallenge/BracketChallenge.entitlements;
 				DEVELOPMENT_TEAM = G9JN5J3VZ9;
 				INFOPLIST_FILE = "$(SRCROOT)/BracketChallenge/res/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bracketchallenge.BracketChallenge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -437,6 +462,7 @@
 				CODE_SIGN_ENTITLEMENTS = BracketChallenge/BracketChallenge.entitlements;
 				DEVELOPMENT_TEAM = G9JN5J3VZ9;
 				INFOPLIST_FILE = "$(SRCROOT)/BracketChallenge/res/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bracketchallenge.BracketChallenge;
 				PRODUCT_NAME = "$(TARGET_NAME)";

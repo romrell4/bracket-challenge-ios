@@ -41,6 +41,21 @@ extension NSLayoutConstraint {
 
 //MARK: UI
 
+extension UIColor {
+    
+    convenience init(red: CGFloat, green: CGFloat, blue: CGFloat, opacity: CGFloat = 1) {
+        self.init(red: red/255.0, green: green/255.0, blue: blue/255.0, alpha: opacity)
+    }
+    
+    static var bcGreen: UIColor {
+        return UIColor(red: 37, green: 104, blue: 0)
+    }
+    
+    static var bcYellow: UIColor {
+        return UIColor(red: 248, green: 255, blue: 52)
+    }
+}
+
 extension UITableView {
     func hideEmptyCells() {
         tableFooterView = UIView()
