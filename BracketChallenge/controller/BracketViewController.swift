@@ -8,33 +8,45 @@
 
 import UIKit
 
-class BracketViewController: BCViewController, UITableViewDelegate, UITableViewDataSource {
+class BracketViewController: BCViewController, UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource {
     //MARK: Outlets
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var pageControl: UIPageControl!
     
     //MARK: Public properties
     var tournamentId: Int!
-    var bracketId: Int!
+    var bracketId: Int?
     
     //MARK: Private properties
+    private var tableViews = [UITableView]()
     private var bracket: Bracket?
+    private var roundIndex = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.hideEmptyCells()
-        
         loadBracket()
+    }
+    
+    //MARK: UIScrollViewDelegate callbacks
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        //Test the offset and calculate the current page after scrolling ends
+        roundIndex = Int(scrollView.contentOffset.x / scrollView.frame.width)
+        
+        //Change the indicator
+        pageControl.currentPage = roundIndex
+        tableViews[roundIndex].reloadData()
     }
     
     //MARK: UITableViewDelegate/Datasource callbacks
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return bracket?.matches?.count ?? 0
+        return getMatches(for: tableView).count
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Match: \(bracket?.matches?[section].position ?? 0)"
+        return " "
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -42,34 +54,53 @@ class BracketViewController: BCViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let match = bracket?.matches?[indexPath.section]
-        let player = indexPath.row == 0 ? match?.player1Name : match?.player2Name
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = player
-        return cell
-    }
-    
-    //MARK: Listeners
-    
-    @IBAction func swipeLeft(_ sender: Any) {
-        print("Swiped Left")
-    }
-    
-    @IBAction func swipeRight(_ sender: Any) {
-        print("Swiped Right")
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? BracketMatchTableViewCell {
+            let match = getMatches(for: tableView)[indexPath.section]
+            let playerId = indexPath.row == 0 ? match.player1Id : match.player2Id
+            cell.nameLabel.text = indexPath.row == 0 ? match.player1Full : match.player2Full
+            cell.accessoryType = match.winnerId == playerId ? .checkmark : .none
+            return cell
+        }
+        return UITableViewCell()
     }
     
     //MARK: Private functions
     
+    private func setupTableViews() {
+        let width = Double(scrollView.frame.width)
+        let height = Double(scrollView.frame.height)
+        
+        let rounds = bracket?.rounds?.count ?? 0
+        for round in 0...rounds - 1 {
+            let tableView = UITableView(frame: CGRect(x: Double(round) * width, y: 0.0, width: Double(round + 1) * width, height: height))
+            tableView.delegate = self
+            tableView.dataSource = self
+            tableView.hideEmptyCells()
+            tableView.registerNib(nibName: "BracketMatchTableViewCell")
+            tableView.separatorStyle = .none
+            tableViews.append(tableView)
+            scrollView.addSubview(tableView)
+        }
+        scrollView.contentSize = CGSize(width: width * Double(rounds), height: height)
+        pageControl.currentPage = 0
+        pageControl.numberOfPages = rounds
+    }
+    
     private func loadBracket() {
-        BCClient.getBracket(tournamentId: tournamentId, bracketId: bracketId) { (bracket, error) in
-            if let bracket = bracket {
-                self.bracket = bracket
-                self.tableView.reloadData()
-            } else {
-                super.displayAlert(error: error)
+        if let bracketId = bracketId {
+            BCClient.getBracket(tournamentId: tournamentId, bracketId: bracketId) { (bracket, error) in
+                if let bracket = bracket {
+                    self.bracket = bracket
+                    self.setupTableViews()
+                } else {
+                    super.displayAlert(error: error)
+                }
             }
         }
+    }
+    
+    private func getMatches(for tableView: UITableView) -> [MatchHelper] {
+        guard let round = tableViews.index(of: tableView), let matches = bracket?.rounds?[round] else { return [] }
+        return matches
     }
 }

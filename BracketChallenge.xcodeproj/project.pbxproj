@@ -19,6 +19,10 @@
 		0C42A0F41F30F45C00BF26CE /* Bracket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C42A0F31F30F45C00BF26CE /* Bracket.swift */; };
 		0C42A0F61F30FCA700BF26CE /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C42A0F51F30FCA700BF26CE /* Match.swift */; };
 		0C42A0F81F311D7300BF26CE /* MatchHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C42A0F71F311D7300BF26CE /* MatchHelper.swift */; };
+		0C42A1011F33DE6000BF26CE /* TournamentTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C42A1001F33DE6000BF26CE /* TournamentTabBarViewController.swift */; };
+		0C49AB451F3554900074FAD0 /* BracketMatchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C49AB431F3554900074FAD0 /* BracketMatchTableViewCell.swift */; };
+		0C49AB461F3554900074FAD0 /* BracketMatchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C49AB441F3554900074FAD0 /* BracketMatchTableViewCell.xib */; };
+		0C49AB481F36843C0074FAD0 /* Identity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C49AB471F36843C0074FAD0 /* Identity.swift */; };
 		0C5085C71F2E357D00C4A04D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C5085BE1F2E357D00C4A04D /* Assets.xcassets */; };
 		0C5085C81F2E357D00C4A04D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C5085BF1F2E357D00C4A04D /* LaunchScreen.storyboard */; };
 		0C5085C91F2E357D00C4A04D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C5085C01F2E357D00C4A04D /* Main.storyboard */; };
@@ -47,6 +51,10 @@
 		0C42A0F31F30F45C00BF26CE /* Bracket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bracket.swift; sourceTree = "<group>"; };
 		0C42A0F51F30FCA700BF26CE /* Match.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
 		0C42A0F71F311D7300BF26CE /* MatchHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchHelper.swift; sourceTree = "<group>"; };
+		0C42A1001F33DE6000BF26CE /* TournamentTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TournamentTabBarViewController.swift; sourceTree = "<group>"; };
+		0C49AB431F3554900074FAD0 /* BracketMatchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BracketMatchTableViewCell.swift; sourceTree = "<group>"; };
+		0C49AB441F3554900074FAD0 /* BracketMatchTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BracketMatchTableViewCell.xib; sourceTree = "<group>"; };
+		0C49AB471F36843C0074FAD0 /* Identity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Identity.swift; sourceTree = "<group>"; };
 		0C5085A61F2E34E300C4A04D /* BracketChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BracketChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C5085BC1F2E357D00C4A04D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0C5085BE1F2E357D00C4A04D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -144,6 +152,8 @@
 				0C5085C01F2E357D00C4A04D /* Main.storyboard */,
 				0C9FD7791F2FE45F005174F4 /* TournamentTableViewCell.swift */,
 				0C9FD77C1F2FE498005174F4 /* TournamentTableViewCell.xib */,
+				0C49AB431F3554900074FAD0 /* BracketMatchTableViewCell.swift */,
+				0C49AB441F3554900074FAD0 /* BracketMatchTableViewCell.xib */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -155,6 +165,7 @@
 				0C213FB11F2FCEC3007F25CA /* UI */,
 				0C5085C21F2E357D00C4A04D /* AppDelegate.swift */,
 				0C15EB311F2EC30B00E6E4A5 /* Extensions.swift */,
+				0C49AB471F36843C0074FAD0 /* Identity.swift */,
 			);
 			path = support;
 			sourceTree = "<group>";
@@ -164,6 +175,7 @@
 			children = (
 				0C5085C41F2E357D00C4A04D /* LoginViewController.swift */,
 				0C15EB261F2E548500E6E4A5 /* TournamentsViewController.swift */,
+				0C42A1001F33DE6000BF26CE /* TournamentTabBarViewController.swift */,
 				0C9FD7801F301B31005174F4 /* BracketViewController.swift */,
 			);
 			path = controller;
@@ -269,6 +281,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C15E5B11F2E397B00E6E4A5 /* Podfile in Resources */,
+				0C49AB461F3554900074FAD0 /* BracketMatchTableViewCell.xib in Resources */,
 				0C9FD77F1F2FEDD9005174F4 /* wimbledon.jpg in Resources */,
 				0C5085C91F2E357D00C4A04D /* Main.storyboard in Resources */,
 				0C9FD77D1F2FE498005174F4 /* TournamentTableViewCell.xib in Resources */,
@@ -344,10 +357,13 @@
 				0C5085CA1F2E357D00C4A04D /* AppDelegate.swift in Sources */,
 				0C15EB321F2EC30B00E6E4A5 /* Extensions.swift in Sources */,
 				0C42A0F81F311D7300BF26CE /* MatchHelper.swift in Sources */,
+				0C49AB481F36843C0074FAD0 /* Identity.swift in Sources */,
 				0C213FB71F2FCEC3007F25CA /* BCViewController.swift in Sources */,
+				0C42A1011F33DE6000BF26CE /* TournamentTabBarViewController.swift in Sources */,
 				0C15EB291F2EAA5C00E6E4A5 /* BCClient.swift in Sources */,
 				0C15EB2B1F2EAAA300E6E4A5 /* User.swift in Sources */,
 				0C5085CB1F2E357D00C4A04D /* LoginViewController.swift in Sources */,
+				0C49AB451F3554900074FAD0 /* BracketMatchTableViewCell.swift in Sources */,
 				0C213FB51F2FCEC3007F25CA /* BCResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

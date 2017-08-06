@@ -19,15 +19,22 @@ class Match {
     var seed2: Int?
     var winnerId: Int?
     
-    init(dict: [String: Any]) {
-        matchId = dict["match_id"] as? Int
-        bracketId = dict["bracket_id"] as? Int
-        round = dict["round"] as? Int
-        position = dict["position"] as? Int
-        player1Id = dict["player1_id"] as? Int
-        player2Id = dict["player2_id"] as? Int
-        seed1 = dict["seed1"] as? Int
-        seed2 = dict["seed2"] as? Int
-        winnerId = dict["winner_id"] as? Int
+    init(dict: [String: Any]) throws {
+        guard let matchId = dict["match_id"] as? Int,
+            let bracketId = dict["bracket_id"] as? Int,
+            let round = dict["round"] as? Int,
+            let position = dict["position"] as? Int else {
+                throw InvalidModelError.match
+        }
+        
+        self.matchId = matchId
+        self.bracketId = bracketId
+        self.round = round
+        self.position = position
+        self.player1Id = dict["player1_id"] as? Int
+        self.player2Id = dict["player2_id"] as? Int
+        self.seed1 = dict["seed1"] as? Int
+        self.seed2 = dict["seed2"] as? Int
+        self.winnerId = dict["winner_id"] as? Int
     }
 }

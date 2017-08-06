@@ -9,13 +9,18 @@
 import UIKit
 
 class Tournament {
-    var tournamentId: Int?
-    var name: String?
+    var tournamentId: Int
+    var name: String
     var masterBracketId: Int?
     
-    init(dict: [String: Any]) {
-        tournamentId = dict["tournament_id"] as? Int
-        name = dict["name"] as? String
-        masterBracketId = dict["master_bracket_id"] as? Int
+    init(dict: [String: Any]) throws {
+        guard let tournamentId = dict["tournament_id"] as? Int,
+            let name = dict["name"] as? String else {
+                throw InvalidModelError.transaction
+        }
+
+        self.tournamentId = tournamentId
+        self.name = name
+        self.masterBracketId = dict["master_bracket_id"] as? Int
     }
 }

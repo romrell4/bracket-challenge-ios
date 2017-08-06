@@ -9,14 +9,36 @@
 import UIKit
 
 class MatchHelper: Match {
-    var player1Name: String?
-    var player2Name: String?
-    var winnerName: String?
+    var player1: Player?
+    var player2: Player?
+    var winner: Player?
+    var player1Full: String? {
+        let name = player1?.name
+        if let seed = seed1 {
+            return "\(name ?? "") (\(seed))"
+        } else {
+            return name
+        }
+    }
+    var player2Full: String? {
+        let name = player2?.name
+        if let seed = seed2 {
+            return "\(name ?? "") (\(seed))"
+        } else {
+            return name
+        }
+    }
     
-    override init(dict: [String : Any]) {
-        super.init(dict: dict)
-        player1Name = dict["player1_name"] as? String
-        player2Name = dict["player2_name"] as? String
-        winnerName = dict["winner_name"] as? String
+    override init(dict: [String : Any]) throws {
+        try super.init(dict: dict)
+        if let id = player1Id, let name = dict["player1_name"] as? String {
+            player1 = Player(id: id, name: name)
+        }
+        if let id = player2Id, let name = dict["player2_name"] as? String {
+            player2 = Player(id: id, name: name)
+        }
+        if let id = winnerId, let name = dict["winner_name"] as? String {
+            winner = Player(id: id, name: name)
+        }
     }
 }

@@ -7,19 +7,21 @@
 //
 
 import UIKit
+import FacebookLogin
+
+private let SEGUE_ID = "tournament"
 
 class TournamentsViewController: BCViewController, UITableViewDataSource, UITableViewDelegate {
     //MARK: Outlets
     @IBOutlet private weak var tableView: UITableView!
     
     //MARK: Public properties
-    var user: User!
     var tournaments = [Tournament]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = user.name
+        title = Identity.user.name
         setupTableView()
         
         loadData()
@@ -28,15 +30,17 @@ class TournamentsViewController: BCViewController, UITableViewDataSource, UITabl
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        //Don't all the user to go back from here, unless they logout
+        navigationItem.setHidesBackButton(true, animated: false)
+        
         if let indexPath = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: indexPath, animated: true)
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "bracket", let vc = segue.destination as? BracketViewController, let tournament = sender as? Tournament {
-            vc.tournamentId = tournament.tournamentId
-            vc.bracketId = tournament.masterBracketId
+        if segue.identifier == SEGUE_ID, let vc = segue.destination as? TournamentTabBarViewController, let tournament = sender as? Tournament {
+            vc.tournament = tournament
         }
     }
     
@@ -60,13 +64,23 @@ class TournamentsViewController: BCViewController, UITableViewDataSource, UITabl
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let tournament = tournaments[indexPath.row]
         if tournament.masterBracketId != nil {
-            performSegue(withIdentifier: "bracket", sender: tournament)
+            performSegue(withIdentifier: SEGUE_ID, sender: tournament)
+        } else if Identity.user.admin {
+            //TODO: Add logic to create the master bracket
         } else {
             super.displayAlert(title: "Bracket Unavailable", message: "The draws for this tournament have not yet been published. Brackets cannot be made until the draw is complete.", alertHandler: { (_) in
                 self.tableView.deselectRow(at: indexPath, animated: true)
             })
         }
     }
+    
+    //MARK: Listeners
+    
+    @IBAction func logoutTapped(_ sender: Any) {
+        LoginManager().logOut()
+        navigationController?.popViewController(animated: true)
+    }
+    
     
     //MARK: Private functions
     

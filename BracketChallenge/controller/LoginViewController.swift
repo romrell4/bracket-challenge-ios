@@ -11,21 +11,22 @@ import FacebookCore
 
 class LoginViewController: BCViewController, LoginButtonDelegate {
     
+    //MARK: Outlets
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
+    
     //MARK: Properties
-    private var user: User?
+    private var loginButton: LoginButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         createFacebookLoginButton()
-        
-        checkForLogin()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "loggedIn", let navVc = segue.destination as? UINavigationController, let vc = navVc.viewControllers[0] as? TournamentsViewController, let user = user {
-            vc.user = user
-        }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        checkForLogin()
     }
     
     //MARK: LoginButtonDelegate callbacks
@@ -34,14 +35,12 @@ class LoginViewController: BCViewController, LoginButtonDelegate {
         checkForLogin()
     }
     
-    func loginButtonDidLogOut(_ loginButton: LoginButton) {
-        print("Logged out")
-    }
+    func loginButtonDidLogOut(_ loginButton: LoginButton) {}
     
     //MARK: Private Functions
     
     private func createFacebookLoginButton() {
-        let loginButton = LoginButton(readPermissions: [.publicProfile, .email])
+        loginButton = LoginButton(readPermissions: [.publicProfile, .email])
         loginButton.translatesAutoresizingMaskIntoConstraints = false
         loginButton.delegate = self
         view.addSubview(loginButton)
@@ -53,14 +52,19 @@ class LoginViewController: BCViewController, LoginButtonDelegate {
     
     private func checkForLogin() {
         if AccessToken.current != nil {
+            loginButton.isHidden = true
+            spinner.startAnimating()
             BCClient.login(callback: { (user, error) in
+                self.spinner.stopAnimating()
                 if let user = user {
-                    self.user = user
+                    Identity.user = user
                     self.performSegue(withIdentifier: "loggedIn", sender: nil)
                 } else {
                     super.displayAlert(error: error)
                 }
             })
+        } else {
+            loginButton.isHidden = false
         }
     }
 }
