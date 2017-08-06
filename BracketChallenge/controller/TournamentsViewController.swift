@@ -66,10 +66,17 @@ class TournamentsViewController: BCViewController, UITableViewDataSource, UITabl
         if tournament.masterBracketId != nil {
             performSegue(withIdentifier: SEGUE_ID, sender: tournament)
         } else if Identity.user.admin {
-            //TODO: Add logic to create the master bracket
+            let dialog = UIAlertController(title: "Master Bracket Not Created", message: "This tournament does not yet have a master bracket. Would you like to create one?", preferredStyle: .alert)
+            dialog.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (_) in
+                //TODO: Add logic to create the master bracket
+            }))
+            dialog.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+            present(dialog, animated: true, completion: { 
+                tableView.deselectRow(at: indexPath, animated: true)
+            })
         } else {
-            super.displayAlert(title: "Bracket Unavailable", message: "The draws for this tournament have not yet been published. Brackets cannot be made until the draw is complete.", alertHandler: { (_) in
-                self.tableView.deselectRow(at: indexPath, animated: true)
+            super.displayAlert(title: "Tournament Unavailable", message: "The draws for this tournament have not yet been published. Brackets cannot be made until the draw is complete.", alertHandler: { (_) in
+                tableView.deselectRow(at: indexPath, animated: true)
             })
         }
     }
