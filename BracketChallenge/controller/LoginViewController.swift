@@ -52,6 +52,7 @@ class LoginViewController: BCViewController, LoginButtonDelegate {
     
     private func checkForLogin() {
         if AccessToken.current != nil {
+            print(AccessToken.current!)
             loginButton.isHidden = true
             spinner.startAnimating()
             BCClient.login(callback: { (user, error) in

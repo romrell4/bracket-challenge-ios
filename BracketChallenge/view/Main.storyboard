@@ -106,7 +106,7 @@
         <!--My Bracket-->
         <scene sceneID="UOP-mw-V12">
             <objects>
-                <viewController id="F6D-UK-sLr" customClass="BracketViewController" customModule="BracketChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="F6D-UK-sLr" customClass="MyBracketViewController" customModule="BracketChallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hCs-E8-AsE"/>
                         <viewControllerLayoutGuide type="bottom" id="MgF-4Y-1LT"/>
@@ -126,21 +126,62 @@
                                 <color key="pageIndicatorTintColor" red="0.97254901959999995" green="1" blue="0.20392156859999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="currentPageIndicatorTintColor" red="0.1450980392" green="0.40784313729999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </pageControl>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zr9-JI-UGP">
+                                <rect key="frame" x="0.0" y="64" width="375" height="497"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="It looks like you haven't created a bracket for this tournament!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wwj-HO-Ud8">
+                                        <rect key="frame" x="32" y="238" width="311" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wm0-hz-6RQ">
+                                        <rect key="frame" x="136" y="267" width="102" height="30"/>
+                                        <state key="normal" title="Create Bracket">
+                                            <color key="titleShadowColor" red="0.1450980392" green="0.40784313729999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="createBracketTapped:" destination="F6D-UK-sLr" eventType="touchUpInside" id="Kr9-en-vO3"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="Wm0-hz-6RQ" firstAttribute="centerX" secondItem="Zr9-JI-UGP" secondAttribute="centerX" id="FJZ-8A-vez"/>
+                                    <constraint firstAttribute="trailing" secondItem="wwj-HO-Ud8" secondAttribute="trailing" constant="32" id="GQL-Ux-eWv"/>
+                                    <constraint firstItem="wwj-HO-Ud8" firstAttribute="leading" secondItem="Zr9-JI-UGP" secondAttribute="leading" constant="32" id="NYY-gc-mGi"/>
+                                    <constraint firstItem="Wm0-hz-6RQ" firstAttribute="top" secondItem="wwj-HO-Ud8" secondAttribute="bottom" constant="8" id="hJg-qp-eqT"/>
+                                    <constraint firstItem="wwj-HO-Ud8" firstAttribute="centerY" secondItem="Zr9-JI-UGP" secondAttribute="centerY" id="iOH-ud-Jbf"/>
+                                    <constraint firstItem="wwj-HO-Ud8" firstAttribute="centerX" secondItem="Zr9-JI-UGP" secondAttribute="centerX" id="k0y-Gh-w71"/>
+                                </constraints>
+                            </view>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="xSa-bp-dgp">
+                                <rect key="frame" x="169" y="315" width="37" height="37"/>
+                                <color key="color" red="0.1450980392" green="0.40784313729999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="MgF-4Y-1LT" firstAttribute="top" secondItem="htG-bn-ATi" secondAttribute="bottom" id="1Iq-Pc-pQU"/>
+                            <constraint firstItem="Zr9-JI-UGP" firstAttribute="top" secondItem="hCs-E8-AsE" secondAttribute="bottom" id="43P-n7-my2"/>
+                            <constraint firstItem="xSa-bp-dgp" firstAttribute="centerX" secondItem="RFa-vB-kSV" secondAttribute="centerX" id="9R4-oq-yOe"/>
+                            <constraint firstItem="DPJ-PN-xqi" firstAttribute="top" secondItem="Zr9-JI-UGP" secondAttribute="bottom" id="Oqe-34-3Vj"/>
                             <constraint firstItem="htG-bn-ATi" firstAttribute="top" secondItem="hCs-E8-AsE" secondAttribute="bottom" id="Vt0-hC-PQ4"/>
                             <constraint firstItem="DPJ-PN-xqi" firstAttribute="centerX" secondItem="RFa-vB-kSV" secondAttribute="centerX" id="XjH-OD-hFf"/>
+                            <constraint firstAttribute="trailing" secondItem="Zr9-JI-UGP" secondAttribute="trailing" id="bjN-2I-dlQ"/>
                             <constraint firstItem="MgF-4Y-1LT" firstAttribute="top" secondItem="DPJ-PN-xqi" secondAttribute="bottom" constant="20" id="lwW-Uy-NeR"/>
+                            <constraint firstItem="xSa-bp-dgp" firstAttribute="centerY" secondItem="RFa-vB-kSV" secondAttribute="centerY" id="mKW-CN-WNj"/>
+                            <constraint firstItem="Zr9-JI-UGP" firstAttribute="leading" secondItem="RFa-vB-kSV" secondAttribute="leading" id="nfs-4d-ZvS"/>
                             <constraint firstAttribute="trailing" secondItem="htG-bn-ATi" secondAttribute="trailing" id="sQ6-N3-WL2"/>
                             <constraint firstItem="htG-bn-ATi" firstAttribute="leading" secondItem="RFa-vB-kSV" secondAttribute="leading" id="uv8-BF-aOD"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="My Bracket" image="bracket_icon" id="BbR-VE-1zx"/>
                     <connections>
+                        <outlet property="createBracketView" destination="Zr9-JI-UGP" id="Ua1-ja-eTn"/>
                         <outlet property="pageControl" destination="DPJ-PN-xqi" id="v0e-7k-drP"/>
                         <outlet property="scrollView" destination="htG-bn-ATi" id="B6g-xG-TZr"/>
+                        <outlet property="spinner" destination="xSa-bp-dgp" id="QI7-CO-K4W"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dpu-6Z-cpj" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -169,7 +210,7 @@
         <!--Results-->
         <scene sceneID="W2l-Nd-L3c">
             <objects>
-                <viewController id="ziG-oX-rGW" customClass="BracketViewController" customModule="BracketChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ziG-oX-rGW" customClass="MasterBracketViewController" customModule="BracketChallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6wZ-xf-BY9"/>
                         <viewControllerLayoutGuide type="bottom" id="sVo-nE-0rL"/>
@@ -189,12 +230,18 @@
                                 <color key="pageIndicatorTintColor" red="0.97254901959999995" green="1" blue="0.20392156859999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="currentPageIndicatorTintColor" red="0.1450980392" green="0.40784313729999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </pageControl>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="fnV-RH-kW8">
+                                <rect key="frame" x="169" y="315" width="37" height="37"/>
+                                <color key="color" red="0.1450980392" green="0.40784313729999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="fnV-RH-kW8" firstAttribute="centerX" secondItem="Adf-WY-rqh" secondAttribute="centerX" id="DKl-fl-K4m"/>
                             <constraint firstItem="sVo-nE-0rL" firstAttribute="top" secondItem="mma-wG-7T2" secondAttribute="bottom" constant="20" id="KO8-AD-2ic"/>
                             <constraint firstItem="Qnj-dv-peV" firstAttribute="leading" secondItem="Adf-WY-rqh" secondAttribute="leading" id="NUX-EK-gQy"/>
+                            <constraint firstItem="fnV-RH-kW8" firstAttribute="centerY" secondItem="Adf-WY-rqh" secondAttribute="centerY" id="Rod-it-mmK"/>
                             <constraint firstItem="sVo-nE-0rL" firstAttribute="top" secondItem="Qnj-dv-peV" secondAttribute="bottom" id="Viq-Ut-bRw"/>
                             <constraint firstAttribute="trailing" secondItem="Qnj-dv-peV" secondAttribute="trailing" id="XIQ-iB-SS8"/>
                             <constraint firstItem="mma-wG-7T2" firstAttribute="centerX" secondItem="Adf-WY-rqh" secondAttribute="centerX" id="YeI-qe-RfK"/>
@@ -205,6 +252,7 @@
                     <connections>
                         <outlet property="pageControl" destination="mma-wG-7T2" id="0rT-dD-ZRG"/>
                         <outlet property="scrollView" destination="Qnj-dv-peV" id="NUo-ID-274"/>
+                        <outlet property="spinner" destination="fnV-RH-kW8" id="gI9-Ea-7tM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B98-hI-8DC" userLabel="First Responder" sceneMemberID="firstResponder"/>

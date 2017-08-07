@@ -12,21 +12,15 @@ class BracketViewController: BCViewController, UIScrollViewDelegate, UITableView
     //MARK: Outlets
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var pageControl: UIPageControl!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     //MARK: Public properties
-    var tournamentId: Int!
-    var bracketId: Int?
+    var tournament: Tournament!
+    var bracket: Bracket?
     
     //MARK: Private properties
     private var tableViews = [UITableView]()
-    private var bracket: Bracket?
     private var roundIndex = 0
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        loadBracket()
-    }
     
     //MARK: UIScrollViewDelegate callbacks
     
@@ -54,29 +48,49 @@ class BracketViewController: BCViewController, UIScrollViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? BracketMatchTableViewCell {
-            let match = getMatches(for: tableView)[indexPath.section]
-            let playerId = indexPath.row == 0 ? match.player1Id : match.player2Id
-            cell.nameLabel.text = indexPath.row == 0 ? match.player1Full : match.player2Full
-            cell.accessoryType = match.winnerId == playerId ? .checkmark : .none
+        let match = getMatches(for: tableView)[indexPath.section]
+        print(indexPath)
+        if indexPath.row == 0, let cell = tableView.dequeueReusableCell(withIdentifier: "topCell", for: indexPath) as? MatchTableViewCell {
+            cell.nameLabel.text = match.player1Full
+            //TODO: Figure out style for winner (different for MyBracket and Results)
+//            cell.backgroundColor = match.winnerId == match.player1Id ? .yellow : .white
+//            cell.accessoryType = match.winnerId == match.player1Id ? .checkmark : .none
+            return cell
+        } else if let cell = tableView.dequeueReusableCell(withIdentifier: "bottomCell", for: indexPath) as? MatchTableViewCell {
+            cell.nameLabel.text = match.player2Full
+//            cell.backgroundColor = match.winnerId == match.player2Id ? .yellow : .white
+//            cell.accessoryType = match.winnerId == match.player2Id ? .checkmark : .none
             return cell
         }
         return UITableViewCell()
     }
     
-    //MARK: Private functions
+    //MARK: Public functions
     
-    private func setupTableViews() {
+    func loadBracket(bracketId: Int) {
+        BCClient.getBracket(tournamentId: tournament.tournamentId, bracketId: bracketId) { (bracket, error) in
+            self.spinner.stopAnimating()
+            if let bracket = bracket {
+                self.bracket = bracket
+                self.setupTableViews()
+            } else {
+                super.displayAlert(error: error)
+            }
+        }
+    }
+    
+    func setupTableViews() {
         let width = Double(scrollView.frame.width)
         let height = Double(scrollView.frame.height)
         
-        let rounds = bracket?.rounds?.count ?? 0
-        for round in 0...rounds - 1 {
-            let tableView = UITableView(frame: CGRect(x: Double(round) * width, y: 0.0, width: Double(round + 1) * width, height: height))
+        let rounds = bracket?.rounds?.count ?? 1
+        for round in 0...(rounds - 1) {
+            let tableView = UITableView(frame: CGRect(x: Double(round) * width, y: 0.0, width: width, height: height))
             tableView.delegate = self
             tableView.dataSource = self
             tableView.hideEmptyCells()
-            tableView.registerNib(nibName: "BracketMatchTableViewCell")
+            tableView.registerNib(nibName: "TopMatchTableViewCell", forCellIdentifier: "topCell")
+            tableView.registerNib(nibName: "BottomMatchTableViewCell", forCellIdentifier: "bottomCell")
             tableView.separatorStyle = .none
             tableViews.append(tableView)
             scrollView.addSubview(tableView)
@@ -86,18 +100,7 @@ class BracketViewController: BCViewController, UIScrollViewDelegate, UITableView
         pageControl.numberOfPages = rounds
     }
     
-    private func loadBracket() {
-        if let bracketId = bracketId {
-            BCClient.getBracket(tournamentId: tournamentId, bracketId: bracketId) { (bracket, error) in
-                if let bracket = bracket {
-                    self.bracket = bracket
-                    self.setupTableViews()
-                } else {
-                    super.displayAlert(error: error)
-                }
-            }
-        }
-    }
+    //MARK: Private functions
     
     private func getMatches(for tableView: UITableView) -> [MatchHelper] {
         guard let round = tableViews.index(of: tableView), let matches = bracket?.rounds?[round] else { return [] }

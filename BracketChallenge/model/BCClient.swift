@@ -40,7 +40,7 @@ class BCClient {
     }
     
     static func getMyBrackets(tournamentId: Int, callback: @escaping ([Bracket]?, BCError?) -> Void) {
-        makeRequest(endpoint: "tournaments/\(tournamentId)/brackets?userId=\(Identity.user.userId)") { (response) in
+        makeRequest(endpoint: "tournaments/\(tournamentId)/brackets?mine=true") { (response) in
             if response.succeeded, let array = response.getDataJson() as? [[String: Any]] {
                 do {
                     callback(try array.map { try Bracket(dict: $0) }, nil)
@@ -67,7 +67,21 @@ class BCClient {
         }
     }
     
-    private static func makeRequest(endpoint: String, method: String = "GET", completionHandler: @escaping ((BCResponse) -> Void)) {
+    static func createBracket(tournamentId: Int, callback: @escaping (Bracket?, BCError?) -> Void) {
+        makeRequest(endpoint: "tournaments/\(tournamentId)/brackets", method: "POST", body: ["name": "Tester"]) { (response) in
+            if response.succeeded, let dict = response.getDataJson() as? [String: Any] {
+                do {
+                    callback(try Bracket(dict: dict), nil)
+                } catch {
+                    callback(nil, BCError(readableMessage: "Invalid bracket returned from service"))
+                }
+            } else {
+                callback(nil, response.error)
+            }
+        }
+    }
+    
+    private static func makeRequest(endpoint: String, method: String = "GET", body: Any? = nil, completionHandler: @escaping ((BCResponse) -> Void)) {
         let urlString = "\(BASE_URL)\(endpoint)"
         guard let url = URL(string: urlString) else {
             completionHandler(BCResponse(error: BCError(readableMessage: "Invalid URL: \(urlString)")))
@@ -81,6 +95,9 @@ class BCClient {
         var request = URLRequest(url: url)
         request.httpMethod = method
         request.addValue(token, forHTTPHeaderField: "Token")
+        if let body = body {
+            request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: [])
+        }
         
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             OperationQueue.main.addOperation {
