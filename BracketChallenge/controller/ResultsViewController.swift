@@ -1,14 +1,12 @@
 //
-//  MasterBracketViewController.swift
+//  ResultsViewController.swift
 //  BracketChallenge
 //
 //  Created by Eric Romrell on 8/6/17.
 //  Copyright © 2017 Eric Romrell. All rights reserved.
 //
 
-import UIKit
-
-class MasterBracketViewController: BracketViewController {
+class ResultsViewController: BracketViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -22,9 +22,12 @@ class TournamentsViewController: BCViewController, UITableViewDataSource, UITabl
         super.viewDidLoad()
         
         title = Identity.user.name
-        setupTableView()
+        if Identity.user.admin {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped(_:)))
+        }
         
-        loadData()
+        setupTableView()
+        loadTournaments()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -68,7 +71,7 @@ class TournamentsViewController: BCViewController, UITableViewDataSource, UITabl
         } else if Identity.user.admin {
             let dialog = UIAlertController(title: "Master Bracket Not Created", message: "This tournament does not yet have a master bracket. Would you like to create one?", preferredStyle: .alert)
             dialog.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (_) in
-                //TODO: Add logic to create the master bracket
+                //TODO: Add logic to create master bracket
             }))
             dialog.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
             present(dialog, animated: true, completion: { 
@@ -88,6 +91,27 @@ class TournamentsViewController: BCViewController, UITableViewDataSource, UITabl
         navigationController?.popViewController(animated: true)
     }
     
+    func addTapped(_ sender: Any) {
+        let alert = UIAlertController(title: "New Tournament", message: "Please enter the name of the tournament below", preferredStyle: .alert)
+        alert.addTextField(configurationHandler: { (textField) in
+            textField.placeholder = "Tournament Name"
+            textField.autocapitalizationType = .words
+        })
+        alert.addAction(UIAlertAction(title: "Create", style: .default, handler: { (action: UIAlertAction) in
+            if let name = alert.textFields?.first?.text {
+                BCClient.createTournament(name: name, callback: { (tournament, error) in
+                    if let tournament = tournament {
+                        //TODO: Test this once we have the endpoint created
+                        self.tournaments.append(tournament)
+                        self.tableView.reloadData()
+                    } else {
+                        super.displayAlert(error: error, alertHandler: nil)
+                    }
+                })
+            }
+        }))
+        present(alert, animated: true, completion: nil)
+    }
     
     //MARK: Private functions
     
@@ -97,7 +121,7 @@ class TournamentsViewController: BCViewController, UITableViewDataSource, UITabl
         tableView.variableHeightForRows()
     }
     
-    func loadData() {
+    func loadTournaments() {
         BCClient.getTournaments { (tournaments, error) in
             if let tournaments = tournaments {
                 self.tournaments = tournaments

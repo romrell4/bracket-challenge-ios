@@ -69,7 +69,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="User" id="u9K-8V-IL8">
-                        <barButtonItem key="rightBarButtonItem" title="Logout" id="NIW-Sx-VCj">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="NIW-Sx-VCj">
                             <connections>
                                 <action selector="logoutTapped:" destination="njm-U6-VZ6" id="N3Q-5D-QBc"/>
                             </connections>
@@ -103,45 +103,51 @@
             </objects>
             <point key="canvasLocation" x="3961" y="770"/>
         </scene>
-        <!--My Bracket-->
-        <scene sceneID="UOP-mw-V12">
+        <!--Tournament Tab Bar View Controller-->
+        <scene sceneID="4xA-Ad-Zhl">
             <objects>
-                <viewController id="F6D-UK-sLr" customClass="MyBracketViewController" customModule="BracketChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController id="Rgz-d7-uyj" customClass="TournamentTabBarViewController" customModule="BracketChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="PVZ-fL-1qC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="vEb-o2-Jb7" kind="relationship" relationship="viewControllers" id="nrQ-Cw-zqs"/>
+                        <segue destination="LH1-Wi-QJN" kind="relationship" relationship="viewControllers" id="UFY-Dg-nTS"/>
+                        <segue destination="1eI-wB-wJe" kind="relationship" relationship="viewControllers" id="QwG-O2-cQj"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="H6e-rO-jyH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2936" y="45"/>
+        </scene>
+        <!--My Bracket-->
+        <scene sceneID="t7j-x2-zg4">
+            <objects>
+                <viewController id="vEb-o2-Jb7" customClass="MyBracketViewController" customModule="BracketChallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="hCs-E8-AsE"/>
-                        <viewControllerLayoutGuide type="bottom" id="MgF-4Y-1LT"/>
+                        <viewControllerLayoutGuide type="top" id="wYi-zR-STB"/>
+                        <viewControllerLayoutGuide type="bottom" id="Mq1-0r-GQ4"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="RFa-vB-kSV">
+                    <view key="view" contentMode="scaleToFill" id="A3X-Kc-QK3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="htG-bn-ATi">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
-                                <connections>
-                                    <outlet property="delegate" destination="F6D-UK-sLr" id="7uQ-2n-Lkb"/>
-                                </connections>
-                            </scrollView>
-                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="DPJ-PN-xqi">
-                                <rect key="frame" x="168" y="561" width="39" height="37"/>
-                                <color key="pageIndicatorTintColor" red="0.97254901959999995" green="1" blue="0.20392156859999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="currentPageIndicatorTintColor" red="0.1450980392" green="0.40784313729999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            </pageControl>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zr9-JI-UGP">
-                                <rect key="frame" x="0.0" y="64" width="375" height="497"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="It looks like you haven't created a bracket for this tournament!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wwj-HO-Ud8">
-                                        <rect key="frame" x="32" y="238" width="311" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="It looks like you haven't created a bracket for this tournament. Tap below to begin!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wwj-HO-Ud8">
+                                        <rect key="frame" x="32" y="266.5" width="311" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wm0-hz-6RQ">
-                                        <rect key="frame" x="136" y="267" width="102" height="30"/>
-                                        <state key="normal" title="Create Bracket">
-                                            <color key="titleShadowColor" red="0.1450980392" green="0.40784313729999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
+                                        <rect key="frame" x="136.5" y="295.5" width="102" height="30"/>
+                                        <state key="normal" title="Create Bracket"/>
                                         <connections>
-                                            <action selector="createBracketTapped:" destination="F6D-UK-sLr" eventType="touchUpInside" id="Kr9-en-vO3"/>
+                                            <action selector="createBracketTapped:" destination="vEb-o2-Jb7" eventType="touchUpInside" id="buu-oW-CdC"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -155,109 +161,24 @@
                                     <constraint firstItem="wwj-HO-Ud8" firstAttribute="centerX" secondItem="Zr9-JI-UGP" secondAttribute="centerX" id="k0y-Gh-w71"/>
                                 </constraints>
                             </view>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="xSa-bp-dgp">
-                                <rect key="frame" x="169" y="315" width="37" height="37"/>
-                                <color key="color" red="0.1450980392" green="0.40784313729999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="MgF-4Y-1LT" firstAttribute="top" secondItem="htG-bn-ATi" secondAttribute="bottom" id="1Iq-Pc-pQU"/>
-                            <constraint firstItem="Zr9-JI-UGP" firstAttribute="top" secondItem="hCs-E8-AsE" secondAttribute="bottom" id="43P-n7-my2"/>
-                            <constraint firstItem="xSa-bp-dgp" firstAttribute="centerX" secondItem="RFa-vB-kSV" secondAttribute="centerX" id="9R4-oq-yOe"/>
-                            <constraint firstItem="DPJ-PN-xqi" firstAttribute="top" secondItem="Zr9-JI-UGP" secondAttribute="bottom" id="Oqe-34-3Vj"/>
-                            <constraint firstItem="htG-bn-ATi" firstAttribute="top" secondItem="hCs-E8-AsE" secondAttribute="bottom" id="Vt0-hC-PQ4"/>
-                            <constraint firstItem="DPJ-PN-xqi" firstAttribute="centerX" secondItem="RFa-vB-kSV" secondAttribute="centerX" id="XjH-OD-hFf"/>
-                            <constraint firstAttribute="trailing" secondItem="Zr9-JI-UGP" secondAttribute="trailing" id="bjN-2I-dlQ"/>
-                            <constraint firstItem="MgF-4Y-1LT" firstAttribute="top" secondItem="DPJ-PN-xqi" secondAttribute="bottom" constant="20" id="lwW-Uy-NeR"/>
-                            <constraint firstItem="xSa-bp-dgp" firstAttribute="centerY" secondItem="RFa-vB-kSV" secondAttribute="centerY" id="mKW-CN-WNj"/>
-                            <constraint firstItem="Zr9-JI-UGP" firstAttribute="leading" secondItem="RFa-vB-kSV" secondAttribute="leading" id="nfs-4d-ZvS"/>
-                            <constraint firstAttribute="trailing" secondItem="htG-bn-ATi" secondAttribute="trailing" id="sQ6-N3-WL2"/>
-                            <constraint firstItem="htG-bn-ATi" firstAttribute="leading" secondItem="RFa-vB-kSV" secondAttribute="leading" id="uv8-BF-aOD"/>
+                            <constraint firstItem="Zr9-JI-UGP" firstAttribute="top" secondItem="wYi-zR-STB" secondAttribute="bottom" id="CJv-xh-4gX"/>
+                            <constraint firstItem="Zr9-JI-UGP" firstAttribute="top" secondItem="wYi-zR-STB" secondAttribute="bottom" id="Cfn-Sh-ggZ"/>
+                            <constraint firstItem="Mq1-0r-GQ4" firstAttribute="top" secondItem="Zr9-JI-UGP" secondAttribute="bottom" id="PVC-sn-RH2"/>
+                            <constraint firstItem="Zr9-JI-UGP" firstAttribute="leading" secondItem="A3X-Kc-QK3" secondAttribute="leading" id="S6f-bQ-E80"/>
+                            <constraint firstAttribute="trailing" secondItem="Zr9-JI-UGP" secondAttribute="trailing" id="bRh-FX-IpS"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="My Bracket" image="bracket_icon" id="BbR-VE-1zx"/>
+                    <tabBarItem key="tabBarItem" title="My Bracket" image="bracket_icon" id="y5E-TE-wD1"/>
                     <connections>
-                        <outlet property="createBracketView" destination="Zr9-JI-UGP" id="Ua1-ja-eTn"/>
-                        <outlet property="pageControl" destination="DPJ-PN-xqi" id="v0e-7k-drP"/>
-                        <outlet property="scrollView" destination="htG-bn-ATi" id="B6g-xG-TZr"/>
-                        <outlet property="spinner" destination="xSa-bp-dgp" id="QI7-CO-K4W"/>
+                        <outlet property="createBracketView" destination="Zr9-JI-UGP" id="Idx-qy-UG5"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dpu-6Z-cpj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="s6r-5a-IzE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3960.8000000000002" y="-640.02998500749629"/>
-        </scene>
-        <!--Tournament Tab Bar View Controller-->
-        <scene sceneID="4xA-Ad-Zhl">
-            <objects>
-                <tabBarController id="Rgz-d7-uyj" customClass="TournamentTabBarViewController" customModule="BracketChallenge" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="PVZ-fL-1qC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="F6D-UK-sLr" kind="relationship" relationship="viewControllers" id="gQk-wz-ohN"/>
-                        <segue destination="ziG-oX-rGW" kind="relationship" relationship="viewControllers" id="fC4-Tf-Zkz"/>
-                        <segue destination="1eI-wB-wJe" kind="relationship" relationship="viewControllers" id="umA-gU-oys"/>
-                    </connections>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="H6e-rO-jyH" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2936" y="45"/>
-        </scene>
-        <!--Results-->
-        <scene sceneID="W2l-Nd-L3c">
-            <objects>
-                <viewController id="ziG-oX-rGW" customClass="MasterBracketViewController" customModule="BracketChallenge" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="6wZ-xf-BY9"/>
-                        <viewControllerLayoutGuide type="bottom" id="sVo-nE-0rL"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Adf-WY-rqh">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qnj-dv-peV">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
-                                <connections>
-                                    <outlet property="delegate" destination="ziG-oX-rGW" id="ssO-v8-hv5"/>
-                                </connections>
-                            </scrollView>
-                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="mma-wG-7T2">
-                                <rect key="frame" x="168" y="561" width="39" height="37"/>
-                                <color key="pageIndicatorTintColor" red="0.97254901959999995" green="1" blue="0.20392156859999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="currentPageIndicatorTintColor" red="0.1450980392" green="0.40784313729999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            </pageControl>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="fnV-RH-kW8">
-                                <rect key="frame" x="169" y="315" width="37" height="37"/>
-                                <color key="color" red="0.1450980392" green="0.40784313729999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            </activityIndicatorView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <gestureRecognizers/>
-                        <constraints>
-                            <constraint firstItem="fnV-RH-kW8" firstAttribute="centerX" secondItem="Adf-WY-rqh" secondAttribute="centerX" id="DKl-fl-K4m"/>
-                            <constraint firstItem="sVo-nE-0rL" firstAttribute="top" secondItem="mma-wG-7T2" secondAttribute="bottom" constant="20" id="KO8-AD-2ic"/>
-                            <constraint firstItem="Qnj-dv-peV" firstAttribute="leading" secondItem="Adf-WY-rqh" secondAttribute="leading" id="NUX-EK-gQy"/>
-                            <constraint firstItem="fnV-RH-kW8" firstAttribute="centerY" secondItem="Adf-WY-rqh" secondAttribute="centerY" id="Rod-it-mmK"/>
-                            <constraint firstItem="sVo-nE-0rL" firstAttribute="top" secondItem="Qnj-dv-peV" secondAttribute="bottom" id="Viq-Ut-bRw"/>
-                            <constraint firstAttribute="trailing" secondItem="Qnj-dv-peV" secondAttribute="trailing" id="XIQ-iB-SS8"/>
-                            <constraint firstItem="mma-wG-7T2" firstAttribute="centerX" secondItem="Adf-WY-rqh" secondAttribute="centerX" id="YeI-qe-RfK"/>
-                            <constraint firstItem="Qnj-dv-peV" firstAttribute="top" secondItem="6wZ-xf-BY9" secondAttribute="bottom" id="dw9-In-YfE"/>
-                        </constraints>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Results" image="results_icon" id="tSg-ob-Lj7"/>
-                    <connections>
-                        <outlet property="pageControl" destination="mma-wG-7T2" id="0rT-dD-ZRG"/>
-                        <outlet property="scrollView" destination="Qnj-dv-peV" id="NUo-ID-274"/>
-                        <outlet property="spinner" destination="fnV-RH-kW8" id="gI9-Ea-7tM"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="B98-hI-8DC" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3961" y="44"/>
+            <point key="canvasLocation" x="3960.8000000000002" y="-646.32683658170924"/>
         </scene>
         <!--Navigation View Controller-->
         <scene sceneID="Cxy-b1-P0C">
@@ -276,6 +197,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eUo-EB-PgN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="340" y="44"/>
+        </scene>
+        <!--Results-->
+        <scene sceneID="OWS-hn-edC">
+            <objects>
+                <viewController id="LH1-Wi-QJN" customClass="ResultsViewController" customModule="BracketChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ojy-Od-skn"/>
+                        <viewControllerLayoutGuide type="bottom" id="U2B-Sw-QGl"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="een-Kb-vzT">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Results" image="results_icon" id="gli-8X-Wu7"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xbu-Kq-Ed6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3961" y="45"/>
         </scene>
     </scenes>
     <resources>

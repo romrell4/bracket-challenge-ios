@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="gTV-IL-0wX" customClass="MatchCollectionViewCell" customModule="BracketChallenge" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="e1t-Dn-cVa">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </tableView>
+                </subviews>
+            </view>
+            <color key="backgroundColor" red="0.97254901959999995" green="1" blue="0.20392156859999999" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="e1t-Dn-cVa" secondAttribute="bottom" id="MZb-oo-104"/>
+                <constraint firstItem="e1t-Dn-cVa" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="XQz-rh-00F"/>
+                <constraint firstItem="e1t-Dn-cVa" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="YF2-Q1-QCk"/>
+                <constraint firstAttribute="trailing" secondItem="e1t-Dn-cVa" secondAttribute="trailing" id="gFc-iS-sNM"/>
+            </constraints>
+            <size key="customSize" width="375" height="100"/>
+            <connections>
+                <outlet property="tableView" destination="e1t-Dn-cVa" id="xAP-M5-Ktf"/>
+            </connections>
+            <point key="canvasLocation" x="196.5" y="124"/>
+        </collectionViewCell>
+    </objects>
+</document>

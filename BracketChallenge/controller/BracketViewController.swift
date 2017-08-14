@@ -2,108 +2,155 @@
 //  BracketViewController.swift
 //  BracketChallenge
 //
-//  Created by Eric Romrell on 7/31/17.
+//  Created by Eric Romrell on 8/12/17.
 //  Copyright © 2017 Eric Romrell. All rights reserved.
 //
 
 import UIKit
 
-class BracketViewController: BCViewController, UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource {
-    //MARK: Outlets
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var pageControl: UIPageControl!
-    @IBOutlet weak var spinner: UIActivityIndicatorView!
-    
-    //MARK: Public properties
+private let CELL_INSET: CGFloat = 8
+
+class BracketViewController: BCViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    //Public properties
+    var spinner: UIActivityIndicatorView!
     var tournament: Tournament!
-    var bracket: Bracket?
+    var bracket: Bracket? {
+        didSet {
+            tabBarController?.title = bracket?.name
+        }
+    }
     
-    //MARK: Private properties
-    private var tableViews = [UITableView]()
-    private var roundIndex = 0
+    //Private properties
+    private var scrollView: UIScrollView!
+    private var collectionViews = [UICollectionView]()
+    private var pageControl: UIPageControl!
     
-    //MARK: UIScrollViewDelegate callbacks
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        createUI()
+    }
+        
+    //UIScrollViewDelegate callbacks
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         //Test the offset and calculate the current page after scrolling ends
-        roundIndex = Int(scrollView.contentOffset.x / scrollView.frame.width)
+        let roundIndex = Int(scrollView.contentOffset.x / scrollView.frame.width)
         
         //Change the indicator
         pageControl.currentPage = roundIndex
-        tableViews[roundIndex].reloadData()
+        collectionViews[roundIndex].reloadData()
     }
     
-    //MARK: UITableViewDelegate/Datasource callbacks
+    //UICollectionViewDataSource/Delegate callbacks
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return getMatches(for: tableView).count
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return getMatches(for: collectionView).count
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return " "
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width - CELL_INSET * 2, height: TABLE_CELL_HEIGHT * 2)
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: CELL_INSET, left: CELL_INSET, bottom: CELL_INSET, right: CELL_INSET)
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let match = getMatches(for: tableView)[indexPath.section]
-        print(indexPath)
-        if indexPath.row == 0, let cell = tableView.dequeueReusableCell(withIdentifier: "topCell", for: indexPath) as? MatchTableViewCell {
-            cell.nameLabel.text = match.player1Full
-            //TODO: Figure out style for winner (different for MyBracket and Results)
-//            cell.backgroundColor = match.winnerId == match.player1Id ? .yellow : .white
-//            cell.accessoryType = match.winnerId == match.player1Id ? .checkmark : .none
-            return cell
-        } else if let cell = tableView.dequeueReusableCell(withIdentifier: "bottomCell", for: indexPath) as? MatchTableViewCell {
-            cell.nameLabel.text = match.player2Full
-//            cell.backgroundColor = match.winnerId == match.player2Id ? .yellow : .white
-//            cell.accessoryType = match.winnerId == match.player2Id ? .checkmark : .none
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? MatchCollectionViewCell {
+            cell.match = getMatches(for: collectionView)[indexPath.row]
             return cell
         }
-        return UITableViewCell()
+        return UICollectionViewCell()
     }
     
-    //MARK: Public functions
+    //Public functions
     
     func loadBracket(bracketId: Int) {
         BCClient.getBracket(tournamentId: tournament.tournamentId, bracketId: bracketId) { (bracket, error) in
             self.spinner.stopAnimating()
             if let bracket = bracket {
                 self.bracket = bracket
-                self.setupTableViews()
+                self.setupCollectionViews()
             } else {
                 super.displayAlert(error: error)
             }
         }
     }
     
-    func setupTableViews() {
+    func setupCollectionViews() {
         let width = Double(scrollView.frame.width)
         let height = Double(scrollView.frame.height)
         
         let rounds = bracket?.rounds?.count ?? 1
         for round in 0...(rounds - 1) {
-            let tableView = UITableView(frame: CGRect(x: Double(round) * width, y: 0.0, width: width, height: height))
-            tableView.delegate = self
-            tableView.dataSource = self
-            tableView.hideEmptyCells()
-            tableView.registerNib(nibName: "TopMatchTableViewCell", forCellIdentifier: "topCell")
-            tableView.registerNib(nibName: "BottomMatchTableViewCell", forCellIdentifier: "bottomCell")
-            tableView.separatorStyle = .none
-            tableViews.append(tableView)
-            scrollView.addSubview(tableView)
+            let collectionView = UICollectionView(frame: CGRect(x: Double(round) * width, y: 0.0, width: width, height: height), collectionViewLayout: UICollectionViewFlowLayout())
+            collectionView.dataSource = self
+            collectionView.delegate = self
+            collectionView.backgroundColor = .lightGray
+            collectionView.registerNib(nibName: "MatchCollectionViewCell")
+            collectionViews.append(collectionView)
+            scrollView.addSubview(collectionView)
         }
         scrollView.contentSize = CGSize(width: width * Double(rounds), height: height)
         pageControl.currentPage = 0
         pageControl.numberOfPages = rounds
     }
     
-    //MARK: Private functions
+    //Private functions
     
-    private func getMatches(for tableView: UITableView) -> [MatchHelper] {
-        guard let round = tableViews.index(of: tableView), let matches = bracket?.rounds?[round] else { return [] }
-        return matches
+    private func createUI() {
+        createScrollView()
+        createPageControl()
+        createSpinner()
+    }
+    
+    private func createScrollView() {
+        scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.delegate = self
+        scrollView.bounces = false
+        scrollView.isPagingEnabled = true
+        view.addSubview(scrollView)
+        view.addConstraints([
+            NSLayoutConstraint(item: view, attr1: .leading, toItem: scrollView, attr2: .leading),
+            NSLayoutConstraint(item: view, attr1: .trailing, toItem: scrollView, attr2: .trailing),
+            NSLayoutConstraint(item: view, attr1: .top, toItem: scrollView, attr2: .top),
+            NSLayoutConstraint(item: view, attr1: .bottom, toItem: scrollView, attr2: .bottom)
+        ])
+    }
+    
+    private func createPageControl() {
+        pageControl = UIPageControl()
+        pageControl.translatesAutoresizingMaskIntoConstraints = false
+        pageControl.currentPageIndicatorTintColor = .bcGreen
+        pageControl.pageIndicatorTintColor = .bcYellow
+        view.addSubview(pageControl)
+        view.addConstraints([
+            NSLayoutConstraint(item: view, attr1: .centerX, toItem: pageControl, attr2: .centerX),
+            NSLayoutConstraint(item: view, attr1: .bottom, toItem: pageControl, attr2: .bottom, constant: 50)
+        ])
+    }
+    
+    private func createSpinner() {
+        spinner = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        spinner.color = .bcGreen
+        spinner.startAnimating()
+        view.addSubview(spinner)
+        view.addConstraints([
+            NSLayoutConstraint(item: view, attr1: .centerX, toItem: spinner, attr2: .centerX),
+            NSLayoutConstraint(item: view, attr1: .centerY, toItem: spinner, attr2: .centerY)
+        ])
+    }
+    
+    private func getMatches(for collectionView: UICollectionView) -> [MatchHelper] {
+        if let round = collectionViews.index(of: collectionView) {
+            let rounds = bracket?.rounds ?? []
+            if rounds.count > round {
+                return rounds[round]
+            }
+        }
+        return []
     }
 }

@@ -16,11 +16,10 @@ class TournamentTabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = tournament.name
         if let myBracketVc = viewControllers?[0] as? MyBracketViewController {
             myBracketVc.tournament = tournament
         }
-        if let resultsVc = viewControllers?[1] as? MasterBracketViewController {
+        if let resultsVc = viewControllers?[1] as? ResultsViewController {
             resultsVc.tournament = tournament
         }
 //        if let standingsVc = viewControllers?[2] as? StandingsViewController {

@@ -39,6 +39,20 @@ class BCClient {
         }
     }
     
+    static func createTournament(name: String, callback: @escaping (Tournament?, BCError?) -> Void) {
+        makeRequest(endpoint: "tournaments", method: "POST", body: ["name": name]) { (response) in
+            if response.succeeded, let dict = response.getDataJson() as? [String: Any] {
+                do {
+                    callback(try Tournament(dict: dict), nil)
+                } catch {
+                    callback(nil, BCError(readableMessage: "Invalid tournament returned from service"))
+                }
+            } else {
+                callback(nil, response.error)
+            }
+        }
+    }
+    
     static func getMyBrackets(tournamentId: Int, callback: @escaping ([Bracket]?, BCError?) -> Void) {
         makeRequest(endpoint: "tournaments/\(tournamentId)/brackets?mine=true") { (response) in
             if response.succeeded, let array = response.getDataJson() as? [[String: Any]] {

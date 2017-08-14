@@ -13,9 +13,12 @@ class BCNavigationViewController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationBar.isTranslucent = false
-        self.navigationBar.barTintColor = UIColor.bcGreen
-        self.navigationBar.tintColor = UIColor.bcYellow
-        self.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white];
+        navigationBar.isTranslucent = false
+        navigationBar.barTintColor = UIColor.bcGreen
+        navigationBar.tintColor = UIColor.bcYellow
+        navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white];
+        
+        //Don't allow the user to swipe back (it messes with the scroll view)
+        interactivePopGestureRecognizer?.isEnabled = false
     }
 }

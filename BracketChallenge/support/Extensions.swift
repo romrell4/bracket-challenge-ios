@@ -72,4 +72,14 @@ extension UITableView {
     func registerNib(nibName: String, forCellIdentifier cellId: String = "cell") {
         self.register(UINib(nibName: nibName, bundle: nil), forCellReuseIdentifier: cellId)
     }
+    
+    func dequeueReusableCell(for indexPath: IndexPath) -> UITableViewCell {
+        return dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+    }
+}
+
+extension UICollectionView {
+    func registerNib(nibName: String, forCellIndentifier cellId: String = "cell") {
+        register(UINib(nibName: nibName, bundle: nil), forCellWithReuseIdentifier: cellId)
+    }
 }
