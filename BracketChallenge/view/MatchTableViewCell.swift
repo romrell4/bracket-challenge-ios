@@ -9,10 +9,12 @@
 import UIKit
 
 class MatchTableViewCell: UITableViewCell {
-
+    //Outlets
     @IBOutlet weak var nameLabel: UILabel!
     
     //Override these functions so that the default behavior doesn't happen
-    override func setSelected(_ selected: Bool, animated: Bool) {}
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        accessoryType = selected ? .checkmark : .none
+    }
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {}
 }
