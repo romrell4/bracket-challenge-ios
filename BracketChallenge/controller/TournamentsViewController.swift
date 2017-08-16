@@ -111,7 +111,6 @@ class TournamentsViewController: BCViewController, CreateMasterBracketDelegate, 
                 BCClient.createTournament(name: name, callback: { (tournament, error) in
                     self.spinner.stopAnimating()
                     if let tournament = tournament {
-                        //TODO: Test this once we have the endpoint created
                         self.tournaments.append(tournament)
                         self.tableView.reloadData()
                     } else {

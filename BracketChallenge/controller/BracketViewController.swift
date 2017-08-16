@@ -94,6 +94,7 @@ class BracketViewController: BCViewController, UICollectionViewDataSource, UICol
             collectionView.dataSource = self
             collectionView.delegate = self
             collectionView.backgroundColor = .lightGray
+            collectionView.isUserInteractionEnabled = areCellsClickable()
             collectionView.registerNib(nibName: "MatchCollectionViewCell")
             collectionViews.append(collectionView)
             scrollView.addSubview(collectionView)
@@ -101,6 +102,11 @@ class BracketViewController: BCViewController, UICollectionViewDataSource, UICol
         scrollView.contentSize = CGSize(width: width * Double(rounds), height: height)
         pageControl.currentPage = 0
         pageControl.numberOfPages = rounds
+    }
+    
+    func areCellsClickable() -> Bool {
+        //Override if you want users to be able to select rows
+        return false
     }
     
     //Private functions

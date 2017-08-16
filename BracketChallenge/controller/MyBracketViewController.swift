@@ -44,4 +44,10 @@ class MyBracketViewController: BracketViewController {
             }
         }
     }
+    
+    //MARK: Override
+    
+    override func areCellsClickable() -> Bool {
+        return true
+    }
 }
