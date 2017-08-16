@@ -17,6 +17,7 @@ class BracketViewController: BCViewController, UICollectionViewDataSource, UICol
     var bracket: Bracket? {
         didSet {
             tabBarController?.title = bracket?.name
+            setupCollectionViews()
         }
     }
     
@@ -29,6 +30,12 @@ class BracketViewController: BCViewController, UICollectionViewDataSource, UICol
         super.viewDidLoad()
         
         createUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tabBarController?.title = bracket?.name
     }
         
     //UIScrollViewDelegate callbacks
@@ -71,7 +78,6 @@ class BracketViewController: BCViewController, UICollectionViewDataSource, UICol
             self.spinner.stopAnimating()
             if let bracket = bracket {
                 self.bracket = bracket
-                self.setupCollectionViews()
             } else {
                 super.displayAlert(error: error)
             }

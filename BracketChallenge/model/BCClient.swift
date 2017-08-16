@@ -74,16 +74,17 @@ class BCClient {
         }
     }
     
-    static func getMyBrackets(tournamentId: Int, callback: @escaping ([Bracket]?, BCError?) -> Void) {
-        makeRequest(endpoint: "tournaments/\(tournamentId)/brackets?mine=true") { (response) in
-            if response.succeeded, let array = response.getDataJson() as? [[String: Any]] {
+    static func getMyBracket(tournamentId: Int, callback: @escaping (Bool, Bracket?, BCError?) -> Void) {
+        makeRequest(endpoint: "tournaments/\(tournamentId)/brackets/mine") { (response) in
+            if response.succeeded, let dict = response.getDataJson() as? [String: Any] {
                 do {
-                    callback(try array.map { try Bracket(dict: $0) }, nil)
+                    callback(true, try Bracket(dict: dict), nil)
                 } catch {
-                    callback(nil, BCError(readableMessage: "Invalid bracket returned from service"))
+                    callback(false, nil, BCError(readableMessage: "Invalid bracket returned from service"))
                 }
             } else {
-                callback(nil, response.error)
+                //If the status code was 404, the response is valid, but the user didn't have a bracket
+                callback(response.response?.statusCode == 404, nil, response.error)
             }
         }
     }
