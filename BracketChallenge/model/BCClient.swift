@@ -25,11 +25,32 @@ class BCClient {
         }
     }
     
+    static func getPlayers(callback: @escaping ([Player]?, BCError?) -> Void) {
+        callback([
+            Player(id: 1, name: "Roger Federer"),
+            Player(id: 2, name: "Andy Murray"),
+            Player(id: 3, name: "Novak Djokovic"),
+            Player(id: 4, name: "Rafael Nadal")
+        ], nil)
+        //TODO: Uncomment this when the endpoint is created
+//        makeRequest(endpoint: "players") { (response) in
+//            if response.succeeded, let array = response.getDataJson() as? [[String: Any]] {
+//                do {
+//                    callback(try array.map { try Player(dict: $0) }, nil)
+//                } catch {
+//                    callback(nil, BCError(readableMessage: "Invalid player returned from service"))
+//                }
+//            } else {
+//                callback(nil, response.error)
+//            }
+//        }
+    }
+    
     static func getTournaments(callback: @escaping ([Tournament]?, BCError?) -> Void) {
         makeRequest(endpoint: "tournaments") { (response) in
             if response.succeeded, let array = response.getDataJson() as? [[String: Any]] {
                 do {
-                    callback(try array.map({ try Tournament(dict: $0) }), nil)
+                    callback(try array.map { try Tournament(dict: $0) }, nil)
                 } catch {
                     callback(nil, BCError(readableMessage: "Invalid tournament returned from service"))
                 }

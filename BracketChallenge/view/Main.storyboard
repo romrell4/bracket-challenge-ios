@@ -59,9 +59,15 @@
                                     <outlet property="delegate" destination="njm-U6-VZ6" id="aVT-Yw-cy4"/>
                                 </connections>
                             </tableView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="lfu-eH-g0O">
+                                <rect key="frame" x="169" y="315" width="37" height="37"/>
+                                <color key="color" red="0.1450980392" green="0.40784313729999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="lfu-eH-g0O" firstAttribute="centerX" secondItem="45V-4D-nTK" secondAttribute="centerX" id="1FH-AI-uOk"/>
+                            <constraint firstItem="lfu-eH-g0O" firstAttribute="centerY" secondItem="45V-4D-nTK" secondAttribute="centerY" id="Cd5-Oy-0HB"/>
                             <constraint firstAttribute="trailing" secondItem="neL-n2-TLQ" secondAttribute="trailing" id="G0M-YO-wLT"/>
                             <constraint firstItem="neL-n2-TLQ" firstAttribute="top" secondItem="45V-4D-nTK" secondAttribute="top" id="OJ9-zU-YM6"/>
                             <constraint firstItem="nA4-S2-e2F" firstAttribute="top" secondItem="neL-n2-TLQ" secondAttribute="bottom" id="Pzk-5Q-Qsa"/>
@@ -76,13 +82,78 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="spinner" destination="lfu-eH-g0O" id="w1g-hq-KTP"/>
                         <outlet property="tableView" destination="neL-n2-TLQ" id="Gkv-GA-EJr"/>
                         <segue destination="Rgz-d7-uyj" kind="show" identifier="tournament" id="uuC-dF-XVo"/>
+                        <segue destination="Bns-Ut-m01" kind="presentation" identifier="createMaster" modalPresentationStyle="formSheet" id="y1r-5t-KS4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NiF-Yc-xyF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2036" y="44"/>
+            <point key="canvasLocation" x="1958" y="36"/>
+        </scene>
+        <!--Master Bracket-->
+        <scene sceneID="4bT-bz-LUJ">
+            <objects>
+                <viewController id="wHM-j6-pwl" customClass="CreateMasterViewController" customModule="BracketChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="r6v-67-vU4"/>
+                        <viewControllerLayoutGuide type="bottom" id="oRT-F5-NTY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="KPe-tV-Qms">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" prefetchingEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kZ1-HD-ic0">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="qKh-OE-u8Y">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="wHM-j6-pwl" id="xPy-sO-cv5"/>
+                                    <outlet property="delegate" destination="wHM-j6-pwl" id="G22-bd-hdx"/>
+                                </connections>
+                            </collectionView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="U5q-jp-lO2">
+                                <rect key="frame" x="169" y="315" width="37" height="37"/>
+                                <color key="color" red="0.1450980392" green="0.40784313729999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="kZ1-HD-ic0" secondAttribute="trailing" id="Cqp-lU-k9M"/>
+                            <constraint firstItem="U5q-jp-lO2" firstAttribute="centerY" secondItem="KPe-tV-Qms" secondAttribute="centerY" id="UeN-7g-kfi"/>
+                            <constraint firstItem="oRT-F5-NTY" firstAttribute="top" secondItem="kZ1-HD-ic0" secondAttribute="bottom" id="gfO-bI-I8n"/>
+                            <constraint firstItem="kZ1-HD-ic0" firstAttribute="leading" secondItem="KPe-tV-Qms" secondAttribute="leading" id="hfh-cQ-JQG"/>
+                            <constraint firstItem="kZ1-HD-ic0" firstAttribute="top" secondItem="KPe-tV-Qms" secondAttribute="top" id="hhx-bh-w9T"/>
+                            <constraint firstItem="U5q-jp-lO2" firstAttribute="centerX" secondItem="KPe-tV-Qms" secondAttribute="centerX" id="wGe-Qp-2ej"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Master Bracket" id="a1t-je-jkU">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="bhn-pK-Q1o">
+                            <connections>
+                                <action selector="cancelTapped:" destination="wHM-j6-pwl" id="L8U-5b-YbG"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="save" id="PYD-Ud-gkG">
+                            <connections>
+                                <action selector="saveTapped:" destination="wHM-j6-pwl" id="5Hp-zl-M59"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="collectionView" destination="kZ1-HD-ic0" id="vq6-AS-nB8"/>
+                        <outlet property="spinner" destination="U5q-jp-lO2" id="5Gw-Rq-UTt"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KjJ-jV-bjq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2935" y="770"/>
         </scene>
         <!--Standings-->
         <scene sceneID="Vlb-Zk-TEQ">
@@ -185,7 +256,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rJX-Ce-ZrQ" customClass="BCNavigationViewController" customModule="BracketChallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="egX-Z0-H05">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="egX-Z0-H05" customClass="BCNavigationBar" customModule="BracketChallenge" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -216,6 +287,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xbu-Kq-Ed6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3961" y="45"/>
+        </scene>
+        <!--Navigation View Controller-->
+        <scene sceneID="zON-Te-0fT">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Bns-Ut-m01" customClass="BCNavigationViewController" customModule="BracketChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="COa-gq-WCE" customClass="BCNavigationBar" customModule="BracketChallenge" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="wHM-j6-pwl" kind="relationship" relationship="rootViewController" id="1HJ-HE-ZQj"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zcp-JJ-MHR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1958" y="770"/>
         </scene>
     </scenes>
     <resources>

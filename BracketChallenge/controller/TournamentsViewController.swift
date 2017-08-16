@@ -9,11 +9,13 @@
 import UIKit
 import FacebookLogin
 
-private let SEGUE_ID = "tournament"
+private let TOURNAMENT_SEGUE_ID = "tournament"
+private let CREATE_MASTER_SEGUE_ID = "createMaster"
 
-class TournamentsViewController: BCViewController, UITableViewDataSource, UITableViewDelegate {
+class TournamentsViewController: BCViewController, CreateMasterBracketDelegate, UITableViewDataSource, UITableViewDelegate {
     //MARK: Outlets
     @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var spinner: UIActivityIndicatorView!
     
     //MARK: Public properties
     var tournaments = [Tournament]()
@@ -33,18 +35,24 @@ class TournamentsViewController: BCViewController, UITableViewDataSource, UITabl
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        //Don't all the user to go back from here, unless they logout
-        navigationItem.setHidesBackButton(true, animated: false)
-        
         if let indexPath = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: indexPath, animated: true)
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == SEGUE_ID, let vc = segue.destination as? TournamentTabBarViewController, let tournament = sender as? Tournament {
+        if segue.identifier == TOURNAMENT_SEGUE_ID, let vc = segue.destination as? TournamentTabBarViewController, let tournament = sender as? Tournament {
             vc.tournament = tournament
+        } else if segue.identifier == CREATE_MASTER_SEGUE_ID, let vc = segue.destination as? CreateMasterViewController, let tournament = sender as? Tournament {
+            vc.tournament = tournament
+            vc.delegate = self
         }
+    }
+    
+    //MARK: CreateMasterBracketDelegate callback
+    
+    func bracketCreated() {
+        loadTournaments()
     }
     
     //MARK: UITableViewDataSource callbacks
@@ -67,11 +75,11 @@ class TournamentsViewController: BCViewController, UITableViewDataSource, UITabl
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let tournament = tournaments[indexPath.row]
         if tournament.masterBracketId != nil {
-            performSegue(withIdentifier: SEGUE_ID, sender: tournament)
+            performSegue(withIdentifier: TOURNAMENT_SEGUE_ID, sender: tournament)
         } else if Identity.user.admin {
             let dialog = UIAlertController(title: "Master Bracket Not Created", message: "This tournament does not yet have a master bracket. Would you like to create one?", preferredStyle: .alert)
             dialog.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (_) in
-                //TODO: Add logic to create master bracket
+                self.performSegue(withIdentifier: CREATE_MASTER_SEGUE_ID, sender: nil)
             }))
             dialog.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
             present(dialog, animated: true, completion: { 
@@ -99,7 +107,9 @@ class TournamentsViewController: BCViewController, UITableViewDataSource, UITabl
         })
         alert.addAction(UIAlertAction(title: "Create", style: .default, handler: { (action: UIAlertAction) in
             if let name = alert.textFields?.first?.text {
+                self.spinner.startAnimating()
                 BCClient.createTournament(name: name, callback: { (tournament, error) in
+                    self.spinner.stopAnimating()
                     if let tournament = tournament {
                         //TODO: Test this once we have the endpoint created
                         self.tournaments.append(tournament)
@@ -110,6 +120,7 @@ class TournamentsViewController: BCViewController, UITableViewDataSource, UITabl
                 })
             }
         }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
     }
     
@@ -122,7 +133,9 @@ class TournamentsViewController: BCViewController, UITableViewDataSource, UITabl
     }
     
     func loadTournaments() {
+        spinner.startAnimating()
         BCClient.getTournaments { (tournaments, error) in
+            self.spinner.stopAnimating()
             if let tournaments = tournaments {
                 self.tournaments = tournaments
                 self.tableView.reloadData()

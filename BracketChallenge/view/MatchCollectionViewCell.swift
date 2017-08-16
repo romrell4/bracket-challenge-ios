@@ -14,11 +14,13 @@ class MatchCollectionViewCell: UICollectionViewCell, UITableViewDataSource, UITa
     //Outlets
     @IBOutlet weak var tableView: UITableView!
     
+    //Public properties
     var match: MatchHelper? {
         didSet {
             tableView.reloadData()
         }
     }
+    var players: [Player]?
     
     override func awakeFromNib() {
         layer.borderColor = UIColor.bcGreen.cgColor
@@ -27,6 +29,7 @@ class MatchCollectionViewCell: UICollectionViewCell, UITableViewDataSource, UITa
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerNib(nibName: "MatchTableViewCell")
+        tableView.registerNib(nibName: "CreateMatchTableViewCell", forCellIdentifier: "cell2")
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -38,14 +41,17 @@ class MatchCollectionViewCell: UICollectionViewCell, UITableViewDataSource, UITa
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(for: indexPath) as? MatchTableViewCell {
+        if players == nil, let cell = tableView.dequeueReusableCell(for: indexPath) as? MatchTableViewCell {
             if indexPath.row == 0 {
                 cell.nameLabel.text = match?.player1Full
-                cell.accessoryType = match?.winnerId == match?.player1Id ? .checkmark : .none
+                cell.accessoryType = match?.winnerId != nil && match?.winnerId == match?.player1Id ? .checkmark : .none
             } else {
                 cell.nameLabel.text = match?.player2Full
-                cell.accessoryType = match?.winnerId == match?.player2Id ? .checkmark : .none
+                cell.accessoryType = match?.winnerId != nil && match?.winnerId == match?.player2Id ? .checkmark : .none
             }
+            return cell
+        } else if let players = players, let cell = tableView.dequeueReusableCell(for: indexPath, withId: "cell2") as? CreateMatchTableViewCell {
+            cell.players = players
             return cell
         }
         return UITableViewCell()

@@ -8,7 +8,7 @@
 
 import UIKit
 
-private let CELL_INSET: CGFloat = 8
+let CELL_INSET: CGFloat = 8
 
 class BracketViewController: BCViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     //Public properties
@@ -42,7 +42,7 @@ class BracketViewController: BCViewController, UICollectionViewDataSource, UICol
         collectionViews[roundIndex].reloadData()
     }
     
-    //UICollectionViewDataSource/Delegate callbacks
+    //UICollectionViewDataSource/DelegateFlowLayout callbacks
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return getMatches(for: collectionView).count
