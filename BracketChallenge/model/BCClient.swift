@@ -117,6 +117,20 @@ class BCClient {
         }
     }
     
+    static func updateBracket(bracket: Bracket, callback: @escaping (Bracket?, BCError?) -> Void) {
+        makeRequest(endpoint: "tournament/\(bracket.tournamentId)/brackets/\(bracket.bracketId)") { (response) in
+            if response.succeeded, let dict = response.getDataJson() as? [String: Any] {
+                do {
+                    callback(try Bracket(dict: dict), nil)
+                } catch {
+                    callback(nil, BCError(readableMessage: "Invalid bracket returned from service"))
+                }
+            } else {
+                callback(nil, response.error)
+            }
+        }
+    }
+    
     private static func makeRequest(endpoint: String, method: String = "GET", body: Any? = nil, completionHandler: @escaping ((BCResponse) -> Void)) {
         let urlString = "\(BASE_URL)\(endpoint)"
         guard let url = URL(string: urlString) else {

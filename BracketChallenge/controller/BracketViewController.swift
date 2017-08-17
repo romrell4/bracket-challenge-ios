@@ -10,7 +10,7 @@ import UIKit
 
 let CELL_INSET: CGFloat = 8
 
-class BracketViewController: BCViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class BracketViewController: BCViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, MatchCollectionViewCellDelegate {
     //Public properties
     var spinner: UIActivityIndicatorView!
     var tournament: Tournament!
@@ -66,9 +66,33 @@ class BracketViewController: BCViewController, UICollectionViewDataSource, UICol
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? MatchCollectionViewCell {
             cell.match = getMatches(for: collectionView)[indexPath.row]
+            cell.delegate = self
             return cell
         }
         return UICollectionViewCell()
+    }
+    
+    //MatchCollectionViewCell callbacks
+    
+    func player(_ player: Player?, selectedInCell cell: MatchCollectionViewCell) {
+        for round in 0...collectionViews.count {
+            guard let position = collectionViews[round].indexPath(for: cell)?.row else { continue }
+            bracket?.rounds?[round][position].winner = player
+            
+            //Update the next round
+            let nextRound = round + 1
+            let newPosition = position / 2 //Integer division will automatically do a "floor"
+            if nextRound < collectionViews.count {
+                let match = bracket?.rounds?[nextRound][newPosition]
+                if position % 2 == 0 {
+                    match?.player1 = player
+                } else {
+                    match?.player2 = player
+                }
+                collectionViews[round + 1].reloadData()
+            }
+            return
+        }
     }
     
     //Public functions

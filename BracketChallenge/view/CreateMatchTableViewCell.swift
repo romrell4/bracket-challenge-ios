@@ -15,6 +15,7 @@ class CreateMatchTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     //Public properties
     var players = [Player]()
+    var player: Player?
     
     override func awakeFromNib() {
         playerNameField.delegate = self
@@ -23,12 +24,17 @@ class CreateMatchTableViewCell: UITableViewCell, UITextFieldDelegate {
     //MARK: UITextFieldDelegate callbacks
     
     func textFieldDidEndEditing(_ textField: UITextField) {
+        guard let text = textField.text else {
+            player = nil
+            return
+        }
+        
         if let player = players.first(where: { $0.name?.lowercased() == textField.text?.lowercased() }) {
-            //TODO: Save this somehow
+            self.player = player
             textField.text = player.name
             textField.textColor = .black
         } else {
-            //TODO: Notify the user of the issue
+            self.player = Player(name: text)
             textField.textColor = .red
         }
     }

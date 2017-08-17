@@ -11,6 +11,7 @@ import UIKit
 class Player {
     var playerId: Int?
     var name: String?
+    var seed: Int?
     
     init(dict: [String: Any]) throws {
         guard let playerId = dict["player_id"] as? Int,
@@ -22,8 +23,9 @@ class Player {
         self.name = name
     }
     
-    init(id: Int, name: String) {
+    init(id: Int? = nil, name: String, seed: Int? = nil) {
         self.playerId = id
         self.name = name
+        self.seed = seed
     }
 }
