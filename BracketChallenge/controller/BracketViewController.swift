@@ -129,8 +129,8 @@ class BracketViewController: BCViewController, UICollectionViewDataSource, UICol
     }
     
     func areCellsClickable() -> Bool {
-        //Override if you want users to be able to select rows
-        return false
+        //Override if you want to stop users from selecting the rows
+        return true
     }
     
     //Private functions
