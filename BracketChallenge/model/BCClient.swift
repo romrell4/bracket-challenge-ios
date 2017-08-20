@@ -118,7 +118,8 @@ class BCClient {
     }
     
     static func updateBracket(bracket: Bracket, callback: @escaping (Bracket?, BCError?) -> Void) {
-        makeRequest(endpoint: "tournament/\(bracket.tournamentId)/brackets/\(bracket.bracketId)") { (response) in
+        let body = try? JSONSerialization.data(withJSONObject: bracket.toDict(), options: [])
+        makeRequest(endpoint: "tournament/\(bracket.tournamentId)/brackets/\(bracket.bracketId)", method: "PUT", body: body) { (response) in
             if response.succeeded, let dict = response.getDataJson() as? [String: Any] {
                 do {
                     callback(try Bracket(dict: dict), nil)

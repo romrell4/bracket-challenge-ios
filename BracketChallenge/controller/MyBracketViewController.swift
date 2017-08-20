@@ -26,7 +26,13 @@ class MyBracketViewController: BracketViewController {
             if validResponse {
                 if let bracket = bracket {
                     super.bracket = bracket
-                    self.tabBarController?.navigationItem.rightBarButtonItem?.isEnabled = true
+                    
+                    //Depending on whether the button
+                    if let saveButton = self.tabBarController?.navigationItem.rightBarButtonItem {
+                        saveButton.isEnabled = true
+                    } else {
+                        self.saveButton.isEnabled = true
+                    }
                 } else {
                     self.createBracketView.isHidden = false
                     self.view.bringSubview(toFront: self.createBracketView)
@@ -37,11 +43,11 @@ class MyBracketViewController: BracketViewController {
         })
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         tabBarController?.navigationItem.rightBarButtonItem = saveButton
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         tabBarController?.navigationItem.rightBarButtonItem = nil
     }
     
