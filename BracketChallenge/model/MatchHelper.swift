@@ -56,4 +56,29 @@ class MatchHelper: Match {
             winner = Player(id: id, name: name)
         }
     }
+    
+    func toDict() -> [String: Any] {
+        var dict = [
+            "match_id": matchId,
+            "bracket_id": bracketId,
+            "round": round,
+            "position": position,
+        ]
+        if let player1Id = player1Id {
+            dict["player1_id"] = player1Id
+        }
+        if let player2Id = player2Id {
+            dict["player2_id"] = player2Id
+        }
+        if let seed1 = seed1 {
+            dict["seed1"] = seed1
+        }
+        if let seed2 = seed2 {
+            dict["seed2"] = seed2
+        }
+        if let winnerId = winnerId {
+            dict["winner_id"] = winnerId
+        }
+        return dict
+    }
 }

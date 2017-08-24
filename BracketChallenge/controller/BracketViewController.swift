@@ -109,6 +109,12 @@ class BracketViewController: BCViewController, UICollectionViewDataSource, UICol
     }
     
     func setupCollectionViews() {
+        //Remove all the current collectionViews (as they will be replaced)
+        for collectionView in collectionViews {
+            collectionView.removeFromSuperview()
+        }
+        collectionViews.removeAll(keepingCapacity: false)
+        
         let width = Double(scrollView.frame.width)
         let height = Double(scrollView.frame.height)
         
@@ -152,7 +158,7 @@ class BracketViewController: BCViewController, UICollectionViewDataSource, UICol
             NSLayoutConstraint(item: view, attr1: .leading, toItem: scrollView, attr2: .leading),
             NSLayoutConstraint(item: view, attr1: .trailing, toItem: scrollView, attr2: .trailing),
             NSLayoutConstraint(item: view, attr1: .top, toItem: scrollView, attr2: .top),
-            NSLayoutConstraint(item: view, attr1: .bottom, toItem: scrollView, attr2: .bottom)
+            NSLayoutConstraint(item: bottomLayoutGuide, attr1: .top, toItem: scrollView, attr2: .bottom)
         ])
     }
     

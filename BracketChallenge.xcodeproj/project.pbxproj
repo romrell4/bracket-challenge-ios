@@ -29,10 +29,10 @@
 		0C5085C91F2E357D00C4A04D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C5085C01F2E357D00C4A04D /* Main.storyboard */; };
 		0C5085CA1F2E357D00C4A04D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5085C21F2E357D00C4A04D /* AppDelegate.swift */; };
 		0C5085CB1F2E357D00C4A04D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5085C41F2E357D00C4A04D /* LoginViewController.swift */; };
+		0C9DAB801F4F8936009268D6 /* defaultTournament.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0C9DAB7F1F4F8936009268D6 /* defaultTournament.jpg */; };
 		0C9FD7781F2FD9B4005174F4 /* Tournament.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9FD7771F2FD9B4005174F4 /* Tournament.swift */; };
 		0C9FD77A1F2FE45F005174F4 /* TournamentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9FD7791F2FE45F005174F4 /* TournamentTableViewCell.swift */; };
 		0C9FD77D1F2FE498005174F4 /* TournamentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C9FD77C1F2FE498005174F4 /* TournamentTableViewCell.xib */; };
-		0C9FD77F1F2FEDD9005174F4 /* wimbledon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0C9FD77E1F2FEDD9005174F4 /* wimbledon.jpg */; };
 		0C9FD7831F302098005174F4 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9FD7821F302098005174F4 /* Player.swift */; };
 		0CA4DB291F3776E0005A3FDF /* MyBracketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA4DB281F3776E0005A3FDF /* MyBracketViewController.swift */; };
 		0CA4DB2B1F378756005A3FDF /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA4DB2A1F378756005A3FDF /* ResultsViewController.swift */; };
@@ -71,10 +71,10 @@
 		0C5085C01F2E357D00C4A04D /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		0C5085C21F2E357D00C4A04D /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0C5085C41F2E357D00C4A04D /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		0C9DAB7F1F4F8936009268D6 /* defaultTournament.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = defaultTournament.jpg; path = Assets.xcassets/defaultTournament.jpg; sourceTree = "<group>"; };
 		0C9FD7771F2FD9B4005174F4 /* Tournament.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tournament.swift; sourceTree = "<group>"; };
 		0C9FD7791F2FE45F005174F4 /* TournamentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TournamentTableViewCell.swift; sourceTree = "<group>"; };
 		0C9FD77C1F2FE498005174F4 /* TournamentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TournamentTableViewCell.xib; sourceTree = "<group>"; };
-		0C9FD77E1F2FEDD9005174F4 /* wimbledon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = wimbledon.jpg; sourceTree = "<group>"; };
 		0C9FD7821F302098005174F4 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		0CA4DB281F3776E0005A3FDF /* MyBracketViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyBracketViewController.swift; sourceTree = "<group>"; };
 		0CA4DB2A1F378756005A3FDF /* ResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
@@ -163,7 +163,7 @@
 		0C5085BD1F2E357D00C4A04D /* view */ = {
 			isa = PBXGroup;
 			children = (
-				0C9FD77E1F2FEDD9005174F4 /* wimbledon.jpg */,
+				0C9DAB7F1F4F8936009268D6 /* defaultTournament.jpg */,
 				0C5085BE1F2E357D00C4A04D /* Assets.xcassets */,
 				0C5085BF1F2E357D00C4A04D /* LaunchScreen.storyboard */,
 				0C5085C01F2E357D00C4A04D /* Main.storyboard */,
@@ -305,7 +305,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C15E5B11F2E397B00E6E4A5 /* Podfile in Resources */,
-				0C9FD77F1F2FEDD9005174F4 /* wimbledon.jpg in Resources */,
+				0C9DAB801F4F8936009268D6 /* defaultTournament.jpg in Resources */,
 				0C5085C91F2E357D00C4A04D /* Main.storyboard in Resources */,
 				0CE187391F40B7210069BEC6 /* MatchTableViewCell.xib in Resources */,
 				0CE187361F3F93450069BEC6 /* MatchCollectionViewCell.xib in Resources */,

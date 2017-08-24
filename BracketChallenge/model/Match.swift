@@ -9,10 +9,10 @@
 import UIKit
 
 class Match {
-    var matchId: Int?
-    var bracketId: Int?
-    var round: Int?
-    var position: Int?
+    var matchId: Int
+    var bracketId: Int
+    var round: Int
+    var position: Int
     var player1Id: Int?
     var player2Id: Int?
     var seed1: Int?

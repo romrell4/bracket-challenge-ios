@@ -21,6 +21,9 @@ class TournamentTableViewCell: UITableViewCell {
     
     func setTournament(_ tournament: Tournament) {
         titleLabel.text = tournament.name
+        if let image = tournament.image {
+            backgroundImageView.image = image
+        }
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

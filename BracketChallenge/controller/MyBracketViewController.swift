@@ -12,27 +12,14 @@ class MyBracketViewController: BracketViewController {
     //MARK: Outlets
     @IBOutlet weak var createBracketView: UIView!
     
-    //MARK: Private properties
-    private var saveButton: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(updateBracket))
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //Start off disabled (until the data comes back)
-        saveButton.isEnabled = false
         
         BCClient.getMyBracket(tournamentId: super.tournament.tournamentId, callback: { (validResponse, bracket, error) in
             super.spinner.stopAnimating()
             if validResponse {
                 if let bracket = bracket {
                     super.bracket = bracket
-                    
-                    //Depending on whether the button
-                    if let saveButton = self.tabBarController?.navigationItem.rightBarButtonItem {
-                        saveButton.isEnabled = true
-                    } else {
-                        self.saveButton.isEnabled = true
-                    }
                 } else {
                     self.createBracketView.isHidden = false
                     self.view.bringSubview(toFront: self.createBracketView)
@@ -44,7 +31,7 @@ class MyBracketViewController: BracketViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        tabBarController?.navigationItem.rightBarButtonItem = saveButton
+        tabBarController?.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(updateBracket))
     }
     
     override func viewDidDisappear(_ animated: Bool) {

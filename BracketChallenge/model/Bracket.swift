@@ -54,7 +54,15 @@ class Bracket {
             dict[USER_ID_KEY] = userId
         }
         if let rounds = rounds {
-            dict[ROUNDS_KEY] = rounds
+            var rounds_array = [[[String: Any]]]()
+            for round in rounds {
+                var round_array = [[String: Any]]()
+                for match in round {
+                    round_array.append(match.toDict())
+                }
+                rounds_array.append(round_array)
+            }
+            dict[ROUNDS_KEY] = rounds_array
         }
         return dict
     }

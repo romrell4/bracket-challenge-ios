@@ -26,24 +26,17 @@ class BCClient {
     }
     
     static func getPlayers(callback: @escaping ([Player]?, BCError?) -> Void) {
-        callback([
-            Player(id: 1, name: "Roger Federer"),
-            Player(id: 2, name: "Andy Murray"),
-            Player(id: 3, name: "Novak Djokovic"),
-            Player(id: 4, name: "Rafael Nadal")
-        ], nil)
-        //TODO: Uncomment this when the endpoint is created
-//        makeRequest(endpoint: "players") { (response) in
-//            if response.succeeded, let array = response.getDataJson() as? [[String: Any]] {
-//                do {
-//                    callback(try array.map { try Player(dict: $0) }, nil)
-//                } catch {
-//                    callback(nil, BCError(readableMessage: "Invalid player returned from service"))
-//                }
-//            } else {
-//                callback(nil, response.error)
-//            }
-//        }
+        makeRequest(endpoint: "players") { (response) in
+            if response.succeeded, let array = response.getDataJson() as? [[String: Any]] {
+                do {
+                    callback(try array.map { try Player(dict: $0) }, nil)
+                } catch {
+                    callback(nil, BCError(readableMessage: "Invalid player returned from service"))
+                }
+            } else {
+                callback(nil, response.error)
+            }
+        }
     }
     
     static func getTournaments(callback: @escaping ([Tournament]?, BCError?) -> Void) {
@@ -118,8 +111,7 @@ class BCClient {
     }
     
     static func updateBracket(bracket: Bracket, callback: @escaping (Bracket?, BCError?) -> Void) {
-        let body = try? JSONSerialization.data(withJSONObject: bracket.toDict(), options: [])
-        makeRequest(endpoint: "tournament/\(bracket.tournamentId)/brackets/\(bracket.bracketId)", method: "PUT", body: body) { (response) in
+        makeRequest(endpoint: "tournaments/\(bracket.tournamentId)/brackets/\(bracket.bracketId)", method: "PUT", body: bracket.toDict()) { (response) in
             if response.succeeded, let dict = response.getDataJson() as? [String: Any] {
                 do {
                     callback(try Bracket(dict: dict), nil)

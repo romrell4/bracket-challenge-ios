@@ -52,9 +52,11 @@ class MatchCollectionViewCell: UICollectionViewCell, UITableViewDataSource, UITa
             if indexPath.row == 0 {
                 cell.nameLabel.text = match?.player1Full
                 cell.accessoryType = match?.winnerId != nil && match?.winnerId == match?.player1Id ? .checkmark : .none
+                cell.isUserInteractionEnabled = match?.player1 != nil
             } else {
                 cell.nameLabel.text = match?.player2Full
                 cell.accessoryType = match?.winnerId != nil && match?.winnerId == match?.player2Id ? .checkmark : .none
+                cell.isUserInteractionEnabled = match?.player2 != nil
             }
             cell.delegate = self
             return cell
