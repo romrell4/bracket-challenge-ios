@@ -98,6 +98,7 @@ class BracketViewController: BCViewController, UICollectionViewDataSource, UICol
     //Public functions
     
     func loadBracket(bracketId: Int) {
+        spinner.startAnimating()
         BCClient.getBracket(tournamentId: tournament.tournamentId, bracketId: bracketId) { (bracket, error) in
             self.spinner.stopAnimating()
             if let bracket = bracket {
@@ -108,30 +109,19 @@ class BracketViewController: BCViewController, UICollectionViewDataSource, UICol
         }
     }
     
-    func setupCollectionViews() {
-        //Remove all the current collectionViews (as they will be replaced)
-        for collectionView in collectionViews {
-            collectionView.removeFromSuperview()
+    func updateBracket() {
+        if let bracket = bracket {
+            spinner.startAnimating()
+            BCClient.updateBracket(bracket: bracket, callback: { (bracket, error) in
+                self.spinner.stopAnimating()
+                if let bracket = bracket {
+                    self.bracket = bracket
+                    super.displayAlert(title: "Success", message: "Bracket successfully updated", alertHandler: nil)
+                } else {
+                    super.displayAlert(error: error)
+                }
+            })
         }
-        collectionViews.removeAll(keepingCapacity: false)
-        
-        let width = Double(scrollView.frame.width)
-        let height = Double(scrollView.frame.height)
-        
-        let rounds = bracket?.rounds?.count ?? 1
-        for round in 0...(rounds - 1) {
-            let collectionView = UICollectionView(frame: CGRect(x: Double(round) * width, y: 0.0, width: width, height: height), collectionViewLayout: UICollectionViewFlowLayout())
-            collectionView.dataSource = self
-            collectionView.delegate = self
-            collectionView.backgroundColor = .lightGray
-            collectionView.isUserInteractionEnabled = areCellsClickable()
-            collectionView.registerNib(nibName: "MatchCollectionViewCell")
-            collectionViews.append(collectionView)
-            scrollView.addSubview(collectionView)
-        }
-        scrollView.contentSize = CGSize(width: width * Double(rounds), height: height)
-        pageControl.currentPage = 0
-        pageControl.numberOfPages = rounds
     }
     
     func areCellsClickable() -> Bool {
@@ -184,6 +174,31 @@ class BracketViewController: BCViewController, UICollectionViewDataSource, UICol
             NSLayoutConstraint(item: view, attr1: .centerX, toItem: spinner, attr2: .centerX),
             NSLayoutConstraint(item: view, attr1: .centerY, toItem: spinner, attr2: .centerY)
         ])
+    }
+    
+    private func setupCollectionViews() {
+        //Remove all the current collectionViews (as they will be replaced)
+        for collectionView in collectionViews {
+            collectionView.removeFromSuperview()
+        }
+        collectionViews.removeAll(keepingCapacity: false)
+        
+        let width = Double(scrollView.frame.width)
+        let height = Double(scrollView.frame.height)
+        
+        let rounds = bracket?.rounds?.count ?? 1
+        for round in 0...(rounds - 1) {
+            let collectionView = UICollectionView(frame: CGRect(x: Double(round) * width, y: 0.0, width: width, height: height), collectionViewLayout: UICollectionViewFlowLayout())
+            collectionView.dataSource = self
+            collectionView.delegate = self
+            collectionView.backgroundColor = .lightGray
+            collectionView.isUserInteractionEnabled = areCellsClickable()
+            collectionView.registerNib(nibName: "MatchCollectionViewCell")
+            collectionViews.append(collectionView)
+            scrollView.addSubview(collectionView)
+        }
+        scrollView.contentSize = CGSize(width: width * Double(rounds), height: height)
+        pageControl.numberOfPages = rounds
     }
     
     private func getMatches(for collectionView: UICollectionView) -> [MatchHelper] {

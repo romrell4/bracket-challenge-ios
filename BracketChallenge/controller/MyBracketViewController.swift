@@ -52,16 +52,4 @@ class MyBracketViewController: BracketViewController {
             }
         }
     }
-    
-    func updateBracket() {
-        if let bracket = bracket {
-            BCClient.updateBracket(bracket: bracket, callback: { (bracket, error) in
-                if let bracket = bracket {
-                    self.bracket = bracket
-                } else {
-                    super.displayAlert(error: error)
-                }
-            })
-        }
-    }
 }

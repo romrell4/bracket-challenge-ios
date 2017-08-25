@@ -20,7 +20,7 @@ class ResultsViewController: BracketViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         if Identity.user.admin {
-            tabBarController?.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveTapped))
+            tabBarController?.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(updateBracket))
         }
     }
     
@@ -32,17 +32,5 @@ class ResultsViewController: BracketViewController {
     
     override func areCellsClickable() -> Bool {
         return Identity.user.admin
-    }
-    
-    func saveTapped() {
-        if let bracket = super.bracket {
-            BCClient.updateBracket(bracket: bracket) { (bracket, error) in
-                if let bracket = bracket {
-                    super.bracket = bracket
-                } else {
-                    super.displayAlert(error: error)
-                }
-            }
-        }
     }
 }
