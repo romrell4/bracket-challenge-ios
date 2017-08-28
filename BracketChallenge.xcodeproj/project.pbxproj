@@ -15,7 +15,6 @@
 		0C213FB41F2FCEC3007F25CA /* BCError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C213FAF1F2FCEC3007F25CA /* BCError.swift */; };
 		0C213FB51F2FCEC3007F25CA /* BCResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C213FB01F2FCEC3007F25CA /* BCResponse.swift */; };
 		0C213FB61F2FCEC3007F25CA /* BCNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C213FB21F2FCEC3007F25CA /* BCNavigationViewController.swift */; };
-		0C213FB71F2FCEC3007F25CA /* BCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C213FB31F2FCEC3007F25CA /* BCViewController.swift */; };
 		0C42A0F41F30F45C00BF26CE /* Bracket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C42A0F31F30F45C00BF26CE /* Bracket.swift */; };
 		0C42A0F61F30FCA700BF26CE /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C42A0F51F30FCA700BF26CE /* Match.swift */; };
 		0C42A0F81F311D7300BF26CE /* MatchHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C42A0F71F311D7300BF26CE /* MatchHelper.swift */; };
@@ -55,7 +54,6 @@
 		0C213FAF1F2FCEC3007F25CA /* BCError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BCError.swift; sourceTree = "<group>"; };
 		0C213FB01F2FCEC3007F25CA /* BCResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BCResponse.swift; sourceTree = "<group>"; };
 		0C213FB21F2FCEC3007F25CA /* BCNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BCNavigationViewController.swift; sourceTree = "<group>"; };
-		0C213FB31F2FCEC3007F25CA /* BCViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BCViewController.swift; sourceTree = "<group>"; };
 		0C42A0F31F30F45C00BF26CE /* Bracket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bracket.swift; sourceTree = "<group>"; };
 		0C42A0F51F30FCA700BF26CE /* Match.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
 		0C42A0F71F311D7300BF26CE /* MatchHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchHelper.swift; sourceTree = "<group>"; };
@@ -115,7 +113,6 @@
 			children = (
 				0C213FB21F2FCEC3007F25CA /* BCNavigationViewController.swift */,
 				0C48A2071F42474D002AB255 /* BCNavigationBar.swift */,
-				0C213FB31F2FCEC3007F25CA /* BCViewController.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -387,7 +384,6 @@
 				0C15EB321F2EC30B00E6E4A5 /* Extensions.swift in Sources */,
 				0C42A0F81F311D7300BF26CE /* MatchHelper.swift in Sources */,
 				0C49AB481F36843C0074FAD0 /* Identity.swift in Sources */,
-				0C213FB71F2FCEC3007F25CA /* BCViewController.swift in Sources */,
 				0CEBDB9B1F4252660066D136 /* CreateMatchTableViewCell.swift in Sources */,
 				0C42A1011F33DE6000BF26CE /* TournamentTabBarViewController.swift in Sources */,
 				0C48A2081F42474D002AB255 /* BCNavigationBar.swift in Sources */,

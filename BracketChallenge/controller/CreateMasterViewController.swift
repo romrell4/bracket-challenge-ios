@@ -12,7 +12,7 @@ protocol CreateMasterBracketDelegate {
     func bracketCreated()
 }
 
-class CreateMasterViewController: BCViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class CreateMasterViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     //MARK: Outlets
     @IBOutlet private weak var collectionView: UICollectionView!

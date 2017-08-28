@@ -9,7 +9,7 @@
 import FacebookLogin
 import FacebookCore
 
-class LoginViewController: BCViewController, LoginButtonDelegate {
+class LoginViewController: UIViewController, LoginButtonDelegate {
     
     //MARK: Outlets
     @IBOutlet weak var spinner: UIActivityIndicatorView!

@@ -42,7 +42,7 @@ class MyBracketViewController: BracketViewController {
     
     @IBAction func createBracketTapped(_ sender: Any) {
         super.spinner.startAnimating()
-        BCClient.createBracket(tournamentId: super.tournament.tournamentId) { (bracket, error) in
+        BCClient.createBracket(tournamentId: super.tournament.tournamentId, bracketName: Identity.user.name) { (bracket, error) in
             super.spinner.stopAnimating()
             self.createBracketView.isHidden = true
             if let bracket = bracket {

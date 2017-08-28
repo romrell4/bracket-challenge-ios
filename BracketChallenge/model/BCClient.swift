@@ -96,8 +96,8 @@ class BCClient {
         }
     }
     
-    static func createBracket(tournamentId: Int, callback: @escaping (Bracket?, BCError?) -> Void) {
-        makeRequest(endpoint: "tournaments/\(tournamentId)/brackets", method: "POST", body: ["name": "Tester"]) { (response) in
+    static func createBracket(tournamentId: Int, bracketName: String? = nil, callback: @escaping (Bracket?, BCError?) -> Void) {
+        makeRequest(endpoint: "tournaments/\(tournamentId)/brackets", method: "POST", body: ["name": bracketName ?? "Tester"]) { (response) in
             if response.succeeded, let dict = response.getDataJson() as? [String: Any] {
                 do {
                     callback(try Bracket(dict: dict), nil)

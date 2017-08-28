@@ -10,6 +10,7 @@ private let BRACKET_ID_KEY = "bracket_id"
 private let USER_ID_KEY = "user_id"
 private let TOURNAMENT_ID_KEY = "tournament_id"
 private let NAME_KEY = "name"
+private let SCORE_KEY = "score"
 private let ROUNDS_KEY = "rounds"
 
 class Bracket {
@@ -17,10 +18,11 @@ class Bracket {
     var userId: Int?
     var tournamentId: Int
     var name: String
+    var score: Int
     var rounds: [[MatchHelper]]?
     
     init(dict: [String: Any]) throws {
-        guard let bracketId = dict[BRACKET_ID_KEY] as? Int, let tournamentId = dict[TOURNAMENT_ID_KEY] as? Int, let name = dict[NAME_KEY] as? String else {
+        guard let bracketId = dict[BRACKET_ID_KEY] as? Int, let tournamentId = dict[TOURNAMENT_ID_KEY] as? Int, let name = dict[NAME_KEY] as? String, let score = dict[SCORE_KEY] as? Int else {
             throw InvalidModelError.transaction
         }
         
@@ -28,6 +30,7 @@ class Bracket {
         self.userId = dict[USER_ID_KEY] as? Int
         self.tournamentId = tournamentId
         self.name = name
+        self.score = score
         
         if let roundArrays = dict[ROUNDS_KEY] as? [[[String: Any]]] {
             var tmpRounds = [[MatchHelper]]()
@@ -46,7 +49,8 @@ class Bracket {
         var dict: [String: Any] = [
             BRACKET_ID_KEY: bracketId,
             TOURNAMENT_ID_KEY: tournamentId,
-            NAME_KEY: name
+            NAME_KEY: name,
+            SCORE_KEY: score
         ]
         
         //Add optional properties

@@ -10,21 +10,23 @@ import UIKit
 
 let CELL_INSET: CGFloat = 8
 
-class BracketViewController: BCViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, MatchCollectionViewCellDelegate {
+class BracketViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, MatchCollectionViewCellDelegate {
     //Public properties
     var spinner: UIActivityIndicatorView!
     var tournament: Tournament!
     var bracket: Bracket? {
         didSet {
             tabBarController?.title = bracket?.name
+            scoreLabel.text = "Score: \(bracket?.score ?? 0)"
             setupCollectionViews()
         }
     }
     
     //Private properties
+    private var pageControl: UIPageControl!
+    private var scoreLabel: UILabel!
     private var scrollView: UIScrollView!
     private var collectionViews = [UICollectionView]()
-    private var pageControl: UIPageControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -132,12 +134,38 @@ class BracketViewController: BCViewController, UICollectionViewDataSource, UICol
     //Private functions
     
     private func createUI() {
-        createScrollView()
-        createPageControl()
+        view.backgroundColor = .lightGray
+        createTopView()
         createSpinner()
     }
     
-    private func createScrollView() {
+    private func createTopView() {
+        let topView = UIView()
+        topView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(topView)
+        view.addConstraints([
+            NSLayoutConstraint(item: view, attr1: .leading, toItem: topView, attr2: .leading),
+            NSLayoutConstraint(item: view, attr1: .trailing, toItem: topView, attr2: .trailing),
+            NSLayoutConstraint(item: topLayoutGuide, attr1: .bottom, toItem: topView, attr2: .top),
+            NSLayoutConstraint(item: topView, attr1: .height, constant: 32)
+        ])
+        pageControl = UIPageControl()
+        pageControl.translatesAutoresizingMaskIntoConstraints = false
+        pageControl.currentPageIndicatorTintColor = .bcGreen
+        pageControl.pageIndicatorTintColor = .bcYellow
+        topView.addSubview(pageControl)
+        topView.addConstraints([
+            NSLayoutConstraint(item: topView, attr1: .centerX, toItem: pageControl, attr2: .centerX),
+            NSLayoutConstraint(item: topView, attr1: .centerY, toItem: pageControl, attr2: .centerY)
+        ])
+        scoreLabel = UILabel()
+        scoreLabel.translatesAutoresizingMaskIntoConstraints = false
+        scoreLabel.font = UIFont.systemFont(ofSize: 18)
+        topView.addSubview(scoreLabel)
+        topView.addConstraints([
+            NSLayoutConstraint(item: topView, attr1: .trailingMargin, toItem: scoreLabel, attr2: .trailing),
+            NSLayoutConstraint(item: topView, attr1: .centerY, toItem: scoreLabel, attr2: .centerY)
+        ])
         scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.delegate = self
@@ -147,20 +175,8 @@ class BracketViewController: BCViewController, UICollectionViewDataSource, UICol
         view.addConstraints([
             NSLayoutConstraint(item: view, attr1: .leading, toItem: scrollView, attr2: .leading),
             NSLayoutConstraint(item: view, attr1: .trailing, toItem: scrollView, attr2: .trailing),
-            NSLayoutConstraint(item: view, attr1: .top, toItem: scrollView, attr2: .top),
+            NSLayoutConstraint(item: topView, attr1: .bottom, toItem: scrollView, attr2: .top),
             NSLayoutConstraint(item: bottomLayoutGuide, attr1: .top, toItem: scrollView, attr2: .bottom)
-        ])
-    }
-    
-    private func createPageControl() {
-        pageControl = UIPageControl()
-        pageControl.translatesAutoresizingMaskIntoConstraints = false
-        pageControl.currentPageIndicatorTintColor = .bcGreen
-        pageControl.pageIndicatorTintColor = .bcYellow
-        view.addSubview(pageControl)
-        view.addConstraints([
-            NSLayoutConstraint(item: view, attr1: .centerX, toItem: pageControl, attr2: .centerX),
-            NSLayoutConstraint(item: view, attr1: .bottom, toItem: pageControl, attr2: .bottom, constant: 50)
         ])
     }
     

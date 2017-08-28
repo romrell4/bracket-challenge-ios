@@ -12,7 +12,7 @@ import FacebookLogin
 private let TOURNAMENT_SEGUE_ID = "tournament"
 private let CREATE_MASTER_SEGUE_ID = "createMaster"
 
-class TournamentsViewController: BCViewController, CreateMasterBracketDelegate, UITableViewDataSource, UITableViewDelegate {
+class TournamentsViewController: UIViewController, CreateMasterBracketDelegate, UITableViewDataSource, UITableViewDelegate {
     //MARK: Outlets
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var spinner: UIActivityIndicatorView!
