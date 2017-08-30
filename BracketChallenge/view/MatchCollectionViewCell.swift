@@ -30,7 +30,6 @@ class MatchCollectionViewCell: UICollectionViewCell, UITableViewDataSource, UITa
         }
     }
     var delegate: MatchCollectionViewCellDelegate?
-    var players: [Player]?
     var areCellsClickable = true
     
     override func awakeFromNib() {
@@ -40,7 +39,6 @@ class MatchCollectionViewCell: UICollectionViewCell, UITableViewDataSource, UITa
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerNib(nibName: "MatchTableViewCell")
-        tableView.registerNib(nibName: "CreateMatchTableViewCell", forCellIdentifier: "cell2")
     }
     
     //UITableViewDataSource/Delegate callbacks
@@ -54,7 +52,7 @@ class MatchCollectionViewCell: UICollectionViewCell, UITableViewDataSource, UITa
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if players == nil, let cell = tableView.dequeueReusableCell(for: indexPath) as? MatchTableViewCell {
+        if let cell = tableView.dequeueReusableCell(for: indexPath) as? MatchTableViewCell {
             if indexPath.row == 0 {
                 cell.nameLabel.text = match?.player1Full
                 cell.accessoryType = match?.winnerId != nil && match?.winnerId == match?.player1Id ? .checkmark : .none
@@ -68,9 +66,6 @@ class MatchCollectionViewCell: UICollectionViewCell, UITableViewDataSource, UITa
             }
             cell.delegate = self
             return cell
-        } else if let players = players, let cell = tableView.dequeueReusableCell(for: indexPath, withId: "cell2") as? CreateMatchTableViewCell {
-            cell.players = players
-            return cell
         }
         return UITableViewCell()
     }
@@ -79,8 +74,11 @@ class MatchCollectionViewCell: UICollectionViewCell, UITableViewDataSource, UITa
         if areCellsClickable {
             let otherIndexPath = IndexPath(row: indexPath.row == 0 ? 1 : 0, section: indexPath.section)
             if let cell = tableView.cellForRow(at: indexPath) as? MatchTableViewCell, let otherCell = tableView.cellForRow(at: otherIndexPath) as? MatchTableViewCell {
+                //When selecting a cell, the other one should deselect
                 cell.checked = true
                 otherCell.checked = false
+                
+                //TODO: Allow the user to deselect a row
             }
         }
     }
@@ -88,6 +86,7 @@ class MatchCollectionViewCell: UICollectionViewCell, UITableViewDataSource, UITa
     //MatchTableViewCellDelegate callback
     
     func selected(cell: MatchTableViewCell) {
+        //When a cell is selected, notify the ViewController which player was selected
         if let row = tableView.indexPath(for: cell)?.row {
             let player = row == 0 ? match?.player1 : match?.player2
             delegate?.player(player, selectedInCell: self)
@@ -98,17 +97,24 @@ class MatchCollectionViewCell: UICollectionViewCell, UITableViewDataSource, UITa
     
     func textColorFor(playerId: Int?, predictionId: Int?, winnerId: Int?) -> UIColor {
         if playerId == nil || winnerId == nil || predictionId == nil {
+            //The match isn't finished, or the user hasn't selected a winner yet
             return .black
         } else if predictionId == playerId {
+            //We predicted this player
             if winnerId == playerId {
+                //This player won
                 return .winnerGreen
             } else {
+                //This player lost
                 return .red
             }
         } else {
+            //We didn't predict this player
             if winnerId == playerId {
+                //This player won
                 return .black
             } else {
+                //This player lost
                 return .lightGray
             }
         }

@@ -11,6 +11,7 @@ import UIKit
 class ResultsViewController: BracketViewController {
     
     override func viewDidAppear(_ animated: Bool) {
+        //If the user is an admin, they can edit the results
         if Identity.user.admin {
             tabBarController?.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(updateBracket))
         }
@@ -23,6 +24,7 @@ class ResultsViewController: BracketViewController {
     //Listeners
     
     override func areCellsClickable() -> Bool {
+        //Results are only editable by admins
         return Identity.user.admin
     }
 }

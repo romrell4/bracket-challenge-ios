@@ -16,6 +16,7 @@ class BracketViewController: UIViewController, UICollectionViewDataSource, UICol
     var tournament: Tournament!
     var bracket: Bracket? {
         didSet {
+            //Sometimes, this will be set before viewDidLoad is called. If that is the case, wait for the viewDidLoad to load the UI
             if isViewLoaded {
                 loadUI()
             }
@@ -32,6 +33,8 @@ class BracketViewController: UIViewController, UICollectionViewDataSource, UICol
         super.viewDidLoad()
         
         createUI()
+        
+        //If the bracket was set before this was called, load the bracket UI now
         if bracket != nil {
             loadUI()
         }
@@ -40,6 +43,7 @@ class BracketViewController: UIViewController, UICollectionViewDataSource, UICol
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        //When this tab is selectd, reset the title to the bracket name
         tabBarController?.title = bracket?.name
     }
         
@@ -66,18 +70,20 @@ class BracketViewController: UIViewController, UICollectionViewDataSource, UICol
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        //Each cell shoud be the width of the view (minus padding) and the height of two cells
         return CGSize(width: collectionView.frame.width - CELL_INSET * 2, height: TABLE_CELL_HEIGHT * 2)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        //Add some padding between cells
         return UIEdgeInsets(top: CELL_INSET, left: CELL_INSET, bottom: CELL_INSET, right: CELL_INSET)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? MatchCollectionViewCell {
+        if let cell = collectionView.dequeueReusableCell(for: indexPath) as? MatchCollectionViewCell {
             cell.areCellsClickable = self.areCellsClickable()
             cell.match = getMatches(for: collectionView, from: bracket)[indexPath.row]
-            cell.delegate = self
+            cell.delegate = self //This will notify us when matches are selected
             return cell
         }
         return UICollectionViewCell()
@@ -87,11 +93,14 @@ class BracketViewController: UIViewController, UICollectionViewDataSource, UICol
     
     func player(_ player: Player?, selectedInCell cell: MatchCollectionViewCell) {
         for round in 0...collectionViews.count {
+            //If the cell selected wasn't in this round, continue searching
             guard var indexPath = collectionViews[round].indexPath(for: cell) else { continue }
             let position = indexPath.row
+            
+            //Set the winner
             bracket?.rounds?[round][position].winner = player
             
-            //Reload this match
+            //Reload the UI for this match
             collectionViews[round].reloadItems(at: [indexPath])
             
             //Update the next round
@@ -105,10 +114,12 @@ class BracketViewController: UIViewController, UICollectionViewDataSource, UICol
                     match?.player2 = player
                 }
                 
-                //Reload the next match
+                //Reload the UI for the next match
                 indexPath.row = newPosition
                 collectionViews[round + 1].reloadItems(at: [indexPath])
             }
+            
+            //If you found it, don't keep looking
             return
         }
     }
@@ -136,6 +147,7 @@ class BracketViewController: UIViewController, UICollectionViewDataSource, UICol
     }
     
     func getMatches(for collectionView: UICollectionView, from bracket: Bracket?) -> [MatchHelper] {
+        //Find the round that the collectionView belongs to and return the corresponding matches
         if let round = collectionViews.index(of: collectionView) {
             let rounds = bracket?.rounds ?? []
             if rounds.count > round {
@@ -180,6 +192,8 @@ class BracketViewController: UIViewController, UICollectionViewDataSource, UICol
             NSLayoutConstraint(item: topView, attr1: .trailingMargin, toItem: scoreLabel, attr2: .trailing),
             NSLayoutConstraint(item: topView, attr1: .centerY, toItem: scoreLabel, attr2: .centerY)
         ])
+        //TODO: There is an issue that setting the frame will make the bottom bounce weirdly... The commented line fixes it, but then breaks viewing other people's brackets
+//        scrollView = UIScrollView()
         scrollView = UIScrollView(frame: CGRect(x: view.frame.origin.x, y: view.frame.origin.y, width: view.frame.width, height: view.frame.height))
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.delegate = self
@@ -206,8 +220,8 @@ class BracketViewController: UIViewController, UICollectionViewDataSource, UICol
     }
     
     private func loadUI() {
-        title = bracket?.name
-        tabBarController?.title = bracket?.name
+        navigationItem.title = bracket?.name
+        tabBarController?.navigationItem.title = bracket?.name
         scoreLabel.text = "Score: \(bracket?.score ?? 0)"
         setupCollectionViews()
     }

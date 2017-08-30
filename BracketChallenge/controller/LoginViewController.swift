@@ -26,12 +26,14 @@ class LoginViewController: UIViewController, LoginButtonDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        //Check to see if they're logged in already. If they are, just send them to the next view controller
         checkForLogin()
     }
     
     //MARK: LoginButtonDelegate callbacks
     
     func loginButtonDidCompleteLogin(_ loginButton: LoginButton, result: LoginResult) {
+        //When we get notified of a change, try to login with their token
         checkForLogin()
     }
     
@@ -40,6 +42,7 @@ class LoginViewController: UIViewController, LoginButtonDelegate {
     //MARK: Private Functions
     
     private func createFacebookLoginButton() {
+        //Throw a login button into the middle of the screen and make ourselves a delegate
         loginButton = LoginButton(readPermissions: [.publicProfile, .email])
         loginButton.translatesAutoresizingMaskIntoConstraints = false
         loginButton.delegate = self
@@ -54,10 +57,13 @@ class LoginViewController: UIViewController, LoginButtonDelegate {
         if AccessToken.current != nil {
             print(AccessToken.current!)
             loginButton.isHidden = true
+            
+            //Try to log in. No need to pass anything in, the token identifies the user
             spinner.startAnimating()
             BCClient.login(callback: { (user, error) in
                 self.spinner.stopAnimating()
                 if let user = user {
+                    //Set the user in a static context. This will make it accessible from everywhere
                     Identity.user = user
                     self.performSegue(withIdentifier: "loggedIn", sender: nil)
                 } else {

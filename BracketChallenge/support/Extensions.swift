@@ -86,6 +86,10 @@ extension UICollectionView {
     func registerNib(nibName: String, forCellIndentifier cellId: String = "cell") {
         register(UINib(nibName: nibName, bundle: nil), forCellWithReuseIdentifier: cellId)
     }
+    
+    func dequeueReusableCell(for indexPath: IndexPath, withId cellIdentifier: String = "cell") -> UICollectionViewCell {
+        return dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath)
+    }
 }
 
 extension UIViewController {

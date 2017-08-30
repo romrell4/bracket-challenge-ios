@@ -27,8 +27,11 @@ class TournamentTableViewCell: UITableViewCell {
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
+        //For some reason, the view reset when selected. This should set them back to what they should be
         lineView.backgroundColor = .white
         overlayView.backgroundColor = .black
+        
+        //Animate the dimming of the cell when it is selected
         UIView.animate(withDuration: ANIMATION_DURATION) {
             self.overlayView.alpha = selected ? SELECTED_ALPHA : UNSELECTED_ALPHA
         }

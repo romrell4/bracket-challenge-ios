@@ -24,6 +24,8 @@ class MatchTableViewCell: UITableViewCell {
         didSet {
             if checked {
                 accessoryType = .checkmark
+                
+                //Notify the CollectionViewCell that a cell was selected
                 delegate?.selected(cell: self)
             } else {
                 accessoryType = .none
