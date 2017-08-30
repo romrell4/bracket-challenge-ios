@@ -12,7 +12,7 @@ class User {
     var userId: Int
     var username: String
     var name: String
-    var admin: Bool = false
+    var admin: Bool
     
     init(dict: [String: Any]) throws {
         guard let userId = dict["user_id"] as? Int,

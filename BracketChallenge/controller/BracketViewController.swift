@@ -43,18 +43,23 @@ class BracketViewController: UIViewController, UICollectionViewDataSource, UICol
     //UIScrollViewDelegate callbacks
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        //Test the offset and calculate the current page after scrolling ends
-        let roundIndex = Int(scrollView.contentOffset.x / scrollView.frame.width)
+        //TODO: Still an issue where vertical bounce causes this to
         
-        //Change the indicator
-        pageControl.currentPage = roundIndex
-        collectionViews[roundIndex].reloadData()
+        //Only change the pageControl if they scrolled horizontally
+        if scrollView.contentOffset.y == 0 {
+            //Test the offset and calculate the current page after scrolling ends
+            let roundIndex = Int(scrollView.contentOffset.x / scrollView.frame.width)
+//            print("x: \(scrollView.contentOffset.x) y: \(scrollView.contentOffset.y) -> \(roundIndex)")
+            
+            //Change the indicator
+            pageControl.currentPage = roundIndex
+        }
     }
     
     //UICollectionViewDataSource/DelegateFlowLayout callbacks
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return getMatches(for: collectionView).count
+        return getMatches(for: collectionView, from: self.bracket).count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -67,7 +72,8 @@ class BracketViewController: UIViewController, UICollectionViewDataSource, UICol
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? MatchCollectionViewCell {
-            cell.match = getMatches(for: collectionView)[indexPath.row]
+            cell.areCellsClickable = self.areCellsClickable()
+            cell.match = getMatches(for: collectionView, from: bracket)[indexPath.row]
             cell.delegate = self
             return cell
         }
@@ -78,8 +84,12 @@ class BracketViewController: UIViewController, UICollectionViewDataSource, UICol
     
     func player(_ player: Player?, selectedInCell cell: MatchCollectionViewCell) {
         for round in 0...collectionViews.count {
-            guard let position = collectionViews[round].indexPath(for: cell)?.row else { continue }
+            guard var indexPath = collectionViews[round].indexPath(for: cell) else { continue }
+            let position = indexPath.row
             bracket?.rounds?[round][position].winner = player
+            
+            //Reload this match
+            collectionViews[round].reloadItems(at: [indexPath])
             
             //Update the next round
             let nextRound = round + 1
@@ -91,7 +101,10 @@ class BracketViewController: UIViewController, UICollectionViewDataSource, UICol
                 } else {
                     match?.player2 = player
                 }
-                collectionViews[round + 1].reloadData()
+                
+                //Reload the next match
+                indexPath.row = newPosition
+                collectionViews[round + 1].reloadItems(at: [indexPath])
             }
             return
         }
@@ -129,6 +142,16 @@ class BracketViewController: UIViewController, UICollectionViewDataSource, UICol
     func areCellsClickable() -> Bool {
         //Override if you want to stop users from selecting the rows
         return true
+    }
+    
+    func getMatches(for collectionView: UICollectionView, from bracket: Bracket?) -> [MatchHelper] {
+        if let round = collectionViews.index(of: collectionView) {
+            let rounds = bracket?.rounds ?? []
+            if rounds.count > round {
+                return rounds[round]
+            }
+        }
+        return []
     }
     
     //Private functions
@@ -169,7 +192,6 @@ class BracketViewController: UIViewController, UICollectionViewDataSource, UICol
         scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.delegate = self
-        scrollView.bounces = false
         scrollView.isPagingEnabled = true
         view.addSubview(scrollView)
         view.addConstraints([
@@ -184,7 +206,6 @@ class BracketViewController: UIViewController, UICollectionViewDataSource, UICol
         spinner = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
         spinner.translatesAutoresizingMaskIntoConstraints = false
         spinner.color = .bcGreen
-        spinner.startAnimating()
         view.addSubview(spinner)
         view.addConstraints([
             NSLayoutConstraint(item: view, attr1: .centerX, toItem: spinner, attr2: .centerX),
@@ -208,22 +229,11 @@ class BracketViewController: UIViewController, UICollectionViewDataSource, UICol
             collectionView.dataSource = self
             collectionView.delegate = self
             collectionView.backgroundColor = .lightGray
-            collectionView.isUserInteractionEnabled = areCellsClickable()
             collectionView.registerNib(nibName: "MatchCollectionViewCell")
             collectionViews.append(collectionView)
             scrollView.addSubview(collectionView)
         }
         scrollView.contentSize = CGSize(width: width * Double(rounds), height: height)
         pageControl.numberOfPages = rounds
-    }
-    
-    private func getMatches(for collectionView: UICollectionView) -> [MatchHelper] {
-        if let round = collectionViews.index(of: collectionView) {
-            let rounds = bracket?.rounds ?? []
-            if rounds.count > round {
-                return rounds[round]
-            }
-        }
-        return []
     }
 }

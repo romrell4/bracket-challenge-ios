@@ -54,6 +54,10 @@ extension UIColor {
     static var bcYellow: UIColor {
         return UIColor(red: 248, green: 255, blue: 52)
     }
+    
+    static var winnerGreen: UIColor {
+        return UIColor(red: 0, green: 130, blue: 0)
+    }
 }
 
 extension UITableView {

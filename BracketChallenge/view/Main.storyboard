@@ -161,7 +161,7 @@
         <!--Standings-->
         <scene sceneID="Vlb-Zk-TEQ">
             <objects>
-                <viewController id="1eI-wB-wJe" sceneMemberID="viewController">
+                <viewController id="1eI-wB-wJe" customClass="StandingsViewController" customModule="BracketChallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ePz-g9-8WM"/>
                         <viewControllerLayoutGuide type="bottom" id="k0h-8d-Gyb"/>
@@ -170,24 +170,85 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This feature is coming soon!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i4p-es-lLb">
-                                <rect key="frame" x="79.5" y="323" width="216" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DQB-4h-seZ">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" textLabel="kgx-bX-wPP" detailTextLabel="fvk-yX-Nxd" style="IBUITableViewCellStyleValue1" id="ciF-Dr-7ka">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ciF-Dr-7ka" id="jkK-FE-6eu">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kgx-bX-wPP">
+                                                    <rect key="frame" x="15" y="12" width="33.5" height="20.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fvk-yX-Nxd">
+                                                    <rect key="frame" x="316" y="12" width="44" height="20.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="yqd-yL-Btk" kind="show" identifier="userBracket" id="5kU-2d-0dj"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="1eI-wB-wJe" id="Ziw-Aj-Lzu"/>
+                                    <outlet property="delegate" destination="1eI-wB-wJe" id="8zR-mz-7wI"/>
+                                </connections>
+                            </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="apQ-2c-sPw">
+                                <rect key="frame" x="169" y="315" width="37" height="37"/>
+                                <color key="color" red="0.1450980392" green="0.40784313729999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="i4p-es-lLb" firstAttribute="centerX" secondItem="plq-lX-5k4" secondAttribute="centerX" id="MRz-Tg-4Sk"/>
-                            <constraint firstItem="i4p-es-lLb" firstAttribute="centerY" secondItem="plq-lX-5k4" secondAttribute="centerY" id="uTT-Tg-Lqa"/>
+                            <constraint firstItem="DQB-4h-seZ" firstAttribute="top" secondItem="plq-lX-5k4" secondAttribute="top" id="E5I-QU-NrR"/>
+                            <constraint firstItem="DQB-4h-seZ" firstAttribute="leading" secondItem="plq-lX-5k4" secondAttribute="leading" id="ETf-Rc-w9b"/>
+                            <constraint firstItem="apQ-2c-sPw" firstAttribute="centerY" secondItem="plq-lX-5k4" secondAttribute="centerY" id="UNH-9u-E1e"/>
+                            <constraint firstAttribute="trailing" secondItem="DQB-4h-seZ" secondAttribute="trailing" id="WN6-pi-5KB"/>
+                            <constraint firstItem="k0h-8d-Gyb" firstAttribute="top" secondItem="DQB-4h-seZ" secondAttribute="bottom" id="jro-57-0fP"/>
+                            <constraint firstItem="apQ-2c-sPw" firstAttribute="centerX" secondItem="plq-lX-5k4" secondAttribute="centerX" id="uaJ-wh-SBn"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Standings" image="standings_icon" id="xzc-8K-aLo"/>
+                    <connections>
+                        <outlet property="spinner" destination="apQ-2c-sPw" id="H8p-2d-s1R"/>
+                        <outlet property="tableView" destination="DQB-4h-seZ" id="6TH-Dr-TbP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tk4-5a-E9O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3961" y="770"/>
+            <point key="canvasLocation" x="3960.8000000000002" y="769.56521739130437"/>
+        </scene>
+        <!--User Bracket View Controller-->
+        <scene sceneID="7bP-5c-JVY">
+            <objects>
+                <viewController id="yqd-yL-Btk" customClass="UserBracketViewController" customModule="BracketChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jUf-dw-q0s"/>
+                        <viewControllerLayoutGuide type="bottom" id="P9d-rf-lDF"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hJf-jl-Cm4">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Idv-P9-7zo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4897" y="770"/>
         </scene>
         <!--Tournament Tab Bar View Controller-->
         <scene sceneID="4xA-Ad-Zhl">

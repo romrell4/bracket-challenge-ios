@@ -67,6 +67,20 @@ class BCClient {
         }
     }
     
+    static func getBrackets(tournamentId: Int, callback: @escaping ([Bracket]?, BCError?) -> Void) {
+        makeRequest(endpoint: "tournaments/\(tournamentId)/brackets") { (response) in
+            if response.succeeded, let array = response.getDataJson() as? [[String: Any]] {
+                do {
+                    callback(try array.map { try Bracket(dict: $0) }, nil)
+                } catch {
+                    callback(nil, BCError(readableMessage: "Invalid bracket returned from service"))
+                }
+            } else {
+                callback(nil, response.error)
+            }
+        }
+    }
+    
     static func getMyBracket(tournamentId: Int, callback: @escaping (Bool, Bracket?, BCError?) -> Void) {
         makeRequest(endpoint: "tournaments/\(tournamentId)/brackets/mine") { (response) in
             if response.succeeded, let dict = response.getDataJson() as? [String: Any] {
