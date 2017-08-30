@@ -16,9 +16,9 @@ class BracketViewController: UIViewController, UICollectionViewDataSource, UICol
     var tournament: Tournament!
     var bracket: Bracket? {
         didSet {
-            tabBarController?.title = bracket?.name
-            scoreLabel.text = "Score: \(bracket?.score ?? 0)"
-            setupCollectionViews()
+            if isViewLoaded {
+                loadUI()
+            }
         }
     }
     
@@ -32,6 +32,9 @@ class BracketViewController: UIViewController, UICollectionViewDataSource, UICol
         super.viewDidLoad()
         
         createUI()
+        if bracket != nil {
+            loadUI()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,7 +46,7 @@ class BracketViewController: UIViewController, UICollectionViewDataSource, UICol
     //UIScrollViewDelegate callbacks
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        //TODO: Still an issue where vertical bounce causes this to
+        //TODO: Still an issue where vertical bounce causes this to reset to the first page :-/
         
         //Only change the pageControl if they scrolled horizontally
         if scrollView.contentOffset.y == 0 {
@@ -112,18 +115,6 @@ class BracketViewController: UIViewController, UICollectionViewDataSource, UICol
     
     //Public functions
     
-    func loadBracket(bracketId: Int) {
-        spinner.startAnimating()
-        BCClient.getBracket(tournamentId: tournament.tournamentId, bracketId: bracketId) { (bracket, error) in
-            self.spinner.stopAnimating()
-            if let bracket = bracket {
-                self.bracket = bracket
-            } else {
-                super.displayAlert(error: error)
-            }
-        }
-    }
-    
     func updateBracket() {
         if let bracket = bracket {
             spinner.startAnimating()
@@ -189,9 +180,10 @@ class BracketViewController: UIViewController, UICollectionViewDataSource, UICol
             NSLayoutConstraint(item: topView, attr1: .trailingMargin, toItem: scoreLabel, attr2: .trailing),
             NSLayoutConstraint(item: topView, attr1: .centerY, toItem: scoreLabel, attr2: .centerY)
         ])
-        scrollView = UIScrollView()
+        scrollView = UIScrollView(frame: CGRect(x: view.frame.origin.x, y: view.frame.origin.y, width: view.frame.width, height: view.frame.height))
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.delegate = self
+        scrollView.isDirectionalLockEnabled = true
         scrollView.isPagingEnabled = true
         view.addSubview(scrollView)
         view.addConstraints([
@@ -211,6 +203,13 @@ class BracketViewController: UIViewController, UICollectionViewDataSource, UICol
             NSLayoutConstraint(item: view, attr1: .centerX, toItem: spinner, attr2: .centerX),
             NSLayoutConstraint(item: view, attr1: .centerY, toItem: spinner, attr2: .centerY)
         ])
+    }
+    
+    private func loadUI() {
+        title = bracket?.name
+        tabBarController?.title = bracket?.name
+        scoreLabel.text = "Score: \(bracket?.score ?? 0)"
+        setupCollectionViews()
     }
     
     private func setupCollectionViews() {

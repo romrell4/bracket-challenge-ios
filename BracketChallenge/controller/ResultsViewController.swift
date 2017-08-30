@@ -9,15 +9,6 @@
 import UIKit
 
 class ResultsViewController: BracketViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        //TODO: Don't reload this. Just pass it in from the MyBracketVC
-        if let bracketId = super.tournament.masterBracketId {
-            super.loadBracket(bracketId: bracketId)
-        }
-    }
     
     override func viewDidAppear(_ animated: Bool) {
         if Identity.user.admin {

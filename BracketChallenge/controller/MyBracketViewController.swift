@@ -8,31 +8,16 @@
 
 import UIKit
 
-class MyBracketViewController: BracketViewController, UITabBarDelegate {
+class MyBracketViewController: UserBracketViewController, UITabBarControllerDelegate {
     //MARK: Outlets
     @IBOutlet weak var createBracketView: UIView!
-    
-    //MARK: Private properties
-    private var masterBracket: Bracket?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        guard let masterBracketId = super.tournament.masterBracketId else {
-            //They should not be here if there is no master bracket yet
-            super.popBack()
-            return
-        }
+        tabBarController?.delegate = self
         
-        BCClient.getBracket(tournamentId: super.tournament.tournamentId, bracketId: masterBracketId) { (masterBracket, error) in
-            if let masterBracket = masterBracket {
-                self.masterBracket = masterBracket
-            } else {
-                super.displayAlert(error: error)
-            }
-        }
-        
-        loadMyBracket()
+        loadData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -43,18 +28,24 @@ class MyBracketViewController: BracketViewController, UITabBarDelegate {
         tabBarController?.navigationItem.rightBarButtonItem = nil
     }
     
+    //MARK: UITabBarController callbacks
+    
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        return bracket != nil && masterBracket != nil
+    }
+    
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        if let vc = viewController as? ResultsViewController, vc.bracket == nil {
+            vc.bracket = masterBracket
+        } else if let vc = viewController as? StandingsViewController, vc.masterBracket == nil {
+            vc.masterBracket = masterBracket
+        }
+    }
+    
     //MARK: Listeners
     
     override func areCellsClickable() -> Bool {
         return tournament.active
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = super.collectionView(collectionView, cellForItemAt: indexPath)
-        if let matchCell = cell as? MatchCollectionViewCell, let masterBracket = masterBracket {
-            matchCell.masterMatch = super.getMatches(for: collectionView, from: masterBracket)[indexPath.row]
-        }
-        return cell
     }
     
     @IBAction func createBracketTapped(_ sender: Any) {
@@ -72,12 +63,18 @@ class MyBracketViewController: BracketViewController, UITabBarDelegate {
     
     //MARK: Private functions
     
-    private func loadMyBracket() {
+    private func loadData() {
+        guard let masterBracketId = super.tournament.masterBracketId else {
+            //They should not be here if there is no master bracket yet
+            super.popBack()
+            return
+        }
+        
         BCClient.getMyBracket(tournamentId: super.tournament.tournamentId, callback: { (validResponse, bracket, error) in
             super.spinner.stopAnimating()
             if validResponse {
                 if let bracket = bracket {
-                    super.bracket = bracket
+                    super.userBracket = bracket
                 } else {
                     self.createBracketView.isHidden = false
                     self.view.bringSubview(toFront: self.createBracketView)
@@ -86,5 +83,12 @@ class MyBracketViewController: BracketViewController, UITabBarDelegate {
                 super.displayAlert(error: error)
             }
         })
+        BCClient.getBracket(tournamentId: super.tournament.tournamentId, bracketId: masterBracketId) { (masterBracket, error) in
+            if let masterBracket = masterBracket {
+                self.masterBracket = masterBracket
+            } else {
+                super.displayAlert(error: error)
+            }
+        }
     }
 }

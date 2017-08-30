@@ -16,6 +16,7 @@ class StandingsViewController: UIViewController, UITableViewDataSource, UITableV
     
     //Public properties
     var tournament: Tournament!
+    var masterBracket: Bracket?
     
     //Private properties
     private var brackets = [Bracket]()
@@ -28,10 +29,21 @@ class StandingsViewController: UIViewController, UITableViewDataSource, UITableV
         loadBrackets()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tabBarController?.title = "Standings"
+        
+        if let indexPath = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "userBracket", let vc = segue.destination as? UserBracketViewController, let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) {
             vc.tournament = tournament
             vc.userBracket = brackets[indexPath.row]
+            vc.masterBracket = masterBracket
         }
     }
     
