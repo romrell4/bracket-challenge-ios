@@ -210,7 +210,7 @@ class BracketViewController: UIViewController, UICollectionViewDataSource, UICol
             NSLayoutConstraint(item: view, attr1: .leading, toItem: scrollView, attr2: .leading),
             NSLayoutConstraint(item: view, attr1: .trailing, toItem: scrollView, attr2: .trailing),
             NSLayoutConstraint(item: topView, attr1: .bottom, toItem: scrollView, attr2: .top),
-            NSLayoutConstraint(item: view, attr1: .bottom, toItem: scrollView, attr2: .bottom, constant: 50)
+            NSLayoutConstraint(item: bottomLayoutGuide, attr1: .top, toItem: scrollView, attr2: .bottom)
         ])
     }
     
@@ -239,8 +239,11 @@ class BracketViewController: UIViewController, UICollectionViewDataSource, UICol
         }
         collectionViews.removeAll(keepingCapacity: false)
         
+        //This will force the scrollView to gain width and height
+        scrollView.layoutIfNeeded()
         let width = scrollView.frame.width
-        let height = scrollView.frame.height
+        //TODO: This is a hack. For some reason, the height of the scroll view is not changing with the tab bar... Figure this out!
+        let height = tabBarController != nil ? scrollView.frame.height : scrollView.frame.height - 64
         
         let rounds = bracket?.rounds?.count ?? 1
         for _ in 0...(rounds - 1) {
@@ -254,7 +257,7 @@ class BracketViewController: UIViewController, UICollectionViewDataSource, UICol
             scrollView.addConstraints([
                 NSLayoutConstraint(item: scrollView, attr1: .top, toItem: collectionView, attr2: .top),
                 NSLayoutConstraint(item: collectionView, attr1: .height, constant: height),
-                NSLayoutConstraint(item: collectionView, attr1: .width, constant: scrollView.frame.width)
+                NSLayoutConstraint(item: collectionView, attr1: .width, constant: width)
             ])
             
             //Check how to constrain your leading edge
