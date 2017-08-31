@@ -21,10 +21,6 @@ class UserBracketViewController: BracketViewController {
             loadIfReady()
         }
     }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
     
     //MARK: Overrides
     

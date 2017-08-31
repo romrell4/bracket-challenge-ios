@@ -29,6 +29,10 @@ class BracketViewController: UIViewController, UICollectionViewDataSource, UICol
     private var scrollView: UIScrollView!
     private var collectionViews = [UICollectionView]()
     
+    //Used for calculating the page control
+    private var oldPoint = CGPoint()
+    private var horizontalScroll = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -49,14 +53,18 @@ class BracketViewController: UIViewController, UICollectionViewDataSource, UICol
         
     //UIScrollViewDelegate callbacks
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        //Check if they are scrolling horizontally
+        let newPoint = scrollView.contentOffset
+        horizontalScroll = newPoint.y == oldPoint.y
+        oldPoint = newPoint
+    }
+    
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        //TODO: Still an issue where vertical bounce causes this to reset to the first page :-/
-        
         //Only change the pageControl if they scrolled horizontally
-        if scrollView.contentOffset.y == 0 {
+        if horizontalScroll {
             //Test the offset and calculate the current page after scrolling ends
             let roundIndex = Int(scrollView.contentOffset.x / scrollView.frame.width)
-//            print("x: \(scrollView.contentOffset.x) y: \(scrollView.contentOffset.y) -> \(roundIndex)")
             
             //Change the indicator
             pageControl.currentPage = roundIndex
@@ -192,9 +200,7 @@ class BracketViewController: UIViewController, UICollectionViewDataSource, UICol
             NSLayoutConstraint(item: topView, attr1: .trailingMargin, toItem: scoreLabel, attr2: .trailing),
             NSLayoutConstraint(item: topView, attr1: .centerY, toItem: scoreLabel, attr2: .centerY)
         ])
-        //TODO: There is an issue that setting the frame will make the bottom bounce weirdly... The commented line fixes it, but then breaks viewing other people's brackets
-//        scrollView = UIScrollView()
-        scrollView = UIScrollView(frame: CGRect(x: view.frame.origin.x, y: view.frame.origin.y, width: view.frame.width, height: view.frame.height))
+        scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.delegate = self
         scrollView.isDirectionalLockEnabled = true
@@ -204,7 +210,7 @@ class BracketViewController: UIViewController, UICollectionViewDataSource, UICol
             NSLayoutConstraint(item: view, attr1: .leading, toItem: scrollView, attr2: .leading),
             NSLayoutConstraint(item: view, attr1: .trailing, toItem: scrollView, attr2: .trailing),
             NSLayoutConstraint(item: topView, attr1: .bottom, toItem: scrollView, attr2: .top),
-            NSLayoutConstraint(item: bottomLayoutGuide, attr1: .top, toItem: scrollView, attr2: .bottom)
+            NSLayoutConstraint(item: view, attr1: .bottom, toItem: scrollView, attr2: .bottom, constant: 50)
         ])
     }
     
@@ -233,20 +239,35 @@ class BracketViewController: UIViewController, UICollectionViewDataSource, UICol
         }
         collectionViews.removeAll(keepingCapacity: false)
         
-        let width = Double(scrollView.frame.width)
-        let height = Double(scrollView.frame.height)
+        let width = scrollView.frame.width
+        let height = scrollView.frame.height
         
         let rounds = bracket?.rounds?.count ?? 1
-        for round in 0...(rounds - 1) {
-            let collectionView = UICollectionView(frame: CGRect(x: Double(round) * width, y: 0.0, width: width, height: height), collectionViewLayout: UICollectionViewFlowLayout())
+        for _ in 0...(rounds - 1) {
+            let collectionView = UICollectionView(frame: CGRect(), collectionViewLayout: UICollectionViewFlowLayout())
+            collectionView.translatesAutoresizingMaskIntoConstraints = false
             collectionView.dataSource = self
             collectionView.delegate = self
             collectionView.backgroundColor = .lightGray
             collectionView.registerNib(nibName: "MatchCollectionViewCell")
-            collectionViews.append(collectionView)
             scrollView.addSubview(collectionView)
+            scrollView.addConstraints([
+                NSLayoutConstraint(item: scrollView, attr1: .top, toItem: collectionView, attr2: .top),
+                NSLayoutConstraint(item: collectionView, attr1: .height, constant: height),
+                NSLayoutConstraint(item: collectionView, attr1: .width, constant: scrollView.frame.width)
+            ])
+            
+            //Check how to constrain your leading edge
+            if let previous = collectionViews.last {
+                //If there is a previous collectionView, constrain to it's trailing edge
+                scrollView.addConstraint(NSLayoutConstraint(item: previous, attr1: .trailing, toItem: collectionView, attr2: .leading))
+            } else {
+                //If you're the first, constraint to the leading edge of the scrollView
+                scrollView.addConstraint(NSLayoutConstraint(item: scrollView, attr1: .leading, toItem: collectionView, attr2: .leading))
+            }
+            collectionViews.append(collectionView)
         }
-        scrollView.contentSize = CGSize(width: width * Double(rounds), height: height)
+        scrollView.contentSize = CGSize(width: width * CGFloat(rounds), height: height)
         pageControl.numberOfPages = rounds
     }
 }
