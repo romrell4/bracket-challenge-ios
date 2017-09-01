@@ -77,9 +77,10 @@ class MyBracketViewController: UserBracketViewController, UITabBarControllerDele
             return
         }
         
+        super.spinner.startAnimating()
+        
         //Load the user's bracket
         BCClient.getMyBracket(tournamentId: super.tournament.tournamentId, callback: { (validResponse, bracket, error) in
-            super.spinner.stopAnimating()
             if validResponse {
                 if let bracket = bracket {
                     super.userBracket = bracket

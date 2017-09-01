@@ -42,6 +42,7 @@ class UserBracketViewController: BracketViewController {
     
     private func loadIfReady() {
         if let bracket = userBracket, masterBracket != nil {
+            super.spinner.stopAnimating()
             super.bracket = bracket
         }
     }
