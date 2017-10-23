@@ -83,7 +83,7 @@ class TournamentsViewController: UIViewController, UITableViewDataSource, UITabl
         super.popBack()
     }
     
-    func addTapped(_ sender: Any) {
+    @objc func addTapped(_ sender: Any) {
         //Display pop up allowing them to type the name of the new tournament
         let alert = UIAlertController(title: "New Tournament", message: "Please enter the name of the tournament below", preferredStyle: .alert)
         alert.addTextField(configurationHandler: { (textField) in

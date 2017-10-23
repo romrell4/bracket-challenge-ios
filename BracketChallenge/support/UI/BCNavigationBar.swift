@@ -16,6 +16,6 @@ class BCNavigationBar: UINavigationBar {
         isTranslucent = false
         barTintColor = UIColor.bcGreen
         tintColor = UIColor.bcYellow
-        titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white];
+        titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white];
     }
 }
