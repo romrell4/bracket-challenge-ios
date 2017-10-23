@@ -134,7 +134,7 @@ class BracketViewController: UIViewController, UICollectionViewDataSource, UICol
     
     //Public functions
     
-    func updateBracket() {
+    @objc func updateBracket() {
         if let bracket = bracket {
             spinner.startAnimating()
             BCClient.updateBracket(bracket: bracket, callback: { (bracket, error) in
