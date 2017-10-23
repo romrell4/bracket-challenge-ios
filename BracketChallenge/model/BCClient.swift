@@ -67,6 +67,20 @@ class BCClient {
         }
     }
     
+    static func updateTournament(_ tournament: Tournament, callback: @escaping (Tournament?, BCError?) -> Void) {
+        makeRequest(endpoint: "tournaments/\(tournament.tournamentId)", method: "PUT", body: tournament.toDict()) { (response) in
+            if response.succeeded, let dict = response.getDataJson() as? [String: Any] {
+                do {
+                    callback(try Tournament(dict: dict), nil)
+                } catch {
+                    callback(nil, BCError(readableMessage: "Invalid tournament returned from service"))
+                }
+            } else {
+                callback(nil, response.error)
+            }
+        }
+    }
+    
     static func getBrackets(tournamentId: Int, callback: @escaping ([Bracket]?, BCError?) -> Void) {
         makeRequest(endpoint: "tournaments/\(tournamentId)/brackets") { (response) in
             if response.succeeded, let array = response.getDataJson() as? [[String: Any]] {

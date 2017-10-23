@@ -76,6 +76,23 @@ class TournamentsViewController: UIViewController, UITableViewDataSource, UITabl
         }
     }
     
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        if Identity.user.admin {
+            let tournament = tournaments[indexPath.row]
+            let action = UITableViewRowAction(style: .normal, title: tournament.active ? "Deactivate" : "Activate", handler: { (_, _) in
+                tournament.active = !tournament.active
+                BCClient.updateTournament(tournament, callback: { (tournament, error) in
+                    if let tournament = tournament {
+                        self.tournaments[indexPath.row] = tournament
+                    }
+                })
+            })
+            action.backgroundColor = tournament.active ? .red : .blue
+            return [action]
+        }
+        return []
+    }
+    
     //MARK: Listeners
     
     @IBAction func logoutTapped(_ sender: Any) {
