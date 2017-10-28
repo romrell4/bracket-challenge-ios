@@ -80,6 +80,15 @@ extension UITableView {
     func dequeueReusableCell(for indexPath: IndexPath, withId cellIdentifier: String = "cell") -> UITableViewCell {
         return dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
     }
+	
+	func addDefaultRefreshControl(target: Any?, action: Selector) -> UIRefreshControl {
+		let refreshControl = UIRefreshControl()
+		refreshControl.attributedTitle = NSAttributedString(string: "Loading...")
+		refreshControl.addTarget(target, action: action, for: .valueChanged)
+		refreshControl.beginRefreshing()
+		self.addSubview(refreshControl)
+		return refreshControl
+	}
 }
 
 extension UICollectionView {

@@ -20,17 +20,19 @@ class StandingsViewController: UIViewController, UITableViewDataSource, UITableV
     
     //Private properties
     private var brackets = [Bracket]()
+	private var refreshControl: UIRefreshControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.hideEmptyCells()
-        
-        loadBrackets()
+		refreshControl = tableView.addDefaultRefreshControl(target: self, action: #selector(loadBrackets))
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+		
+		loadBrackets()
         
         tabBarController?.title = "Standings"
         
@@ -62,11 +64,14 @@ class StandingsViewController: UIViewController, UITableViewDataSource, UITableV
         return cell
     }
     
-    //MARK: Private functions
+    //MARK: Listeners
     
-    private func loadBrackets() {
+    @objc func loadBrackets() {
+		spinner.startAnimating()
+		refreshControl.beginRefreshing()
         BCClient.getBrackets(tournamentId: tournament.tournamentId) { (brackets, error) in
             self.spinner.stopAnimating()
+			self.refreshControl.endRefreshing()
             if let brackets = brackets {
                 self.brackets = brackets.filter { $0.bracketId != self.tournament.masterBracketId }
                 self.tableView.reloadData()
