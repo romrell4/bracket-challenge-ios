@@ -21,14 +21,14 @@ class LoginViewController: UIViewController, LoginButtonDelegate {
         super.viewDidLoad()
         
         createFacebookLoginButton()
+		
+		checkForLogin()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        //Check to see if they're logged in already. If they are, just send them to the next view controller
-        checkForLogin()
-    }
+	
+	@IBAction func unwindSegue(_ sender: UIStoryboardSegue) {
+		LoginManager().logOut()
+		checkForLogin()
+	}
     
     //MARK: LoginButtonDelegate callbacks
     

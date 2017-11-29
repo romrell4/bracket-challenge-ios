@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rJX-Ce-ZrQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rJX-Ce-ZrQ">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -40,7 +40,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1220" y="44"/>
+            <point key="canvasLocation" x="1186" y="45"/>
         </scene>
         <!--User-->
         <scene sceneID="c87-jS-EJh">
@@ -80,7 +80,7 @@
                     <navigationItem key="navigationItem" title="User" id="u9K-8V-IL8">
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="NIW-Sx-VCj">
                             <connections>
-                                <action selector="logoutTapped:" destination="njm-U6-VZ6" id="N3Q-5D-QBc"/>
+                                <segue destination="PBz-ls-SKP" kind="unwind" unwindAction="unwindSegue:" id="ZmA-p4-u1C"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -92,8 +92,9 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NiF-Yc-xyF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="PBz-ls-SKP" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1958" y="36"/>
+            <point key="canvasLocation" x="1958" y="45"/>
         </scene>
         <!--Master Bracket-->
         <scene sceneID="4bT-bz-LUJ">
@@ -343,7 +344,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eUo-EB-PgN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="340" y="44"/>
+            <point key="canvasLocation" x="345" y="45"/>
         </scene>
         <!--Results-->
         <scene sceneID="OWS-hn-edC">

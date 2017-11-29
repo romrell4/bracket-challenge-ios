@@ -95,11 +95,6 @@ class TournamentsViewController: UIViewController, UITableViewDataSource, UITabl
     
     //MARK: Listeners
     
-    @IBAction func logoutTapped(_ sender: Any) {
-        LoginManager().logOut()
-        super.popBack()
-    }
-    
     @objc func addTapped(_ sender: Any) {
         //Display pop up allowing them to type the name of the new tournament
         let alert = UIAlertController(title: "New Tournament", message: "Please enter the name of the tournament below", preferredStyle: .alert)
