@@ -9,6 +9,7 @@
 import UIKit
 
 let CELL_INSET: CGFloat = 8
+private let CELL_HEIGHT = TABLE_CELL_HEIGHT * 2
 
 class BracketViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, MatchCollectionViewCellDelegate {
     //Public properties
@@ -56,19 +57,27 @@ class BracketViewController: UIViewController, UICollectionViewDataSource, UICol
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         //Check if they are scrolling horizontally
         let newPoint = scrollView.contentOffset
-        horizontalScroll = newPoint.y == oldPoint.y
+        horizontalScroll = !(scrollView is UICollectionView)
         oldPoint = newPoint
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        //Only change the pageControl if they scrolled horizontally
+        //Change the pageControl if they just scrolled horizontally. Otherwise, scroll all the collection views to be aligned
         if horizontalScroll {
             //Test the offset and calculate the current page after scrolling ends
             let roundIndex = Int(scrollView.contentOffset.x / scrollView.frame.width)
             
             //Change the indicator
             pageControl.currentPage = roundIndex
-        }
+		} else {
+			for collectionView in collectionViews {
+				if collectionView != scrollView {
+					var offsetPoint = collectionView.contentOffset
+					offsetPoint.y = scrollView.contentOffset.y
+					collectionView.setContentOffset(offsetPoint, animated: false)
+				}
+			}
+		}
     }
     
     //UICollectionViewDataSource/DelegateFlowLayout callbacks
@@ -233,12 +242,22 @@ class BracketViewController: UIViewController, UICollectionViewDataSource, UICol
         let height = tabBarController != nil ? scrollView.frame.height : scrollView.frame.height - 64
         
         let rounds = bracket?.rounds?.count ?? 1
-        for _ in 0...(rounds - 1) {
+		let totalHeight = CELL_HEIGHT * CGFloat(bracket?.rounds?[0].count ?? 0)
+		
+        for round in 0 ..< rounds {
 			//Create flow layout (including size and padding of cells)
 			let layout = UICollectionViewFlowLayout()
-			layout.itemSize = CGSize(width: width - CELL_INSET * 2, height: TABLE_CELL_HEIGHT * 2)
-			layout.sectionInset = UIEdgeInsets(top: CELL_INSET, left: CELL_INSET, bottom: CELL_INSET, right: CELL_INSET)
-			layout.minimumLineSpacing = CELL_INSET
+			layout.itemSize = CGSize(width: width - CELL_INSET * 2, height: CELL_HEIGHT)
+			
+			if let rounds = bracket?.rounds {
+				//Calculate the padding necessary for the cells and the section
+				let cellCount = CGFloat(rounds[round].count)
+				let cellPadding = (totalHeight - CELL_HEIGHT * cellCount) / cellCount
+				let sectionPadding = cellPadding / 2
+				
+				layout.sectionInset = UIEdgeInsets(top: sectionPadding, left: CELL_INSET, bottom: sectionPadding, right: CELL_INSET)
+				layout.minimumLineSpacing = cellPadding
+			}
 			
             let collectionView = UICollectionView(frame: CGRect(), collectionViewLayout: layout)
             collectionView.translatesAutoresizingMaskIntoConstraints = false
