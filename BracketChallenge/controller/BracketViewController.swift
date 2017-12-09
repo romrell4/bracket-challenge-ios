@@ -169,11 +169,7 @@ class BracketViewController: UIViewController, UICollectionViewDataSource, UICol
     
     private func createUI() {
         view.backgroundColor = .lightGray
-        createTopView()
-        createSpinner()
-    }
-    
-    private func createTopView() {
+
         let topView = UIView()
         topView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(topView)
@@ -215,13 +211,11 @@ class BracketViewController: UIViewController, UICollectionViewDataSource, UICol
 			topView.bottomAnchor.constraint(equalTo: scrollView.topAnchor),
 			view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
 		])
-    }
-    
-    private func createSpinner() {
-        spinner = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
-        spinner.translatesAutoresizingMaskIntoConstraints = false
-        spinner.color = .bcGreen
-        view.addSubview(spinner)
+		
+		spinner = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+		spinner.translatesAutoresizingMaskIntoConstraints = false
+		spinner.color = .bcGreen
+		view.addSubview(spinner)
 		NSLayoutConstraint.activate([
 			view.centerXAnchor.constraint(equalTo: spinner.centerXAnchor),
 			view.centerYAnchor.constraint(equalTo: spinner.centerYAnchor)
