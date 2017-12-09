@@ -10,7 +10,7 @@ import UIKit
 
 let CELL_INSET: CGFloat = 8
 
-class BracketViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, MatchCollectionViewCellDelegate {
+class BracketViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, MatchCollectionViewCellDelegate {
     //Public properties
     var spinner: UIActivityIndicatorView!
     var tournament: Tournament!
@@ -76,17 +76,7 @@ class BracketViewController: UIViewController, UICollectionViewDataSource, UICol
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return getMatches(for: collectionView, from: self.bracket).count
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        //Each cell shoud be the width of the view (minus padding) and the height of two cells
-        return CGSize(width: collectionView.frame.width - CELL_INSET * 2, height: TABLE_CELL_HEIGHT * 2)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        //Add some padding between cells
-        return UIEdgeInsets(top: CELL_INSET, left: CELL_INSET, bottom: CELL_INSET, right: CELL_INSET)
-    }
-    
+	
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(for: indexPath) as? MatchCollectionViewCell {
             cell.areCellsClickable = self.areCellsClickable()
@@ -244,7 +234,13 @@ class BracketViewController: UIViewController, UICollectionViewDataSource, UICol
         
         let rounds = bracket?.rounds?.count ?? 1
         for _ in 0...(rounds - 1) {
-            let collectionView = UICollectionView(frame: CGRect(), collectionViewLayout: UICollectionViewFlowLayout())
+			//Create flow layout (including size and padding of cells)
+			let layout = UICollectionViewFlowLayout()
+			layout.itemSize = CGSize(width: width - CELL_INSET * 2, height: TABLE_CELL_HEIGHT * 2)
+			layout.sectionInset = UIEdgeInsets(top: CELL_INSET, left: CELL_INSET, bottom: CELL_INSET, right: CELL_INSET)
+			layout.minimumLineSpacing = CELL_INSET
+			
+            let collectionView = UICollectionView(frame: CGRect(), collectionViewLayout: layout)
             collectionView.translatesAutoresizingMaskIntoConstraints = false
             collectionView.dataSource = self
             collectionView.delegate = self
