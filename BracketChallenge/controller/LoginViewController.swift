@@ -47,10 +47,10 @@ class LoginViewController: UIViewController, LoginButtonDelegate {
         loginButton.translatesAutoresizingMaskIntoConstraints = false
         loginButton.delegate = self
         view.addSubview(loginButton)
-        view.addConstraints([
-            NSLayoutConstraint(item: view, attr1: .centerX, toItem: loginButton, attr2: .centerX),
-            NSLayoutConstraint(item: view, attr1: .centerY, toItem: loginButton, attr2: .centerY)
-        ])
+		NSLayoutConstraint.activate([
+			view.centerXAnchor.constraint(equalTo: loginButton.centerXAnchor),
+			view.centerYAnchor.constraint(equalTo: loginButton.centerYAnchor)
+		])
     }
     
     private func checkForLogin() {

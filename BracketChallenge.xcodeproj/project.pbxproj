@@ -525,7 +525,7 @@
 				CODE_SIGN_ENTITLEMENTS = BracketChallenge/BracketChallenge.entitlements;
 				DEVELOPMENT_TEAM = G9JN5J3VZ9;
 				INFOPLIST_FILE = "$(SRCROOT)/BracketChallenge/res/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.romrell4.bracketchallenge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -542,7 +542,7 @@
 				CODE_SIGN_ENTITLEMENTS = BracketChallenge/BracketChallenge.entitlements;
 				DEVELOPMENT_TEAM = G9JN5J3VZ9;
 				INFOPLIST_FILE = "$(SRCROOT)/BracketChallenge/res/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.romrell4.bracketchallenge;
 				PRODUCT_NAME = "$(TARGET_NAME)";

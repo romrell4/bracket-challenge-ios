@@ -177,41 +177,44 @@ class BracketViewController: UIViewController, UICollectionViewDataSource, UICol
         let topView = UIView()
         topView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(topView)
-        view.addConstraints([
-            NSLayoutConstraint(item: view, attr1: .leading, toItem: topView, attr2: .leading),
-            NSLayoutConstraint(item: view, attr1: .trailing, toItem: topView, attr2: .trailing),
-            NSLayoutConstraint(item: topLayoutGuide, attr1: .bottom, toItem: topView, attr2: .top),
-            NSLayoutConstraint(item: topView, attr1: .height, constant: 32)
-        ])
+		NSLayoutConstraint.activate([
+			view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: topView.leadingAnchor),
+			view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: topView.trailingAnchor),
+			view.safeAreaLayoutGuide.topAnchor.constraint(equalTo: topView.topAnchor),
+			topView.heightAnchor.constraint(equalToConstant: 32)
+		])
+		
         pageControl = UIPageControl()
         pageControl.translatesAutoresizingMaskIntoConstraints = false
         pageControl.currentPageIndicatorTintColor = .bcGreen
         pageControl.pageIndicatorTintColor = .bcYellow
         topView.addSubview(pageControl)
-        topView.addConstraints([
-            NSLayoutConstraint(item: topView, attr1: .centerX, toItem: pageControl, attr2: .centerX),
-            NSLayoutConstraint(item: topView, attr1: .centerY, toItem: pageControl, attr2: .centerY)
-        ])
+		NSLayoutConstraint.activate([
+			topView.centerXAnchor.constraint(equalTo: pageControl.centerXAnchor),
+			topView.centerYAnchor.constraint(equalTo: pageControl.centerYAnchor)
+		])
+		
         scoreLabel = UILabel()
         scoreLabel.translatesAutoresizingMaskIntoConstraints = false
         scoreLabel.font = UIFont.systemFont(ofSize: 18)
         topView.addSubview(scoreLabel)
-        topView.addConstraints([
-            NSLayoutConstraint(item: topView, attr1: .trailingMargin, toItem: scoreLabel, attr2: .trailing),
-            NSLayoutConstraint(item: topView, attr1: .centerY, toItem: scoreLabel, attr2: .centerY)
-        ])
+		NSLayoutConstraint.activate([
+			topView.layoutMarginsGuide.trailingAnchor.constraint(equalTo: scoreLabel.trailingAnchor),
+			topView.centerYAnchor.constraint(equalTo: scoreLabel.centerYAnchor)
+		])
+		
         scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.delegate = self
         scrollView.isDirectionalLockEnabled = true
         scrollView.isPagingEnabled = true
         view.addSubview(scrollView)
-        view.addConstraints([
-            NSLayoutConstraint(item: view, attr1: .leading, toItem: scrollView, attr2: .leading),
-            NSLayoutConstraint(item: view, attr1: .trailing, toItem: scrollView, attr2: .trailing),
-            NSLayoutConstraint(item: topView, attr1: .bottom, toItem: scrollView, attr2: .top),
-            NSLayoutConstraint(item: bottomLayoutGuide, attr1: .top, toItem: scrollView, attr2: .bottom)
-        ])
+		NSLayoutConstraint.activate([
+			view.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+			view.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+			topView.bottomAnchor.constraint(equalTo: scrollView.topAnchor),
+			view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
+		])
     }
     
     private func createSpinner() {
@@ -219,10 +222,10 @@ class BracketViewController: UIViewController, UICollectionViewDataSource, UICol
         spinner.translatesAutoresizingMaskIntoConstraints = false
         spinner.color = .bcGreen
         view.addSubview(spinner)
-        view.addConstraints([
-            NSLayoutConstraint(item: view, attr1: .centerX, toItem: spinner, attr2: .centerX),
-            NSLayoutConstraint(item: view, attr1: .centerY, toItem: spinner, attr2: .centerY)
-        ])
+		NSLayoutConstraint.activate([
+			view.centerXAnchor.constraint(equalTo: spinner.centerXAnchor),
+			view.centerYAnchor.constraint(equalTo: spinner.centerYAnchor)
+		])
     }
     
     private func loadUI() {
@@ -254,20 +257,21 @@ class BracketViewController: UIViewController, UICollectionViewDataSource, UICol
             collectionView.backgroundColor = .lightGray
             collectionView.registerNib(nibName: "MatchCollectionViewCell")
             scrollView.addSubview(collectionView)
-            scrollView.addConstraints([
-                NSLayoutConstraint(item: scrollView, attr1: .top, toItem: collectionView, attr2: .top),
-                NSLayoutConstraint(item: collectionView, attr1: .height, constant: height),
-                NSLayoutConstraint(item: collectionView, attr1: .width, constant: width)
-            ])
+			var constraints = [
+				scrollView.topAnchor.constraint(equalTo: collectionView.topAnchor),
+				collectionView.heightAnchor.constraint(equalToConstant: height),
+				collectionView.widthAnchor.constraint(equalToConstant: width)
+			]
             
             //Check how to constrain your leading edge
             if let previous = collectionViews.last {
                 //If there is a previous collectionView, constrain to it's trailing edge
-                scrollView.addConstraint(NSLayoutConstraint(item: previous, attr1: .trailing, toItem: collectionView, attr2: .leading))
+				constraints.append(previous.trailingAnchor.constraint(equalTo: collectionView.leadingAnchor))
             } else {
                 //If you're the first, constraint to the leading edge of the scrollView
-                scrollView.addConstraint(NSLayoutConstraint(item: scrollView, attr1: .leading, toItem: collectionView, attr2: .leading))
+				constraints.append(scrollView.leadingAnchor.constraint(equalTo: collectionView.leadingAnchor))
             }
+			NSLayoutConstraint.activate(constraints)
             collectionViews.append(collectionView)
         }
         scrollView.contentSize = CGSize(width: width * CGFloat(rounds), height: height)

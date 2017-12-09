@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -70,10 +69,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="lfu-eH-g0O" firstAttribute="centerX" secondItem="45V-4D-nTK" secondAttribute="centerX" id="1FH-AI-uOk"/>
+                            <constraint firstAttribute="bottom" secondItem="neL-n2-TLQ" secondAttribute="bottom" id="Ajf-BU-G9e"/>
                             <constraint firstItem="lfu-eH-g0O" firstAttribute="centerY" secondItem="45V-4D-nTK" secondAttribute="centerY" id="Cd5-Oy-0HB"/>
                             <constraint firstAttribute="trailing" secondItem="neL-n2-TLQ" secondAttribute="trailing" id="G0M-YO-wLT"/>
                             <constraint firstItem="neL-n2-TLQ" firstAttribute="top" secondItem="45V-4D-nTK" secondAttribute="top" id="OJ9-zU-YM6"/>
-                            <constraint firstItem="nA4-S2-e2F" firstAttribute="top" secondItem="neL-n2-TLQ" secondAttribute="bottom" id="Pzk-5Q-Qsa"/>
                             <constraint firstItem="neL-n2-TLQ" firstAttribute="leading" secondItem="45V-4D-nTK" secondAttribute="leading" id="YTm-fd-KN4"/>
                         </constraints>
                     </view>
