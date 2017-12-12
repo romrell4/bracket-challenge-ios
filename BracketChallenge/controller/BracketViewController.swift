@@ -60,6 +60,13 @@ class BracketViewController: UIViewController, UICollectionViewDataSource, UICol
         horizontalScroll = !(scrollView is UICollectionView)
         oldPoint = newPoint
     }
+	
+	func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+		//If the drag will not cause deceleration, update the scroll positions right now. Otherwise, it will be called in the didEndDecelerating
+		if !decelerate && !horizontalScroll {
+			syncScrollPosition(base: scrollView)
+		}
+	}
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         //Change the pageControl if they just scrolled horizontally. Otherwise, scroll all the collection views to be aligned
@@ -70,13 +77,7 @@ class BracketViewController: UIViewController, UICollectionViewDataSource, UICol
             //Change the indicator
             pageControl.currentPage = roundIndex
 		} else {
-			for collectionView in collectionViews {
-				if collectionView != scrollView {
-					var offsetPoint = collectionView.contentOffset
-					offsetPoint.y = scrollView.contentOffset.y
-					collectionView.setContentOffset(offsetPoint, animated: false)
-				}
-			}
+			syncScrollPosition(base: scrollView)
 		}
     }
     
@@ -286,4 +287,14 @@ class BracketViewController: UIViewController, UICollectionViewDataSource, UICol
         scrollView.contentSize = CGSize(width: width * CGFloat(rounds), height: height)
         pageControl.numberOfPages = rounds
     }
+
+	private func syncScrollPosition(base scrollView: UIScrollView) {
+		for collectionView in collectionViews {
+			if collectionView != scrollView {
+				var offsetPoint = collectionView.contentOffset
+				offsetPoint.y = scrollView.contentOffset.y
+				collectionView.setContentOffset(offsetPoint, animated: false)
+			}
+		}
+	}
 }
