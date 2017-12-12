@@ -9,7 +9,7 @@
 import FacebookLogin
 import FacebookCore
 
-class LoginViewController: UIViewController, LoginButtonDelegate {
+class LoginViewController: UIViewController, LoginButtonDelegate, UIBarPositioningDelegate {
     
     //MARK: Outlets
     @IBOutlet weak var spinner: UIActivityIndicatorView!
@@ -25,9 +25,10 @@ class LoginViewController: UIViewController, LoginButtonDelegate {
 		checkForLogin()
     }
 	
-	@IBAction func unwindSegue(_ sender: UIStoryboardSegue) {
-		LoginManager().logOut()
-		checkForLogin()
+	//MARK: UIBarPositioningDelegate
+	
+	func position(for bar: UIBarPositioning) -> UIBarPosition {
+		return .topAttached
 	}
     
     //MARK: LoginButtonDelegate callbacks

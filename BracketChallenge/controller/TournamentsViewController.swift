@@ -8,6 +8,7 @@
 
 import UIKit
 import FacebookLogin
+import FacebookCore
 
 private let TOURNAMENT_SEGUE_ID = "tournament"
 private let CREATE_MASTER_SEGUE_ID = "createMaster"
@@ -22,16 +23,13 @@ class TournamentsViewController: UIViewController, UITableViewDataSource, UITabl
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        title = Identity.user.name
-        
-        //If they are an admin, they can create tournaments. Give them the button
-        if Identity.user.admin {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped(_:)))
-        }
-        
-        setupTableView()
-        loadTournaments()
+		
+		if AccessToken.current != nil, Identity.loadFromDefaults() {
+			loggedIn(segue: nil)
+		} else {
+			LoginManager().logOut()
+			performSegue(withIdentifier: "logIn", sender: nil)
+		}
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -98,6 +96,23 @@ class TournamentsViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     //MARK: Listeners
+	
+	@IBAction func logOut(_ sender: UIBarButtonItem) {
+		LoginManager().logOut()
+		performSegue(withIdentifier: "logIn", sender: nil)
+	}
+	
+	@IBAction func loggedIn(segue: UIStoryboardSegue?) {
+		title = Identity.user.name
+		
+		//If they are an admin, they can create tournaments. Give them the button
+		if Identity.user.admin {
+			navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped(_:)))
+		}
+		
+		setupTableView()
+		loadTournaments()
+	}
     
     @objc func addTapped(_ sender: Any) {
         //Display pop up allowing them to type the name of the new tournament
