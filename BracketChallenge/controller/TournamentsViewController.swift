@@ -20,6 +20,9 @@ class TournamentsViewController: UIViewController, UITableViewDataSource, UITabl
     
     //MARK: Public properties
     var tournaments = [Tournament]()
+	
+	//MARK: Private properties
+	private var refreshControl = UIRefreshControl()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -127,7 +130,7 @@ class TournamentsViewController: UIViewController, UITableViewDataSource, UITabl
                 BCClient.createTournament(name: name, callback: { (tournament, error) in
                     self.spinner.stopAnimating()
                     if let tournament = tournament {
-                        self.tournaments.append(tournament)
+						self.tournaments.insert(tournament, at: 0)
                         self.tableView.reloadData()
 						super.displayAlert(title: "Tournament Created!", message: "To fill in the tournament, please run the webscraper with the tournament's id and draw url. New tournament's id: \(tournament.tournamentId)")
                     } else {
@@ -139,25 +142,26 @@ class TournamentsViewController: UIViewController, UITableViewDataSource, UITabl
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
     }
+	
+	@objc func loadTournaments() {
+		refreshControl.beginRefreshing()
+		BCClient.getTournaments { (tournaments, error) in
+			self.refreshControl.endRefreshing()
+			if let tournaments = tournaments {
+				self.tournaments = tournaments
+				self.tableView.reloadData()
+			} else {
+				super.displayAlert(error: error)
+			}
+		}
+	}
     
     //MARK: Private functions
     
     private func setupTableView() {
+		refreshControl = tableView.addDefaultRefreshControl(target: self, action: #selector(loadTournaments))
         tableView.hideEmptyCells()
         tableView.registerNib(nibName: "TournamentTableViewCell")
         tableView.variableHeightForRows()
-    }
-    
-    private func loadTournaments() {
-        spinner.startAnimating()
-        BCClient.getTournaments { (tournaments, error) in
-            self.spinner.stopAnimating()
-            if let tournaments = tournaments {
-                self.tournaments = tournaments
-                self.tableView.reloadData()
-            } else {
-                super.displayAlert(error: error)
-            }
-        }
     }
 }
