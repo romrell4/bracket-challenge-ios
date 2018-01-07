@@ -129,6 +129,7 @@ class TournamentsViewController: UIViewController, UITableViewDataSource, UITabl
                     if let tournament = tournament {
                         self.tournaments.append(tournament)
                         self.tableView.reloadData()
+						super.displayAlert(title: "Tournament Created!", message: "To fill in the tournament, please run the webscraper with the tournament's id and draw url. New tournament's id: \(tournament.tournamentId)")
                     } else {
                         super.displayAlert(error: error, alertHandler: nil)
                     }
