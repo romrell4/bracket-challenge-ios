@@ -20,6 +20,7 @@ class TournamentTableViewCell: UITableViewCell {
     @IBOutlet weak var lineView: UIView!
     
     func setTournament(_ tournament: Tournament) {
+		//TODO: Add tournament dates here
         titleLabel.text = tournament.name
         if let image = tournament.image {
             backgroundImageView.image = image

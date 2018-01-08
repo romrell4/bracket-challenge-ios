@@ -120,26 +120,31 @@ class TournamentsViewController: UIViewController, UITableViewDataSource, UITabl
     @objc func addTapped(_ sender: Any) {
         //Display pop up allowing them to type the name of the new tournament
         let alert = UIAlertController(title: "New Tournament", message: "Please enter the name of the tournament below", preferredStyle: .alert)
-        alert.addTextField(configurationHandler: { (textField) in
+        alert.addTextField { (textField) in
             textField.placeholder = "Tournament Name"
             textField.autocapitalizationType = .words
+        }
+		alert.addTextField { (textField) in
+			textField.placeholder = "Image URL (optional)"
+			textField.autocorrectionType = .no
+			textField.autocapitalizationType = .none
+		}
+        alert.addAction(UIAlertAction(title: "Create", style: .default) { (action: UIAlertAction) in
+			guard let name = alert.textFields?[0].text, let imageUrl = alert.textFields?[1].text else { return }
+			
+			self.spinner.startAnimating()
+			BCClient.createTournament(name: name, imageUrl: imageUrl, callback: { (tournament, error) in
+				self.spinner.stopAnimating()
+				if let tournament = tournament {
+					self.tournaments.insert(tournament, at: 0)
+					self.tableView.reloadData()
+					super.displayAlert(title: "Tournament Created!", message: "To fill in the tournament, please run the webscraper with the tournament's id and draw url. New tournament's id: \(tournament.tournamentId)")
+				} else {
+					super.displayAlert(error: error, alertHandler: nil)
+				}
+			})
         })
-        alert.addAction(UIAlertAction(title: "Create", style: .default, handler: { (action: UIAlertAction) in
-            if let name = alert.textFields?.first?.text {
-                self.spinner.startAnimating()
-                BCClient.createTournament(name: name, callback: { (tournament, error) in
-                    self.spinner.stopAnimating()
-                    if let tournament = tournament {
-						self.tournaments.insert(tournament, at: 0)
-                        self.tableView.reloadData()
-						super.displayAlert(title: "Tournament Created!", message: "To fill in the tournament, please run the webscraper with the tournament's id and draw url. New tournament's id: \(tournament.tournamentId)")
-                    } else {
-                        super.displayAlert(error: error, alertHandler: nil)
-                    }
-                })
-            }
-        }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         present(alert, animated: true, completion: nil)
     }
 	
