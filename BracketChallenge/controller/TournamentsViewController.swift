@@ -61,7 +61,7 @@ class TournamentsViewController: UIViewController, UITableViewDataSource, UITabl
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(for: indexPath) as? TournamentTableViewCell {
-            cell.setTournament(tournaments[indexPath.row])
+			cell.tournament = tournaments[indexPath.row]
             return cell
         }
         return UITableViewCell()
@@ -114,7 +114,7 @@ class TournamentsViewController: UIViewController, UITableViewDataSource, UITabl
 		}
 		
 		setupTableView()
-		loadTournaments()
+		loadTournaments(nil)
 	}
     
     @objc func addTapped(_ sender: Any) {
@@ -148,9 +148,11 @@ class TournamentsViewController: UIViewController, UITableViewDataSource, UITabl
         present(alert, animated: true, completion: nil)
     }
 	
-	@objc func loadTournaments() {
-		refreshControl.beginRefreshing()
+	@objc func loadTournaments(_ sender: Any?) {
+		//If a sender is passed in, this is a refresh. Otherwise, it's the first load
+		sender == nil ? spinner.startAnimating() : refreshControl.beginRefreshing()
 		BCClient.getTournaments { (tournaments, error) in
+			self.spinner.stopAnimating()
 			self.refreshControl.endRefreshing()
 			if let tournaments = tournaments {
 				self.tournaments = tournaments
@@ -164,7 +166,7 @@ class TournamentsViewController: UIViewController, UITableViewDataSource, UITabl
     //MARK: Private functions
     
     private func setupTableView() {
-		refreshControl = tableView.addDefaultRefreshControl(target: self, action: #selector(loadTournaments))
+		refreshControl = tableView.addDefaultRefreshControl(target: self, action: #selector(loadTournaments(_:)))
         tableView.hideEmptyCells()
         tableView.registerNib(nibName: "TournamentTableViewCell")
         tableView.variableHeightForRows()

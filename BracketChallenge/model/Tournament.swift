@@ -23,6 +23,10 @@ class Tournament {
     private var imageUrl: String?
     var image: UIImage?
     var active: Bool
+	
+	var imageNotificationName: Notification.Name {
+		return Notification.Name(rawValue: "T\(tournamentId)_IMAGE_LOADED")
+	}
     
     init(dict: [String: Any]) throws {
         guard let tournamentId = dict[Keys.tournamentId.rawValue] as? Int,
@@ -35,11 +39,16 @@ class Tournament {
         self.name = name
         self.masterBracketId = dict[Keys.masterBracketId.rawValue] as? Int
         self.imageUrl = dict[Keys.imageUrl.rawValue] as? String
-        if let imageUrl = self.imageUrl, let url = URL(string: imageUrl), let data = try? Data(contentsOf: url) {
-            self.image = UIImage(data: data)
-        }
         self.active = active
-    }
+		
+		//Asynchronously load the image
+		DispatchQueue.global(qos: .background).async {
+			if let imageUrl = self.imageUrl, let url = URL(string: imageUrl), let data = try? Data(contentsOf: url) {
+				self.image = UIImage(data: data)
+				NotificationCenter.default.post(Notification(name: self.imageNotificationName))
+			}
+		}
+	}
     
     func toDict() -> [String: Any] {
         var dict: [String: Any] = [

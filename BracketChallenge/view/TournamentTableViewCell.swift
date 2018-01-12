@@ -18,14 +18,25 @@ class TournamentTableViewCell: UITableViewCell {
     @IBOutlet weak var overlayView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var lineView: UIView!
-    
-    func setTournament(_ tournament: Tournament) {
-		//TODO: Add tournament dates here
-        titleLabel.text = tournament.name
-        if let image = tournament.image {
-            backgroundImageView.image = image
-        }
-    }
+	
+	var tournament: Tournament! {
+		didSet {
+			//TODO: Add tournament dates here
+			titleLabel.text = tournament.name
+			if tournament.image != nil {
+				loadImage()
+			} else {
+				backgroundImageView.backgroundColor = .gray
+				NotificationCenter.default.addObserver(self, selector: #selector(loadImage), name: tournament.imageNotificationName, object: nil)
+			}
+		}
+	}
+	
+	@objc func loadImage() {
+		DispatchQueue.main.async {
+			self.backgroundImageView.image = self.tournament.image
+		}
+	}
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         //For some reason, the view reset when selected. This should set them back to what they should be

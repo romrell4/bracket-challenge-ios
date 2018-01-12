@@ -17,8 +17,9 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="119.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultTournament.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="DTO-uo-9bL">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DTO-uo-9bL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="119.5"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </imageView>
                     <view alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l3C-FQ-0hn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="119.5"/>
@@ -63,7 +64,4 @@
             <point key="canvasLocation" x="66.5" y="-109"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="defaultTournament.jpg" width="849" height="565"/>
-    </resources>
 </document>
