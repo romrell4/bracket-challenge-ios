@@ -173,10 +173,12 @@ class BracketViewController: UIViewController, UICollectionViewDataSource, UICol
         let topView = UIView()
         topView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(topView)
+		let layoutGuide: UILayoutGuide
+		if #available(iOS 11.0, *) { layoutGuide = view.safeAreaLayoutGuide } else { layoutGuide = view.layoutMarginsGuide }
 		NSLayoutConstraint.activate([
-			view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: topView.leadingAnchor),
-			view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: topView.trailingAnchor),
-			view.safeAreaLayoutGuide.topAnchor.constraint(equalTo: topView.topAnchor),
+			layoutGuide.leadingAnchor.constraint(equalTo: topView.leadingAnchor),
+			layoutGuide.trailingAnchor.constraint(equalTo: topView.trailingAnchor),
+			layoutGuide.topAnchor.constraint(equalTo: topView.topAnchor),
 			topView.heightAnchor.constraint(equalToConstant: 32)
 		])
 		
@@ -209,7 +211,7 @@ class BracketViewController: UIViewController, UICollectionViewDataSource, UICol
 			view.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
 			view.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
 			topView.bottomAnchor.constraint(equalTo: scrollView.topAnchor),
-			view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
+			layoutGuide.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
 		])
 		
 		spinner = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)

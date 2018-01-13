@@ -33,6 +33,12 @@ extension DateFormatter {
     }
 }
 
+extension NSLayoutConstraint {
+	convenience init(item: Any, attr1: NSLayoutAttribute, relatedBy: NSLayoutRelation = .equal, toItem: Any? = nil, attr2: NSLayoutAttribute = .notAnAttribute, multiplier: CGFloat = 1, constant: CGFloat = 0) {
+		self.init(item: item, attribute: attr1, relatedBy: relatedBy, toItem: toItem, attribute: attr2, multiplier: multiplier, constant: constant)
+	}
+}
+
 //MARK: UI
 
 extension UIColor {
