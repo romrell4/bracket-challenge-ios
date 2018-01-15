@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -257,6 +258,8 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="My Bracket" image="bracket_icon" id="y5E-TE-wD1"/>
                     <connections>
+                        <outlet property="createBracketButton" destination="Wm0-hz-6RQ" id="rrv-Zp-1GS"/>
+                        <outlet property="createBracketLabel" destination="wwj-HO-Ud8" id="LYD-SQ-gQu"/>
                         <outlet property="createBracketView" destination="Zr9-JI-UGP" id="Idx-qy-UG5"/>
                     </connections>
                 </viewController>

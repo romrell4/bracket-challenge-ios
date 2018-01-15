@@ -10,8 +10,10 @@ import UIKit
 
 class MyBracketViewController: UserBracketViewController, UITabBarControllerDelegate {
     //MARK: Outlets
-    @IBOutlet weak var createBracketView: UIView!
-    
+    @IBOutlet private weak var createBracketView: UIView!
+	@IBOutlet private weak var createBracketLabel: UILabel!
+	@IBOutlet private weak var createBracketButton: UIButton!
+	
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -19,11 +21,18 @@ class MyBracketViewController: UserBracketViewController, UITabBarControllerDele
         tabBarController?.delegate = self
         
         loadData()
+		
+		if !tournament.active {
+			createBracketLabel.text = "This tournament is not active. No new brackets are being taken."
+			createBracketButton.isHidden = true
+		}
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        //Add the save button when this tab is selected
-        tabBarController?.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(updateBracket))
+		if tournament.active {
+			//Add the save button when this tab is selected
+			tabBarController?.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(updateBracket))
+		}
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -61,7 +70,7 @@ class MyBracketViewController: UserBracketViewController, UITabBarControllerDele
             if let bracket = bracket {
                 //When the bracket is successfully created, hide the view
                 self.createBracketView.isHidden = true
-                super.bracket = bracket
+                super.userBracket = bracket
             } else {
                 super.displayAlert(error: error)
             }
