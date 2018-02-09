@@ -9,17 +9,19 @@
 import UIKit
 
 class Tournament {
-    private enum Keys: String {
-        case tournamentId = "tournament_id"
-        case name
-        case masterBracketId = "master_bracket_id"
-        case imageUrl = "image_url"
-        case active
+    struct Keys {
+        static let tournamentId = "tournament_id"
+        static let name = "name"
+        static let masterBracketId = "master_bracket_id"
+        static let drawsUrl = "draws_url"
+        static let imageUrl = "image_url"
+        static let active = "active"
     }
     
     var tournamentId: Int
     var name: String
     var masterBracketId: Int?
+    private var drawsUrl: String?
     private var imageUrl: String?
     var image: UIImage?
     var active: Bool
@@ -29,16 +31,17 @@ class Tournament {
 	}
     
     init(dict: [String: Any]) throws {
-        guard let tournamentId = dict[Keys.tournamentId.rawValue] as? Int,
-            let name = dict[Keys.name.rawValue] as? String,
-            let active = dict[Keys.active.rawValue] as? Bool else {
+        guard let tournamentId = dict[Keys.tournamentId] as? Int,
+            let name = dict[Keys.name] as? String,
+            let active = dict[Keys.active] as? Bool else {
                 throw InvalidModelError.transaction
         }
 
         self.tournamentId = tournamentId
         self.name = name
-        self.masterBracketId = dict[Keys.masterBracketId.rawValue] as? Int
-        self.imageUrl = dict[Keys.imageUrl.rawValue] as? String
+        self.masterBracketId = dict[Keys.masterBracketId] as? Int
+        self.drawsUrl = dict[Keys.drawsUrl] as? String
+        self.imageUrl = dict[Keys.imageUrl] as? String
         self.active = active
 		
 		//Asynchronously load the image
@@ -51,18 +54,22 @@ class Tournament {
 	}
     
     func toDict() -> [String: Any] {
+        //Add required properties
         var dict: [String: Any] = [
-            Keys.tournamentId.rawValue: tournamentId,
-            Keys.name.rawValue: name,
-            Keys.active.rawValue: active
+            Keys.tournamentId: tournamentId,
+            Keys.name: name,
+            Keys.active: active
         ]
         
         //Add optional properties
         if let masterBracketId = masterBracketId {
-            dict[Keys.masterBracketId.rawValue] = masterBracketId
+            dict[Keys.masterBracketId] = masterBracketId
+        }
+        if let drawsUrl = drawsUrl {
+            dict[Keys.drawsUrl] = drawsUrl
         }
         if let imageUrl = imageUrl {
-            dict[Keys.imageUrl.rawValue] = imageUrl
+            dict[Keys.imageUrl] = imageUrl
         }
         return dict
     }

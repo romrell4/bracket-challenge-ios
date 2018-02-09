@@ -122,7 +122,13 @@ class TournamentsViewController: UIViewController, UITableViewDataSource, UITabl
         let alert = UIAlertController(title: "New Tournament", message: "Please enter the name of the tournament below", preferredStyle: .alert)
         alert.addTextField { (textField) in
             textField.placeholder = "Tournament Name"
+            textField.autocorrectionType = .no
             textField.autocapitalizationType = .words
+        }
+        alert.addTextField { (textField) in
+            textField.placeholder = "Draw URL (optional)"
+            textField.autocorrectionType = .no
+            textField.autocapitalizationType = .none
         }
 		alert.addTextField { (textField) in
 			textField.placeholder = "Image URL (optional)"
@@ -130,10 +136,10 @@ class TournamentsViewController: UIViewController, UITableViewDataSource, UITabl
 			textField.autocapitalizationType = .none
 		}
         alert.addAction(UIAlertAction(title: "Create", style: .default) { (action: UIAlertAction) in
-			guard let name = alert.textFields?[0].text, let imageUrl = alert.textFields?[1].text else { return }
+			guard let name = alert.textFields?[0].text, let drawsUrl = alert.textFields?[1].text, let imageUrl = alert.textFields?[2].text else { return }
 			
 			self.spinner.startAnimating()
-			BCClient.createTournament(name: name, imageUrl: imageUrl, callback: { (tournament, error) in
+            BCClient.createTournament(name: name, drawsUrl: drawsUrl, imageUrl: imageUrl, callback: { (tournament, error) in
 				self.spinner.stopAnimating()
 				if let tournament = tournament {
 					self.tournaments.insert(tournament, at: 0)
