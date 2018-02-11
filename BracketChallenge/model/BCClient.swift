@@ -159,6 +159,10 @@ class BCClient {
         }
     }
     
+    static func refreshMasterBracket(tournamentId: Int) {
+        makeRequest(endpoint: "tournaments/\(tournamentId)/scrape", method: "POST") {_ in }
+    }
+    
     private static func makeRequest(endpoint: String, method: String = "GET", body: Any? = nil, completionHandler: @escaping ((BCResponse) -> Void)) {
         let urlString = "\(BASE_URL)\(endpoint)"
         guard let url = URL(string: urlString) else {
