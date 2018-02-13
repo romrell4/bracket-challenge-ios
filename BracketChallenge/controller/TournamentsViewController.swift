@@ -84,6 +84,12 @@ class TournamentsViewController: UIViewController, UITableViewDataSource, UITabl
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         if Identity.user.admin {
             let tournament = tournaments[indexPath.row]
+            
+            let refreshAction = UITableViewRowAction(style: .normal, title: "Refresh", handler: { (_, _) in
+                BCClient.refreshMasterBracket(tournamentId: self.tournaments[indexPath.row].tournamentId)
+            })
+            refreshAction.backgroundColor = .purple
+            
             let activateAction = UITableViewRowAction(style: .normal, title: tournament.active ? "Deactivate" : "Activate", handler: { (_, _) in
                 tournament.active = !tournament.active
                 BCClient.updateTournament(tournament) { (tournament, error) in
@@ -94,12 +100,7 @@ class TournamentsViewController: UIViewController, UITableViewDataSource, UITabl
             })
             activateAction.backgroundColor = tournament.active ? .red : .blue
             
-            let refreshAction = UITableViewRowAction(style: .normal, title: "Refresh", handler: { (_, _) in
-                BCClient.refreshMasterBracket(tournamentId: self.tournaments[indexPath.row].tournamentId)
-            })
-            refreshAction.backgroundColor = .purple
-            
-            return [activateAction, refreshAction]
+            return [refreshAction, activateAction]
         }
         return []
     }
