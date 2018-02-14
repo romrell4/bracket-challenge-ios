@@ -11,18 +11,22 @@ import UIKit
 private let ANIMATION_DURATION = 0.4
 private let SELECTED_ALPHA: CGFloat = 0.80
 private let UNSELECTED_ALPHA: CGFloat = 0.4
+private let DATE_FORMAT = DateFormatter.defaultDateFormat("MM/dd/yy")
 
 class TournamentTableViewCell: UITableViewCell {
     //MARK: Outlets
-    @IBOutlet weak var backgroundImageView: UIImageView!
-    @IBOutlet weak var overlayView: UIView!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var lineView: UIView!
-	
+    @IBOutlet private weak var backgroundImageView: UIImageView!
+    @IBOutlet private weak var overlayView: UIView!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var lineView: UIView!
+    @IBOutlet private weak var datesLabel: UILabel!
+    
 	var tournament: Tournament! {
 		didSet {
-			//TODO: Add tournament dates here
 			titleLabel.text = tournament.name
+            if let startDate = tournament.startDate, let endDate = tournament.endDate {
+                datesLabel.text = "\(DATE_FORMAT.string(from: startDate)) - \(DATE_FORMAT.string(from: endDate))"
+            }
 			if tournament.image != nil {
 				loadImage()
 			} else {
