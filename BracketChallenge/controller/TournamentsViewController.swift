@@ -83,24 +83,11 @@ class TournamentsViewController: UIViewController, UITableViewDataSource, UITabl
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         if Identity.user.admin {
-            let tournament = tournaments[indexPath.row]
-            
             let refreshAction = UITableViewRowAction(style: .normal, title: "Refresh", handler: { (_, _) in
                 BCClient.refreshMasterBracket(tournamentId: self.tournaments[indexPath.row].tournamentId)
             })
             refreshAction.backgroundColor = .purple
-            
-            let activateAction = UITableViewRowAction(style: .normal, title: tournament.active ? "Deactivate" : "Activate", handler: { (_, _) in
-                tournament.active = !tournament.active
-                BCClient.updateTournament(tournament) { (tournament, error) in
-                    if let tournament = tournament {
-                        self.tournaments[indexPath.row] = tournament
-                    }
-                }
-            })
-            activateAction.backgroundColor = tournament.active ? .red : .blue
-            
-            return [refreshAction, activateAction]
+            return [refreshAction]
         }
         return []
     }
@@ -124,41 +111,15 @@ class TournamentsViewController: UIViewController, UITableViewDataSource, UITabl
 		loadTournaments(nil)
 	}
     
+    @IBAction func tournamentAdded(segue: UIStoryboardSegue?) {
+        if let vc = segue?.source as? AddTournamentViewController, let tournament = vc.createdTournament {
+            tournaments.insert(tournament, at: 0)
+            tableView.reloadData()
+        }
+    }
+    
     @objc func addTapped(_ sender: Any) {
-        //Display pop up allowing them to type the name of the new tournament
-        let alert = UIAlertController(title: "New Tournament", message: "Please enter the name of the tournament below", preferredStyle: .alert)
-        alert.addTextField { (textField) in
-            textField.placeholder = "Tournament Name"
-            textField.autocorrectionType = .no
-            textField.autocapitalizationType = .words
-        }
-        alert.addTextField { (textField) in
-            textField.placeholder = "Draw URL (optional)"
-            textField.autocorrectionType = .no
-            textField.autocapitalizationType = .none
-        }
-		alert.addTextField { (textField) in
-			textField.placeholder = "Image URL (optional)"
-			textField.autocorrectionType = .no
-			textField.autocapitalizationType = .none
-		}
-        alert.addAction(UIAlertAction(title: "Create", style: .default) { (action: UIAlertAction) in
-			guard let name = alert.textFields?[0].text, let drawsUrl = alert.textFields?[1].text, let imageUrl = alert.textFields?[2].text else { return }
-			
-			self.spinner.startAnimating()
-            BCClient.createTournament(name: name, drawsUrl: drawsUrl, imageUrl: imageUrl, callback: { (tournament, error) in
-				self.spinner.stopAnimating()
-				if let tournament = tournament {
-					self.tournaments.insert(tournament, at: 0)
-					self.tableView.reloadData()
-					super.displayAlert(title: "Tournament Created!", message: "To fill in the tournament, please run the webscraper with the tournament's id and draw url. New tournament's id: \(tournament.tournamentId)")
-				} else {
-					super.displayAlert(error: error, alertHandler: nil)
-				}
-			})
-        })
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        present(alert, animated: true, completion: nil)
+        performSegue(withIdentifier: "createTournament", sender: nil)
     }
 	
 	@objc func loadTournaments(_ sender: Any?) {

@@ -16,6 +16,18 @@ extension String {
     }
 }
 
+extension Date {
+    func next(_ dayName: String) -> Date {
+        var cal = Calendar(identifier: .gregorian)
+        cal.locale = Locale(identifier: "en_US")
+        
+        if let index = cal.weekdaySymbols.index(of: dayName), let date = cal.nextDate(after: self, matching: DateComponents(weekday: index + 1), matchingPolicy: .nextTime) {
+            return date
+        }
+        return self
+    }
+}
+
 extension DateFormatter {
     static func defaultDateFormat(_ format: String) -> DateFormatter {
         let formatter = DateFormatter()

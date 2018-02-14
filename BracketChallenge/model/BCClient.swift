@@ -53,15 +53,8 @@ class BCClient {
         }
     }
     
-    static func createTournament(name: String, drawsUrl: String, imageUrl: String, callback: @escaping (Tournament?, BCError?) -> Void) {
-		var tournamentJson = [Tournament.Keys.name: name]
-        if drawsUrl != "" {
-            tournamentJson[Tournament.Keys.drawsUrl] = drawsUrl
-        }
-		if imageUrl != "" {
-			tournamentJson[Tournament.Keys.imageUrl] = imageUrl
-		}
-        makeRequest(endpoint: "tournaments", method: "POST", body: tournamentJson) { (response) in
+    static func createTournament(tournament: Tournament, callback: @escaping (Tournament?, BCError?) -> Void) {
+        makeRequest(endpoint: "tournaments", method: "POST", body: tournament.toDict()) { (response) in
             if response.succeeded, let dict = response.getDataJson() as? [String: Any] {
                 do {
                     callback(try Tournament(dict: dict), nil)
