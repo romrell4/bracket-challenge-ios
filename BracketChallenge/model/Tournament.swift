@@ -76,15 +76,12 @@ class Tournament {
 	}
     
     func toDict() -> [String: Any] {
-        //Add required properties
-        var dict: [String: Any] = [
-            Keys.name: name,
-            Keys.active: active
-        ]
-        
-        //Add optional properties
+        var dict = [String: Any]()
         if let tournamentId = tournamentId {
             dict[Keys.tournamentId] = tournamentId
+        }
+        if let name = name {
+            dict[Keys.name] = name
         }
         if let masterBracketId = masterBracketId {
             dict[Keys.masterBracketId] = masterBracketId
@@ -101,6 +98,7 @@ class Tournament {
         if let endDate = endDate {
             dict[Keys.endDate] = DATE_FORMAT.string(from: endDate)
         }
+        dict[Keys.active] = active
         return dict
     }
 }

@@ -24,39 +24,33 @@
                     </imageView>
                     <view alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l3C-FQ-0hn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="119.5"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Wk2-9F-r0s">
-                                <rect key="frame" x="106" y="31" width="163" height="57"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wimbledon 2017" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sl8-rS-qPt">
-                                        <rect key="frame" x="0.0" y="0.0" width="163" height="26.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9vz-iD-3cK">
-                                        <rect key="frame" x="46.5" y="30.5" width="70" height="2"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="2" id="W1z-DK-s8k"/>
-                                            <constraint firstAttribute="width" constant="70" id="Zrn-x9-hED"/>
-                                        </constraints>
-                                    </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1/18/18 - 2/1/18" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0SF-r5-Yta">
-                                        <rect key="frame" x="23.5" y="36.5" width="116.5" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                            </stackView>
-                        </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="Wk2-9F-r0s" firstAttribute="centerY" secondItem="l3C-FQ-0hn" secondAttribute="centerY" id="aw9-HA-Ees"/>
-                            <constraint firstItem="Wk2-9F-r0s" firstAttribute="centerX" secondItem="l3C-FQ-0hn" secondAttribute="centerX" id="hgD-IA-MGW"/>
-                        </constraints>
                     </view>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Wk2-9F-r0s">
+                        <rect key="frame" x="100.5" y="32.5" width="174.5" height="54.5"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wimbledon 2017" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sl8-rS-qPt">
+                                <rect key="frame" x="0.0" y="0.0" width="174.5" height="26.5"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9vz-iD-3cK">
+                                <rect key="frame" x="52.5" y="30.5" width="70" height="2"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="2" id="W1z-DK-s8k"/>
+                                    <constraint firstAttribute="width" constant="70" id="Zrn-x9-hED"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1/18/18 - 2/1/18" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0SF-r5-Yta">
+                                <rect key="frame" x="35" y="36.5" width="105" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="DTO-uo-9bL" firstAttribute="top" secondItem="Fjf-n8-gkF" secondAttribute="top" id="289-Fy-tOk"/>
@@ -65,6 +59,8 @@
                     <constraint firstAttribute="trailing" secondItem="DTO-uo-9bL" secondAttribute="trailing" id="JKI-Sk-ngd"/>
                     <constraint firstItem="l3C-FQ-0hn" firstAttribute="top" secondItem="Fjf-n8-gkF" secondAttribute="top" id="JrG-qm-pap"/>
                     <constraint firstAttribute="bottom" secondItem="DTO-uo-9bL" secondAttribute="bottom" id="OuJ-tc-t4z"/>
+                    <constraint firstItem="Wk2-9F-r0s" firstAttribute="centerX" secondItem="Fjf-n8-gkF" secondAttribute="centerX" id="S7z-9v-4ww"/>
+                    <constraint firstItem="Wk2-9F-r0s" firstAttribute="centerY" secondItem="Fjf-n8-gkF" secondAttribute="centerY" id="XhO-pD-vto"/>
                     <constraint firstItem="DTO-uo-9bL" firstAttribute="leading" secondItem="Fjf-n8-gkF" secondAttribute="leading" id="eLB-zk-vqy"/>
                     <constraint firstAttribute="bottom" secondItem="l3C-FQ-0hn" secondAttribute="bottom" id="nIu-yO-05g"/>
                 </constraints>
