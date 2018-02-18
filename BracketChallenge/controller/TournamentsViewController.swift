@@ -84,7 +84,18 @@ class TournamentsViewController: UIViewController, UITableViewDataSource, UITabl
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         if Identity.user.admin {
             let refreshAction = UITableViewRowAction(style: .normal, title: "Refresh", handler: { (_, _) in
-                BCClient.refreshMasterBracket(tournamentId: self.tournaments[indexPath.row].tournamentId)
+                self.spinner.startAnimating()
+                BCClient.refreshMasterBracket(tournamentId: self.tournaments[indexPath.row].tournamentId) { error in
+                    //If the call succeeded, and it was to create the master bracket, reload the tournaments (so you get the master_bracket_id)
+                    if error == nil, tournament.masterBracketId == nil {
+                        self.loadTournaments(nil)
+                    } else {
+                        self.spinner.stopAnimating()
+                        if error != nil {
+                            super.displayAlert(error: error, title: "Failed to refresh")
+                        }
+                    }
+                }
             })
             refreshAction.backgroundColor = .purple
             return [refreshAction]

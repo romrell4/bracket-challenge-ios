@@ -152,8 +152,14 @@ class BCClient {
         }
     }
     
-    static func refreshMasterBracket(tournamentId: Int) {
-        makeRequest(endpoint: "tournaments/\(tournamentId)/scrape", method: "POST") {_ in }
+    static func refreshMasterBracket(tournamentId: Int, callback: @escaping (BCError?) -> Void) {
+        makeRequest(endpoint: "tournaments/\(tournamentId)/scrape", method: "POST") { (response) in
+            if response.succeeded {
+                callback(nil)
+            } else {
+                callback(response.error)
+            }
+        }
     }
     
     private static func makeRequest(endpoint: String, method: String = "GET", body: Any? = nil, completionHandler: @escaping ((BCResponse) -> Void)) {
