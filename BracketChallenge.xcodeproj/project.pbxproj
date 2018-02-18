@@ -27,7 +27,7 @@
 		0C5085C91F2E357D00C4A04D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C5085C01F2E357D00C4A04D /* Main.storyboard */; };
 		0C5085CA1F2E357D00C4A04D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5085C21F2E357D00C4A04D /* AppDelegate.swift */; };
 		0C5085CB1F2E357D00C4A04D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5085C41F2E357D00C4A04D /* LoginViewController.swift */; };
-		0C8806B32030F78E001D7EB9 /* AddTournamentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8806B22030F78E001D7EB9 /* AddTournamentViewController.swift */; };
+		0C8806B32030F78E001D7EB9 /* CreateTournamentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8806B22030F78E001D7EB9 /* CreateTournamentViewController.swift */; };
 		0C8806B520333D88001D7EB9 /* TableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8806B420333D88001D7EB9 /* TableData.swift */; };
 		0C8806B720338C05001D7EB9 /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8806B620338C05001D7EB9 /* TextFieldTableViewCell.swift */; };
 		0C8806B92033C30C001D7EB9 /* DatePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8806B82033C30C001D7EB9 /* DatePickerTableViewCell.swift */; };
@@ -70,7 +70,7 @@
 		0C5085C01F2E357D00C4A04D /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		0C5085C21F2E357D00C4A04D /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0C5085C41F2E357D00C4A04D /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		0C8806B22030F78E001D7EB9 /* AddTournamentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTournamentViewController.swift; sourceTree = "<group>"; };
+		0C8806B22030F78E001D7EB9 /* CreateTournamentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTournamentViewController.swift; sourceTree = "<group>"; };
 		0C8806B420333D88001D7EB9 /* TableData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableData.swift; sourceTree = "<group>"; };
 		0C8806B620338C05001D7EB9 /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		0C8806B82033C30C001D7EB9 /* DatePickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerTableViewCell.swift; sourceTree = "<group>"; };
@@ -197,7 +197,7 @@
 			children = (
 				0C5085C41F2E357D00C4A04D /* LoginViewController.swift */,
 				0C15EB261F2E548500E6E4A5 /* TournamentsViewController.swift */,
-				0C8806B22030F78E001D7EB9 /* AddTournamentViewController.swift */,
+				0C8806B22030F78E001D7EB9 /* CreateTournamentViewController.swift */,
 				0C42A1001F33DE6000BF26CE /* TournamentTabBarViewController.swift */,
 				0CA4DB281F3776E0005A3FDF /* MyBracketViewController.swift */,
 				0CA4DB2A1F378756005A3FDF /* ResultsViewController.swift */,
@@ -401,7 +401,7 @@
 				0C9FD7831F302098005174F4 /* Player.swift in Sources */,
 				0C8806B92033C30C001D7EB9 /* DatePickerTableViewCell.swift in Sources */,
 				0C9FD77A1F2FE45F005174F4 /* TournamentTableViewCell.swift in Sources */,
-				0C8806B32030F78E001D7EB9 /* AddTournamentViewController.swift in Sources */,
+				0C8806B32030F78E001D7EB9 /* CreateTournamentViewController.swift in Sources */,
 				0C5085CA1F2E357D00C4A04D /* AppDelegate.swift in Sources */,
 				0C15EB321F2EC30B00E6E4A5 /* Extensions.swift in Sources */,
 				0C42A0F81F311D7300BF26CE /* MatchHelper.swift in Sources */,

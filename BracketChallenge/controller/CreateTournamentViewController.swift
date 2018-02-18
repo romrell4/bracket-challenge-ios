@@ -1,5 +1,5 @@
 //
-//  AddTournamentViewController.swift
+//  CreateTournamentViewController.swift
 //  BracketChallenge
 //
 //  Created by Eric Romrell on 2/11/18.
@@ -15,7 +15,7 @@ private let DEFAULT_END = DEFAULT_START.next("Sunday")
 private let TEXT_FIELD_SECTION = 0
 private let DATE_SECTION = 1
 
-class AddTournamentViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate {
+class CreateTournamentViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate {
 
     //MARK: Outlets
     @IBOutlet private weak var spinner: UIActivityIndicatorView!

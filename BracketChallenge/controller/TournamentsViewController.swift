@@ -125,7 +125,7 @@ class TournamentsViewController: UIViewController, UITableViewDataSource, UITabl
 	}
     
     @IBAction func tournamentAdded(segue: UIStoryboardSegue?) {
-        if let vc = segue?.source as? AddTournamentViewController, let tournament = vc.createdTournament {
+        if let vc = segue?.source as? CreateTournamentViewController, let tournament = vc.createdTournament {
             tournaments.insert(tournament, at: 0)
             tableView.reloadData()
         }
