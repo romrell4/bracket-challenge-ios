@@ -74,11 +74,14 @@ class MatchCollectionViewCell: UICollectionViewCell, UITableViewDataSource, UITa
         if areCellsClickable {
             let otherIndexPath = IndexPath(row: indexPath.row == 0 ? 1 : 0, section: indexPath.section)
             if let cell = tableView.cellForRow(at: indexPath) as? MatchTableViewCell, let otherCell = tableView.cellForRow(at: otherIndexPath) as? MatchTableViewCell {
-                //When selecting a cell, the other one should deselect
-                cell.checked = true
-                otherCell.checked = false
-                
-                //TODO: Allow the user to deselect a row
+                if cell.checked {
+                    cell.checked = false
+                    delegate?.player(nil, selectedInCell: self)
+                } else {
+                    //When selecting a cell, the other one should deselect
+                    cell.checked = true
+                    otherCell.checked = false
+                }
             }
         }
     }

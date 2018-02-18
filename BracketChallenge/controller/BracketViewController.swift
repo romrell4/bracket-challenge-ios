@@ -124,7 +124,7 @@ class BracketViewController: UIViewController, UICollectionViewDataSource, UICol
                 
                 //Reload the UI for the next match
                 indexPath.row = newPosition
-                collectionViews[round + 1].reloadItems(at: [indexPath])
+                collectionViews[nextRound].reloadItems(at: [indexPath])
             }
             
             //If you found it, don't keep looking

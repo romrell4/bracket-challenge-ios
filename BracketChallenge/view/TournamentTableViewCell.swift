@@ -23,12 +23,20 @@ class TournamentTableViewCell: UITableViewCell {
 		didSet {
 			//TODO: Add tournament dates here
 			titleLabel.text = tournament.name
-			if tournament.image != nil {
-				loadImage()
-			} else {
-				backgroundImageView.backgroundColor = .gray
-				NotificationCenter.default.addObserver(self, selector: #selector(loadImage), name: tournament.imageNotificationName, object: nil)
-			}
+            
+            //Asynchronously load the image
+            if tournament.image != nil {
+                self.backgroundImageView.image = self.tournament.image
+            } else {
+                DispatchQueue.global(qos: .utility).async {
+                    if let imageUrl = self.tournament.imageUrl, let url = URL(string: imageUrl), let data = try? Data(contentsOf: url) {
+                        self.tournament.image = UIImage(data: data)
+                        DispatchQueue.main.async {
+                            self.backgroundImageView.image = self.tournament.image
+                        }
+                    }
+                }
+            }
 		}
 	}
 	

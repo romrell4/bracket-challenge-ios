@@ -22,7 +22,7 @@ class Tournament {
     var name: String
     var masterBracketId: Int?
     private var drawsUrl: String?
-    private var imageUrl: String?
+    var imageUrl: String?
     var image: UIImage?
     var active: Bool
 	
@@ -43,14 +43,6 @@ class Tournament {
         self.drawsUrl = dict[Keys.drawsUrl] as? String
         self.imageUrl = dict[Keys.imageUrl] as? String
         self.active = active
-		
-		//Asynchronously load the image
-		DispatchQueue.global(qos: .background).async {
-			if let imageUrl = self.imageUrl, let url = URL(string: imageUrl), let data = try? Data(contentsOf: url) {
-				self.image = UIImage(data: data)
-				NotificationCenter.default.post(Notification(name: self.imageNotificationName))
-			}
-		}
 	}
     
     func toDict() -> [String: Any] {
