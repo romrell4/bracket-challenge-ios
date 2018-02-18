@@ -159,12 +159,16 @@ class BCClient {
         }
     }
     
-    static func refreshMasterBracket(tournamentId: Int, callback: @escaping (BCError?) -> Void) {
+    static func refreshMasterBracket(tournamentId: Int, callback: @escaping (Bracket?, BCError?) -> Void) {
         makeRequest(endpoint: "tournaments/\(tournamentId)/scrape", method: "POST") { (response) in
-            if response.succeeded {
-                callback(nil)
+            if response.succeeded, let dict = response.getDataJson() as? [String: Any] {
+                do {
+                    callback(try Bracket(dict: dict), nil)
+                } catch {
+                    callback(nil, BCError(readableMessage: "Invalid bracket returned from service"))
+                }
             } else {
-                callback(response.error)
+                callback(nil, response.error)
             }
         }
     }

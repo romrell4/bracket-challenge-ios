@@ -87,15 +87,15 @@ class TournamentsViewController: UIViewController, UITableViewDataSource, UITabl
             
             let refreshAction = UITableViewRowAction(style: .normal, title: "Refresh", handler: { (_, _) in
                 self.spinner.startAnimating()
-                BCClient.refreshMasterBracket(tournamentId: self.tournaments[indexPath.row].tournamentId) { error in
-                    //If the call succeeded, and it was to create the master bracket, reload the tournaments (so you get the master_bracket_id)
-                    if error == nil, tournament.masterBracketId == nil {
-                        self.loadTournaments(nil)
+                BCClient.refreshMasterBracket(tournamentId: self.tournaments[indexPath.row].tournamentId) { bracket, error in
+                    if let bracket = bracket {
+                        //If the call succeeded, and the master bracket didn't exist, set the master bracket id
+                        if tournament.masterBracketId == nil {
+                            tournament.masterBracketId = bracket.bracketId
+                        }
                     } else {
                         self.spinner.stopAnimating()
-                        if error != nil {
-                            super.displayAlert(error: error, title: "Failed to refresh")
-                        }
+                        super.displayAlert(error: error, title: "Failed to refresh")
                     }
                 }
             })
