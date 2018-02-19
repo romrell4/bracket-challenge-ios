@@ -88,13 +88,13 @@ class TournamentsViewController: UIViewController, UITableViewDataSource, UITabl
                 
                 let tournament = self.tournaments[indexPath.row]
                 BCClient.refreshMasterBracket(tournamentId: tournament.tournamentId) { bracket, error in
+                    self.spinner.stopAnimating()
                     if let bracket = bracket {
                         //If the call succeeded, and the master bracket didn't exist, set the master bracket id
                         if tournament.masterBracketId == nil {
                             tournament.masterBracketId = bracket.bracketId
                         }
                     } else {
-                        self.spinner.stopAnimating()
                         super.displayAlert(error: error, title: "Failed to refresh")
                     }
                 }
