@@ -44,12 +44,6 @@ class TournamentTableViewCell: UITableViewCell {
             }
 		}
 	}
-	
-	@objc func loadImage() {
-		DispatchQueue.main.async {
-			self.backgroundImageView.image = self.tournament.image
-		}
-	}
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         //For some reason, the view reset when selected. This should set them back to what they should be

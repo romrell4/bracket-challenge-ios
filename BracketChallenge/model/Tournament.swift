@@ -49,14 +49,6 @@ class Tournament {
         self.imageUrl = imageUrl
         self.startDate = startDate
         self.endDate = endDate
-        
-        //Asynchronously load the image
-        DispatchQueue.global(qos: .background).async {
-            if let imageUrl = self.imageUrl, let url = URL(string: imageUrl), let data = try? Data(contentsOf: url) {
-                self.image = UIImage(data: data)
-                NotificationCenter.default.post(Notification(name: self.imageNotificationName))
-            }
-        }
     }
     
     convenience init(dict: [String: Any]) throws {
