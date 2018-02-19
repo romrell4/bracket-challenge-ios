@@ -11,7 +11,7 @@ import UIKit
 private let ANIMATION_DURATION = 0.4
 private let SELECTED_ALPHA: CGFloat = 0.80
 private let UNSELECTED_ALPHA: CGFloat = 0.4
-private let DATE_FORMAT = DateFormatter.defaultDateFormat("MM/dd/yy")
+private let DATE_FORMAT = DateFormatter.defaultDateFormat("MMM d")
 
 class TournamentTableViewCell: UITableViewCell {
     //MARK: Outlets

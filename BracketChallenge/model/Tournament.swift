@@ -8,7 +8,7 @@
 
 import UIKit
 
-private let DATE_FORMAT = DateFormatter.defaultDateFormat("MM/dd/yyyy HH:mm:ss")
+private let DATE_FORMAT = DateFormatter.defaultDateFormat("yyyy-MM-dd")
 
 class Tournament {
     private struct Keys {
@@ -17,7 +17,6 @@ class Tournament {
         static let masterBracketId = "master_bracket_id"
         static let drawsUrl = "draws_url"
         static let imageUrl = "image_url"
-        static let active = "active"
         static let startDate = "start_date"
         static let endDate = "end_date"
     }
@@ -62,7 +61,9 @@ class Tournament {
     
     convenience init(dict: [String: Any]) throws {
         guard let tournamentId = dict[Keys.tournamentId] as? Int,
-            let name = dict[Keys.name] as? String else {
+            let name = dict[Keys.name] as? String,
+            let startDate = DATE_FORMAT.date(from: dict[Keys.startDate] as? String),
+            let endDate = DATE_FORMAT.date(from: dict[Keys.endDate] as? String) else {
                 throw InvalidModelError.transaction
         }
         
@@ -71,8 +72,8 @@ class Tournament {
                   masterBracketId: dict[Keys.masterBracketId] as? Int,
                   drawsUrl: dict[Keys.drawsUrl] as? String,
                   imageUrl: dict[Keys.imageUrl] as? String,
-                  startDate: DATE_FORMAT.date(from: dict[Keys.startDate] as? String),
-                  endDate: DATE_FORMAT.date(from: dict[Keys.endDate] as? String))
+                  startDate: startDate,
+                  endDate: endDate)
 	}
     
     func toDict() -> [String: Any] {
@@ -98,7 +99,6 @@ class Tournament {
         if let endDate = endDate {
             dict[Keys.endDate] = DATE_FORMAT.string(from: endDate)
         }
-        dict[Keys.active] = active
         return dict
     }
 }
