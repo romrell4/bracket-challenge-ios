@@ -87,7 +87,7 @@ class TournamentsViewController: UIViewController, UITableViewDataSource, UITabl
                 self.spinner.startAnimating()
                 
                 let tournament = self.tournaments[indexPath.row]
-                BCClient.refreshMasterBracket(tournamentId: self.tournaments[indexPath.row].tournamentId) { bracket, error in
+                BCClient.refreshMasterBracket(tournamentId: tournament.tournamentId) { bracket, error in
                     if let bracket = bracket {
                         //If the call succeeded, and the master bracket didn't exist, set the master bracket id
                         if tournament.masterBracketId == nil {
