@@ -31,8 +31,8 @@ class CreateTournamentViewController: UIViewController, UITableViewDataSource, U
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //TODO: Use TableData in other VCs
         tableData = TableData(sections: [
-            //TODD: Remove title?
             Section(cellId: "textFieldCell", rows: [
                 Row(placeholderText: "Tournament Name"),
                 Row(placeholderText: "Draws URL"),
