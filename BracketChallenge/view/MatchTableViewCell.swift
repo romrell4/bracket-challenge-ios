@@ -22,14 +22,7 @@ class MatchTableViewCell: UITableViewCell {
     //Private properties
     var checked: Bool = false {
         didSet {
-            if checked {
-                accessoryType = .checkmark
-                
-                //Notify the CollectionViewCell that a cell was selected
-                delegate?.selected(cell: self)
-            } else {
-                accessoryType = .none
-            }
+            accessoryType = checked ? .checkmark : .none
         }
     }
     
