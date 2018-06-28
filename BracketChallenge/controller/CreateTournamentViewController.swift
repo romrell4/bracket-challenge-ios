@@ -15,7 +15,7 @@ private let DEFAULT_END = DEFAULT_START.next("Sunday")
 private let TEXT_FIELD_SECTION = 0
 private let DATE_SECTION = 1
 
-class CreateTournamentViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate {
+class CreateTournamentViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate, UITextFieldDelegate {
 
     //MARK: Outlets
     @IBOutlet private weak var spinner: UIActivityIndicatorView!
@@ -27,6 +27,7 @@ class CreateTournamentViewController: UIViewController, UITableViewDataSource, U
     //MARK: Private properties
     private var tableData = TableData()
     private var datePickerIndexPath: IndexPath?
+	private var selectedTextField: UITextField?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,6 +61,7 @@ class CreateTournamentViewController: UIViewController, UITableViewDataSource, U
         let cell = tableData.cell(forTableView: tableView, atIndexPath: indexPath)
         if let cell = cell as? TextFieldTableViewCell {
             cell.textField.placeholder = row.placeholderText
+			cell.textField.delegate = self
         } else if let cell = cell as? DatePickerTableViewCell, let date = getDateFromRow(aboveIndexPath: indexPath) {
             cell.datePicker.date = date
         }
@@ -68,6 +70,9 @@ class CreateTournamentViewController: UIViewController, UITableViewDataSource, U
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableData.cellId(forIndexPath: indexPath) == "dateCell" {
+			//Make the text field disappear
+			selectedTextField?.resignFirstResponder()
+			
             tableView.beginUpdates()
             
             let insert: ((IndexPath, IndexPath) -> Void) = { selectedIndexPath, displayIndexPath in
@@ -96,8 +101,14 @@ class CreateTournamentViewController: UIViewController, UITableViewDataSource, U
                 insert(indexPath, IndexPath(row: indexPath.row + 1, section: indexPath.section))
             }
             tableView.endUpdates()
-        }
+		}
     }
+	
+	//MARK: UITextFieldDelegate
+	
+	func textFieldDidBeginEditing(_ textField: UITextField) {
+		selectedTextField = textField
+	}
     
     //MARK: Listeners
     
