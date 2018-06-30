@@ -67,7 +67,6 @@ class StandingsViewController: UIViewController, UITableViewDataSource, UITableV
     //MARK: Listeners
     
     @objc func loadBrackets() {
-		spinner.startAnimating()
 		refreshControl.beginRefreshing()
         BCClient.getBrackets(tournamentId: tournament.tournamentId) { (brackets, error) in
             self.spinner.stopAnimating()
