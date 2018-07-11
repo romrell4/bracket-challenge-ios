@@ -21,17 +21,12 @@ class Bracket {
     var score: Int
     var rounds: [[MatchHelper]]?
     
-    init(dict: [String: Any]) throws {
+    convenience init(dict: [String: Any]) throws {
         guard let bracketId = dict[BRACKET_ID_KEY] as? Int, let tournamentId = dict[TOURNAMENT_ID_KEY] as? Int, let name = dict[NAME_KEY] as? String, let score = dict[SCORE_KEY] as? Int else {
-            throw InvalidModelError.transaction
+            throw InvalidModelError.bracket
         }
-        
-        self.bracketId = bracketId
-        self.userId = dict[USER_ID_KEY] as? Int
-        self.tournamentId = tournamentId
-        self.name = name
-        self.score = score
-        
+		
+		var rounds: [[MatchHelper]]?
         if let roundArrays = dict[ROUNDS_KEY] as? [[[String: Any]]] {
             var tmpRounds = [[MatchHelper]]()
             for roundArray in roundArrays {
@@ -43,7 +38,17 @@ class Bracket {
             }
             rounds = tmpRounds
         }
+		self.init(bracketId: bracketId, userId: dict[USER_ID_KEY] as? Int, tournamentId: tournamentId, name: name, score: score, rounds: rounds)
     }
+	
+	init(bracketId: Int = 0, userId: Int? = nil, tournamentId: Int = 0, name: String = "", score: Int = 0, rounds: [[MatchHelper]]? = nil) {
+		self.bracketId = bracketId
+		self.userId = userId
+		self.tournamentId = tournamentId
+		self.name = name
+		self.score = score
+		self.rounds = rounds
+	}
     
     func toDict() -> [String: Any] {
         var dict: [String: Any] = [

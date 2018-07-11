@@ -96,7 +96,7 @@ class BracketViewController: UIViewController, UICollectionViewDataSource, UICol
         }
         return UICollectionViewCell()
     }
-    
+	
     //MatchCollectionViewCell callbacks
     
     func player(_ player: Player?, selectedInCell cell: MatchCollectionViewCell) {

@@ -33,9 +33,9 @@ class MatchCollectionViewCell: UICollectionViewCell, UITableViewDataSource, UITa
     var areCellsClickable = true
     
     override func awakeFromNib() {
-        layer.borderColor = UIColor.bcGreen.cgColor
-        layer.borderWidth = 1
-        layer.cornerRadius = 8
+        tableView.layer.borderColor = UIColor.bcGreen.cgColor
+        tableView.layer.borderWidth = 1
+        tableView.layer.cornerRadius = 8
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerNib(nibName: "MatchTableViewCell")

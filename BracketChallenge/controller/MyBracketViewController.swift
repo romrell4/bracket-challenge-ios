@@ -53,7 +53,17 @@ class MyBracketViewController: UserBracketViewController, UITabBarControllerDele
             vc.bracket = masterBracket
         } else if let vc = viewController as? StandingsViewController, vc.masterBracket == nil {
             vc.masterBracket = masterBracket
-        }
+		} else if let vc = viewController as? BracketViewController2, vc.bracket == nil {
+			vc.bracket = masterBracket /*Bracket(rounds: [
+				[
+					MatchHelper(round: 1, position: 1, player1Id: 1, player1Name: "Test 1", player2Id: 2, player2Name: "Test 2", winnerId: 1),
+					MatchHelper(round: 1, position: 2, player1Id: 3, player1Name: "Test 3", player2Id: 4, player2Name: "Test 4", winnerId: 4)
+				],
+				[
+					MatchHelper(round: 2, position: 1, player1Id: 1, player1Name: "Test 1", player2Id: 4, player2Name: "Test 4", winnerId: 1)
+				]
+			])*/
+		}
     }
     
     //MARK: Listeners

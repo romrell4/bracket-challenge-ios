@@ -56,6 +56,19 @@ class MatchHelper: Match {
             winner = Player(id: id, name: name)
         }
     }
+	
+	init(matchId: Int = 0, bracketId: Int = 0, round: Int, position: Int, player1Id: Int?, player1Name: String?, seed1: Int? = nil, player2Id: Int?, player2Name: String?, seed2: Int? = nil, winnerId: Int? = nil, winnerName: String? = nil) {
+		super.init(matchId: matchId, bracketId: bracketId, round: round, position: position, player1Id: player1Id, player2Id: player2Id, seed1: seed1, seed2: seed2, winnerId: winnerId)
+		if let id = player1Id, let name = player1Name {
+			player1 = Player(id: id, name: name, seed: super.seed1)
+		}
+		if let id = player2Id, let name = player2Name {
+			player2 = Player(id: id, name: name, seed: super.seed2)
+		}
+		if let id = winnerId, let name = winnerName {
+			winner = Player(id: id, name: name)
+		}
+	}
     
     func toDict() -> [String: Any] {
         var dict = [

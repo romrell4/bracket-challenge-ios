@@ -27,5 +27,8 @@ class TournamentTabBarViewController: UITabBarController {
         if let standingsVc = viewControllers?[2] as? StandingsViewController {
             standingsVc.tournament = tournament
         }
+		if let testVc = viewControllers?[3] as? BracketViewController2 {
+			testVc.tournament = tournament
+		}
     }
 }

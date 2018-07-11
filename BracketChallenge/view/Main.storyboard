@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rJX-Ce-ZrQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rJX-Ce-ZrQ">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -249,10 +249,10 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" textLabel="kgx-bX-wPP" detailTextLabel="fvk-yX-Nxd" style="IBUITableViewCellStyleValue1" id="ciF-Dr-7ka">
-                                        <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ciF-Dr-7ka" id="jkK-FE-6eu">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kgx-bX-wPP">
@@ -263,7 +263,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fvk-yX-Nxd">
-                                                    <rect key="frame" x="541" y="12" width="44" height="20.5"/>
+                                                    <rect key="frame" x="316" y="12" width="44" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -306,6 +306,25 @@
             </objects>
             <point key="canvasLocation" x="4300" y="801.94902548725645"/>
         </scene>
+        <!--Test-->
+        <scene sceneID="TmW-we-M7z">
+            <objects>
+                <viewController id="KOO-8C-Fa8" customClass="BracketViewController2" customModule="BracketChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="yMP-dw-3DS"/>
+                        <viewControllerLayoutGuide type="bottom" id="qbM-bI-u27"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="xwx-JQ-0IT">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Test" id="ZYF-Mq-itu"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tbg-S7-eI0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4188" y="1560"/>
+        </scene>
         <!--User Bracket View Controller-->
         <scene sceneID="7bP-5c-JVY">
             <objects>
@@ -337,6 +356,7 @@
                         <segue destination="vEb-o2-Jb7" kind="relationship" relationship="viewControllers" id="nrQ-Cw-zqs"/>
                         <segue destination="LH1-Wi-QJN" kind="relationship" relationship="viewControllers" id="UFY-Dg-nTS"/>
                         <segue destination="1eI-wB-wJe" kind="relationship" relationship="viewControllers" id="QwG-O2-cQj"/>
+                        <segue destination="KOO-8C-Fa8" kind="relationship" relationship="viewControllers" id="gE6-Oh-nix"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H6e-rO-jyH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -359,13 +379,13 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="It looks like you haven't created a bracket for this tournament. Tap below to begin!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wwj-HO-Ud8">
-                                        <rect key="frame" x="32" y="266.5" width="311" height="21"/>
+                                        <rect key="frame" x="32" y="246.5" width="311" height="61"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wm0-hz-6RQ">
-                                        <rect key="frame" x="136.5" y="295.5" width="102" height="30"/>
+                                        <rect key="frame" x="136.5" y="315.5" width="102" height="30"/>
                                         <state key="normal" title="Create Bracket"/>
                                         <connections>
                                             <action selector="createBracketTapped:" destination="vEb-o2-Jb7" eventType="touchUpInside" id="buu-oW-CdC"/>
