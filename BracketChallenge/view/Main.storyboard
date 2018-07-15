@@ -356,16 +356,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zr9-JI-UGP">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="598"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="It looks like you haven't created a bracket for this tournament. Tap below to begin!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wwj-HO-Ud8">
-                                        <rect key="frame" x="32" y="246.5" width="311" height="61"/>
+                                        <rect key="frame" x="32" y="268.5" width="311" height="61"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wm0-hz-6RQ">
-                                        <rect key="frame" x="136.5" y="315.5" width="102" height="30"/>
+                                        <rect key="frame" x="136.5" y="337.5" width="102" height="30"/>
                                         <state key="normal" title="Create Bracket"/>
                                         <connections>
                                             <action selector="createBracketTapped:" destination="vEb-o2-Jb7" eventType="touchUpInside" id="buu-oW-CdC"/>
@@ -414,7 +414,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="njm-U6-VZ6" kind="relationship" relationship="rootViewController" id="g3Z-ND-p0e"/>
+                        <segue destination="UgA-uW-BZz" kind="relationship" relationship="rootViewController" id="cbM-Rv-CIF"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eUo-EB-PgN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -457,6 +457,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1IP-e7-KzP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1956.8" y="-646.77661169415296"/>
+        </scene>
+        <!--Test View Controller-->
+        <scene sceneID="yBq-Al-YIc">
+            <objects>
+                <viewController id="UgA-uW-BZz" customClass="TestViewController" customModule="BracketChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wh3-lz-1oQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="mJY-bY-uBr"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="nxj-Mb-59S">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="hZv-IZ-D8J"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="V68-Y4-Ngx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1132" y="814.54272863568224"/>
         </scene>
         <!--Navigation View Controller-->
         <scene sceneID="nxe-P3-BqD">
