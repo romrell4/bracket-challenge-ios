@@ -43,10 +43,7 @@ class RoundView: UIScrollView {
 		}
 	}
 	
-	//TODO: Make this the awake from nib
-	init() {
-		super.init(frame: CGRect())
-		
+	override func awakeFromNib() {
 		translatesAutoresizingMaskIntoConstraints = false
 		backgroundColor = .lightGray
 		

@@ -27,16 +27,17 @@ class TestViewController: UIViewController {
 		super.viewDidLoad()
 		
 		bracket.rounds?.forEach {
-			let roundView = RoundView()
-			roundView.matches = $0
-			view.addSubview(roundView)
-			
-			NSLayoutConstraint.activate([
-				roundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-				roundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-				roundView.topAnchor.constraint(equalTo: view.topAnchor),
-				roundView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-			])
+			if let roundView = UINib(nibName: "RoundView", bundle: nil).instantiate(withOwner: self, options: nil).first as? RoundView {
+				roundView.matches = $0
+				view.addSubview(roundView)
+				
+				NSLayoutConstraint.activate([
+					roundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+					roundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+					roundView.topAnchor.constraint(equalTo: view.topAnchor),
+					roundView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+				])
+			}
 		}
 	}
 }
