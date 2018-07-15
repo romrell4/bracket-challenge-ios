@@ -45,7 +45,6 @@
 		0CE187351F3F93450069BEC6 /* MatchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE187331F3F93450069BEC6 /* MatchCollectionViewCell.swift */; };
 		0CE187361F3F93450069BEC6 /* MatchCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CE187341F3F93450069BEC6 /* MatchCollectionViewCell.xib */; };
 		0CE187391F40B7210069BEC6 /* MatchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CE187381F40B7210069BEC6 /* MatchTableViewCell.xib */; };
-		0CE8270E20E868EF0069DF2E /* BracketViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE8270D20E868EF0069DF2E /* BracketViewController2.swift */; };
 		FD30427A253E69BA5DB0240F /* Pods_BracketChallenge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F29F7997F141AA3D3B8A33D9 /* Pods_BracketChallenge.framework */; };
 /* End PBXBuildFile section */
 
@@ -91,7 +90,6 @@
 		0CE187331F3F93450069BEC6 /* MatchCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchCollectionViewCell.swift; sourceTree = "<group>"; };
 		0CE187341F3F93450069BEC6 /* MatchCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MatchCollectionViewCell.xib; sourceTree = "<group>"; };
 		0CE187381F40B7210069BEC6 /* MatchTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MatchTableViewCell.xib; sourceTree = "<group>"; };
-		0CE8270D20E868EF0069DF2E /* BracketViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BracketViewController2.swift; sourceTree = "<group>"; };
 		4D7185542C0E4E1151157A56 /* Pods-BracketChallenge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BracketChallenge.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BracketChallenge/Pods-BracketChallenge.debug.xcconfig"; sourceTree = "<group>"; };
 		832DB5FC271697BEEB9C135D /* Pods-BracketChallenge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BracketChallenge.release.xcconfig"; path = "Pods/Target Support Files/Pods-BracketChallenge/Pods-BracketChallenge.release.xcconfig"; sourceTree = "<group>"; };
 		F29F7997F141AA3D3B8A33D9 /* Pods_BracketChallenge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BracketChallenge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -210,7 +208,6 @@
 				0CA4DB281F3776E0005A3FDF /* MyBracketViewController.swift */,
 				0CA4DB2A1F378756005A3FDF /* ResultsViewController.swift */,
 				0CE187311F3F8D7D0069BEC6 /* BracketViewController.swift */,
-				0CE8270D20E868EF0069DF2E /* BracketViewController2.swift */,
 				0C9DAB841F54BCC4009268D6 /* StandingsViewController.swift */,
 				0C9DAB861F54C80D009268D6 /* UserBracketViewController.swift */,
 			);
@@ -260,7 +257,6 @@
 				0C5085A31F2E34E300C4A04D /* Frameworks */,
 				0C5085A41F2E34E300C4A04D /* Resources */,
 				C6D41C221CE55F6B17C88C8E /* [CP] Embed Pods Frameworks */,
-				FE612FA9B272E1EA1392F205 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -375,21 +371,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BracketChallenge/Pods-BracketChallenge-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		FE612FA9B272E1EA1392F205 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BracketChallenge/Pods-BracketChallenge-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -422,7 +403,6 @@
 				0C15EB291F2EAA5C00E6E4A5 /* BCClient.swift in Sources */,
 				0C8806B520333D88001D7EB9 /* TableData.swift in Sources */,
 				0C9DAB851F54BCC4009268D6 /* StandingsViewController.swift in Sources */,
-				0CE8270E20E868EF0069DF2E /* BracketViewController2.swift in Sources */,
 				0C8806B720338C05001D7EB9 /* TextFieldTableViewCell.swift in Sources */,
 				0C15EB2B1F2EAAA300E6E4A5 /* User.swift in Sources */,
 				0C5085CB1F2E357D00C4A04D /* LoginViewController.swift in Sources */,
