@@ -27,88 +27,16 @@ class TestViewController: UIViewController {
 		super.viewDidLoad()
 		
 		bracket.rounds?.forEach {
-			view.addSubview(RoundView(matches: $0, superview: view))
+			let roundView = RoundView()
+			roundView.matches = $0
+			view.addSubview(roundView)
+			
+			NSLayoutConstraint.activate([
+				roundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+				roundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+				roundView.topAnchor.constraint(equalTo: view.topAnchor),
+				roundView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+			])
 		}
 	}
 }
-
-class RoundView: UIScrollView {
-	//MARK: Private properties
-	private let stackView = UIStackView()
-	private var topBottomConstraints: [NSLayoutConstraint]!
-	private var zoomLevel: CGFloat = 1 {
-		didSet {
-			let spacing = (zoomLevel - 1) * TABLE_CELL_HEIGHT
-			topBottomConstraints.forEach { $0.constant = spacing }
-
-			UIView.animate(withDuration: 0.5) {
-				self.stackView.spacing = spacing
-				self.setNeedsLayout()
-			}
-		}
-	}
-	
-	init(matches: [MatchHelper], superview: UIView) {
-		super.init(frame: CGRect())
-		
-		translatesAutoresizingMaskIntoConstraints = false
-		backgroundColor = .lightGray
-		superview.addSubview(self)
-		
-		NSLayoutConstraint.activate([
-			leadingAnchor.constraint(equalTo: superview.leadingAnchor),
-			trailingAnchor.constraint(equalTo: superview.trailingAnchor),
-			topAnchor.constraint(equalTo: superview.topAnchor),
-			bottomAnchor.constraint(equalTo: superview.bottomAnchor)
-		])
-		
-		stackView.translatesAutoresizingMaskIntoConstraints = false
-		stackView.axis = .vertical
-		stackView.spacing = 20
-		addSubview(stackView)
-		
-		topBottomConstraints = [
-			stackView.topAnchor.constraint(equalTo: topAnchor),
-			stackView.bottomAnchor.constraint(equalTo: bottomAnchor)
-		]
-
-		NSLayoutConstraint.activate([
-			stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
-			stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
-			topBottomConstraints[0],
-			topBottomConstraints[1],
-			stackView.widthAnchor.constraint(equalTo: widthAnchor)
-		])
-
-		matches.forEach { match in
-			if let matchView = UINib(nibName: "MatchCollectionViewCell", bundle: nil).instantiate(withOwner: self, options: nil).first as? MatchCollectionViewCell {
-				matchView.match = match
-				stackView.addArrangedSubview(matchView)
-				
-				NSLayoutConstraint.activate([
-					matchView.heightAnchor.constraint(equalToConstant: TABLE_CELL_HEIGHT * 2)
-				])
-			}
-		}
-		
-		//Add gesture recognizer for testing
-		addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tap(sender:))))
-	}
-	
-	required init?(coder aDecoder: NSCoder) {
-		super.init(coder: aDecoder)
-	}
-	
-	//MARK: Listeners
-	
-	@objc func tap(sender: UIPanGestureRecognizer) {
-		if sender.state == .ended {
-			if sender.location(in: self).x > self.frame.width / 2 {
-				zoomLevel *= 2
-			} else {
-				zoomLevel /= 2
-			}
-		}
-	}
-}
-
