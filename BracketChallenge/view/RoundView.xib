@@ -12,11 +12,39 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" id="NQA-SI-bNi" customClass="RoundView" customModule="BracketChallenge" customModuleProvider="target">
+        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" id="NQA-SI-bNi" customClass="RoundView" customModule="BracketChallenge" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="AXU-8T-MIU">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <gestureRecognizers/>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="uAN-23-RHN" appends="YES" id="ivd-cI-5lR"/>
+                    </connections>
+                </stackView>
+            </subviews>
+            <gestureRecognizers/>
+            <constraints>
+                <constraint firstItem="AXU-8T-MIU" firstAttribute="bottom" secondItem="NQA-SI-bNi" secondAttribute="bottom" id="7we-lT-Ban"/>
+                <constraint firstItem="AXU-8T-MIU" firstAttribute="height" secondItem="NQA-SI-bNi" secondAttribute="height" placeholder="YES" id="O3T-UD-Shc"/>
+                <constraint firstItem="AXU-8T-MIU" firstAttribute="leading" secondItem="NQA-SI-bNi" secondAttribute="leading" id="dgP-qw-0Aq"/>
+                <constraint firstItem="AXU-8T-MIU" firstAttribute="top" secondItem="NQA-SI-bNi" secondAttribute="top" id="hxB-Dv-Mcj"/>
+                <constraint firstItem="AXU-8T-MIU" firstAttribute="trailing" secondItem="NQA-SI-bNi" secondAttribute="trailing" id="lSh-n5-etO"/>
+                <constraint firstItem="AXU-8T-MIU" firstAttribute="width" secondItem="NQA-SI-bNi" secondAttribute="width" id="u1v-5m-pS2"/>
+            </constraints>
             <viewLayoutGuide key="safeArea" id="stO-Pr-L0A"/>
-            <point key="canvasLocation" x="38" y="209"/>
+            <connections>
+                <outlet property="stackView" destination="AXU-8T-MIU" id="dA8-BE-hsL"/>
+                <outletCollection property="topBottomConstraints" destination="hxB-Dv-Mcj" collectionClass="NSMutableArray" id="oIK-Q6-dx8"/>
+                <outletCollection property="topBottomConstraints" destination="7we-lT-Ban" collectionClass="NSMutableArray" id="LVe-P5-GsL"/>
+            </connections>
+            <point key="canvasLocation" x="37.5" y="208.5"/>
         </scrollView>
+        <tapGestureRecognizer id="uAN-23-RHN">
+            <connections>
+                <action selector="tap:" destination="NQA-SI-bNi" id="D8Z-ug-LsE"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
 </document>

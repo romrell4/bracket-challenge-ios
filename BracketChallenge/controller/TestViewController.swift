@@ -28,9 +28,12 @@ class TestViewController: UIViewController {
 		
 		bracket.rounds?.forEach {
 			if let roundView = UINib(nibName: "RoundView", bundle: nil).instantiate(withOwner: self, options: nil).first as? RoundView {
+				roundView.translatesAutoresizingMaskIntoConstraints = false
 				roundView.matches = $0
 				view.addSubview(roundView)
 				
+//				let layoutGuide: UILayoutGuide
+//				if #available(iOS 11.0, *) { layoutGuide = view.safeAreaLayoutGuide } else { layoutGuide = view.layoutMarginsGuide }
 				NSLayoutConstraint.activate([
 					roundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
 					roundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),

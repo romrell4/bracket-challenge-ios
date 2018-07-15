@@ -9,6 +9,10 @@
 import UIKit
 
 class RoundView: UIScrollView {
+	//MARK: Outlets
+	@IBOutlet private weak var stackView: UIStackView!
+	@IBOutlet private var topBottomConstraints: [NSLayoutConstraint]!
+	
 	//MARK: Public properties
 	var matches = [MatchHelper]() {
 		didSet {
@@ -19,18 +23,14 @@ class RoundView: UIScrollView {
 					
 					NSLayoutConstraint.activate([
 						matchView.heightAnchor.constraint(equalToConstant: TABLE_CELL_HEIGHT * 2)
-						])
+					])
 				}
 			}
-			
-			//Add gesture recognizer for testing
-			addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tap(sender:))))
 		}
 	}
 	
+	
 	//MARK: Private properties
-	private let stackView = UIStackView()
-	private var topBottomConstraints: [NSLayoutConstraint]!
 	private var zoomLevel: CGFloat = 1 {
 		didSet {
 			let spacing = (zoomLevel - 1) * TABLE_CELL_HEIGHT
@@ -43,36 +43,13 @@ class RoundView: UIScrollView {
 		}
 	}
 	
-	override func awakeFromNib() {
-		translatesAutoresizingMaskIntoConstraints = false
-		backgroundColor = .lightGray
-		
-		stackView.translatesAutoresizingMaskIntoConstraints = false
-		stackView.axis = .vertical
-		addSubview(stackView)
-		
-		//Save these so that we can change them with the stack view spacing
-		topBottomConstraints = [
-			stackView.topAnchor.constraint(equalTo: topAnchor),
-			stackView.bottomAnchor.constraint(equalTo: bottomAnchor)
-		]
-		
-		NSLayoutConstraint.activate([
-			stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
-			stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
-			topBottomConstraints[0],
-			topBottomConstraints[1],
-			stackView.widthAnchor.constraint(equalTo: widthAnchor)
-		])
-	}
-	
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 	}
 	
 	//MARK: Listeners
 	
-	@objc func tap(sender: UIPanGestureRecognizer) {
+	@IBAction func tap(_ sender: UITapGestureRecognizer) {
 		if sender.state == .ended {
 			if sender.location(in: self).x > self.frame.width / 2 {
 				zoomLevel *= 2
