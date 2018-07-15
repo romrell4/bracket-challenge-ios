@@ -12,27 +12,6 @@ class RoundView: UIScrollView {
 	//MARK: Public properties
 	var matches = [MatchHelper]() {
 		didSet {
-			translatesAutoresizingMaskIntoConstraints = false
-			backgroundColor = .lightGray
-			
-			stackView.translatesAutoresizingMaskIntoConstraints = false
-			stackView.axis = .vertical
-			addSubview(stackView)
-			
-			//Save these so that we can change them with the stack view spacing
-			topBottomConstraints = [
-				stackView.topAnchor.constraint(equalTo: topAnchor),
-				stackView.bottomAnchor.constraint(equalTo: bottomAnchor)
-			]
-			
-			NSLayoutConstraint.activate([
-				stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
-				stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
-				topBottomConstraints[0],
-				topBottomConstraints[1],
-				stackView.widthAnchor.constraint(equalTo: widthAnchor)
-				])
-			
 			matches.forEach { match in
 				if let matchView = UINib(nibName: "MatchCollectionViewCell", bundle: nil).instantiate(withOwner: self, options: nil).first as? MatchCollectionViewCell {
 					matchView.match = match
@@ -64,8 +43,30 @@ class RoundView: UIScrollView {
 		}
 	}
 	
+	//TODO: Make this the awake from nib
 	init() {
 		super.init(frame: CGRect())
+		
+		translatesAutoresizingMaskIntoConstraints = false
+		backgroundColor = .lightGray
+		
+		stackView.translatesAutoresizingMaskIntoConstraints = false
+		stackView.axis = .vertical
+		addSubview(stackView)
+		
+		//Save these so that we can change them with the stack view spacing
+		topBottomConstraints = [
+			stackView.topAnchor.constraint(equalTo: topAnchor),
+			stackView.bottomAnchor.constraint(equalTo: bottomAnchor)
+		]
+		
+		NSLayoutConstraint.activate([
+			stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
+			stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
+			topBottomConstraints[0],
+			topBottomConstraints[1],
+			stackView.widthAnchor.constraint(equalTo: widthAnchor)
+		])
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
