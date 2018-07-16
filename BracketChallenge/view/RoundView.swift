@@ -32,10 +32,7 @@ class RoundView: UIScrollView {
 			}
 		}
 	}
-	
-	//MARK: Private properties
-	private var matchViews = [MatchView]()
-	private var zoomLevel: CGFloat = 1 {
+	var zoomLevel: CGFloat = 1 {
 		didSet {
 			let spacing = (zoomLevel - 1) * MATCH_CELL_HEIGHT
 			topBottomConstraints.forEach { $0.constant = spacing }
@@ -47,6 +44,9 @@ class RoundView: UIScrollView {
 			}
 		}
 	}
+	
+	//MARK: Private properties
+	private var matchViews = [MatchView]()
 	
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
