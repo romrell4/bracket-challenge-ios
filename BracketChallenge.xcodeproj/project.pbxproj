@@ -40,6 +40,8 @@
 		0C9FD7831F302098005174F4 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9FD7821F302098005174F4 /* Player.swift */; };
 		0CA1C09C20FC01F10072656B /* RoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA1C09B20FC01F10072656B /* RoundView.swift */; };
 		0CA1C09E20FC02B40072656B /* RoundView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CA1C09D20FC02B40072656B /* RoundView.xib */; };
+		0CA1C0A020FC13D70072656B /* MatchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CA1C09F20FC13D70072656B /* MatchView.xib */; };
+		0CA1C0A220FC13E20072656B /* MatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA1C0A120FC13E20072656B /* MatchView.swift */; };
 		0CA4DB291F3776E0005A3FDF /* MyBracketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA4DB281F3776E0005A3FDF /* MyBracketViewController.swift */; };
 		0CA4DB2B1F378756005A3FDF /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA4DB2A1F378756005A3FDF /* ResultsViewController.swift */; };
 		0CE187321F3F8D7D0069BEC6 /* BracketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE187311F3F8D7D0069BEC6 /* BracketViewController.swift */; };
@@ -86,6 +88,8 @@
 		0C9FD7821F302098005174F4 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		0CA1C09B20FC01F10072656B /* RoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundView.swift; sourceTree = "<group>"; };
 		0CA1C09D20FC02B40072656B /* RoundView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RoundView.xib; sourceTree = "<group>"; };
+		0CA1C09F20FC13D70072656B /* MatchView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MatchView.xib; sourceTree = "<group>"; };
+		0CA1C0A120FC13E20072656B /* MatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchView.swift; sourceTree = "<group>"; };
 		0CA4DB281F3776E0005A3FDF /* MyBracketViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyBracketViewController.swift; sourceTree = "<group>"; };
 		0CA4DB2A1F378756005A3FDF /* ResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
 		0CE187311F3F8D7D0069BEC6 /* BracketViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BracketViewController.swift; sourceTree = "<group>"; };
@@ -176,14 +180,16 @@
 				0C5085C01F2E357D00C4A04D /* Main.storyboard */,
 				0C9FD7791F2FE45F005174F4 /* TournamentTableViewCell.swift */,
 				0C9FD77C1F2FE498005174F4 /* TournamentTableViewCell.xib */,
+				0CA1C09B20FC01F10072656B /* RoundView.swift */,
+				0CA1C09D20FC02B40072656B /* RoundView.xib */,
+				0CA1C0A120FC13E20072656B /* MatchView.swift */,
+				0CA1C09F20FC13D70072656B /* MatchView.xib */,
 				0CE187331F3F93450069BEC6 /* MatchCollectionViewCell.swift */,
 				0CE187341F3F93450069BEC6 /* MatchCollectionViewCell.xib */,
 				0C49AB431F3554900074FAD0 /* MatchTableViewCell.swift */,
 				0CE187381F40B7210069BEC6 /* MatchTableViewCell.xib */,
 				0C8806B620338C05001D7EB9 /* TextFieldTableViewCell.swift */,
 				0C8806B82033C30C001D7EB9 /* DatePickerTableViewCell.swift */,
-				0CA1C09B20FC01F10072656B /* RoundView.swift */,
-				0CA1C09D20FC02B40072656B /* RoundView.xib */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -324,6 +330,7 @@
 				0CA1C09E20FC02B40072656B /* RoundView.xib in Resources */,
 				0C5085C81F2E357D00C4A04D /* LaunchScreen.storyboard in Resources */,
 				0C5085C71F2E357D00C4A04D /* Assets.xcassets in Resources */,
+				0CA1C0A020FC13D70072656B /* MatchView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -399,6 +406,7 @@
 				0C8806B32030F78E001D7EB9 /* CreateTournamentViewController.swift in Sources */,
 				0C5085CA1F2E357D00C4A04D /* AppDelegate.swift in Sources */,
 				0C15EB321F2EC30B00E6E4A5 /* Extensions.swift in Sources */,
+				0CA1C0A220FC13E20072656B /* MatchView.swift in Sources */,
 				0C42A0F81F311D7300BF26CE /* MatchHelper.swift in Sources */,
 				0C49AB481F36843C0074FAD0 /* Identity.swift in Sources */,
 				0C42A1011F33DE6000BF26CE /* TournamentTabBarViewController.swift in Sources */,

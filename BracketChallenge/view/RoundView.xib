@@ -19,9 +19,6 @@
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="AXU-8T-MIU">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <gestureRecognizers/>
-                    <connections>
-                        <outletCollection property="gestureRecognizers" destination="uAN-23-RHN" appends="YES" id="ivd-cI-5lR"/>
-                    </connections>
                 </stackView>
             </subviews>
             <gestureRecognizers/>
@@ -41,10 +38,5 @@
             </connections>
             <point key="canvasLocation" x="37.5" y="208.5"/>
         </scrollView>
-        <tapGestureRecognizer id="uAN-23-RHN">
-            <connections>
-                <action selector="tap:" destination="NQA-SI-bNi" id="D8Z-ug-LsE"/>
-            </connections>
-        </tapGestureRecognizer>
     </objects>
 </document>
