@@ -17,6 +17,7 @@ class RoundView: UIScrollView {
 	var matchDelegate: MatchViewDelegate!
 	var matches = [MatchHelper]() {
 		didSet {
+			matchViews.removeAll(keepingCapacity: true)
 			matches.forEach { match in
 				if let matchView = UINib(nibName: "MatchView", bundle: nil).instantiate(withOwner: self, options: nil).first as? MatchView {
 					matchView.delegate = matchDelegate
@@ -26,12 +27,14 @@ class RoundView: UIScrollView {
 					NSLayoutConstraint.activate([
 						matchView.heightAnchor.constraint(equalToConstant: MATCH_CELL_HEIGHT * 2)
 					])
+					matchViews.append(matchView)
 				}
 			}
 		}
 	}
 	
 	//MARK: Private properties
+	private var matchViews = [MatchView]()
 	private var zoomLevel: CGFloat = 1 {
 		didSet {
 			let spacing = (zoomLevel - 1) * MATCH_CELL_HEIGHT
@@ -47,5 +50,22 @@ class RoundView: UIScrollView {
 	
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
+	}
+	
+	//MARK: Public Functions
+	
+	static func fromNib() -> RoundView {
+		if let roundView = UINib(nibName: "RoundView", bundle: nil).instantiate(withOwner: nil).first as? RoundView {
+			return roundView
+		}
+		fatalError("Unable to create RoundView from nib")
+	}
+	
+	func index(of matchView: MatchView) -> Int? {
+		return matchViews.index(of: matchView)
+	}
+	
+	func reloadItems(at index: Int) {
+		matchViews[index].match = matches[index]
 	}
 }

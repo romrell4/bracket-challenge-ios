@@ -33,6 +33,7 @@ class MatchView: UIView, UITableViewDataSource, UITableViewDelegate {
 	var areCellsClickable = true
 	
 	override func awakeFromNib() {
+		tableView.isScrollEnabled = false
 		tableView.layer.borderColor = UIColor.bcGreen.cgColor
 		tableView.layer.borderWidth = 1
 		tableView.layer.cornerRadius = 8
