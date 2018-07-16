@@ -8,6 +8,8 @@
 
 import UIKit
 
+private let MATCH_VIEW_HEIGHT = MATCH_CELL_HEIGHT * 2
+
 class RoundView: UIScrollView {
 	//MARK: Outlets
 	@IBOutlet private weak var stackView: UIStackView!
@@ -25,7 +27,7 @@ class RoundView: UIScrollView {
 					stackView.addArrangedSubview(matchView)
 					
 					NSLayoutConstraint.activate([
-						matchView.heightAnchor.constraint(equalToConstant: MATCH_CELL_HEIGHT * 2)
+						matchView.heightAnchor.constraint(equalToConstant: MATCH_VIEW_HEIGHT)
 					])
 					matchViews.append(matchView)
 				}
@@ -34,8 +36,8 @@ class RoundView: UIScrollView {
 	}
 	var zoomLevel: CGFloat = 1 {
 		didSet {
-			let spacing = (zoomLevel - 1) * MATCH_CELL_HEIGHT
-			topBottomConstraints.forEach { $0.constant = spacing }
+			let spacing = (zoomLevel - 1) * MATCH_VIEW_HEIGHT
+			topBottomConstraints.forEach { $0.constant = spacing / 2 }
 			
 			UIView.animate(withDuration: 0.5) {
 				//TODO: Also animate scroll contentOffset so that the top stays the same
