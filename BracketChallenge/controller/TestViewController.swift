@@ -160,10 +160,31 @@ class TestViewController: UIViewController, UIScrollViewDelegate, RoundViewDeleg
 		}
 	}
 	
-	//MARK: MatchViewDelegate
+	//MARK: RoundViewDelegate
 	
 	func player(_ player: Player?, selectedIn roundView: RoundView, and matchView: MatchView) {
-		//TODO
+		guard let round = roundViews.index(of: roundView), let position = roundView.index(of: matchView) else { return }
+		
+		//Set the winner
+		bracket?.rounds?[round][position].winner = player
+		
+		//Reload the UI for this match
+		roundView.reloadItems(at: position)
+		
+		//Update the next round
+		let nextRound = round + 1
+		let newPosition = position / 2 //Integer division will automatically do a "floor"
+		if nextRound < roundViews.count {
+			let match = bracket?.rounds?[nextRound][newPosition]
+			if position % 2 == 0 {
+				match?.player1 = player
+			} else {
+				match?.player2 = player
+			}
+			
+			//Reload the UI for the next match
+			roundViews[nextRound].reloadItems(at: newPosition)
+		}
 	}
 	
 	//MARK: Listeners
@@ -194,9 +215,35 @@ class TestViewController: UIViewController, UIScrollViewDelegate, RoundViewDeleg
 		}
 	}
 	
+	@objc func updateBracket() {
+		if let bracket = bracket {
+			spinner.startAnimating()
+			BCClient.updateBracket(bracket: bracket, callback: { (bracket, error) in
+				self.spinner.stopAnimating()
+				if let bracket = bracket {
+					self.bracket = bracket
+					super.displayAlert(title: "Success", message: "Bracket successfully updated", alertHandler: nil)
+				} else {
+					super.displayAlert(error: error)
+				}
+			})
+		}
+	}
+	
+	//MARK: Public functions
+	
+	func areCellsClickable() -> Bool {
+		//Override if you want to stop users from selecting the rows
+		return true
+	}
+	
 	//MARK: Private functions
 	
 	private func loadUI() {
+		navigationItem.title = bracket?.name
+		tabBarController?.navigationItem.title = bracket?.name
+		scoreLabel.text = "Score: \(bracket?.score ?? 0)"
+		
 		//Only allow the UI to be loaded once
 		if roundViews.count == 0 {
 			bracket.rounds?.forEach {
