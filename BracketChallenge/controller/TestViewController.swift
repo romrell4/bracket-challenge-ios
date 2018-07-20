@@ -13,7 +13,7 @@ class TestViewController: UIViewController, UIScrollViewDelegate, MatchViewDeleg
 	private struct UI {
 		static let roundWidth: CGFloat = UIScreen.main.bounds.width * 0.8
 		static let minimumPanAmount = roundWidth / 4
-		static let animateDuration = 0.5
+		static let panDuration = 0.5
 	}
 	
 	//MARK: Outlets
@@ -138,9 +138,12 @@ class TestViewController: UIViewController, UIScrollViewDelegate, MatchViewDeleg
 	//MARK: UIScrollViewDelegate
 	
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {
-		//Keep all visible round views in sync
-		roundViews.filter { $0 != scrollView }.forEach {
-			$0.contentOffset = scrollView.contentOffset
+		//Only sync the views if the user initiated the scrolling (not if a programmatic change of the contentOffset is made)
+		if scrollView.isDragging || scrollView.isDecelerating {
+			//Keep all visible round views in sync
+			roundViews.filter { $0 != scrollView }.forEach {
+				$0.contentOffset = scrollView.contentOffset
+			}
 		}
 	}
 	
@@ -160,17 +163,18 @@ class TestViewController: UIViewController, UIScrollViewDelegate, MatchViewDeleg
 			let translation = recognizer.translation(in: stackView)
 			recognizer.view?.frame.origin.x = panOriginX + translation.x
 		case .ended:
-			//Animate the cells growing and/or shrinking
-			UIView.animate(withDuration: UI.animateDuration) {
-				//Check the distance moved to determine if we should switch pages
-				let translation = recognizer.translation(in: self.stackView).x
-				if translation <= -UI.minimumPanAmount && self.currentPage < self.roundViews.count - 1 {
-					//We're moving left (and there is another page to our right)
-					self.currentPage += 1
-				} else if translation >= UI.minimumPanAmount && self.currentPage > 0 {
-					//We're moving right (and there is another page to our left)
-					self.currentPage -= 1
-				}
+			//Check the distance moved to determine if we should switch pages
+			let translation = recognizer.translation(in: self.stackView).x
+			if translation <= -UI.minimumPanAmount && self.currentPage < self.roundViews.count - 1 {
+				//We're moving left (and there is another page to our right)
+				self.currentPage += 1
+			} else if translation >= UI.minimumPanAmount && self.currentPage > 0 {
+				//We're moving right (and there is another page to our left)
+				self.currentPage -= 1
+			}
+			
+			//Animate the rest of the paging
+			UIView.animate(withDuration: UI.panDuration) {
 				recognizer.view?.frame.origin.x = 0 - (UI.roundWidth * CGFloat(self.currentPage))
 			}
 		default: break

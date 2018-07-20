@@ -11,6 +11,10 @@ import UIKit
 private let MATCH_VIEW_HEIGHT = MATCH_CELL_HEIGHT * 2
 
 class RoundView: UIScrollView {
+	private struct UI {
+		static let cellAnimationDuration = 0.5
+	}
+	
 	//MARK: Outlets
 	@IBOutlet private weak var stackView: UIStackView!
 	@IBOutlet private var topBottomConstraints: [NSLayoutConstraint]!
@@ -40,28 +44,13 @@ class RoundView: UIScrollView {
 			let spacing = CGFloat(zoomLevel - 1) * MATCH_VIEW_HEIGHT
 			let currentScrollPercentage = contentSize.height != 0 ? contentOffset.y / contentSize.height: 0
 			let newHeight = CGFloat(matches.count) * (MATCH_VIEW_HEIGHT + spacing)
-			if matches.count == 8 {
-				print()
-				print("---BEFORE---")
-				print("Spacing \(spacing)")
-				print("Percentage \(contentOffset.y)/\(contentSize.height) (\(currentScrollPercentage))")
-				print("New Height \(newHeight)")
-			}
 			topBottomConstraints.forEach { $0.constant = spacing / 2 }
 			
-			UIView.animate(withDuration: 0.5, animations: {
+			UIView.animate(withDuration: UI.cellAnimationDuration) {
 				//Make the scroll percentage stay the same after the scroll
 				self.contentOffset.y = currentScrollPercentage * newHeight
 				self.stackView.spacing = spacing
 				self.setNeedsLayout()
-			}) { (_) in
-				if self.matches.count == 8 {
-					print("---AFTER---")
-					print("Spacing \(spacing)")
-					print("Percentage \(self.contentOffset.y)/\(self.contentSize.height) (\(currentScrollPercentage))")
-					print("New Height \(newHeight)")
-					print()
-				}
 			}
 		}
 	}
