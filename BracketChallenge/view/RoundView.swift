@@ -11,6 +11,7 @@ import UIKit
 private let MATCH_VIEW_HEIGHT = MATCH_CELL_HEIGHT * 2
 
 protocol RoundViewDelegate {
+	func areCellsClickable() -> Bool
 	func player(_ player: Player?, selectedIn roundView: RoundView, and matchView: MatchView)
 }
 
@@ -32,6 +33,7 @@ class RoundView: UIScrollView, MatchViewDelegate {
 				if let matchView = UINib(nibName: "MatchView", bundle: nil).instantiate(withOwner: self, options: nil).first as? MatchView {
 					matchView.delegate = self
 					matchView.match = match
+					matchView.areCellsClickable = roundDelegate.areCellsClickable()
 					stackView.addArrangedSubview(matchView)
 					
 					NSLayoutConstraint.activate([

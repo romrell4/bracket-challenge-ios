@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ResultsViewController: BracketViewController {
+class ResultsViewController: TestViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         //If the user is an admin, they can edit the results
