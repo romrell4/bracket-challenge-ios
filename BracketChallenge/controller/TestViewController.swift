@@ -151,12 +151,9 @@ class TestViewController: UIViewController, UIScrollViewDelegate, RoundViewDeleg
 	//MARK: UIScrollViewDelegate
 	
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {
-		//Only sync the views if the user initiated the scrolling (not if a programmatic change of the contentOffset is made)
-		if scrollView.isDragging || scrollView.isDecelerating {
-			//Keep all visible round views in sync
-			roundViews.filter { $0 != scrollView }.forEach {
-				$0.contentOffset = scrollView.contentOffset
-			}
+		//Keep all visible round views in sync
+		roundViews.filter { $0 != scrollView }.forEach {
+			$0.contentOffset = scrollView.contentOffset
 		}
 	}
 	

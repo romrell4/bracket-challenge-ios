@@ -50,11 +50,18 @@ class RoundView: UIScrollView, MatchViewDelegate {
 			let newHeight = CGFloat(matches.count) * (MATCH_VIEW_HEIGHT + spacing)
 			topBottomConstraints.forEach { $0.constant = spacing / 2 }
 			
-			UIView.animate(withDuration: UI.cellAnimationDuration) {
+			//Remove the delegate so that the scroll views don't try to sync during the animation
+			let oldDelegate = delegate
+			delegate = nil
+			UIView.animate(withDuration: UI.cellAnimationDuration, animations: {
 				//Make the scroll percentage stay the same after the scroll
 				self.contentOffset.y = currentScrollPercentage * newHeight
 				self.stackView.spacing = spacing
 				self.setNeedsLayout()
+			}) { (_) in
+				//Reset the delegate and manually trigger the scroll view syncing
+				self.delegate = oldDelegate
+				self.delegate?.scrollViewDidScroll?(self)
 			}
 		}
 	}
