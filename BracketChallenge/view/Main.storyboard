@@ -415,7 +415,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="x7M-cH-psZ" kind="relationship" relationship="rootViewController" id="cbM-Rv-CIF"/>
+                        <segue destination="UgA-uW-BZz" kind="relationship" relationship="rootViewController" id="jQg-cm-Gme"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eUo-EB-PgN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -486,7 +486,6 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="84k-ko-gY3"/>
                                     <constraint firstItem="ZIq-UM-yRY" firstAttribute="centerY" secondItem="xw7-YA-t3H" secondAttribute="centerY" id="HhN-9q-nCY"/>
@@ -496,10 +495,17 @@
                                     <constraint firstItem="ZIq-UM-yRY" firstAttribute="centerX" secondItem="xw7-YA-t3H" secondAttribute="centerX" priority="250" id="coC-UL-Joy"/>
                                 </constraints>
                             </view>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OTN-sc-1eu">
-                                <rect key="frame" x="0.0" y="96" width="375" height="522"/>
-                            </scrollView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="26Y-s0-osM">
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GQC-Tp-UDX">
+                                <rect key="frame" x="0.0" y="96" width="375" height="571"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="375" id="DJq-JO-BjV"/>
+                                </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="UhH-ik-I6T" appends="YES" id="xMy-0l-sih"/>
+                                </connections>
+                            </stackView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="26Y-s0-osM">
                                 <rect key="frame" x="169" y="315" width="37" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="color" red="0.0" green="0.50980392159999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -507,19 +513,29 @@
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="OTN-sc-1eu" firstAttribute="top" secondItem="xw7-YA-t3H" secondAttribute="bottom" id="4ts-PD-Ix6"/>
                             <constraint firstAttribute="trailing" secondItem="xw7-YA-t3H" secondAttribute="trailing" id="5rr-VB-q3t"/>
-                            <constraint firstItem="mJY-bY-uBr" firstAttribute="top" secondItem="OTN-sc-1eu" secondAttribute="bottom" id="GI2-jM-9gh"/>
-                            <constraint firstAttribute="trailing" secondItem="OTN-sc-1eu" secondAttribute="trailing" id="GwP-Pp-H6t"/>
-                            <constraint firstItem="OTN-sc-1eu" firstAttribute="leading" secondItem="nxj-Mb-59S" secondAttribute="leading" id="LOq-f1-cHq"/>
+                            <constraint firstItem="GQC-Tp-UDX" firstAttribute="leading" secondItem="nxj-Mb-59S" secondAttribute="leading" id="IUT-x8-xJr"/>
                             <constraint firstItem="xw7-YA-t3H" firstAttribute="top" secondItem="wh3-lz-1oQ" secondAttribute="bottom" id="PIz-Rx-jkf"/>
                             <constraint firstItem="xw7-YA-t3H" firstAttribute="leading" secondItem="nxj-Mb-59S" secondAttribute="leading" id="RMF-aO-Em3"/>
+                            <constraint firstItem="GQC-Tp-UDX" firstAttribute="top" secondItem="xw7-YA-t3H" secondAttribute="bottom" id="oX6-h0-VxD"/>
+                            <constraint firstItem="mJY-bY-uBr" firstAttribute="top" secondItem="GQC-Tp-UDX" secondAttribute="bottom" id="pk0-Jz-6qV"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="sTy-2h-1bx"/>
                     <navigationItem key="navigationItem" id="hZv-IZ-D8J"/>
+                    <connections>
+                        <outlet property="pageControl" destination="ZIq-UM-yRY" id="LTX-yf-Bvf"/>
+                        <outlet property="scoreLabel" destination="yVJ-ub-AZ0" id="ZKP-Q1-zae"/>
+                        <outlet property="stackView" destination="GQC-Tp-UDX" id="tPf-Ia-eDm"/>
+                        <outlet property="stackViewWidthConstraint" destination="DJq-JO-BjV" id="Ptz-GP-Cpu"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V68-Y4-Ngx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="UhH-ik-I6T">
+                    <connections>
+                        <action selector="panGestureHandler:" destination="UgA-uW-BZz" id="pkL-BH-jiO"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1144.8" y="882.90854572713647"/>
         </scene>
@@ -540,24 +556,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bf0-Yn-AnS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2893.5999999999999" y="801.0494752623689"/>
-        </scene>
-        <!--Tab Bar Controller-->
-        <scene sceneID="nyF-wf-x5t">
-            <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="x7M-cH-psZ" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationItem key="navigationItem" id="Rxo-Tb-crb"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="X5B-IS-GM5">
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="UgA-uW-BZz" kind="relationship" relationship="viewControllers" id="NIQ-HN-mTs"/>
-                    </connections>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fgj-7X-hAk" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="372" y="883"/>
         </scene>
     </scenes>
     <resources>

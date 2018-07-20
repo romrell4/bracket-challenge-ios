@@ -34,15 +34,34 @@ class RoundView: UIScrollView {
 			}
 		}
 	}
-	var zoomLevel: CGFloat = 1 {
+
+	var zoomLevel: Int = 1 {
 		didSet {
-			let spacing = (zoomLevel - 1) * MATCH_VIEW_HEIGHT
+			let spacing = CGFloat(zoomLevel - 1) * MATCH_VIEW_HEIGHT
+			let currentScrollPercentage = contentSize.height != 0 ? contentOffset.y / contentSize.height: 0
+			let newHeight = CGFloat(matches.count) * (MATCH_VIEW_HEIGHT + spacing)
+			if matches.count == 8 {
+				print()
+				print("---BEFORE---")
+				print("Spacing \(spacing)")
+				print("Percentage \(contentOffset.y)/\(contentSize.height) (\(currentScrollPercentage))")
+				print("New Height \(newHeight)")
+			}
 			topBottomConstraints.forEach { $0.constant = spacing / 2 }
 			
-			UIView.animate(withDuration: 0.5) {
-				//TODO: Also animate scroll contentOffset so that the top stays the same
+			UIView.animate(withDuration: 0.5, animations: {
+				//Make the scroll percentage stay the same after the scroll
+				self.contentOffset.y = currentScrollPercentage * newHeight
 				self.stackView.spacing = spacing
 				self.setNeedsLayout()
+			}) { (_) in
+				if self.matches.count == 8 {
+					print("---AFTER---")
+					print("Spacing \(spacing)")
+					print("Percentage \(self.contentOffset.y)/\(self.contentSize.height) (\(currentScrollPercentage))")
+					print("New Height \(newHeight)")
+					print()
+				}
 			}
 		}
 	}
