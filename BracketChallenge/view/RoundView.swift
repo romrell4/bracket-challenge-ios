@@ -10,7 +10,11 @@ import UIKit
 
 private let MATCH_VIEW_HEIGHT = MATCH_CELL_HEIGHT * 2
 
-class RoundView: UIScrollView {
+protocol RoundViewDelegate {
+	func player(_ player: Player?, selectedIn roundView: RoundView, and matchView: MatchView)
+}
+
+class RoundView: UIScrollView, MatchViewDelegate {
 	private struct UI {
 		static let cellAnimationDuration = 0.5
 	}
@@ -20,13 +24,13 @@ class RoundView: UIScrollView {
 	@IBOutlet private var topBottomConstraints: [NSLayoutConstraint]!
 	
 	//MARK: Public properties
-	var matchDelegate: MatchViewDelegate!
+	var roundDelegate: RoundViewDelegate!
 	var matches = [MatchHelper]() {
 		didSet {
 			matchViews.removeAll(keepingCapacity: true)
 			matches.forEach { match in
 				if let matchView = UINib(nibName: "MatchView", bundle: nil).instantiate(withOwner: self, options: nil).first as? MatchView {
-					matchView.delegate = matchDelegate
+					matchView.delegate = self
 					matchView.match = match
 					stackView.addArrangedSubview(matchView)
 					
@@ -77,5 +81,11 @@ class RoundView: UIScrollView {
 	
 	func reloadItems(at index: Int) {
 		matchViews[index].match = matches[index]
+	}
+	
+	//MARK: MatchViewDelegate
+	
+	func player(_ player: Player?, selectedInView view: MatchView) {
+		roundDelegate.player(player, selectedIn: self, and: view)
 	}
 }

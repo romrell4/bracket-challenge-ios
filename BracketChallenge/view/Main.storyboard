@@ -526,6 +526,7 @@
                     <connections>
                         <outlet property="pageControl" destination="ZIq-UM-yRY" id="LTX-yf-Bvf"/>
                         <outlet property="scoreLabel" destination="yVJ-ub-AZ0" id="ZKP-Q1-zae"/>
+                        <outlet property="spinner" destination="26Y-s0-osM" id="7aI-Xz-veG"/>
                         <outlet property="stackView" destination="GQC-Tp-UDX" id="tPf-Ia-eDm"/>
                         <outlet property="stackViewWidthConstraint" destination="DJq-JO-BjV" id="Ptz-GP-Cpu"/>
                     </connections>

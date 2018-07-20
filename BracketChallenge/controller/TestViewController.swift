@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TestViewController: UIViewController, UIScrollViewDelegate, MatchViewDelegate {
+class TestViewController: UIViewController, UIScrollViewDelegate, RoundViewDelegate {
 	
 	private struct UI {
 		static let roundWidth: CGFloat = UIScreen.main.bounds.width * 0.8
@@ -16,13 +16,11 @@ class TestViewController: UIViewController, UIScrollViewDelegate, MatchViewDeleg
 		static let panDuration = 0.5
 	}
 	
-	//MARK: Outlets
-	@IBOutlet private weak var pageControl: UIPageControl!
-	@IBOutlet private weak var scoreLabel: UILabel!
-	@IBOutlet private weak var stackView: UIStackView!
-	@IBOutlet private weak var stackViewWidthConstraint: NSLayoutConstraint!
+	//MARK: Public Outlets
+	@IBOutlet weak var spinner: UIActivityIndicatorView!
 	
 	//MARK: Public properties
+	var tournament: Tournament!
 	var bracket: Bracket! {
 		didSet {
 			//Sometimes, this will be set before viewDidLoad is called. If that is the case, wait for the viewDidLoad to load the UI
@@ -32,14 +30,20 @@ class TestViewController: UIViewController, UIScrollViewDelegate, MatchViewDeleg
 		}
 	}
 	
+	//MARK: Private Outlets
+	@IBOutlet private weak var pageControl: UIPageControl!
+	@IBOutlet private weak var scoreLabel: UILabel!
+	@IBOutlet private weak var stackView: UIStackView!
+	@IBOutlet private weak var stackViewWidthConstraint: NSLayoutConstraint!
+	
 	//MARK: Private properties
-	private var panOriginX: CGFloat = 0
+	private var panOriginX: CGFloat = 0 //TODO: Can you do this natively?
 	private var roundViews = [RoundView]()
 	private var currentPage = 0 {
 		didSet {
 			if currentPage == 0 {
 				roundViews.enumerated().forEach { (index, roundView) in
-					roundView.zoomLevel = Int(pow(2.0, Double(index)))
+					roundView.zoomLevel = Int(pow(2.0, Double(index))) //TODO: Can this be combined with the one below?
 				}
 			} else {
 				roundViews.enumerated().forEach { (index, roundView) in
@@ -129,10 +133,19 @@ class TestViewController: UIViewController, UIScrollViewDelegate, MatchViewDeleg
 			[
 				MatchHelper(round: 6, position: 1, player1Id: 1, player1Name: "Player 1", player2Id: 33, player2Name: "Player 33", winnerId: 1)
 			]
-		])
+			])
+		
+		//If the bracket was set before this was called, load the bracket UI now
 		if bracket != nil {
 			loadUI()
 		}
+	}
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		
+		//When this tab is selectd, reset the title to the bracket name
+		tabBarController?.title = bracket?.name
 	}
 	
 	//MARK: UIScrollViewDelegate
@@ -149,8 +162,8 @@ class TestViewController: UIViewController, UIScrollViewDelegate, MatchViewDeleg
 	
 	//MARK: MatchViewDelegate
 	
-	func player(_ player: Player?, selectedInView view: MatchView) {
-		print("Selected \(player?.name ?? "nobody")")
+	func player(_ player: Player?, selectedIn roundView: RoundView, and matchView: MatchView) {
+		//TODO
 	}
 	
 	//MARK: Listeners
@@ -189,7 +202,7 @@ class TestViewController: UIViewController, UIScrollViewDelegate, MatchViewDeleg
 			bracket.rounds?.forEach {
 				let roundView = RoundView.fromNib()
 				roundView.translatesAutoresizingMaskIntoConstraints = false
-				roundView.matchDelegate = self
+				roundView.roundDelegate = self
 				roundView.delegate = self
 				roundView.matches = $0
 				roundViews.append(roundView)
