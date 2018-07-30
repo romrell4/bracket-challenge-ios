@@ -41,14 +41,8 @@ class TestViewController: UIViewController, UIScrollViewDelegate, RoundViewDeleg
 	private var roundViews = [RoundView]()
 	private var currentPage = 0 {
 		didSet {
-			if currentPage == 0 {
-				roundViews.enumerated().forEach { (index, roundView) in
-					roundView.zoomLevel = Int(pow(2.0, Double(index))) //TODO: Can this be combined with the one below?
-				}
-			} else {
-				roundViews.enumerated().forEach { (index, roundView) in
-					roundView.zoomLevel = Int(pow(2.0, Double(index - currentPage + 1)))
-				}
+			roundViews.enumerated().forEach { (index, roundView) in
+				roundView.zoomLevel = Int(pow(2.0, Double(currentPage == 0 ? index : index - currentPage + 1)))
 			}
 			pageControl.currentPage = currentPage
 		}
