@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ResultsViewController: BracketViewController {
+class ResultsViewController: BracketViewController2 {
     
     override func viewDidAppear(_ animated: Bool) {
         //If the user is an admin, they can edit the results
@@ -20,11 +20,6 @@ class ResultsViewController: BracketViewController {
     override func viewDidDisappear(_ animated: Bool) {
         tabBarController?.navigationItem.rightBarButtonItem = nil
     }
-    
-    //Listeners
-    
-    override func areCellsClickable() -> Bool {
-        //Results are only editable by admins
-        return Identity.user.admin
-    }
+	
+	//TODO: areCellsClickable
 }
