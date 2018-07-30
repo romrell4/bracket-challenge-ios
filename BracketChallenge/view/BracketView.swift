@@ -15,10 +15,10 @@ class BracketView: UIView, UIScrollViewDelegate, RoundViewDelegate {
 		static let panDuration = 0.5
 	}
 	
-	//Public outlets
+	//MARK: Public outlets
 	@IBOutlet weak var spinner: UIActivityIndicatorView!
 	
-	//Private outlets
+	//MARK: Private outlets
 	@IBOutlet private weak var pageControl: UIPageControl!
 	@IBOutlet private weak var scoreLabel: UILabel!
 	@IBOutlet private weak var stackView: UIStackView!
@@ -98,7 +98,7 @@ class BracketView: UIView, UIScrollViewDelegate, RoundViewDelegate {
 		}
 	}
 	
-	//MARK: Listerners
+	//MARK: Listeners
 	
 	@IBAction func panGestureHandler(_ recognizer: UIPanGestureRecognizer) {
 		switch recognizer.state {
