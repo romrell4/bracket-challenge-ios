@@ -145,7 +145,7 @@ class BracketView: UIView, UIScrollViewDelegate, RoundViewDelegate {
 				
 				NSLayoutConstraint.activate([
 					roundView.widthAnchor.constraint(equalToConstant: UI.roundWidth)
-					])
+				])
 			}
 			
 			//Allow the stack view enough space to see everything
