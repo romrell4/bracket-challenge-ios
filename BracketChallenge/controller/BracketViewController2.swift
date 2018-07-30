@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TestViewController: UIViewController, UIScrollViewDelegate, RoundViewDelegate {
+class BracketViewController2: UIViewController, UIScrollViewDelegate, RoundViewDelegate {
 	
 	private struct UI {
 		static let roundWidth: CGFloat = UIScreen.main.bounds.width * 0.8
