@@ -37,7 +37,6 @@ class TestViewController: UIViewController, UIScrollViewDelegate, RoundViewDeleg
 	@IBOutlet private weak var stackViewWidthConstraint: NSLayoutConstraint!
 	
 	//MARK: Private properties
-	private var panOriginX: CGFloat = 0 //TODO: Can you do this natively?
 	private var roundViews = [RoundView]()
 	private var currentPage = 0 {
 		didSet {
@@ -107,6 +106,7 @@ class TestViewController: UIViewController, UIScrollViewDelegate, RoundViewDeleg
 	
 	//MARK: Listeners
 	
+	private var panOriginX: CGFloat = 0 //TODO: Can you do this natively?
 	@IBAction func panGestureHandler(_ recognizer: UIPanGestureRecognizer) {
 		switch recognizer.state {
 		case .began:

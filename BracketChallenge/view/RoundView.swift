@@ -45,35 +45,37 @@ class RoundView: UIScrollView, MatchViewDelegate {
 		}
 	}
 
-	var zoomLevel: Int = 1 {
+	var zoomLevel: Int! {
 		didSet {
 			let spacing = CGFloat(zoomLevel - 1) * MATCH_VIEW_HEIGHT
-			let currentScrollPercentage = contentSize.height != 0 ? contentOffset.y / contentSize.height: 0
+			let currentScrollPercentage = contentSize.height != 0 ? contentOffset.y / contentSize.height : 0
 			let newHeight = CGFloat(matches.count) * (MATCH_VIEW_HEIGHT + spacing)
+
 			topBottomConstraints.forEach { $0.constant = spacing / 2 }
-			
-			//Remove the delegate so that the scroll views don't try to sync during the animation
-			let oldDelegate = delegate
-			delegate = nil
-			UIView.animate(withDuration: UI.cellAnimationDuration, animations: {
-				//Make the scroll percentage stay the same after the scroll
-				self.contentOffset.y = currentScrollPercentage * newHeight
-				self.stackView.spacing = spacing
-				self.setNeedsLayout()
-			}) { (_) in
-				//Reset the delegate and manually trigger the scroll view syncing
-				self.delegate = oldDelegate
-				self.delegate?.scrollViewDidScroll?(self)
+
+			if oldValue == nil {
+				//If this is the first time, don't animate
+				stackView.spacing = spacing
+			} else {
+				//Remove the delegate so that the scroll views don't try to sync during the animation
+				let oldDelegate = delegate
+				delegate = nil
+				UIView.animate(withDuration: UI.cellAnimationDuration, animations: {
+					//Make the scroll percentage stay the same after the scroll
+					self.contentOffset.y = currentScrollPercentage * newHeight
+					self.stackView.spacing = spacing
+					self.setNeedsLayout()
+				}) { (_) in
+					//Reset the delegate and manually trigger the scroll view syncing
+					self.delegate = oldDelegate
+					self.delegate?.scrollViewDidScroll?(self)
+				}
 			}
 		}
 	}
 	
 	//MARK: Private properties
 	private var matchViews = [MatchView]()
-	
-	required init?(coder aDecoder: NSCoder) {
-		super.init(coder: aDecoder)
-	}
 	
 	//MARK: Public Functions
 	
