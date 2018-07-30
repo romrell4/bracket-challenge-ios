@@ -106,14 +106,14 @@ class TestViewController: UIViewController, UIScrollViewDelegate, RoundViewDeleg
 	
 	//MARK: Listeners
 	
-	private var panOriginX: CGFloat = 0 //TODO: Can you do this natively?
 	@IBAction func panGestureHandler(_ recognizer: UIPanGestureRecognizer) {
 		switch recognizer.state {
 		case .began:
-			panOriginX = recognizer.view?.frame.origin.x ?? 0
+			//Save the original position as the tag (so that you can base the translation off of it)
+			recognizer.view?.tag = Int(recognizer.view?.frame.origin.x ?? 0)
 		case .changed:
 			let translation = recognizer.translation(in: stackView)
-			recognizer.view?.frame.origin.x = panOriginX + translation.x
+			recognizer.view?.frame.origin.x = CGFloat(recognizer.view?.tag ?? 0) + translation.x
 		case .ended:
 			//Check the distance moved to determine if we should switch pages
 			let translation = recognizer.translation(in: self.stackView).x
