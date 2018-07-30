@@ -440,10 +440,10 @@
             </objects>
             <point key="canvasLocation" x="1956.8" y="-646.77661169415296"/>
         </scene>
-        <!--Test-->
+        <!--Results-->
         <scene sceneID="yBq-Al-YIc">
             <objects>
-                <viewController title="Test" id="UgA-uW-BZz" customClass="ResultsViewController" customModule="BracketChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Results" id="UgA-uW-BZz" customClass="ResultsViewController" customModule="BracketChallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="wh3-lz-1oQ"/>
                         <viewControllerLayoutGuide type="bottom" id="mJY-bY-uBr"/>
