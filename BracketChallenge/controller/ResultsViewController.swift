@@ -21,5 +21,7 @@ class ResultsViewController: BracketViewController2 {
         tabBarController?.navigationItem.rightBarButtonItem = nil
     }
 	
-	//TODO: areCellsClickable
+	override func areCellsClickable() -> Bool {
+		return Identity.user.admin
+	}
 }

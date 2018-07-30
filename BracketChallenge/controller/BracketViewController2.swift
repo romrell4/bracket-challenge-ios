@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BracketViewController2: UIViewController {
+class BracketViewController2: UIViewController, MatchViewClickableDelegate {
 	
 	//MARK: Public properties
 	var tournament: Tournament!
@@ -16,7 +16,7 @@ class BracketViewController2: UIViewController {
 		didSet {
 			//Sometimes, this will be set before viewDidLoad is called. If that is the case, wait for the viewDidLoad to load the UI
 			if isViewLoaded {
-				bracketView = BracketView.initAsSubview(in: view, tournament: tournament, bracket: bracket)
+				bracketView = BracketView.initAsSubview(in: view, clickDelegate: self, tournament: tournament, bracket: bracket)
 			}
 		}
 	}
@@ -29,7 +29,7 @@ class BracketViewController2: UIViewController {
 		
 		//If the bracket was set before this was called, load the bracket UI now
 		if let bracket = bracket {
-			bracketView = BracketView.initAsSubview(in: view, tournament: tournament, bracket: bracket)
+			bracketView = BracketView.initAsSubview(in: view, clickDelegate: self, tournament: tournament, bracket: bracket)
 		}
 	}
 	
@@ -55,5 +55,12 @@ class BracketViewController2: UIViewController {
 				}
 			})
 		}
+	}
+	
+	//MARK: MatchViewClickableDelegate
+	
+	func areCellsClickable() -> Bool {
+		//Override if you want to stop users from selecting the rows
+		return true
 	}
 }

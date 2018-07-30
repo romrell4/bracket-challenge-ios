@@ -11,7 +11,6 @@ import UIKit
 private let MATCH_VIEW_HEIGHT = MATCH_CELL_HEIGHT * 2
 
 protocol RoundViewDelegate {
-	func areCellsClickable() -> Bool
 	func player(_ player: Player?, selectedIn roundView: RoundView, and matchView: MatchView)
 }
 
@@ -25,26 +24,6 @@ class RoundView: UIScrollView, MatchViewDelegate {
 	@IBOutlet private var topBottomConstraints: [NSLayoutConstraint]!
 	
 	//MARK: Public properties
-	var roundDelegate: RoundViewDelegate!
-	var matches = [MatchHelper]() {
-		didSet {
-			matchViews.removeAll(keepingCapacity: true)
-			matches.forEach { match in
-				if let matchView = UINib(nibName: "MatchView", bundle: nil).instantiate(withOwner: self, options: nil).first as? MatchView {
-					matchView.delegate = self
-					matchView.match = match
-					matchView.areCellsClickable = roundDelegate.areCellsClickable()
-					stackView.addArrangedSubview(matchView)
-					
-					NSLayoutConstraint.activate([
-						matchView.heightAnchor.constraint(equalToConstant: MATCH_VIEW_HEIGHT)
-					])
-					matchViews.append(matchView)
-				}
-			}
-		}
-	}
-
 	var zoomLevel: Int! {
 		didSet {
 			let spacing = CGFloat(zoomLevel - 1) * MATCH_VIEW_HEIGHT
@@ -75,15 +54,33 @@ class RoundView: UIScrollView, MatchViewDelegate {
 	}
 	
 	//MARK: Private properties
+	private var roundDelegate: RoundViewDelegate!
+	private var clickDelegate: MatchViewClickableDelegate!
+	private var matches = [MatchHelper]() {
+		didSet {
+			matchViews.removeAll(keepingCapacity: true)
+			matches.forEach { match in
+				let matchView = MatchView.initWith(delegate: self, clickDelegate: clickDelegate, match: match)
+				stackView.addArrangedSubview(matchView)
+				
+				NSLayoutConstraint.activate([
+					matchView.heightAnchor.constraint(equalToConstant: MATCH_VIEW_HEIGHT)
+					])
+				matchViews.append(matchView)
+			}
+		}
+	}
 	private var matchViews = [MatchView]()
 	
 	//MARK: Public Functions
 	
-	static func fromNib() -> RoundView {
-		if let roundView = UINib(nibName: "RoundView", bundle: nil).instantiate(withOwner: nil).first as? RoundView {
-			return roundView
-		}
-		fatalError("Unable to create RoundView from nib")
+	static func initWith(scrollDelegate: UIScrollViewDelegate, roundDelegate: RoundViewDelegate, clickDelegate: MatchViewClickableDelegate, matches: [MatchHelper]) -> RoundView {
+		let roundView = UINib(nibName: "RoundView", bundle: nil).instantiate(withOwner: nil).first as! RoundView
+		roundView.delegate = scrollDelegate
+		roundView.roundDelegate = roundDelegate
+		roundView.clickDelegate = clickDelegate
+		roundView.matches = matches
+		return roundView
 	}
 	
 	func index(of matchView: MatchView) -> Int? {

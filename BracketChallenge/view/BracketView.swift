@@ -31,6 +31,7 @@ class BracketView: UIView, UIScrollViewDelegate, RoundViewDelegate {
 			loadUI()
 		}
 	}
+	private var clickDelegate: MatchViewClickableDelegate!
 	private var roundViews = [RoundView]()
 	private var currentPage = 0 {
 		didSet {
@@ -41,7 +42,7 @@ class BracketView: UIView, UIScrollViewDelegate, RoundViewDelegate {
 		}
 	}
 	
-	static func initAsSubview(in superview: UIView, tournament: Tournament, bracket: Bracket) -> BracketView {
+	static func initAsSubview(in superview: UIView, clickDelegate: MatchViewClickableDelegate, tournament: Tournament, bracket: Bracket) -> BracketView {
 		let bracketView = UINib(nibName: "BracketView", bundle: nil).instantiate(withOwner: nil).first as! BracketView
 		bracketView.translatesAutoresizingMaskIntoConstraints = false
 		superview.addSubview(bracketView)
@@ -51,6 +52,8 @@ class BracketView: UIView, UIScrollViewDelegate, RoundViewDelegate {
 			bracketView.topAnchor.constraint(equalTo: superview.topAnchor),
 			bracketView.bottomAnchor.constraint(equalTo: superview.bottomAnchor)
 		])
+		//Set this first so that the variable is saved when the bracket loads all it's matches (didSet)
+		bracketView.clickDelegate = clickDelegate
 		bracketView.tournament = tournament
 		bracketView.bracket = bracket
 		bracketView.loadUI()
@@ -67,11 +70,6 @@ class BracketView: UIView, UIScrollViewDelegate, RoundViewDelegate {
 	}
 	
 	//MARK: RoundViewDelegate
-	
-	func areCellsClickable() -> Bool {
-		//Override if you want to stop users from selecting the rows
-		return true
-	}
 	
 	func player(_ player: Player?, selectedIn roundView: RoundView, and matchView: MatchView) {
 		guard let round = roundViews.index(of: roundView), let position = roundView.index(of: matchView) else { return }
@@ -135,11 +133,8 @@ class BracketView: UIView, UIScrollViewDelegate, RoundViewDelegate {
 		//Only allow the UI to be loaded once
 		if roundViews.count == 0 {
 			bracket.rounds?.forEach {
-				let roundView = RoundView.fromNib()
+				let roundView = RoundView.initWith(scrollDelegate: self, roundDelegate: self, clickDelegate: clickDelegate, matches: $0)
 				roundView.translatesAutoresizingMaskIntoConstraints = false
-				roundView.roundDelegate = self
-				roundView.delegate = self
-				roundView.matches = $0
 				roundViews.append(roundView)
 				stackView.addArrangedSubview(roundView)
 				

@@ -10,27 +10,41 @@ import UIKit
 
 let MATCH_CELL_HEIGHT: CGFloat = 44
 
+protocol MatchViewClickableDelegate {
+	func areCellsClickable() -> Bool
+}
+
 protocol MatchViewDelegate {
 	func player(_ player: Player?, selectedInView view: MatchView)
 }
 
 class MatchView: UIView, UITableViewDataSource, UITableViewDelegate {
-	//Outlets
+	//MARK: Outlets
 	@IBOutlet private weak var tableView: UITableView!
 	
-	//Public Properties
+	//MARK: Public properties
 	var match: MatchHelper? {
 		didSet {
 			tableView.reloadData()
 		}
 	}
-	var masterMatch: MatchHelper? {
+	
+	//MARK: Private properties
+	private var masterMatch: MatchHelper? {
 		didSet {
 			tableView.reloadData()
 		}
 	}
-	var delegate: MatchViewDelegate?
-	var areCellsClickable = true
+	private var delegate: MatchViewDelegate!
+	private var clickDelegate: MatchViewClickableDelegate!
+	
+	static func initWith(delegate: MatchViewDelegate, clickDelegate: MatchViewClickableDelegate, match: MatchHelper) -> MatchView {
+		let matchView = UINib(nibName: "MatchView", bundle: nil).instantiate(withOwner: self, options: nil).first as! MatchView
+		matchView.delegate = delegate
+		matchView.clickDelegate = clickDelegate
+		matchView.match = match
+		return matchView
+	}
 	
 	override func awakeFromNib() {
 		tableView.isScrollEnabled = false
@@ -71,7 +85,7 @@ class MatchView: UIView, UITableViewDataSource, UITableViewDelegate {
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		if areCellsClickable {
+		if clickDelegate.areCellsClickable() {
 			let otherIndexPath = IndexPath(row: indexPath.row == 0 ? 1 : 0, section: indexPath.section)
 			if let cell = tableView.cellForRow(at: indexPath) as? MatchTableViewCell, let otherCell = tableView.cellForRow(at: otherIndexPath) as? MatchTableViewCell {
 				if cell.checked {

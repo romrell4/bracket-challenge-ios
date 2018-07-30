@@ -184,6 +184,8 @@
 				0C5085C01F2E357D00C4A04D /* Main.storyboard */,
 				0C9FD7791F2FE45F005174F4 /* TournamentTableViewCell.swift */,
 				0C9FD77C1F2FE498005174F4 /* TournamentTableViewCell.xib */,
+				0CE3A1F2210EBDC10099B1D3 /* BracketView.swift */,
+				0CE3A1F0210EBDB70099B1D3 /* BracketView.xib */,
 				0CA1C09B20FC01F10072656B /* RoundView.swift */,
 				0CA1C09D20FC02B40072656B /* RoundView.xib */,
 				0CA1C0A120FC13E20072656B /* MatchView.swift */,
@@ -194,8 +196,6 @@
 				0CE187381F40B7210069BEC6 /* MatchTableViewCell.xib */,
 				0C8806B620338C05001D7EB9 /* TextFieldTableViewCell.swift */,
 				0C8806B82033C30C001D7EB9 /* DatePickerTableViewCell.swift */,
-				0CE3A1F2210EBDC10099B1D3 /* BracketView.swift */,
-				0CE3A1F0210EBDB70099B1D3 /* BracketView.xib */,
 			);
 			path = view;
 			sourceTree = "<group>";
