@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -451,73 +450,11 @@
                     <view key="view" contentMode="scaleToFill" id="nxj-Mb-59S">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xw7-YA-t3H">
-                                <rect key="frame" x="0.0" y="64" width="375" height="32"/>
-                                <subviews>
-                                    <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="ZIq-UM-yRY">
-                                        <rect key="frame" x="168" y="-2" width="39" height="37"/>
-                                        <color key="pageIndicatorTintColor" red="0.0" green="0.50980392156862742" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <color key="currentPageIndicatorTintColor" red="0.97254901959999995" green="1" blue="0.20392156859999999" alpha="1" colorSpace="calibratedRGB"/>
-                                    </pageControl>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score: 100" textAlignment="natural" lineBreakMode="headTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yVJ-ub-AZ0">
-                                        <rect key="frame" x="280" y="5" width="87" height="22"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="32" id="84k-ko-gY3"/>
-                                    <constraint firstItem="ZIq-UM-yRY" firstAttribute="centerY" secondItem="xw7-YA-t3H" secondAttribute="centerY" id="HhN-9q-nCY"/>
-                                    <constraint firstItem="yVJ-ub-AZ0" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ZIq-UM-yRY" secondAttribute="trailing" constant="8" id="YQA-Nw-ntn"/>
-                                    <constraint firstItem="yVJ-ub-AZ0" firstAttribute="centerY" secondItem="xw7-YA-t3H" secondAttribute="centerY" id="af9-mc-cgB"/>
-                                    <constraint firstItem="yVJ-ub-AZ0" firstAttribute="trailing" secondItem="xw7-YA-t3H" secondAttribute="trailingMargin" id="bOC-ZU-ut5"/>
-                                    <constraint firstItem="ZIq-UM-yRY" firstAttribute="centerX" secondItem="xw7-YA-t3H" secondAttribute="centerX" priority="250" id="coC-UL-Joy"/>
-                                </constraints>
-                            </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GQC-Tp-UDX">
-                                <rect key="frame" x="0.0" y="96" width="375" height="522"/>
-                                <gestureRecognizers/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="375" id="DJq-JO-BjV"/>
-                                </constraints>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="UhH-ik-I6T" appends="YES" id="xMy-0l-sih"/>
-                                </connections>
-                            </stackView>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="26Y-s0-osM">
-                                <rect key="frame" x="169" y="315" width="37" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="color" red="0.0" green="0.50980392159999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            </activityIndicatorView>
-                        </subviews>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="xw7-YA-t3H" secondAttribute="trailing" id="5rr-VB-q3t"/>
-                            <constraint firstItem="GQC-Tp-UDX" firstAttribute="leading" secondItem="nxj-Mb-59S" secondAttribute="leading" id="IUT-x8-xJr"/>
-                            <constraint firstItem="xw7-YA-t3H" firstAttribute="top" secondItem="wh3-lz-1oQ" secondAttribute="bottom" id="PIz-Rx-jkf"/>
-                            <constraint firstItem="xw7-YA-t3H" firstAttribute="leading" secondItem="nxj-Mb-59S" secondAttribute="leading" id="RMF-aO-Em3"/>
-                            <constraint firstItem="GQC-Tp-UDX" firstAttribute="top" secondItem="xw7-YA-t3H" secondAttribute="bottom" id="oX6-h0-VxD"/>
-                            <constraint firstItem="mJY-bY-uBr" firstAttribute="top" secondItem="GQC-Tp-UDX" secondAttribute="bottom" id="pk0-Jz-6qV"/>
-                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Results" image="results_icon" id="sTy-2h-1bx"/>
                     <navigationItem key="navigationItem" id="hZv-IZ-D8J"/>
-                    <connections>
-                        <outlet property="pageControl" destination="ZIq-UM-yRY" id="LTX-yf-Bvf"/>
-                        <outlet property="scoreLabel" destination="yVJ-ub-AZ0" id="ZKP-Q1-zae"/>
-                        <outlet property="spinner" destination="26Y-s0-osM" id="7aI-Xz-veG"/>
-                        <outlet property="stackView" destination="GQC-Tp-UDX" id="tPf-Ia-eDm"/>
-                        <outlet property="stackViewWidthConstraint" destination="DJq-JO-BjV" id="Ptz-GP-Cpu"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V68-Y4-Ngx" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <panGestureRecognizer minimumNumberOfTouches="1" id="UhH-ik-I6T">
-                    <connections>
-                        <action selector="panGestureHandler:" destination="UgA-uW-BZz" id="pkL-BH-jiO"/>
-                    </connections>
-                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="4004" y="45"/>
         </scene>

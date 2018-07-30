@@ -48,6 +48,8 @@
 		0CE187351F3F93450069BEC6 /* MatchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE187331F3F93450069BEC6 /* MatchCollectionViewCell.swift */; };
 		0CE187361F3F93450069BEC6 /* MatchCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CE187341F3F93450069BEC6 /* MatchCollectionViewCell.xib */; };
 		0CE187391F40B7210069BEC6 /* MatchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CE187381F40B7210069BEC6 /* MatchTableViewCell.xib */; };
+		0CE3A1F1210EBDB70099B1D3 /* BracketView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CE3A1F0210EBDB70099B1D3 /* BracketView.xib */; };
+		0CE3A1F3210EBDC10099B1D3 /* BracketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE3A1F2210EBDC10099B1D3 /* BracketView.swift */; };
 		FD30427A253E69BA5DB0240F /* Pods_BracketChallenge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F29F7997F141AA3D3B8A33D9 /* Pods_BracketChallenge.framework */; };
 /* End PBXBuildFile section */
 
@@ -96,6 +98,8 @@
 		0CE187331F3F93450069BEC6 /* MatchCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchCollectionViewCell.swift; sourceTree = "<group>"; };
 		0CE187341F3F93450069BEC6 /* MatchCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MatchCollectionViewCell.xib; sourceTree = "<group>"; };
 		0CE187381F40B7210069BEC6 /* MatchTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MatchTableViewCell.xib; sourceTree = "<group>"; };
+		0CE3A1F0210EBDB70099B1D3 /* BracketView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BracketView.xib; sourceTree = "<group>"; };
+		0CE3A1F2210EBDC10099B1D3 /* BracketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BracketView.swift; sourceTree = "<group>"; };
 		4D7185542C0E4E1151157A56 /* Pods-BracketChallenge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BracketChallenge.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BracketChallenge/Pods-BracketChallenge.debug.xcconfig"; sourceTree = "<group>"; };
 		832DB5FC271697BEEB9C135D /* Pods-BracketChallenge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BracketChallenge.release.xcconfig"; path = "Pods/Target Support Files/Pods-BracketChallenge/Pods-BracketChallenge.release.xcconfig"; sourceTree = "<group>"; };
 		F29F7997F141AA3D3B8A33D9 /* Pods_BracketChallenge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BracketChallenge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -190,6 +194,8 @@
 				0CE187381F40B7210069BEC6 /* MatchTableViewCell.xib */,
 				0C8806B620338C05001D7EB9 /* TextFieldTableViewCell.swift */,
 				0C8806B82033C30C001D7EB9 /* DatePickerTableViewCell.swift */,
+				0CE3A1F2210EBDC10099B1D3 /* BracketView.swift */,
+				0CE3A1F0210EBDB70099B1D3 /* BracketView.xib */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -323,6 +329,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C15E5B11F2E397B00E6E4A5 /* Podfile in Resources */,
+				0CE3A1F1210EBDB70099B1D3 /* BracketView.xib in Resources */,
 				0C5085C91F2E357D00C4A04D /* Main.storyboard in Resources */,
 				0CE187391F40B7210069BEC6 /* MatchTableViewCell.xib in Resources */,
 				0CE187361F3F93450069BEC6 /* MatchCollectionViewCell.xib in Resources */,
@@ -391,6 +398,7 @@
 				0C9DAB871F54C80D009268D6 /* UserBracketViewController.swift in Sources */,
 				0CA4DB291F3776E0005A3FDF /* MyBracketViewController.swift in Sources */,
 				0C213FB41F2FCEC3007F25CA /* BCError.swift in Sources */,
+				0CE3A1F3210EBDC10099B1D3 /* BracketView.swift in Sources */,
 				0CE187321F3F8D7D0069BEC6 /* BracketViewController.swift in Sources */,
 				0C42A0F41F30F45C00BF26CE /* Bracket.swift in Sources */,
 				0CE187351F3F93450069BEC6 /* MatchCollectionViewCell.swift in Sources */,
