@@ -1,5 +1,5 @@
 //
-//  BracketViewController2.swift
+//  BracketViewController.swift
 //  BracketChallenge
 //
 //  Created by Eric Romrell on 7/15/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BracketViewController2: UIViewController, MatchViewClickableDelegate {
+class BracketViewController: UIViewController, MatchViewClickableDelegate {
 	
 	//MARK: Public properties
 	var tournament: Tournament!

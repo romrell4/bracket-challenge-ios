@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UserBracketViewController: BracketViewController2 {
+class UserBracketViewController: BracketViewController {
     override func areCellsClickable() -> Bool {
         return false
     }

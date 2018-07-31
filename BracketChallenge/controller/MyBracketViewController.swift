@@ -14,6 +14,14 @@ class MyBracketViewController: UserBracketViewController, UITabBarControllerDele
 	@IBOutlet private weak var createBracketLabel: UILabel!
 	@IBOutlet private weak var createBracketButton: UIButton!
 	
+	//MARK: Private properties
+	private var tmpBracket: Bracket? {
+		didSet { setBracketsWhenReady() }
+	}
+	private var tmpMasterBracket: Bracket? {
+		didSet { setBracketsWhenReady() }
+	}
+	
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -90,7 +98,7 @@ class MyBracketViewController: UserBracketViewController, UITabBarControllerDele
         BCClient.getMyBracket(tournamentId: super.tournament.tournamentId, callback: { (validResponse, bracket, error) in
             if validResponse {
                 if let bracket = bracket {
-                    super.bracket = bracket
+					self.tmpBracket = bracket
                 } else {
                     //If they don't have a bracket yet, show the create bracket view
                     self.createBracketView.isHidden = false
@@ -104,10 +112,17 @@ class MyBracketViewController: UserBracketViewController, UITabBarControllerDele
         //Load the master bracket
         BCClient.getBracket(tournamentId: super.tournament.tournamentId, bracketId: masterBracketId) { (masterBracket, error) in
             if let masterBracket = masterBracket {
-                self.masterBracket = masterBracket
+                self.tmpMasterBracket = masterBracket
             } else {
                 super.displayAlert(error: error)
             }
         }
     }
+	
+	private func setBracketsWhenReady() {
+		if let bracket = tmpBracket, let masterBracket = tmpMasterBracket {
+			super.bracket = bracket
+			super.masterBracket = masterBracket
+		}
+	}
 }
