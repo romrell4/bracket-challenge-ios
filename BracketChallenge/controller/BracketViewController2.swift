@@ -12,14 +12,17 @@ class BracketViewController2: UIViewController, MatchViewClickableDelegate {
 	
 	//MARK: Public properties
 	var tournament: Tournament!
-	var bracket: Bracket! {
+	var bracket: Bracket? {
 		didSet {
-			//Sometimes, this will be set before viewDidLoad is called. If that is the case, wait for the viewDidLoad to load the UI
-			if isViewLoaded {
-				bracketView = BracketView.initAsSubview(in: view, clickDelegate: self, tournament: tournament, bracket: bracket)
-			}
+			bracketView?.bracket = bracket
 		}
 	}
+	var masterBracket: Bracket? {
+		didSet {
+			bracketView?.masterBracket = masterBracket
+		}
+	}
+	var spinner: UIActivityIndicatorView! { return bracketView.spinner }
 	
 	//MARK: Private Outlets
 	private var bracketView: BracketView!
@@ -27,9 +30,14 @@ class BracketViewController2: UIViewController, MatchViewClickableDelegate {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		//If the bracket was set before this was called, load the bracket UI now
+		bracketView = BracketView.initAsSubview(in: view, clickDelegate: self, tournament: tournament)
+		
+		//If either of the brackets were set before the view was loaded, set them now
 		if let bracket = bracket {
-			bracketView = BracketView.initAsSubview(in: view, clickDelegate: self, tournament: tournament, bracket: bracket)
+			bracketView.bracket = bracket
+		}
+		if let masterBracket = masterBracket {
+			bracketView.masterBracket = masterBracket
 		}
 	}
 	
@@ -40,13 +48,20 @@ class BracketViewController2: UIViewController, MatchViewClickableDelegate {
 		tabBarController?.title = bracket?.name
 	}
 	
+	//MARK: MatchViewClickableDelegate
+	
+	func areCellsClickable() -> Bool {
+		//Override if you want to stop users from selecting the rows
+		return true
+	}
+	
 	//MARK: Listeners
 	
 	@objc func updateBracket() {
 		if let bracket = bracket {
-			bracketView.spinner.startAnimating()
+			spinner.startAnimating()
 			BCClient.updateBracket(bracket: bracket, callback: { (bracket, error) in
-				self.bracketView.spinner.stopAnimating()
+				self.spinner.stopAnimating()
 				if let bracket = bracket {
 					self.bracket = bracket
 					super.displayAlert(title: "Success", message: "Bracket successfully updated", alertHandler: nil)
@@ -55,12 +70,5 @@ class BracketViewController2: UIViewController, MatchViewClickableDelegate {
 				}
 			})
 		}
-	}
-	
-	//MARK: MatchViewClickableDelegate
-	
-	func areCellsClickable() -> Bool {
-		//Override if you want to stop users from selecting the rows
-		return true
 	}
 }

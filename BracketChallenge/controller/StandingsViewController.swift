@@ -44,7 +44,7 @@ class StandingsViewController: UIViewController, UITableViewDataSource, UITableV
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "userBracket", let vc = segue.destination as? UserBracketViewController, let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) {
             vc.tournament = tournament
-            vc.userBracket = brackets[indexPath.row]
+            vc.bracket = brackets[indexPath.row]
             vc.masterBracket = masterBracket
         }
     }

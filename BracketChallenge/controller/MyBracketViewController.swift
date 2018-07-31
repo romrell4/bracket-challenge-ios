@@ -44,7 +44,7 @@ class MyBracketViewController: UserBracketViewController, UITabBarControllerDele
     
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         //Let the user change tabs AFTER the data is loaded
-        return (super.userBracket != nil || !self.createBracketView.isHidden) && masterBracket != nil
+        return (super.bracket != nil || !self.createBracketView.isHidden) && masterBracket != nil
     }
     
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
@@ -70,7 +70,7 @@ class MyBracketViewController: UserBracketViewController, UITabBarControllerDele
             if let bracket = bracket {
                 //When the bracket is successfully created, hide the view
                 self.createBracketView.isHidden = true
-                super.userBracket = bracket
+                super.bracket = bracket
             } else {
                 super.displayAlert(error: error)
             }
@@ -86,13 +86,11 @@ class MyBracketViewController: UserBracketViewController, UITabBarControllerDele
             return
         }
         
-        super.spinner.startAnimating()
-        
         //Load the user's bracket
         BCClient.getMyBracket(tournamentId: super.tournament.tournamentId, callback: { (validResponse, bracket, error) in
             if validResponse {
                 if let bracket = bracket {
-                    super.userBracket = bracket
+                    super.bracket = bracket
                 } else {
                     //If they don't have a bracket yet, show the create bracket view
                     self.createBracketView.isHidden = false
