@@ -44,8 +44,6 @@
 		0CA1C0A220FC13E20072656B /* MatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA1C0A120FC13E20072656B /* MatchView.swift */; };
 		0CA4DB291F3776E0005A3FDF /* MyBracketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA4DB281F3776E0005A3FDF /* MyBracketViewController.swift */; };
 		0CA4DB2B1F378756005A3FDF /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA4DB2A1F378756005A3FDF /* ResultsViewController.swift */; };
-		0CE187351F3F93450069BEC6 /* MatchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE187331F3F93450069BEC6 /* MatchCollectionViewCell.swift */; };
-		0CE187361F3F93450069BEC6 /* MatchCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CE187341F3F93450069BEC6 /* MatchCollectionViewCell.xib */; };
 		0CE187391F40B7210069BEC6 /* MatchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CE187381F40B7210069BEC6 /* MatchTableViewCell.xib */; };
 		0CE3A1F1210EBDB70099B1D3 /* BracketView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CE3A1F0210EBDB70099B1D3 /* BracketView.xib */; };
 		0CE3A1F3210EBDC10099B1D3 /* BracketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE3A1F2210EBDC10099B1D3 /* BracketView.swift */; };
@@ -93,8 +91,6 @@
 		0CA1C0A120FC13E20072656B /* MatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchView.swift; sourceTree = "<group>"; };
 		0CA4DB281F3776E0005A3FDF /* MyBracketViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyBracketViewController.swift; sourceTree = "<group>"; };
 		0CA4DB2A1F378756005A3FDF /* ResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
-		0CE187331F3F93450069BEC6 /* MatchCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchCollectionViewCell.swift; sourceTree = "<group>"; };
-		0CE187341F3F93450069BEC6 /* MatchCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MatchCollectionViewCell.xib; sourceTree = "<group>"; };
 		0CE187381F40B7210069BEC6 /* MatchTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MatchTableViewCell.xib; sourceTree = "<group>"; };
 		0CE3A1F0210EBDB70099B1D3 /* BracketView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BracketView.xib; sourceTree = "<group>"; };
 		0CE3A1F2210EBDC10099B1D3 /* BracketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BracketView.swift; sourceTree = "<group>"; };
@@ -188,8 +184,6 @@
 				0CA1C09D20FC02B40072656B /* RoundView.xib */,
 				0CA1C0A120FC13E20072656B /* MatchView.swift */,
 				0CA1C09F20FC13D70072656B /* MatchView.xib */,
-				0CE187331F3F93450069BEC6 /* MatchCollectionViewCell.swift */,
-				0CE187341F3F93450069BEC6 /* MatchCollectionViewCell.xib */,
 				0C49AB431F3554900074FAD0 /* MatchTableViewCell.swift */,
 				0CE187381F40B7210069BEC6 /* MatchTableViewCell.xib */,
 				0C8806B620338C05001D7EB9 /* TextFieldTableViewCell.swift */,
@@ -329,7 +323,6 @@
 				0CE3A1F1210EBDB70099B1D3 /* BracketView.xib in Resources */,
 				0C5085C91F2E357D00C4A04D /* Main.storyboard in Resources */,
 				0CE187391F40B7210069BEC6 /* MatchTableViewCell.xib in Resources */,
-				0CE187361F3F93450069BEC6 /* MatchCollectionViewCell.xib in Resources */,
 				0C9FD77D1F2FE498005174F4 /* TournamentTableViewCell.xib in Resources */,
 				0CA1C09E20FC02B40072656B /* RoundView.xib in Resources */,
 				0C5085C81F2E357D00C4A04D /* LaunchScreen.storyboard in Resources */,
@@ -397,7 +390,6 @@
 				0C213FB41F2FCEC3007F25CA /* BCError.swift in Sources */,
 				0CE3A1F3210EBDC10099B1D3 /* BracketView.swift in Sources */,
 				0C42A0F41F30F45C00BF26CE /* Bracket.swift in Sources */,
-				0CE187351F3F93450069BEC6 /* MatchCollectionViewCell.swift in Sources */,
 				0C9FD7781F2FD9B4005174F4 /* Tournament.swift in Sources */,
 				0C42A0F61F30FCA700BF26CE /* Match.swift in Sources */,
 				0C15EB271F2E548500E6E4A5 /* TournamentsViewController.swift in Sources */,
