@@ -23,26 +23,27 @@ class MatchView: UIView, UITableViewDataSource, UITableViewDelegate {
 	@IBOutlet private weak var tableView: UITableView!
 	
 	//MARK: Public properties
-	var match: MatchHelper? {
+	var match: MatchHelper! {
+		didSet {
+			tableView.reloadData()
+		}
+	}
+	var masterMatch: MatchHelper? {
 		didSet {
 			tableView.reloadData()
 		}
 	}
 	
 	//MARK: Private properties
-	private var masterMatch: MatchHelper? {
-		didSet {
-			tableView.reloadData()
-		}
-	}
 	private var delegate: MatchViewDelegate!
 	private var clickDelegate: MatchViewClickableDelegate!
 	
-	static func initWith(delegate: MatchViewDelegate, clickDelegate: MatchViewClickableDelegate, match: MatchHelper) -> MatchView {
+	static func initWith(delegate: MatchViewDelegate, clickDelegate: MatchViewClickableDelegate, match: MatchHelper, masterMatch: MatchHelper?) -> MatchView {
 		let matchView = UINib(nibName: "MatchView", bundle: nil).instantiate(withOwner: self, options: nil).first as! MatchView
 		matchView.delegate = delegate
 		matchView.clickDelegate = clickDelegate
 		matchView.match = match
+		matchView.masterMatch = masterMatch
 		return matchView
 	}
 	

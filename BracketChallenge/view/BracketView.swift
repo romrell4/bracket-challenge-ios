@@ -12,13 +12,26 @@ class BracketView: UIView, UIScrollViewDelegate, RoundViewDelegate {
 	private struct UI {
 		static let roundWidth: CGFloat = UIScreen.main.bounds.width * 0.8
 		static let minimumPanAmount = roundWidth / 4
-		static let panDuration = 0.5
+		static let panDuration = 0.3
 	}
 	
 	//MARK: Public outlets
 	@IBOutlet weak var spinner: UIActivityIndicatorView!
 	
+	//MARK: Public properties
+	var bracket: Bracket! {
+		didSet {
+			loadUI()
+		}
+	}
+	var masterBracket: Bracket? {
+		didSet {
+			loadUI()
+		}
+	}
+	
 	//MARK: Private outlets
+	@IBOutlet private weak var topView: UIView!
 	@IBOutlet private weak var pageControl: UIPageControl!
 	@IBOutlet private weak var scoreLabel: UILabel!
 	@IBOutlet private weak var stackView: UIStackView!
@@ -26,11 +39,6 @@ class BracketView: UIView, UIScrollViewDelegate, RoundViewDelegate {
 	
 	//MARK: Private properties
 	private var tournament: Tournament!
-	private var bracket: Bracket! {
-		didSet {
-			loadUI()
-		}
-	}
 	private var clickDelegate: MatchViewClickableDelegate!
 	private var roundViews = [RoundView]()
 	private var currentPage = 0 {
@@ -42,7 +50,7 @@ class BracketView: UIView, UIScrollViewDelegate, RoundViewDelegate {
 		}
 	}
 	
-	static func initAsSubview(in superview: UIView, clickDelegate: MatchViewClickableDelegate, tournament: Tournament, bracket: Bracket) -> BracketView {
+	static func initAsSubview(in superview: UIView, clickDelegate: MatchViewClickableDelegate, tournament: Tournament) -> BracketView {
 		let bracketView = UINib(nibName: "BracketView", bundle: nil).instantiate(withOwner: nil).first as! BracketView
 		bracketView.translatesAutoresizingMaskIntoConstraints = false
 		superview.addSubview(bracketView)
@@ -55,8 +63,6 @@ class BracketView: UIView, UIScrollViewDelegate, RoundViewDelegate {
 		//Set this first so that the variable is saved when the bracket loads all it's matches (didSet)
 		bracketView.clickDelegate = clickDelegate
 		bracketView.tournament = tournament
-		bracketView.bracket = bracket
-		bracketView.loadUI()
 		return bracketView
 	}
 	
@@ -128,12 +134,21 @@ class BracketView: UIView, UIScrollViewDelegate, RoundViewDelegate {
 	//MARK: Private functions
 	
 	private func loadUI() {
-		scoreLabel.text = "Score: \(bracket?.score ?? 0)"
-		
-		//Only allow the UI to be loaded once
-		if roundViews.count == 0 {
-			bracket.rounds?.forEach {
-				let roundView = RoundView.initWith(scrollDelegate: self, roundDelegate: self, clickDelegate: clickDelegate, matches: $0)
+		//Only load the UI if the user's bracket is loaded already (if the master gets loaded, wait until the user's bracket loads
+		if let bracket = bracket {
+			spinner.stopAnimating()
+			topView.isHidden = false
+			
+			scoreLabel.text = "Score: \(bracket.score)"
+			
+			//Only allow the UI to be loaded once
+			roundViews.forEach {
+				$0.removeFromSuperview()
+			}
+			roundViews.removeAll(keepingCapacity: true)
+			
+			for i in 0..<(bracket.rounds?.count ?? 0) {
+				let roundView = RoundView.initWith(scrollDelegate: self, roundDelegate: self, clickDelegate: clickDelegate, matches: bracket.rounds?[i] ?? [], masterMatches: masterBracket?.rounds?[i])
 				roundView.translatesAutoresizingMaskIntoConstraints = false
 				roundViews.append(roundView)
 				stackView.addArrangedSubview(roundView)

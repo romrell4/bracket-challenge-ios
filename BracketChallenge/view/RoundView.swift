@@ -56,30 +56,20 @@ class RoundView: UIScrollView, MatchViewDelegate {
 	//MARK: Private properties
 	private var roundDelegate: RoundViewDelegate!
 	private var clickDelegate: MatchViewClickableDelegate!
-	private var matches = [MatchHelper]() {
-		didSet {
-			matchViews.removeAll(keepingCapacity: true)
-			matches.forEach { match in
-				let matchView = MatchView.initWith(delegate: self, clickDelegate: clickDelegate, match: match)
-				stackView.addArrangedSubview(matchView)
-				
-				NSLayoutConstraint.activate([
-					matchView.heightAnchor.constraint(equalToConstant: MATCH_VIEW_HEIGHT)
-					])
-				matchViews.append(matchView)
-			}
-		}
-	}
+	private var matches = [MatchHelper]()
+	private var masterMatches: [MatchHelper]?
 	private var matchViews = [MatchView]()
 	
 	//MARK: Public Functions
 	
-	static func initWith(scrollDelegate: UIScrollViewDelegate, roundDelegate: RoundViewDelegate, clickDelegate: MatchViewClickableDelegate, matches: [MatchHelper]) -> RoundView {
+	static func initWith(scrollDelegate: UIScrollViewDelegate, roundDelegate: RoundViewDelegate, clickDelegate: MatchViewClickableDelegate, matches: [MatchHelper], masterMatches: [MatchHelper]? = nil) -> RoundView {
 		let roundView = UINib(nibName: "RoundView", bundle: nil).instantiate(withOwner: nil).first as! RoundView
 		roundView.delegate = scrollDelegate
 		roundView.roundDelegate = roundDelegate
 		roundView.clickDelegate = clickDelegate
 		roundView.matches = matches
+		roundView.masterMatches = masterMatches
+		roundView.loadUI()
 		return roundView
 	}
 	
@@ -95,5 +85,19 @@ class RoundView: UIScrollView, MatchViewDelegate {
 	
 	func player(_ player: Player?, selectedInView view: MatchView) {
 		roundDelegate.player(player, selectedIn: self, and: view)
+	}
+	
+	//MARK: Private functions
+	
+	private func loadUI() {
+		for i in 0..<matches.count {
+			let matchView = MatchView.initWith(delegate: self, clickDelegate: clickDelegate, match: matches[i], masterMatch: masterMatches?[i])
+			stackView.addArrangedSubview(matchView)
+			
+			NSLayoutConstraint.activate([
+				matchView.heightAnchor.constraint(equalToConstant: MATCH_VIEW_HEIGHT)
+			])
+			matchViews.append(matchView)
+		}
 	}
 }

@@ -17,7 +17,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="410"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dnn-QG-Vsc" userLabel="Top View">
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dnn-QG-Vsc" userLabel="Top View">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="32"/>
                     <subviews>
                         <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="BQL-hN-g45">
@@ -50,7 +50,7 @@
                         <outletCollection property="gestureRecognizers" destination="vMe-ZM-05R" appends="YES" id="Tem-g2-3Qk"/>
                     </connections>
                 </stackView>
-                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="k0l-os-bG1">
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="k0l-os-bG1">
                     <rect key="frame" x="169" y="187" width="37" height="37"/>
                     <color key="color" red="0.1450980392" green="0.40784313729999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                 </activityIndicatorView>
@@ -74,6 +74,7 @@
                 <outlet property="spinner" destination="k0l-os-bG1" id="bXr-BI-cog"/>
                 <outlet property="stackView" destination="Hxn-XO-HNl" id="mAu-u3-TsK"/>
                 <outlet property="stackViewWidthConstraint" destination="oUj-w8-Deb" id="Zax-5g-wUi"/>
+                <outlet property="topView" destination="dnn-QG-Vsc" id="rDi-EB-G47"/>
             </connections>
             <point key="canvasLocation" x="33.5" y="207"/>
         </view>
