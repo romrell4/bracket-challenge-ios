@@ -44,7 +44,6 @@
 		0CA1C0A220FC13E20072656B /* MatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA1C0A120FC13E20072656B /* MatchView.swift */; };
 		0CA4DB291F3776E0005A3FDF /* MyBracketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA4DB281F3776E0005A3FDF /* MyBracketViewController.swift */; };
 		0CA4DB2B1F378756005A3FDF /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA4DB2A1F378756005A3FDF /* ResultsViewController.swift */; };
-		0CE187321F3F8D7D0069BEC6 /* BracketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE187311F3F8D7D0069BEC6 /* BracketViewController.swift */; };
 		0CE187351F3F93450069BEC6 /* MatchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE187331F3F93450069BEC6 /* MatchCollectionViewCell.swift */; };
 		0CE187361F3F93450069BEC6 /* MatchCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CE187341F3F93450069BEC6 /* MatchCollectionViewCell.xib */; };
 		0CE187391F40B7210069BEC6 /* MatchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CE187381F40B7210069BEC6 /* MatchTableViewCell.xib */; };
@@ -94,7 +93,6 @@
 		0CA1C0A120FC13E20072656B /* MatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchView.swift; sourceTree = "<group>"; };
 		0CA4DB281F3776E0005A3FDF /* MyBracketViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyBracketViewController.swift; sourceTree = "<group>"; };
 		0CA4DB2A1F378756005A3FDF /* ResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
-		0CE187311F3F8D7D0069BEC6 /* BracketViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BracketViewController.swift; sourceTree = "<group>"; };
 		0CE187331F3F93450069BEC6 /* MatchCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchCollectionViewCell.swift; sourceTree = "<group>"; };
 		0CE187341F3F93450069BEC6 /* MatchCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MatchCollectionViewCell.xib; sourceTree = "<group>"; };
 		0CE187381F40B7210069BEC6 /* MatchTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MatchTableViewCell.xib; sourceTree = "<group>"; };
@@ -221,7 +219,6 @@
 				0C42A1001F33DE6000BF26CE /* TournamentTabBarViewController.swift */,
 				0CA4DB281F3776E0005A3FDF /* MyBracketViewController.swift */,
 				0CA4DB2A1F378756005A3FDF /* ResultsViewController.swift */,
-				0CE187311F3F8D7D0069BEC6 /* BracketViewController.swift */,
 				0C9DAB841F54BCC4009268D6 /* StandingsViewController.swift */,
 				0C9DAB861F54C80D009268D6 /* UserBracketViewController.swift */,
 				0C81A2C620FBE2F400B8E817 /* BracketViewController2.swift */,
@@ -399,7 +396,6 @@
 				0CA4DB291F3776E0005A3FDF /* MyBracketViewController.swift in Sources */,
 				0C213FB41F2FCEC3007F25CA /* BCError.swift in Sources */,
 				0CE3A1F3210EBDC10099B1D3 /* BracketView.swift in Sources */,
-				0CE187321F3F8D7D0069BEC6 /* BracketViewController.swift in Sources */,
 				0C42A0F41F30F45C00BF26CE /* Bracket.swift in Sources */,
 				0CE187351F3F93450069BEC6 /* MatchCollectionViewCell.swift in Sources */,
 				0C9FD7781F2FD9B4005174F4 /* Tournament.swift in Sources */,
