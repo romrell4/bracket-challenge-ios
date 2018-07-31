@@ -14,14 +14,6 @@ class MyBracketViewController: UserBracketViewController, UITabBarControllerDele
 	@IBOutlet private weak var createBracketLabel: UILabel!
 	@IBOutlet private weak var createBracketButton: UIButton!
 	
-	//MARK: Private properties
-	private var tmpBracket: Bracket? {
-		didSet { setBracketsWhenReady() }
-	}
-	private var tmpMasterBracket: Bracket? {
-		didSet { setBracketsWhenReady() }
-	}
-	
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -97,13 +89,8 @@ class MyBracketViewController: UserBracketViewController, UITabBarControllerDele
         //Load the user's bracket
         BCClient.getMyBracket(tournamentId: super.tournament.tournamentId, callback: { (validResponse, bracket, error) in
             if validResponse {
-                if let bracket = bracket {
-					self.tmpBracket = bracket
-                } else {
-                    //If they don't have a bracket yet, show the create bracket view
-                    self.createBracketView.isHidden = false
-                    self.view.bringSubview(toFront: self.createBracketView)
-                }
+				//Set temp variable, which will eventually set the parent's bracket, or show the create bracket view
+				self.tmpBracket = bracket
             } else {
                 super.displayAlert(error: error)
             }
@@ -111,18 +98,52 @@ class MyBracketViewController: UserBracketViewController, UITabBarControllerDele
         
         //Load the master bracket
         BCClient.getBracket(tournamentId: super.tournament.tournamentId, bracketId: masterBracketId) { (masterBracket, error) in
-            if let masterBracket = masterBracket {
-                self.tmpMasterBracket = masterBracket
+			if let masterBracket = masterBracket {
+				//Set temp variable, which will eventually set the parent's master bracket, or show the create bracket view
+				self.tmpMasterBracket = masterBracket
             } else {
                 super.displayAlert(error: error)
             }
         }
     }
 	
-	private func setBracketsWhenReady() {
-		if let bracket = tmpBracket, let masterBracket = tmpMasterBracket {
-			super.bracket = bracket
-			super.masterBracket = masterBracket
+	private func displayCreateBracketView() {
+		self.createBracketView.isHidden = false
+		self.view.bringSubview(toFront: self.createBracketView)
+	}
+	
+	private var noBracket = false
+	private var tmpBracket: Bracket? {
+		didSet {
+			if let bracket = tmpBracket {
+				//We have a bracket for this tournament
+				if super.masterBracket != nil {
+					//We already loaded the master. Setup the UI
+					super.bracket = bracket
+				}
+			} else {
+				//We don't have a bracket yet for this tournament
+				if super.masterBracket != nil {
+					//We already loaded the master. Setup the UI
+					displayCreateBracketView()
+				} else {
+					//We are still waiting for the master... Cache the fact that we don't have a bracket
+					noBracket = true
+				}
+			}
+		}
+	}
+	private var tmpMasterBracket: Bracket? {
+		didSet {
+			super.masterBracket = tmpMasterBracket
+			
+			if let myBracket = self.tmpBracket {
+				//We already loaded (and cached) my bracket. Setup the UI
+				super.bracket = myBracket
+			} else if self.noBracket {
+				//We already loaded my bracket, but I don't have one. Setup the UI
+				self.displayCreateBracketView()
+			}
 		}
 	}
 }
