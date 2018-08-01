@@ -21,6 +21,14 @@ PODS:
 DEPENDENCIES:
   - FacebookLogin
 
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Bolts
+    - FacebookCore
+    - FacebookLogin
+    - FBSDKCoreKit
+    - FBSDKLoginKit
+
 SPEC CHECKSUMS:
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   FacebookCore: 3ffa190a3f1f96cec0e44d3fc221bc322c595ffa
@@ -30,4 +38,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: b4b6617d260d0e69d151cd30d22fa06b03212a50
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.3

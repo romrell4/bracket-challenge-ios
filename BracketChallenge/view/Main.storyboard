@@ -43,7 +43,7 @@
             </objects>
             <point key="canvasLocation" x="2705" y="-647"/>
         </scene>
-        <!--User-->
+        <!--Tournaments-->
         <scene sceneID="c87-jS-EJh">
             <objects>
                 <viewController id="njm-U6-VZ6" customClass="TournamentsViewController" customModule="BracketChallenge" customModuleProvider="target" sceneMemberID="viewController">
@@ -77,7 +77,7 @@
                             <constraint firstItem="neL-n2-TLQ" firstAttribute="leading" secondItem="45V-4D-nTK" secondAttribute="leading" id="YTm-fd-KN4"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="User" id="u9K-8V-IL8">
+                    <navigationItem key="navigationItem" title="Tournaments" id="u9K-8V-IL8">
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="NIW-Sx-VCj">
                             <connections>
                                 <action selector="logOut:" destination="njm-U6-VZ6" id="1TG-qH-6gI"/>
@@ -230,7 +230,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vzz-75-Ucl" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="AJP-c7-vKj" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2703.1999999999998" y="801.0494752623689"/>
+            <point key="canvasLocation" x="2935" y="839"/>
         </scene>
         <!--Standings-->
         <scene sceneID="Vlb-Zk-TEQ">
@@ -304,26 +304,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tk4-5a-E9O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4300" y="801.94902548725645"/>
-        </scene>
-        <!--Test-->
-        <scene sceneID="TmW-we-M7z">
-            <objects>
-                <viewController id="KOO-8C-Fa8" customClass="BracketViewController2" customModule="BracketChallenge" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="yMP-dw-3DS"/>
-                        <viewControllerLayoutGuide type="bottom" id="qbM-bI-u27"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="xwx-JQ-0IT">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Test" id="ZYF-Mq-itu"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="tbg-S7-eI0" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4188" y="1560"/>
+            <point key="canvasLocation" x="4004" y="839"/>
         </scene>
         <!--User Bracket View Controller-->
         <scene sceneID="7bP-5c-JVY">
@@ -341,7 +322,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Idv-P9-7zo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5232.8000000000002" y="801.94902548725645"/>
+            <point key="canvasLocation" x="5177" y="839"/>
         </scene>
         <!--Tournament Tab Bar View Controller-->
         <scene sceneID="4xA-Ad-Zhl">
@@ -354,9 +335,8 @@
                     </tabBar>
                     <connections>
                         <segue destination="vEb-o2-Jb7" kind="relationship" relationship="viewControllers" id="nrQ-Cw-zqs"/>
-                        <segue destination="LH1-Wi-QJN" kind="relationship" relationship="viewControllers" id="UFY-Dg-nTS"/>
-                        <segue destination="1eI-wB-wJe" kind="relationship" relationship="viewControllers" id="QwG-O2-cQj"/>
-                        <segue destination="KOO-8C-Fa8" kind="relationship" relationship="viewControllers" id="gE6-Oh-nix"/>
+                        <segue destination="UgA-uW-BZz" kind="relationship" relationship="viewControllers" id="Zp1-g6-mUM"/>
+                        <segue destination="1eI-wB-wJe" kind="relationship" relationship="viewControllers" id="ctz-0F-X2M"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H6e-rO-jyH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -421,7 +401,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s6r-5a-IzE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4300" y="-646.32683658170924"/>
+            <point key="canvasLocation" x="4004" y="-647"/>
         </scene>
         <!--Navigation View Controller-->
         <scene sceneID="Cxy-b1-P0C">
@@ -434,31 +414,12 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="njm-U6-VZ6" kind="relationship" relationship="rootViewController" id="g3Z-ND-p0e"/>
+                        <segue destination="njm-U6-VZ6" kind="relationship" relationship="rootViewController" id="wdI-BL-EBY"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eUo-EB-PgN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1146" y="45"/>
-        </scene>
-        <!--Results-->
-        <scene sceneID="OWS-hn-edC">
-            <objects>
-                <viewController id="LH1-Wi-QJN" customClass="ResultsViewController" customModule="BracketChallenge" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="ojy-Od-skn"/>
-                        <viewControllerLayoutGuide type="bottom" id="U2B-Sw-QGl"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="een-Kb-vzT">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Results" image="results_icon" id="gli-8X-Wu7"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Xbu-Kq-Ed6" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3961" y="45"/>
         </scene>
         <!--Navigation View Controller-->
         <scene sceneID="wal-YP-h4Z">
@@ -478,6 +439,25 @@
             </objects>
             <point key="canvasLocation" x="1956.8" y="-646.77661169415296"/>
         </scene>
+        <!--Results-->
+        <scene sceneID="yBq-Al-YIc">
+            <objects>
+                <viewController title="Results" id="UgA-uW-BZz" customClass="ResultsViewController" customModule="BracketChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wh3-lz-1oQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="mJY-bY-uBr"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="nxj-Mb-59S">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Results" image="results_icon" id="sTy-2h-1bx"/>
+                    <navigationItem key="navigationItem" id="hZv-IZ-D8J"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="V68-Y4-Ngx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4004" y="45"/>
+        </scene>
         <!--Navigation View Controller-->
         <scene sceneID="nxe-P3-BqD">
             <objects>
@@ -494,7 +474,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bf0-Yn-AnS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1955.2" y="801.49925037481262"/>
+            <point key="canvasLocation" x="1958" y="839"/>
         </scene>
     </scenes>
     <resources>

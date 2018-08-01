@@ -20,11 +20,8 @@ class ResultsViewController: BracketViewController {
     override func viewDidDisappear(_ animated: Bool) {
         tabBarController?.navigationItem.rightBarButtonItem = nil
     }
-    
-    //Listeners
-    
-    override func areCellsClickable() -> Bool {
-        //Results are only editable by admins
-        return Identity.user.admin
-    }
+	
+	override func areCellsClickable() -> Bool {
+		return Identity.user.admin
+	}
 }

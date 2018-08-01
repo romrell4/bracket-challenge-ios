@@ -1,25 +1,29 @@
 //
-//  MatchCollectionViewCell.swift
+//  MatchView.swift
 //  BracketChallenge
 //
-//  Created by Eric Romrell on 8/12/17.
-//  Copyright © 2017 Eric Romrell. All rights reserved.
+//  Created by Eric Romrell on 7/15/18.
+//  Copyright © 2018 Eric Romrell. All rights reserved.
 //
 
 import UIKit
 
-let TABLE_CELL_HEIGHT2: CGFloat = 44
+let MATCH_CELL_HEIGHT: CGFloat = 44
 
-protocol RoundTableViewCellDelegate {
-	func player(_ player: Player?, selectedInCell cell: RoundTableViewCell)
+protocol MatchViewClickableDelegate {
+	func areCellsClickable() -> Bool
 }
 
-class RoundTableViewCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
-	//Outlets
-	@IBOutlet weak var tableView: UITableView!
+protocol MatchViewDelegate {
+	func player(_ player: Player?, selectedInView view: MatchView)
+}
+
+class MatchView: UIView, UITableViewDataSource, UITableViewDelegate {
+	//MARK: Outlets
+	@IBOutlet private weak var tableView: UITableView!
 	
-	//Public properties
-	var match: MatchHelper? {
+	//MARK: Public properties
+	var match: MatchHelper! {
 		didSet {
 			tableView.reloadData()
 		}
@@ -29,10 +33,22 @@ class RoundTableViewCell: UITableViewCell, UITableViewDataSource, UITableViewDel
 			tableView.reloadData()
 		}
 	}
-	var delegate: RoundTableViewCellDelegate?
-	var areCellsClickable = true
+	
+	//MARK: Private properties
+	private var delegate: MatchViewDelegate!
+	private var clickDelegate: MatchViewClickableDelegate!
+	
+	static func initWith(delegate: MatchViewDelegate, clickDelegate: MatchViewClickableDelegate, match: MatchHelper, masterMatch: MatchHelper?) -> MatchView {
+		let matchView = UINib(nibName: "MatchView", bundle: nil).instantiate(withOwner: self, options: nil).first as! MatchView
+		matchView.delegate = delegate
+		matchView.clickDelegate = clickDelegate
+		matchView.match = match
+		matchView.masterMatch = masterMatch
+		return matchView
+	}
 	
 	override func awakeFromNib() {
+		tableView.isScrollEnabled = false
 		tableView.layer.borderColor = UIColor.bcGreen.cgColor
 		tableView.layer.borderWidth = 1
 		tableView.layer.cornerRadius = 8
@@ -48,7 +64,7 @@ class RoundTableViewCell: UITableViewCell, UITableViewDataSource, UITableViewDel
 	}
 	
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		return TABLE_CELL_HEIGHT
+		return MATCH_CELL_HEIGHT
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -70,12 +86,12 @@ class RoundTableViewCell: UITableViewCell, UITableViewDataSource, UITableViewDel
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		if areCellsClickable {
+		if clickDelegate.areCellsClickable() {
 			let otherIndexPath = IndexPath(row: indexPath.row == 0 ? 1 : 0, section: indexPath.section)
 			if let cell = tableView.cellForRow(at: indexPath) as? MatchTableViewCell, let otherCell = tableView.cellForRow(at: otherIndexPath) as? MatchTableViewCell {
 				if cell.checked {
 					cell.checked = false
-					delegate?.player(nil, selectedInCell: self)
+					delegate?.player(nil, selectedInView: self)
 				} else {
 					//When selecting a cell, the other one should deselect
 					cell.checked = true
@@ -83,7 +99,7 @@ class RoundTableViewCell: UITableViewCell, UITableViewDataSource, UITableViewDel
 					
 					//Notify the CollectionViewCell that a cell was selected
 					let player = indexPath.row == 0 ? match?.player1 : match?.player2
-					delegate?.player(player, selectedInCell: self)
+					delegate?.player(player, selectedInView: self)
 				}
 			}
 		}

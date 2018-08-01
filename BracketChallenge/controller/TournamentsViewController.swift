@@ -113,8 +113,6 @@ class TournamentsViewController: UIViewController, UITableViewDataSource, UITabl
 	}
 	
 	@IBAction func loggedIn(segue: UIStoryboardSegue?) {
-		title = Identity.user.name
-		
 		//If they are an admin, they can create tournaments. Give them the button
 		if Identity.user.admin {
 			navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped(_:)))

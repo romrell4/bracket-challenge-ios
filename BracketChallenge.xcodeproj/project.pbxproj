@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0C11E89020EB028500912441 /* RoundTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C11E88F20EB028500912441 /* RoundTableViewCell.swift */; };
-		0C11E89220EB036E00912441 /* RoundTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C11E89120EB036E00912441 /* RoundTableViewCell.xib */; };
 		0C15E5B11F2E397B00E6E4A5 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 0C15E5B01F2E397B00E6E4A5 /* Podfile */; };
 		0C15EB271F2E548500E6E4A5 /* TournamentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C15EB261F2E548500E6E4A5 /* TournamentsViewController.swift */; };
 		0C15EB291F2EAA5C00E6E4A5 /* BCClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C15EB281F2EAA5C00E6E4A5 /* BCClient.swift */; };
@@ -29,6 +27,7 @@
 		0C5085C91F2E357D00C4A04D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C5085C01F2E357D00C4A04D /* Main.storyboard */; };
 		0C5085CA1F2E357D00C4A04D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5085C21F2E357D00C4A04D /* AppDelegate.swift */; };
 		0C5085CB1F2E357D00C4A04D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5085C41F2E357D00C4A04D /* LoginViewController.swift */; };
+		0C81A2C720FBE2F400B8E817 /* BracketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C81A2C620FBE2F400B8E817 /* BracketViewController.swift */; };
 		0C8806B32030F78E001D7EB9 /* CreateTournamentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8806B22030F78E001D7EB9 /* CreateTournamentViewController.swift */; };
 		0C8806B520333D88001D7EB9 /* TableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8806B420333D88001D7EB9 /* TableData.swift */; };
 		0C8806B720338C05001D7EB9 /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8806B620338C05001D7EB9 /* TextFieldTableViewCell.swift */; };
@@ -39,19 +38,19 @@
 		0C9FD77A1F2FE45F005174F4 /* TournamentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9FD7791F2FE45F005174F4 /* TournamentTableViewCell.swift */; };
 		0C9FD77D1F2FE498005174F4 /* TournamentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C9FD77C1F2FE498005174F4 /* TournamentTableViewCell.xib */; };
 		0C9FD7831F302098005174F4 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9FD7821F302098005174F4 /* Player.swift */; };
+		0CA1C09C20FC01F10072656B /* RoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA1C09B20FC01F10072656B /* RoundView.swift */; };
+		0CA1C09E20FC02B40072656B /* RoundView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CA1C09D20FC02B40072656B /* RoundView.xib */; };
+		0CA1C0A020FC13D70072656B /* MatchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CA1C09F20FC13D70072656B /* MatchView.xib */; };
+		0CA1C0A220FC13E20072656B /* MatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA1C0A120FC13E20072656B /* MatchView.swift */; };
 		0CA4DB291F3776E0005A3FDF /* MyBracketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA4DB281F3776E0005A3FDF /* MyBracketViewController.swift */; };
 		0CA4DB2B1F378756005A3FDF /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA4DB2A1F378756005A3FDF /* ResultsViewController.swift */; };
-		0CE187321F3F8D7D0069BEC6 /* BracketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE187311F3F8D7D0069BEC6 /* BracketViewController.swift */; };
-		0CE187351F3F93450069BEC6 /* MatchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE187331F3F93450069BEC6 /* MatchCollectionViewCell.swift */; };
-		0CE187361F3F93450069BEC6 /* MatchCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CE187341F3F93450069BEC6 /* MatchCollectionViewCell.xib */; };
 		0CE187391F40B7210069BEC6 /* MatchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CE187381F40B7210069BEC6 /* MatchTableViewCell.xib */; };
-		0CE8270E20E868EF0069DF2E /* BracketViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE8270D20E868EF0069DF2E /* BracketViewController2.swift */; };
+		0CE3A1F1210EBDB70099B1D3 /* BracketView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CE3A1F0210EBDB70099B1D3 /* BracketView.xib */; };
+		0CE3A1F3210EBDC10099B1D3 /* BracketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE3A1F2210EBDC10099B1D3 /* BracketView.swift */; };
 		FD30427A253E69BA5DB0240F /* Pods_BracketChallenge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F29F7997F141AA3D3B8A33D9 /* Pods_BracketChallenge.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0C11E88F20EB028500912441 /* RoundTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundTableViewCell.swift; sourceTree = "<group>"; };
-		0C11E89120EB036E00912441 /* RoundTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RoundTableViewCell.xib; sourceTree = "<group>"; };
 		0C15E5B01F2E397B00E6E4A5 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		0C15EB251F2E530100E6E4A5 /* BracketChallenge.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BracketChallenge.entitlements; sourceTree = "<group>"; };
 		0C15EB261F2E548500E6E4A5 /* TournamentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TournamentsViewController.swift; sourceTree = "<group>"; };
@@ -75,6 +74,7 @@
 		0C5085C01F2E357D00C4A04D /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		0C5085C21F2E357D00C4A04D /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0C5085C41F2E357D00C4A04D /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		0C81A2C620FBE2F400B8E817 /* BracketViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BracketViewController.swift; sourceTree = "<group>"; };
 		0C8806B22030F78E001D7EB9 /* CreateTournamentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTournamentViewController.swift; sourceTree = "<group>"; };
 		0C8806B420333D88001D7EB9 /* TableData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableData.swift; sourceTree = "<group>"; };
 		0C8806B620338C05001D7EB9 /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
@@ -85,13 +85,15 @@
 		0C9FD7791F2FE45F005174F4 /* TournamentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TournamentTableViewCell.swift; sourceTree = "<group>"; };
 		0C9FD77C1F2FE498005174F4 /* TournamentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TournamentTableViewCell.xib; sourceTree = "<group>"; };
 		0C9FD7821F302098005174F4 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		0CA1C09B20FC01F10072656B /* RoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundView.swift; sourceTree = "<group>"; };
+		0CA1C09D20FC02B40072656B /* RoundView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RoundView.xib; sourceTree = "<group>"; };
+		0CA1C09F20FC13D70072656B /* MatchView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MatchView.xib; sourceTree = "<group>"; };
+		0CA1C0A120FC13E20072656B /* MatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchView.swift; sourceTree = "<group>"; };
 		0CA4DB281F3776E0005A3FDF /* MyBracketViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyBracketViewController.swift; sourceTree = "<group>"; };
 		0CA4DB2A1F378756005A3FDF /* ResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
-		0CE187311F3F8D7D0069BEC6 /* BracketViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BracketViewController.swift; sourceTree = "<group>"; };
-		0CE187331F3F93450069BEC6 /* MatchCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchCollectionViewCell.swift; sourceTree = "<group>"; };
-		0CE187341F3F93450069BEC6 /* MatchCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MatchCollectionViewCell.xib; sourceTree = "<group>"; };
 		0CE187381F40B7210069BEC6 /* MatchTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MatchTableViewCell.xib; sourceTree = "<group>"; };
-		0CE8270D20E868EF0069DF2E /* BracketViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BracketViewController2.swift; sourceTree = "<group>"; };
+		0CE3A1F0210EBDB70099B1D3 /* BracketView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BracketView.xib; sourceTree = "<group>"; };
+		0CE3A1F2210EBDC10099B1D3 /* BracketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BracketView.swift; sourceTree = "<group>"; };
 		4D7185542C0E4E1151157A56 /* Pods-BracketChallenge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BracketChallenge.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BracketChallenge/Pods-BracketChallenge.debug.xcconfig"; sourceTree = "<group>"; };
 		832DB5FC271697BEEB9C135D /* Pods-BracketChallenge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BracketChallenge.release.xcconfig"; path = "Pods/Target Support Files/Pods-BracketChallenge/Pods-BracketChallenge.release.xcconfig"; sourceTree = "<group>"; };
 		F29F7997F141AA3D3B8A33D9 /* Pods_BracketChallenge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BracketChallenge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -176,10 +178,12 @@
 				0C5085C01F2E357D00C4A04D /* Main.storyboard */,
 				0C9FD7791F2FE45F005174F4 /* TournamentTableViewCell.swift */,
 				0C9FD77C1F2FE498005174F4 /* TournamentTableViewCell.xib */,
-				0CE187331F3F93450069BEC6 /* MatchCollectionViewCell.swift */,
-				0CE187341F3F93450069BEC6 /* MatchCollectionViewCell.xib */,
-				0C11E88F20EB028500912441 /* RoundTableViewCell.swift */,
-				0C11E89120EB036E00912441 /* RoundTableViewCell.xib */,
+				0CE3A1F2210EBDC10099B1D3 /* BracketView.swift */,
+				0CE3A1F0210EBDB70099B1D3 /* BracketView.xib */,
+				0CA1C09B20FC01F10072656B /* RoundView.swift */,
+				0CA1C09D20FC02B40072656B /* RoundView.xib */,
+				0CA1C0A120FC13E20072656B /* MatchView.swift */,
+				0CA1C09F20FC13D70072656B /* MatchView.xib */,
 				0C49AB431F3554900074FAD0 /* MatchTableViewCell.swift */,
 				0CE187381F40B7210069BEC6 /* MatchTableViewCell.xib */,
 				0C8806B620338C05001D7EB9 /* TextFieldTableViewCell.swift */,
@@ -207,10 +211,9 @@
 				0C15EB261F2E548500E6E4A5 /* TournamentsViewController.swift */,
 				0C8806B22030F78E001D7EB9 /* CreateTournamentViewController.swift */,
 				0C42A1001F33DE6000BF26CE /* TournamentTabBarViewController.swift */,
+				0C81A2C620FBE2F400B8E817 /* BracketViewController.swift */,
 				0CA4DB281F3776E0005A3FDF /* MyBracketViewController.swift */,
 				0CA4DB2A1F378756005A3FDF /* ResultsViewController.swift */,
-				0CE187311F3F8D7D0069BEC6 /* BracketViewController.swift */,
-				0CE8270D20E868EF0069DF2E /* BracketViewController2.swift */,
 				0C9DAB841F54BCC4009268D6 /* StandingsViewController.swift */,
 				0C9DAB861F54C80D009268D6 /* UserBracketViewController.swift */,
 			);
@@ -260,7 +263,6 @@
 				0C5085A31F2E34E300C4A04D /* Frameworks */,
 				0C5085A41F2E34E300C4A04D /* Resources */,
 				C6D41C221CE55F6B17C88C8E /* [CP] Embed Pods Frameworks */,
-				FE612FA9B272E1EA1392F205 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -318,13 +320,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C15E5B11F2E397B00E6E4A5 /* Podfile in Resources */,
+				0CE3A1F1210EBDB70099B1D3 /* BracketView.xib in Resources */,
 				0C5085C91F2E357D00C4A04D /* Main.storyboard in Resources */,
-				0C11E89220EB036E00912441 /* RoundTableViewCell.xib in Resources */,
 				0CE187391F40B7210069BEC6 /* MatchTableViewCell.xib in Resources */,
-				0CE187361F3F93450069BEC6 /* MatchCollectionViewCell.xib in Resources */,
 				0C9FD77D1F2FE498005174F4 /* TournamentTableViewCell.xib in Resources */,
+				0CA1C09E20FC02B40072656B /* RoundView.xib in Resources */,
 				0C5085C81F2E357D00C4A04D /* LaunchScreen.storyboard in Resources */,
 				0C5085C71F2E357D00C4A04D /* Assets.xcassets in Resources */,
+				0CA1C0A020FC13D70072656B /* MatchView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -375,21 +378,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BracketChallenge/Pods-BracketChallenge-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		FE612FA9B272E1EA1392F205 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BracketChallenge/Pods-BracketChallenge-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -400,29 +388,29 @@
 				0C9DAB871F54C80D009268D6 /* UserBracketViewController.swift in Sources */,
 				0CA4DB291F3776E0005A3FDF /* MyBracketViewController.swift in Sources */,
 				0C213FB41F2FCEC3007F25CA /* BCError.swift in Sources */,
-				0C11E89020EB028500912441 /* RoundTableViewCell.swift in Sources */,
-				0CE187321F3F8D7D0069BEC6 /* BracketViewController.swift in Sources */,
+				0CE3A1F3210EBDC10099B1D3 /* BracketView.swift in Sources */,
 				0C42A0F41F30F45C00BF26CE /* Bracket.swift in Sources */,
-				0CE187351F3F93450069BEC6 /* MatchCollectionViewCell.swift in Sources */,
 				0C9FD7781F2FD9B4005174F4 /* Tournament.swift in Sources */,
 				0C42A0F61F30FCA700BF26CE /* Match.swift in Sources */,
 				0C15EB271F2E548500E6E4A5 /* TournamentsViewController.swift in Sources */,
 				0C213FB61F2FCEC3007F25CA /* BCNavigationViewController.swift in Sources */,
 				0CA4DB2B1F378756005A3FDF /* ResultsViewController.swift in Sources */,
 				0C9FD7831F302098005174F4 /* Player.swift in Sources */,
+				0CA1C09C20FC01F10072656B /* RoundView.swift in Sources */,
 				0C8806B92033C30C001D7EB9 /* DatePickerTableViewCell.swift in Sources */,
 				0C9FD77A1F2FE45F005174F4 /* TournamentTableViewCell.swift in Sources */,
 				0C8806B32030F78E001D7EB9 /* CreateTournamentViewController.swift in Sources */,
 				0C5085CA1F2E357D00C4A04D /* AppDelegate.swift in Sources */,
 				0C15EB321F2EC30B00E6E4A5 /* Extensions.swift in Sources */,
+				0CA1C0A220FC13E20072656B /* MatchView.swift in Sources */,
 				0C42A0F81F311D7300BF26CE /* MatchHelper.swift in Sources */,
 				0C49AB481F36843C0074FAD0 /* Identity.swift in Sources */,
 				0C42A1011F33DE6000BF26CE /* TournamentTabBarViewController.swift in Sources */,
 				0C48A2081F42474D002AB255 /* BCNavigationBar.swift in Sources */,
 				0C15EB291F2EAA5C00E6E4A5 /* BCClient.swift in Sources */,
+				0C81A2C720FBE2F400B8E817 /* BracketViewController.swift in Sources */,
 				0C8806B520333D88001D7EB9 /* TableData.swift in Sources */,
 				0C9DAB851F54BCC4009268D6 /* StandingsViewController.swift in Sources */,
-				0CE8270E20E868EF0069DF2E /* BracketViewController2.swift in Sources */,
 				0C8806B720338C05001D7EB9 /* TextFieldTableViewCell.swift in Sources */,
 				0C15EB2B1F2EAAA300E6E4A5 /* User.swift in Sources */,
 				0C5085CB1F2E357D00C4A04D /* LoginViewController.swift in Sources */,
