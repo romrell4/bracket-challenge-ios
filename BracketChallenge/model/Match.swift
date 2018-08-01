@@ -37,4 +37,16 @@ class Match {
         self.seed2 = dict["seed2"] as? Int
         self.winnerId = dict["winner_id"] as? Int
     }
+	
+	init(matchId: Int, bracketId: Int, round: Int, position: Int, player1Id: Int?, player2Id: Int?, seed1: Int?, seed2: Int?, winnerId: Int?) {
+		self.matchId = matchId
+		self.bracketId = bracketId
+		self.round = round
+		self.position = position
+		self.player1Id = player1Id
+		self.player2Id = player2Id
+		self.seed1 = seed1
+		self.seed2 = seed2
+		self.winnerId = winnerId
+	}
 }

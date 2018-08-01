@@ -56,7 +56,7 @@ class Tournament {
             let name = dict[Keys.name] as? String,
             let startDate = DATE_FORMAT.date(from: dict[Keys.startDate] as? String),
             let endDate = DATE_FORMAT.date(from: dict[Keys.endDate] as? String) else {
-                throw InvalidModelError.transaction
+                throw InvalidModelError.tournament
         }
         
         self.init(tournamentId: tournamentId,

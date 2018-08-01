@@ -199,7 +199,7 @@ class BCClient {
 enum InvalidModelError: Error {
     case user
     case player
-    case transaction
+	case tournament
     case bracket
     case match
 }
