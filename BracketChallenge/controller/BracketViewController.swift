@@ -14,6 +14,9 @@ class BracketViewController: UIViewController, MatchViewClickableDelegate {
 	var tournament: Tournament!
 	var bracket: Bracket? {
 		didSet {
+			//If we aren't in a tab controller, the top line will set the title. Otherwise, the bottom one will.
+			title = bracket?.name
+			tabBarController?.title = bracket?.name
 			bracketView?.bracket = bracket
 		}
 	}
@@ -44,7 +47,7 @@ class BracketViewController: UIViewController, MatchViewClickableDelegate {
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		
-		//When this tab is selectd, reset the title to the bracket name
+		//When this tab is selected, reset the title to the bracket name
 		tabBarController?.title = bracket?.name
 	}
 	

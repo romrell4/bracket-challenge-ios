@@ -43,7 +43,7 @@
             </objects>
             <point key="canvasLocation" x="2705" y="-647"/>
         </scene>
-        <!--User-->
+        <!--Tournaments-->
         <scene sceneID="c87-jS-EJh">
             <objects>
                 <viewController id="njm-U6-VZ6" customClass="TournamentsViewController" customModule="BracketChallenge" customModuleProvider="target" sceneMemberID="viewController">
@@ -77,7 +77,7 @@
                             <constraint firstItem="neL-n2-TLQ" firstAttribute="leading" secondItem="45V-4D-nTK" secondAttribute="leading" id="YTm-fd-KN4"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="User" id="u9K-8V-IL8">
+                    <navigationItem key="navigationItem" title="Tournaments" id="u9K-8V-IL8">
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="NIW-Sx-VCj">
                             <connections>
                                 <action selector="logOut:" destination="njm-U6-VZ6" id="1TG-qH-6gI"/>
