@@ -24,6 +24,13 @@ class RoundView: UIScrollView, MatchViewDelegate {
 	@IBOutlet private var topBottomConstraints: [NSLayoutConstraint]!
 	
 	//MARK: Public properties
+	var matches: [MatchHelper]! {
+		didSet {
+			if oldValue != nil {
+				loadUI(firstTime: false)
+			}
+		}
+	}
 	var zoomLevel: Int! {
 		didSet {
 			let spacing = CGFloat(zoomLevel - 1) * MATCH_VIEW_HEIGHT
@@ -56,7 +63,6 @@ class RoundView: UIScrollView, MatchViewDelegate {
 	//MARK: Private properties
 	private var roundDelegate: RoundViewDelegate!
 	private var clickDelegate: MatchViewClickableDelegate!
-	private var matches = [MatchHelper]()
 	private var masterMatches: [MatchHelper]?
 	private var matchViews = [MatchView]()
 	
@@ -69,7 +75,7 @@ class RoundView: UIScrollView, MatchViewDelegate {
 		roundView.clickDelegate = clickDelegate
 		roundView.matches = matches
 		roundView.masterMatches = masterMatches
-		roundView.loadUI()
+		roundView.loadUI(firstTime: true)
 		return roundView
 	}
 	
@@ -89,15 +95,19 @@ class RoundView: UIScrollView, MatchViewDelegate {
 	
 	//MARK: Private functions
 	
-	private func loadUI() {
+	private func loadUI(firstTime: Bool) {
 		for i in 0..<matches.count {
-			let matchView = MatchView.initWith(delegate: self, clickDelegate: clickDelegate, match: matches[i], masterMatch: masterMatches?[i])
-			stackView.addArrangedSubview(matchView)
-			
-			NSLayoutConstraint.activate([
-				matchView.heightAnchor.constraint(equalToConstant: MATCH_VIEW_HEIGHT)
-			])
-			matchViews.append(matchView)
+			if firstTime {
+				let matchView = MatchView.initWith(delegate: self, clickDelegate: clickDelegate, match: matches[i], masterMatch: masterMatches?[i])
+				stackView.addArrangedSubview(matchView)
+				
+				NSLayoutConstraint.activate([
+					matchView.heightAnchor.constraint(equalToConstant: MATCH_VIEW_HEIGHT)
+				])
+				matchViews.append(matchView)
+			} else {
+				matchViews[i].match = matches[i]
+			}
 		}
 	}
 }

@@ -21,12 +21,12 @@ class BracketView: UIView, UIScrollViewDelegate, RoundViewDelegate {
 	//MARK: Public properties
 	var bracket: Bracket! {
 		didSet {
-			loadUI()
+			loadUI(firstTime: oldValue == nil)
 		}
 	}
 	var masterBracket: Bracket? {
 		didSet {
-			loadUI()
+			loadUI(firstTime: true)
 		}
 	}
 	
@@ -133,37 +133,39 @@ class BracketView: UIView, UIScrollViewDelegate, RoundViewDelegate {
 	
 	//MARK: Private functions
 	
-	private func loadUI() {
+	private func loadUI(firstTime: Bool) {
 		//Only load the UI if the user's bracket is loaded already (if the master gets loaded, wait until the user's bracket loads
 		if let bracket = bracket {
 			spinner.stopAnimating()
-			topView.isHidden = false
 			
 			scoreLabel.text = "Score: \(bracket.score)"
 			
-			//Only allow the UI to be loaded once
-			roundViews.forEach {
-				$0.removeFromSuperview()
-			}
-			roundViews.removeAll(keepingCapacity: true)
-			
-			for i in 0..<(bracket.rounds?.count ?? 0) {
-				let roundView = RoundView.initWith(scrollDelegate: self, roundDelegate: self, clickDelegate: clickDelegate, matches: bracket.rounds?[i] ?? [], masterMatches: masterBracket?.rounds?[i])
-				roundView.translatesAutoresizingMaskIntoConstraints = false
-				roundViews.append(roundView)
-				stackView.addArrangedSubview(roundView)
+			//Only allow the UI to be created once
+			if firstTime {
+				topView.isHidden = false
 				
-				NSLayoutConstraint.activate([
-					roundView.widthAnchor.constraint(equalToConstant: UI.roundWidth)
-				])
+				for i in 0..<(bracket.rounds?.count ?? 0) {
+					let roundView = RoundView.initWith(scrollDelegate: self, roundDelegate: self, clickDelegate: clickDelegate, matches: bracket.rounds?[i] ?? [], masterMatches: masterBracket?.rounds?[i])
+					roundView.translatesAutoresizingMaskIntoConstraints = false
+					roundViews.append(roundView)
+					stackView.addArrangedSubview(roundView)
+					
+					NSLayoutConstraint.activate([
+						roundView.widthAnchor.constraint(equalToConstant: UI.roundWidth)
+					])
+				}
+				
+				//Allow the stack view enough space to see everything
+				stackViewWidthConstraint.constant = UI.roundWidth * CGFloat(bracket.rounds?.count ?? 0)
+				
+				//This will make sure all of the spacing is correct
+				pageControl.numberOfPages = roundViews.count
+				currentPage = 0
+			} else {
+				for i in 0..<(bracket.rounds?.count ?? 0) {
+					roundViews[i].matches = bracket.rounds?[i] ?? []
+				}
 			}
-			
-			//Allow the stack view enough space to see everything
-			stackViewWidthConstraint.constant = UI.roundWidth * CGFloat(bracket.rounds?.count ?? 0)
-			
-			//This will make sure all of the spacing is correct
-			pageControl.numberOfPages = roundViews.count
-			currentPage = 0
 		}
 	}
 }
