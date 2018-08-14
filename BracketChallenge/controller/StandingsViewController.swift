@@ -34,8 +34,6 @@ class StandingsViewController: UIViewController, UITableViewDataSource, UITableV
 		
 		loadBrackets()
         
-        tabBarController?.title = "Standings"
-        
         if let indexPath = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: indexPath, animated: true)
         }
