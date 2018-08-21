@@ -26,7 +26,7 @@ class BracketView: UIView, UIScrollViewDelegate, RoundViewDelegate {
 	}
 	var masterBracket: Bracket? {
 		didSet {
-			loadUI(firstTime: true)
+			loadUI(firstTime: false)
 		}
 	}
 	
