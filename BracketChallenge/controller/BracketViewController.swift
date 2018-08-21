@@ -41,27 +41,23 @@ class BracketViewController: UIViewController, MatchViewClickableDelegate {
 		}
 	}
 	
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(animated)
+		
+		if bracketView.changesMade {
+			BCClient.updateBracket(bracket: bracketView.bracket, callback: { (bracket, error) in
+				if bracket != nil {
+					//This will delete the cached bracket
+					self.bracketView.changesMade = false
+				}
+			})
+		}
+	}
+	
 	//MARK: MatchViewClickableDelegate
 	
 	func areCellsClickable() -> Bool {
 		//Override if you want to stop users from selecting the rows
 		return true
-	}
-	
-	//MARK: Listeners
-	
-	@objc func updateBracket() {
-		if let bracket = bracket {
-			spinner.startAnimating()
-			BCClient.updateBracket(bracket: bracket, callback: { (bracket, error) in
-				self.spinner.stopAnimating()
-				if let bracket = bracket {
-					self.bracket = bracket
-					super.displayAlert(title: "Success", message: "Bracket successfully updated", alertHandler: nil)
-				} else {
-					super.displayAlert(error: error)
-				}
-			})
-		}
 	}
 }
