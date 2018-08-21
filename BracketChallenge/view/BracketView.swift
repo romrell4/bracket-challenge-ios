@@ -54,6 +54,7 @@ class BracketView: UIView, UIScrollViewDelegate, RoundViewDelegate {
 	
 	//MARK: Private outlets
 	@IBOutlet private weak var topView: UIView!
+	@IBOutlet private weak var roundLabel: UILabel!
 	@IBOutlet private weak var pageControl: UIPageControl!
 	@IBOutlet private weak var scoreLabel: UILabel!
 	@IBOutlet private weak var stackView: UIStackView!
@@ -69,6 +70,7 @@ class BracketView: UIView, UIScrollViewDelegate, RoundViewDelegate {
 			roundViews.enumerated().forEach { (index, roundView) in
 				roundView.zoomLevel = Int(pow(2.0, Double(currentPage == 0 ? index : index - currentPage + 1)))
 			}
+			roundLabel.text = getRoundLabel()
 			pageControl.currentPage = currentPage
 		}
 	}
@@ -193,5 +195,24 @@ class BracketView: UIView, UIScrollViewDelegate, RoundViewDelegate {
 				}
 			}
 		}
+	}
+
+	private func getRoundLabel() -> String? {
+		let roundFormatter = NumberFormatter()
+		roundFormatter.numberStyle = .ordinal
+		
+		let current = currentPage + 1
+		let max = roundViews.count
+		
+		if current == max {
+			return "Final"
+		} else if current == max - 1 {
+			return "Semis"
+		} else if current == max - 2 {
+			return "Quarters"
+		} else if let roundPrefix = roundFormatter.string(from: NSNumber(value: current)) {
+			return "\(roundPrefix) Round"
+		}
+		return nil
 	}
 }
