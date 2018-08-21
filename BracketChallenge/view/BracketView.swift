@@ -21,10 +21,9 @@ class BracketView: UIView, UIScrollViewDelegate, RoundViewDelegate {
 	//MARK: Public properties
 	var bracket: Bracket! {
 		didSet {
+			//If there is a cached bracket that did not get saved, save it
 			if let bracketDict = UserDefaults.standard.dictionary(forKey: bracket.unsavedBracketKey), let unsavedBracket = try? Bracket(dict: bracketDict) {
-				spinner.startAnimating()
 				BCClient.updateBracket(bracket: unsavedBracket) { (bracket, error) in
-					self.spinner.stopAnimating()
 					if let updatedBracket = bracket {
 						//This will delete the cached bracket
 						self.changesMade = false
@@ -32,6 +31,7 @@ class BracketView: UIView, UIScrollViewDelegate, RoundViewDelegate {
 					}
 				}
 			}
+			//If oldValue is nil, you're really creating the UI instead of just loading it
 			loadUI(firstTime: oldValue == nil)
 		}
 	}
@@ -43,8 +43,10 @@ class BracketView: UIView, UIScrollViewDelegate, RoundViewDelegate {
 	var changesMade = false {
 		didSet {
 			if changesMade {
+				//Cache the bracket in user defaults, so that it can be saved later
 				UserDefaults.standard.set(bracket.toDict(), forKey: bracket.unsavedBracketKey)
 			} else {
+				//Delete the cached bracket
 				UserDefaults.standard.removeObject(forKey: bracket.unsavedBracketKey)
 			}
 		}
@@ -63,6 +65,7 @@ class BracketView: UIView, UIScrollViewDelegate, RoundViewDelegate {
 	private var roundViews = [RoundView]()
 	private var currentPage = 0 {
 		didSet {
+			//Calculate the zoomLevel for each round - 2^(index - currentPage), unless it's the first page
 			roundViews.enumerated().forEach { (index, roundView) in
 				roundView.zoomLevel = Int(pow(2.0, Double(currentPage == 0 ? index : index - currentPage + 1)))
 			}
@@ -80,7 +83,6 @@ class BracketView: UIView, UIScrollViewDelegate, RoundViewDelegate {
 			bracketView.topAnchor.constraint(equalTo: superview.topAnchor),
 			bracketView.bottomAnchor.constraint(equalTo: superview.bottomAnchor)
 		])
-		//Set this first so that the variable is saved when the bracket loads all it's matches (didSet)
 		bracketView.clickDelegate = clickDelegate
 		bracketView.tournament = tournament
 		return bracketView
@@ -89,7 +91,7 @@ class BracketView: UIView, UIScrollViewDelegate, RoundViewDelegate {
 	//MARK: UIScrollViewDelegate
 	
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {
-		//Keep all visible round views in sync
+		//Keep all round views in sync (filtering out itself, since it already scrolled)
 		roundViews.filter { $0 != scrollView }.forEach {
 			$0.contentOffset = scrollView.contentOffset
 		}
@@ -167,15 +169,15 @@ class BracketView: UIView, UIScrollViewDelegate, RoundViewDelegate {
 			if firstTime {
 				topView.isHidden = false
 				
+				//Create a new round view for each round in the bracket
 				for i in 0..<(bracket.rounds?.count ?? 0) {
 					let roundView = RoundView.initWith(scrollDelegate: self, roundDelegate: self, clickDelegate: clickDelegate, matches: bracket.rounds?[i] ?? [], masterMatches: masterBracket?.rounds?[i])
 					roundView.translatesAutoresizingMaskIntoConstraints = false
 					roundViews.append(roundView)
 					stackView.addArrangedSubview(roundView)
 					
-					NSLayoutConstraint.activate([
-						roundView.widthAnchor.constraint(equalToConstant: UI.roundWidth)
-					])
+					//The width constraint in the storyboard is just a placeholder. This will actually set the width of the roundView
+					roundView.widthAnchor.constraint(equalToConstant: UI.roundWidth).isActive = true
 				}
 				
 				//Allow the stack view enough space to see everything
@@ -185,6 +187,7 @@ class BracketView: UIView, UIScrollViewDelegate, RoundViewDelegate {
 				pageControl.numberOfPages = roundViews.count
 				currentPage = 0
 			} else {
+				//If we're just updating the view, setting the matches will reload each individual roundView
 				for i in 0..<(bracket.rounds?.count ?? 0) {
 					roundViews[i].matches = bracket.rounds?[i] ?? []
 				}
