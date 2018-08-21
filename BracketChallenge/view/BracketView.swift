@@ -21,12 +21,32 @@ class BracketView: UIView, UIScrollViewDelegate, RoundViewDelegate {
 	//MARK: Public properties
 	var bracket: Bracket! {
 		didSet {
+			if let bracketDict = UserDefaults.standard.dictionary(forKey: bracket.unsavedBracketKey), let unsavedBracket = try? Bracket(dict: bracketDict) {
+				spinner.startAnimating()
+				BCClient.updateBracket(bracket: unsavedBracket) { (bracket, error) in
+					self.spinner.stopAnimating()
+					if let updatedBracket = bracket {
+						//This will delete the cached bracket
+						self.changesMade = false
+						self.bracket = updatedBracket
+					}
+				}
+			}
 			loadUI(firstTime: oldValue == nil)
 		}
 	}
 	var masterBracket: Bracket? {
 		didSet {
-			loadUI(firstTime: false)
+			loadUI()
+		}
+	}
+	var changesMade = false {
+		didSet {
+			if changesMade {
+				UserDefaults.standard.set(bracket.toDict(), forKey: bracket.unsavedBracketKey)
+			} else {
+				UserDefaults.standard.removeObject(forKey: bracket.unsavedBracketKey)
+			}
 		}
 	}
 	
@@ -100,6 +120,9 @@ class BracketView: UIView, UIScrollViewDelegate, RoundViewDelegate {
 			//Reload the UI for the next match
 			roundViews[nextRound].reloadItems(at: newPosition)
 		}
+		
+		//Save the bracket to the device (so that it can be saved later)
+		changesMade = true
 	}
 	
 	//MARK: Listeners
@@ -133,7 +156,7 @@ class BracketView: UIView, UIScrollViewDelegate, RoundViewDelegate {
 	
 	//MARK: Private functions
 	
-	private func loadUI(firstTime: Bool) {
+	private func loadUI(firstTime: Bool = false) {
 		//Only load the UI if the user's bracket is loaded already (if the master gets loaded, wait until the user's bracket loads
 		if let bracket = bracket {
 			spinner.stopAnimating()

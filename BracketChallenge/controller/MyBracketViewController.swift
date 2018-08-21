@@ -28,13 +28,6 @@ class MyBracketViewController: UserBracketViewController, UITabBarControllerDele
 		}
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-		if tournament.active {
-			//Add the save button when this tab is selected
-			tabBarController?.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(updateBracket))
-		}
-    }
-    
     override func viewDidDisappear(_ animated: Bool) {
         //Remove the save button when a different tab is selected
         tabBarController?.navigationItem.rightBarButtonItem = nil

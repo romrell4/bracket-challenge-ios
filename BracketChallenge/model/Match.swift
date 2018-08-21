@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Match {
+class Match: Equatable {
     var matchId: Int
     var bracketId: Int
     var round: Int
@@ -48,5 +48,9 @@ class Match {
 		self.seed1 = seed1
 		self.seed2 = seed2
 		self.winnerId = winnerId
+	}
+	
+	static func ==(lhs: Match, rhs: Match) -> Bool {
+		return lhs.player1Id == rhs.player1Id && lhs.player2Id == rhs.player2Id && lhs.winnerId == rhs.winnerId
 	}
 }

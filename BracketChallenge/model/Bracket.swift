@@ -13,13 +13,17 @@ private let NAME_KEY = "name"
 private let SCORE_KEY = "score"
 private let ROUNDS_KEY = "rounds"
 
-class Bracket {
+private let UNSAVED_BRACKET_KEY_PREFIX = "UNSAVED_BRACKET_"
+
+class Bracket: Equatable {
     var bracketId: Int
     var userId: Int?
     var tournamentId: Int
     var name: String
     var score: Int
     var rounds: [[MatchHelper]]?
+	
+	var unsavedBracketKey: String { return "\(UNSAVED_BRACKET_KEY_PREFIX)\(bracketId)" }
     
     convenience init(dict: [String: Any]) throws {
         guard let bracketId = dict[BRACKET_ID_KEY] as? Int, let tournamentId = dict[TOURNAMENT_ID_KEY] as? Int, let name = dict[NAME_KEY] as? String, let score = dict[SCORE_KEY] as? Int else {
@@ -75,4 +79,8 @@ class Bracket {
         }
         return dict
     }
+	
+	static func ==(lhs: Bracket, rhs: Bracket) -> Bool {
+		return lhs.bracketId == rhs.bracketId && lhs.name == rhs.name && lhs.score == rhs.score && lhs.tournamentId == rhs.tournamentId && lhs.userId == rhs.userId && lhs.rounds == rhs.rounds
+	}
 }
