@@ -45,6 +45,13 @@ extension NSLayoutConstraint {
 	}
 }
 
+extension NumberFormatter {
+	convenience init(style: NumberFormatter.Style) {
+		self.init()
+		numberStyle = style
+	}
+}
+
 extension String {
 	func urlEncoded(characterSet: CharacterSet = .alphanumerics) -> String {
 		return self.addingPercentEncoding(withAllowedCharacters: characterSet) ?? ""

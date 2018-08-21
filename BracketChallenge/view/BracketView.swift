@@ -8,6 +8,8 @@
 
 import UIKit
 
+private let NUMBER_FORMATTER = NumberFormatter(style: .ordinal)
+
 class BracketView: UIView, UIScrollViewDelegate, RoundViewDelegate {
 	private struct UI {
 		static let roundWidth: CGFloat = UIScreen.main.bounds.width * 0.8
@@ -198,9 +200,6 @@ class BracketView: UIView, UIScrollViewDelegate, RoundViewDelegate {
 	}
 
 	private func getRoundLabel() -> String? {
-		let roundFormatter = NumberFormatter()
-		roundFormatter.numberStyle = .ordinal
-		
 		let current = currentPage + 1
 		let max = roundViews.count
 		
@@ -210,7 +209,7 @@ class BracketView: UIView, UIScrollViewDelegate, RoundViewDelegate {
 			return "Semis"
 		} else if current == max - 2 {
 			return "Quarters"
-		} else if let roundPrefix = roundFormatter.string(from: NSNumber(value: current)) {
+		} else if let roundPrefix = NUMBER_FORMATTER.string(from: NSNumber(value: current)) {
 			return "\(roundPrefix) Round"
 		}
 		return nil
