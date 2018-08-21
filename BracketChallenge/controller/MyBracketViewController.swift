@@ -22,7 +22,7 @@ class MyBracketViewController: UserBracketViewController, UITabBarControllerDele
         
         loadData()
 		
-		if !tournament.active {
+		if !areCellsClickable() {
 			createBracketLabel.text = "This tournament has already started. No new brackets are being taken."
 			createBracketButton.isHidden = true
 		}
@@ -52,8 +52,8 @@ class MyBracketViewController: UserBracketViewController, UITabBarControllerDele
     //MARK: Listeners
     
     override func areCellsClickable() -> Bool {
-        //They should only be able to edit their picks if the tournament hasn't started yet
-        return tournament.active
+        //They should only be able to edit their picks if the tournament hasn't started yet (or if they're an admin)
+        return tournament.active || Identity.user.admin
     }
     
     @IBAction func createBracketTapped(_ sender: Any) {
