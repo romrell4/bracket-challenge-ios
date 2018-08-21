@@ -15,7 +15,8 @@ class TournamentTabBarViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+		
+		self.title = tournament.name
         self.tabBar.isTranslucent = false
         
         if let myBracketVc = viewControllers?[0] as? MyBracketViewController {

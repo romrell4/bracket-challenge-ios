@@ -14,9 +14,6 @@ class BracketViewController: UIViewController, MatchViewClickableDelegate {
 	var tournament: Tournament!
 	var bracket: Bracket? {
 		didSet {
-			//If we aren't in a tab controller, the top line will set the title. Otherwise, the bottom one will.
-			title = bracket?.name
-			tabBarController?.title = bracket?.name
 			bracketView?.bracket = bracket
 		}
 	}
@@ -44,11 +41,17 @@ class BracketViewController: UIViewController, MatchViewClickableDelegate {
 		}
 	}
 	
-	override func viewWillAppear(_ animated: Bool) {
-		super.viewWillAppear(animated)
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(animated)
 		
-		//When this tab is selected, reset the title to the bracket name
-		tabBarController?.title = bracket?.name
+		if bracketView.changesMade {
+			BCClient.updateBracket(bracket: bracketView.bracket, callback: { (bracket, error) in
+				if bracket != nil {
+					//This will delete the cached bracket
+					self.bracketView.changesMade = false
+				}
+			})
+		}
 	}
 	
 	//MARK: MatchViewClickableDelegate
@@ -56,22 +59,5 @@ class BracketViewController: UIViewController, MatchViewClickableDelegate {
 	func areCellsClickable() -> Bool {
 		//Override if you want to stop users from selecting the rows
 		return true
-	}
-	
-	//MARK: Listeners
-	
-	@objc func updateBracket() {
-		if let bracket = bracket {
-			spinner.startAnimating()
-			BCClient.updateBracket(bracket: bracket, callback: { (bracket, error) in
-				self.spinner.stopAnimating()
-				if let bracket = bracket {
-					self.bracket = bracket
-					super.displayAlert(title: "Success", message: "Bracket successfully updated", alertHandler: nil)
-				} else {
-					super.displayAlert(error: error)
-				}
-			})
-		}
 	}
 }
