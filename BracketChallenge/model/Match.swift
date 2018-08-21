@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Match: Equatable {
+class Match {
     var matchId: Int
     var bracketId: Int
     var round: Int

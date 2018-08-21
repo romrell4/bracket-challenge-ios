@@ -15,7 +15,7 @@ private let ROUNDS_KEY = "rounds"
 
 private let UNSAVED_BRACKET_KEY_PREFIX = "UNSAVED_BRACKET_"
 
-class Bracket: Equatable {
+class Bracket {
     var bracketId: Int
     var userId: Int?
     var tournamentId: Int
@@ -79,8 +79,4 @@ class Bracket: Equatable {
         }
         return dict
     }
-	
-	static func ==(lhs: Bracket, rhs: Bracket) -> Bool {
-		return lhs.bracketId == rhs.bracketId && lhs.name == rhs.name && lhs.score == rhs.score && lhs.tournamentId == rhs.tournamentId && lhs.userId == rhs.userId && lhs.rounds == rhs.rounds
-	}
 }
