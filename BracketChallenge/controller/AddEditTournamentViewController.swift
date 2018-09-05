@@ -34,7 +34,6 @@ class AddEditTournamentViewController: UIViewController, UITableViewDataSource, 
 		
 		title = tournament?.name ?? "Create Tournament"
         
-        //TODO: Use TableData in other VCs
         tableData = TableData(sections: [
             Section(cellId: "textFieldCell", rows: [
 				Row(text: tournament?.name, placeholderText: "Tournament Name"),
