@@ -53,8 +53,9 @@ class BCClient {
         }
     }
     
-    static func createTournament(tournament: Tournament, callback: @escaping (Tournament?, BCError?) -> Void) {
-        makeRequest(endpoint: "tournaments", method: "POST", body: tournament.toDict()) { (response) in
+    static func saveTournament(tournament: Tournament, callback: @escaping (Tournament?, BCError?) -> Void) {
+		let (url, method) = tournament.tournamentId == nil ? ("tournaments", "POST") : ("tournaments/\(tournament.tournamentId!)", "PUT")
+		makeRequest(endpoint: url, method: method, body: tournament.toDict()) { (response) in
             if response.succeeded, let dict = response.getDataJson() as? [String: Any] {
                 do {
                     callback(try Tournament(dict: dict), nil)
@@ -80,6 +81,16 @@ class BCClient {
             }
         }
     }
+	
+	static func deleteTournament(_ tournamentId: Int, callback: @escaping (BCError?) -> Void) {
+		makeRequest(endpoint: "tournaments/\(tournamentId)", method: "DELETE") { (response) in
+			if response.succeeded {
+				callback(nil)
+			} else {
+				callback(response.error)
+			}
+		}
+	}
     
     static func getBrackets(tournamentId: Int, callback: @escaping ([Bracket]?, BCError?) -> Void) {
         makeRequest(endpoint: "tournaments/\(tournamentId)/brackets") { (response) in

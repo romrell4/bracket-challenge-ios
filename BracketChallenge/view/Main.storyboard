@@ -89,17 +89,17 @@
                         <outlet property="tableView" destination="neL-n2-TLQ" id="Gkv-GA-EJr"/>
                         <segue destination="Rgz-d7-uyj" kind="show" identifier="tournament" id="uuC-dF-XVo"/>
                         <segue destination="MKc-fd-1F3" kind="presentation" identifier="logIn" modalPresentationStyle="formSheet" id="Kpn-vx-g8Z"/>
-                        <segue destination="dK2-yh-zHq" kind="presentation" identifier="createTournament" modalPresentationStyle="formSheet" id="Igg-oH-h1r"/>
+                        <segue destination="dK2-yh-zHq" kind="presentation" identifier="addEditTournament" modalPresentationStyle="formSheet" id="Igg-oH-h1r"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NiF-Yc-xyF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1958" y="45"/>
         </scene>
-        <!--Create Tournament-->
+        <!--Add Edit Tournament View Controller-->
         <scene sceneID="RaJ-Ef-mb3">
             <objects>
-                <viewController id="g40-kR-UXQ" customClass="CreateTournamentViewController" customModule="BracketChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="g40-kR-UXQ" customClass="AddEditTournamentViewController" customModule="BracketChallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7Od-gd-rjj"/>
                         <viewControllerLayoutGuide type="bottom" id="THf-0d-c2p"/>
@@ -209,10 +209,10 @@
                             <constraint firstAttribute="trailing" secondItem="5FE-8Y-A2f" secondAttribute="trailing" id="yVp-Vh-UkK"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Create Tournament" id="5Ey-Ci-Q4H">
+                    <navigationItem key="navigationItem" id="5Ey-Ci-Q4H">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="5NQ-a9-eIy">
                             <connections>
-                                <segue destination="AJP-c7-vKj" kind="unwind" unwindAction="tournamentAddedWithSegue:" id="PGr-1M-KhD"/>
+                                <action selector="cancelTapped:" destination="g40-kR-UXQ" id="uhu-qd-p4L"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="cMH-y6-A5Z">
