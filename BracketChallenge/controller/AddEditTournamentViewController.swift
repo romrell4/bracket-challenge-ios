@@ -1,5 +1,5 @@
 //
-//  CreateTournamentViewController.swift
+//  AddEditTournamentViewController.swift
 //  BracketChallenge
 //
 //  Created by Eric Romrell on 2/11/18.
@@ -15,14 +15,14 @@ private let DEFAULT_END = DEFAULT_START.next("Sunday")
 private let TEXT_FIELD_SECTION = 0
 private let DATE_SECTION = 1
 
-class CreateTournamentViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate, UITextFieldDelegate {
+class AddEditTournamentViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate, UITextFieldDelegate {
 
     //MARK: Outlets
     @IBOutlet private weak var spinner: UIActivityIndicatorView!
     @IBOutlet private weak var tableView: UITableView!
     
     //MARK: Public properties
-    var createdTournament: Tournament?
+    var tournament: Tournament?
     
     //MARK: Private properties
     private var tableData = TableData()
@@ -31,17 +31,19 @@ class CreateTournamentViewController: UIViewController, UITableViewDataSource, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
+		
+		title = tournament?.name ?? "Create Tournament"
         
         //TODO: Use TableData in other VCs
         tableData = TableData(sections: [
             Section(cellId: "textFieldCell", rows: [
-                Row(placeholderText: "Tournament Name"),
-                Row(placeholderText: "Draws URL"),
-                Row(placeholderText: "Image URL")
+				Row(text: tournament?.name, placeholderText: "Tournament Name"),
+				Row(text: tournament?.drawsUrl, placeholderText: "Draws URL"),
+				Row(text: tournament?.imageUrl, placeholderText: "Image URL")
             ]),
             Section(cellId: "dateCell", rows: [
-                Row(text: "Start Date", detailText: DATE_FORMAT.string(from: DEFAULT_START)),
-                Row(text: "End Date", detailText: DATE_FORMAT.string(from: DEFAULT_END))
+                Row(text: "Start Date", detailText: DATE_FORMAT.string(from: tournament?.startDate ?? DEFAULT_START)),
+                Row(text: "End Date", detailText: DATE_FORMAT.string(from: tournament?.endDate ?? DEFAULT_END))
             ])
         ])
     }
@@ -60,6 +62,7 @@ class CreateTournamentViewController: UIViewController, UITableViewDataSource, U
         let row = tableData.row(forIndexPath: indexPath)
         let cell = tableData.cell(forTableView: tableView, atIndexPath: indexPath)
         if let cell = cell as? TextFieldTableViewCell {
+			cell.textField.text = row.text
             cell.textField.placeholder = row.placeholderText
 			cell.textField.delegate = self
         } else if let cell = cell as? DatePickerTableViewCell, let date = getDateFromRow(aboveIndexPath: indexPath) {
@@ -121,12 +124,12 @@ class CreateTournamentViewController: UIViewController, UITableViewDataSource, U
     }
     
     @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
-        if let tournament = validateFields() {
+        if let newTournament = validateFields() {
             self.spinner.startAnimating()
-            BCClient.createTournament(tournament: tournament, callback: { (tournament, error) in
+            BCClient.saveTournament(tournament: newTournament, callback: { (tournament, error) in
                 self.spinner.stopAnimating()
                 if let tournament = tournament {
-                    self.createdTournament = tournament
+                    self.tournament = tournament
                     self.performSegue(withIdentifier: "unwind", sender: nil)
                 } else {
                     super.displayAlert(error: error, alertHandler: nil)
@@ -134,6 +137,11 @@ class CreateTournamentViewController: UIViewController, UITableViewDataSource, U
             })
         }
     }
+	
+	@IBAction func cancelTapped(_ sender: Any) {
+		tournament = nil
+		self.performSegue(withIdentifier: "unwind", sender: nil)
+	}
     
     //MARK: Private functions
     
@@ -151,7 +159,7 @@ class CreateTournamentViewController: UIViewController, UITableViewDataSource, U
             .map { DATE_FORMAT.date(from: $0.detailText) }
         guard dates.count == 2 else { return nil }
         
-        return Tournament(name: name, drawsUrl: drawsUrl, imageUrl: imageUrl, startDate: dates[0], endDate: dates[1])
+		return Tournament(tournamentId: tournament?.tournamentId, name: name, masterBracketId: tournament?.masterBracketId, drawsUrl: drawsUrl, imageUrl: imageUrl, startDate: dates[0], endDate: dates[1])
     }
     
     private func getFieldText(forRow row: Int) -> String? {

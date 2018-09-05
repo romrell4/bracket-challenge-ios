@@ -56,7 +56,6 @@ class LoginViewController: UIViewController, LoginButtonDelegate, UIBarPositioni
     
     private func checkForLogin() {
         if AccessToken.current != nil {
-            print(AccessToken.current!)
             loginButton.isHidden = true
             
             //Try to log in. No need to pass anything in, the token identifies the user
