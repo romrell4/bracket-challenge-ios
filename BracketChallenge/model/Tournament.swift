@@ -38,7 +38,7 @@ class Tournament {
     }
 	
 	var imageNotificationName: Notification.Name {
-		return Notification.Name(rawValue: "T\(tournamentId)_IMAGE_LOADED")
+		return Notification.Name(rawValue: "T\(tournamentId ?? 0)_IMAGE_LOADED")
 	}
     
     init(tournamentId: Int? = nil, name: String? = nil, masterBracketId: Int? = nil, drawsUrl: String? = nil, imageUrl: String? = nil, startDate: Date? = nil, endDate: Date? = nil) {

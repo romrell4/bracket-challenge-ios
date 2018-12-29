@@ -54,7 +54,13 @@ class BCClient {
     }
     
     static func saveTournament(tournament: Tournament, callback: @escaping (Tournament?, BCError?) -> Void) {
-		let (url, method) = tournament.tournamentId == nil ? ("tournaments", "POST") : ("tournaments/\(tournament.tournamentId!)", "PUT")
+		let (url, method): (String, String)
+		if let tournamentId = tournament.tournamentId {
+			(url, method) = ("tournaments/\(tournamentId)", "PUT")
+		} else {
+			(url, method) = ("tournaments", "POST")
+		}
+		
 		makeRequest(endpoint: url, method: method, body: tournament.toDict()) { (response) in
             if response.succeeded, let dict = response.getDataJson() as? [String: Any] {
                 do {
@@ -69,7 +75,11 @@ class BCClient {
     }
     
     static func updateTournament(_ tournament: Tournament, callback: @escaping (Tournament?, BCError?) -> Void) {
-        makeRequest(endpoint: "tournaments/\(tournament.tournamentId)", method: "PUT", body: tournament.toDict()) { (response) in
+		guard let tournamentId = tournament.tournamentId else {
+			callback(nil, BCError(readableMessage: "You cannot update a tournament without a tournament id"))
+			return
+		}
+        makeRequest(endpoint: "tournaments/\(tournamentId)", method: "PUT", body: tournament.toDict()) { (response) in
             if response.succeeded, let dict = response.getDataJson() as? [String: Any] {
                 do {
                     callback(try Tournament(dict: dict), nil)
