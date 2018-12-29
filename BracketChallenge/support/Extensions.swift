@@ -110,6 +110,14 @@ extension UITableView {
 	}
 }
 
+@available(iOS 11.0, *)
+extension UIContextualAction {
+	convenience init(style: UIContextualAction.Style, title: String?, color: UIColor, handler: @escaping UIContextualActionHandler) {
+		self.init(style: style, title: title, handler: handler)
+		backgroundColor = color
+	}
+}
+
 extension UICollectionView {
     func registerNib(nibName: String, forCellIndentifier cellId: String = "cell") {
         register(UINib(nibName: nibName, bundle: nil), forCellWithReuseIdentifier: cellId)

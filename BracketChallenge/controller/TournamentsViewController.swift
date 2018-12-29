@@ -11,9 +11,10 @@ import FacebookLogin
 import FacebookCore
 
 private let TOURNAMENT_SEGUE_ID = "tournament"
-private let CREATE_MASTER_SEGUE_ID = "createMaster"
+private let ADD_EDIT_SEGUE_ID = "addEditTournament"
 
 class TournamentsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+	
     //MARK: Outlets
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var spinner: UIActivityIndicatorView!
@@ -46,7 +47,9 @@ class TournamentsViewController: UIViewController, UITableViewDataSource, UITabl
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == TOURNAMENT_SEGUE_ID, let vc = segue.destination as? TournamentTabBarViewController, let tournament = sender as? Tournament {
             vc.tournament = tournament
-        }
+		} else if segue.identifier == ADD_EDIT_SEGUE_ID, let navVc = segue.destination as? UINavigationController, let vc = navVc.viewControllers.first as? AddEditTournamentViewController {
+			vc.tournament = sender as? Tournament
+		}
     }
     
     //MARK: UITableViewDataSource callbacks
@@ -80,30 +83,57 @@ class TournamentsViewController: UIViewController, UITableViewDataSource, UITabl
             })
         }
     }
-    
-    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        if Identity.user.admin {
-            let refreshAction = UITableViewRowAction(style: .normal, title: "Refresh", handler: { (_, _) in
-                self.spinner.startAnimating()
-                
-                let tournament = self.tournaments[indexPath.row]
-                BCClient.refreshMasterBracket(tournamentId: tournament.tournamentId) { bracket, error in
-                    self.spinner.stopAnimating()
-                    if let bracket = bracket {
-                        //If the call succeeded, and the master bracket didn't exist, set the master bracket id
-                        if tournament.masterBracketId == nil {
-                            tournament.masterBracketId = bracket.bracketId
-                        }
-                    } else {
-                        super.displayAlert(error: error, title: "Failed to refresh")
-                    }
-                }
-            })
-            refreshAction.backgroundColor = .purple
-            return [refreshAction]
-        }
-        return []
-    }
+	
+	@available(iOS 11.0, *)
+	func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+		if Identity.user.admin {
+			return UISwipeActionsConfiguration(actions: [UIContextualAction(style: .destructive, title: "Delete", handler: { (_, _, completionHandler) in
+				self.spinner.startAnimating()
+				
+				let tournament = self.tournaments[indexPath.row]
+				BCClient.deleteTournament(tournament.tournamentId, callback: { (error) in
+					self.spinner.stopAnimating()
+					if error == nil {
+						self.tournaments.remove(at: indexPath.row)
+						self.tableView.deleteRows(at: [indexPath], with: .automatic)
+						completionHandler(true)
+					} else {
+						self.displayAlert(error: error)
+						completionHandler(false)
+					}
+				})
+			})])
+		}
+		return nil
+	}
+	
+	@available(iOS 11.0, *)
+	func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+		if Identity.user.admin {
+			return UISwipeActionsConfiguration(actions: [
+				UIContextualAction(style: .normal, title: "Edit", color: .blue) { (_, _, _) in
+					self.performSegue(withIdentifier: ADD_EDIT_SEGUE_ID, sender: self.tournaments[indexPath.row])
+				},
+				UIContextualAction(style: .normal, title: "Refresh", color: .purple) { (_, _, _) in
+					self.spinner.startAnimating()
+					
+					let tournament = self.tournaments[indexPath.row]
+					BCClient.refreshMasterBracket(tournamentId: tournament.tournamentId) { bracket, error in
+						self.spinner.stopAnimating()
+						if let bracket = bracket {
+							//If the call succeeded, and the master bracket didn't exist, set the master bracket id
+							if tournament.masterBracketId == nil {
+								tournament.masterBracketId = bracket.bracketId
+							}
+						} else {
+							super.displayAlert(error: error, title: "Failed to refresh")
+						}
+					}
+				}
+			])
+		}
+		return nil
+	}
     
     //MARK: Listeners
 	
@@ -113,6 +143,8 @@ class TournamentsViewController: UIViewController, UITableViewDataSource, UITabl
 	}
 	
 	@IBAction func loggedIn(segue: UIStoryboardSegue?) {
+		print(AccessToken.current?.authenticationToken ?? "")
+		
 		//If they are an admin, they can create tournaments. Give them the button
 		if Identity.user.admin {
 			navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped(_:)))
@@ -123,14 +155,18 @@ class TournamentsViewController: UIViewController, UITableViewDataSource, UITabl
 	}
     
     @IBAction func tournamentAdded(segue: UIStoryboardSegue?) {
-        if let vc = segue?.source as? CreateTournamentViewController, let tournament = vc.createdTournament {
-            tournaments.insert(tournament, at: 0)
-            tableView.reloadData()
+        if let vc = segue?.source as? AddEditTournamentViewController, let tournament = vc.tournament {
+			if let existingIndex = tournaments.index(where: { $0.tournamentId == tournament.tournamentId }) {
+				tournaments[existingIndex] = tournament
+			} else {
+				tournaments.insert(tournament, at: 0)
+			}
         }
+		tableView.reloadData()
     }
     
     @objc func addTapped(_ sender: Any) {
-        performSegue(withIdentifier: "createTournament", sender: nil)
+        performSegue(withIdentifier: ADD_EDIT_SEGUE_ID, sender: nil)
     }
 	
 	@objc func loadTournaments(_ sender: Any?) {
