@@ -8,15 +8,26 @@
 
 import UIKit
 import FacebookCore
+import UserNotifications
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         SDKApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+		
+		let center = UNUserNotificationCenter.current()
+		center.delegate = self
+		center.requestAuthorization(options: [.badge, .sound, .alert]) { (granted, error) in
+			print("Accepted!")
+			DispatchQueue.main.async {
+				application.registerForRemoteNotifications()
+			}
+		}
+		
         return true
     }
 	
@@ -28,6 +39,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return false
     }
     
-    
+	func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+		let hexToken = deviceToken.map { String(format: "%02hhx", $0) }.joined()
+		print(hexToken)
+	}
+	
+	func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+		print("Failed to get token, error: \(error)")
+	}
 }
 
