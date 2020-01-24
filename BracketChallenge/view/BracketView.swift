@@ -25,6 +25,8 @@ class BracketView: UIView, UIScrollViewDelegate, RoundViewDelegate {
 		didSet {
 			//If there is a cached bracket that did not get saved, save it
 			if let bracketDict = UserDefaults.standard.dictionary(forKey: bracket.unsavedBracketKey), let unsavedBracket = try? Bracket(dict: bracketDict) {
+				//This will apply any changes that we are about to overwrite
+				unsavedBracket.rebase(otherBracket: bracket)
 				BCClient.updateBracket(bracket: unsavedBracket) { (bracket, error) in
 					if let updatedBracket = bracket {
 						//This will delete the cached bracket

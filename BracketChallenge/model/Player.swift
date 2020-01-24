@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Player {
+class Player: Equatable {
     var playerId: Int?
     var name: String?
     var seed: Int?
@@ -28,4 +28,8 @@ class Player {
         self.name = name
         self.seed = seed
     }
+	
+	static func == (lhs: Player, rhs: Player) -> Bool {
+		return lhs.playerId == rhs.playerId && lhs.name == rhs.name && lhs.seed == rhs.seed
+	}
 }

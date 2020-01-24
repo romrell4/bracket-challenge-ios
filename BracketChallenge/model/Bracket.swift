@@ -53,6 +53,21 @@ class Bracket {
 		self.score = score
 		self.rounds = rounds
 	}
+	
+	func rebase(otherBracket: Bracket) {
+		guard let rounds = self.rounds, let otherRounds = otherBracket.rounds, rounds.count == otherRounds.count else { return }
+		for (myRound, otherRound) in zip(rounds, otherRounds) {
+			for (myMatch, otherMatch) in zip(myRound, otherRound) {
+				//Only apply additions to missing players. Keep all other
+				if myMatch.player1 == nil, otherMatch.player1 != nil {
+					myMatch.player1 = otherMatch.player1
+				}
+				if myMatch.player2 == nil, otherMatch.player2 != nil {
+					myMatch.player2 = otherMatch.player2
+				}
+			}
+		}
+	}
     
     func toDict() -> [String: Any] {
         var dict: [String: Any] = [
