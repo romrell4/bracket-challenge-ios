@@ -15,7 +15,7 @@ extension Date {
         var cal = Calendar(identifier: .gregorian)
         cal.locale = Locale(identifier: "en_US")
         
-        if let index = cal.weekdaySymbols.index(of: dayName), let date = cal.nextDate(after: self, matching: DateComponents(weekday: index + 1), matchingPolicy: .nextTime) {
+        if let index = cal.weekdaySymbols.firstIndex(of: dayName), let date = cal.nextDate(after: self, matching: DateComponents(weekday: index + 1), matchingPolicy: .nextTime) {
             return date
         }
         return self
@@ -40,7 +40,7 @@ extension DateFormatter {
 }
 
 extension NSLayoutConstraint {
-	convenience init(item: Any, attr1: NSLayoutAttribute, relatedBy: NSLayoutRelation = .equal, toItem: Any? = nil, attr2: NSLayoutAttribute = .notAnAttribute, multiplier: CGFloat = 1, constant: CGFloat = 0) {
+	convenience init(item: Any, attr1: NSLayoutConstraint.Attribute, relatedBy: NSLayoutConstraint.Relation = .equal, toItem: Any? = nil, attr2: NSLayoutConstraint.Attribute = .notAnAttribute, multiplier: CGFloat = 1, constant: CGFloat = 0) {
 		self.init(item: item, attribute: attr1, relatedBy: relatedBy, toItem: toItem, attribute: attr2, multiplier: multiplier, constant: constant)
 	}
 }
@@ -89,7 +89,7 @@ extension UITableView {
     //This can be done programatically or from the storyboard
     func variableHeightForRows() {
         self.estimatedRowHeight = 44.0                  //Arbitrary value, set to default cell height
-        self.rowHeight = UITableViewAutomaticDimension  //Needed to resize cells to fit contents
+        self.rowHeight = UITableView.automaticDimension  //Needed to resize cells to fit contents
     }
     
     func registerNib(nibName: String, forCellIdentifier cellId: String = "cell") {
@@ -112,7 +112,7 @@ extension UITableView {
 
 @available(iOS 11.0, *)
 extension UIContextualAction {
-	convenience init(style: UIContextualAction.Style, title: String?, color: UIColor, handler: @escaping UIContextualActionHandler) {
+	convenience init(style: UIContextualAction.Style, title: String?, color: UIColor, handler: @escaping UIContextualAction.Handler) {
 		self.init(style: style, title: title, handler: handler)
 		backgroundColor = color
 	}

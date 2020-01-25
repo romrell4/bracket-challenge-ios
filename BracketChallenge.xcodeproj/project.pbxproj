@@ -286,7 +286,7 @@
 					0C5085A51F2E34E300C4A04D = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = G9JN5J3VZ9;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1130;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Keychain = {
@@ -549,7 +549,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.romrell4.bracketchallenge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -568,7 +568,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.romrell4.bracketchallenge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};

@@ -156,7 +156,7 @@ class TournamentsViewController: UIViewController, UITableViewDataSource, UITabl
     
     @IBAction func tournamentAdded(segue: UIStoryboardSegue?) {
         if let vc = segue?.source as? AddEditTournamentViewController, let tournament = vc.tournament {
-			if let existingIndex = tournaments.index(where: { $0.tournamentId == tournament.tournamentId }) {
+			if let existingIndex = tournaments.firstIndex(where: { $0.tournamentId == tournament.tournamentId }) {
 				tournaments[existingIndex] = tournament
 			} else {
 				tournaments.insert(tournament, at: 0)

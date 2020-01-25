@@ -104,7 +104,7 @@ class BracketView: UIView, UIScrollViewDelegate, RoundViewDelegate {
 	//MARK: RoundViewDelegate
 	
 	func player(_ player: Player?, selectedIn roundView: RoundView, and matchView: MatchView) {
-		guard let round = roundViews.index(of: roundView), let position = roundView.index(of: matchView) else { return }
+		guard let round = roundViews.firstIndex(of: roundView), let position = roundView.index(of: matchView) else { return }
 		
 		//Set the winner
 		bracket?.rounds?[round][position].winner = player

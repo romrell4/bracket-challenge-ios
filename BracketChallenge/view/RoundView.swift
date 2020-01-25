@@ -80,7 +80,7 @@ class RoundView: UIScrollView, MatchViewDelegate {
 	}
 	
 	func index(of matchView: MatchView) -> Int? {
-		return matchViews.index(of: matchView)
+		return matchViews.firstIndex(of: matchView)
 	}
 	
 	func reloadItems(at index: Int) {

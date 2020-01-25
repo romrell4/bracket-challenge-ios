@@ -102,7 +102,7 @@ class MyBracketViewController: UserBracketViewController, UITabBarControllerDele
 	
 	private func displayCreateBracketView() {
 		self.createBracketView.isHidden = false
-		self.view.bringSubview(toFront: self.createBracketView)
+		self.view.bringSubviewToFront(self.createBracketView)
 	}
 	
 	private var noBracket = false
