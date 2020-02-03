@@ -266,6 +266,7 @@
 				0C5085A31F2E34E300C4A04D /* Frameworks */,
 				0C5085A41F2E34E300C4A04D /* Resources */,
 				C6D41C221CE55F6B17C88C8E /* [CP] Embed Pods Frameworks */,
+				CB04B337D50F0BC3C3A92833 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -387,6 +388,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BracketChallenge/Pods-BracketChallenge-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CB04B337D50F0BC3C3A92833 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BracketChallenge/Pods-BracketChallenge-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseAuthUI.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseAuthUI.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BracketChallenge/Pods-BracketChallenge-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

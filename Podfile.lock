@@ -41,6 +41,9 @@ PODS:
     - GoogleUtilities/Logger (~> 6.2)
     - nanopb (~> 0.3.901)
   - FirebaseCoreDiagnosticsInterop (1.1.0)
+  - FirebaseUI/Auth (8.4.0):
+    - Firebase/Auth (~> 6.0)
+    - GoogleUtilities/UserDefaults
   - GoogleDataTransport (3.2.0)
   - GoogleDataTransportCCTSupport (1.2.3):
     - GoogleDataTransport (~> 3.2)
@@ -59,6 +62,8 @@ PODS:
   - "GoogleUtilities/NSData+zlib (6.4.0)"
   - GoogleUtilities/Reachability (6.4.0):
     - GoogleUtilities/Logger
+  - GoogleUtilities/UserDefaults (6.4.0):
+    - GoogleUtilities/Logger
   - GTMSessionFetcher/Core (1.3.0)
   - nanopb (0.3.9011):
     - nanopb/decode (= 0.3.9011)
@@ -69,6 +74,7 @@ PODS:
 DEPENDENCIES:
   - FacebookLogin
   - Firebase/Auth
+  - FirebaseUI/Auth
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -84,6 +90,7 @@ SPEC REPOS:
     - FirebaseCore
     - FirebaseCoreDiagnostics
     - FirebaseCoreDiagnosticsInterop
+    - FirebaseUI
     - GoogleDataTransport
     - GoogleDataTransportCCTSupport
     - GoogleUtilities
@@ -102,12 +109,13 @@ SPEC CHECKSUMS:
   FirebaseCore: 632e05cc5e1199d9147122c16d92305eb04c34bd
   FirebaseCoreDiagnostics: 511f4f3ed7d440bb69127e8b97c2bc8befae639e
   FirebaseCoreDiagnosticsInterop: e9b1b023157e3a2fc6418b5cb601e79b9af7b3a0
+  FirebaseUI: 433550cb9e3d03ec7ee2c25f87493f76358d9b68
   GoogleDataTransport: 8e9b210c97d55fbff306cc5468ff91b9cb32dcf5
   GoogleDataTransportCCTSupport: 202d7cdf9c4a7d81a2bb7f7e7e1ba6faa421b1f2
   GoogleUtilities: 29bd0d8f850efbd28cff6d99e8b7da1f8d236bcf
   GTMSessionFetcher: 43b8b64263023d4f32caa0b40f4c8bfa3c5f36d8
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
 
-PODFILE CHECKSUM: f61988602543ba07ba5c64ce584cbc5038350c6b
+PODFILE CHECKSUM: dce79f2f7931a1e5fd099566f116087a522d1a0f
 
 COCOAPODS: 1.8.4
