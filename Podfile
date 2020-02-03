@@ -10,6 +10,6 @@ target 'BracketChallenge' do
 
   # Pods for BracketChallenge
   pod 'FacebookLogin'
-  pod 'Firebase/Auth'
+  pod 'Firebase/Core'
   pod 'FirebaseUI/Auth'
 end
