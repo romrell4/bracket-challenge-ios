@@ -99,7 +99,6 @@ class TournamentsViewController: UIViewController, UITableViewDataSource, UITabl
         }
     }
 	
-	@available(iOS 11.0, *)
 	func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
 		if Identity.user?.admin == true {
 			return UISwipeActionsConfiguration(actions: [UIContextualAction(style: .destructive, title: "Delete", handler: { (_, _, completionHandler) in
@@ -122,7 +121,6 @@ class TournamentsViewController: UIViewController, UITableViewDataSource, UITabl
 		return nil
 	}
 	
-	@available(iOS 11.0, *)
 	func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
 		if Identity.user?.admin == true {
 			return UISwipeActionsConfiguration(actions: [

@@ -111,7 +111,6 @@ extension UITableView {
 	}
 }
 
-@available(iOS 11.0, *)
 extension UIContextualAction {
 	convenience init(style: UIContextualAction.Style, title: String?, color: UIColor, handler: @escaping UIContextualAction.Handler) {
 		self.init(style: style, title: title, handler: handler)
