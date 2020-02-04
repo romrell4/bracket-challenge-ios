@@ -53,12 +53,13 @@ class MyBracketViewController: UserBracketViewController, UITabBarControllerDele
     
     override func areCellsClickable() -> Bool {
         //They should only be able to edit their picks if the tournament hasn't started yet (or if they're an admin)
-        return tournament.active || Identity.user.admin
+        return tournament.active || Identity.user?.admin == true
     }
     
     @IBAction func createBracketTapped(_ sender: Any) {
+		guard let user = Identity.user else { return }
         super.spinner.startAnimating()
-        BCClient.createBracket(tournamentId: super.tournament.tournamentId, bracketName: Identity.user.name) { (bracket, error) in
+        BCClient.createBracket(tournamentId: super.tournament.tournamentId, bracketName: user.name) { (bracket, error) in
             super.spinner.stopAnimating()
             if let bracket = bracket {
                 //When the bracket is successfully created, hide the view
