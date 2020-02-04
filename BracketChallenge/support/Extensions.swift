@@ -180,6 +180,9 @@ extension UIViewController {
 			FUIFacebookAuth(),
 			FUIEmailAuth()
 		]
+		if #available(iOS 13.0, *) {
+			authUI.providers.insert(FUIOAuth.appleAuthProvider(), at: 0)
+		}
 		present(authUI.authViewController(), animated: true)
 	}
 }
