@@ -49,6 +49,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="loginButton" destination="NIW-Sx-VCj" id="7Cw-fo-zJb"/>
                         <outlet property="spinner" destination="lfu-eH-g0O" id="w1g-hq-KTP"/>
                         <outlet property="tableView" destination="neL-n2-TLQ" id="Gkv-GA-EJr"/>
                         <segue destination="Rgz-d7-uyj" kind="show" identifier="tournament" id="uuC-dF-XVo"/>

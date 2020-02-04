@@ -17,7 +17,8 @@ class TournamentsViewController: UIViewController, UITableViewDataSource, UITabl
     //MARK: Outlets
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var spinner: UIActivityIndicatorView!
-    
+	@IBOutlet private weak var loginButton: UIBarButtonItem!
+	
     //MARK: Public properties
     var tournaments = [Tournament]()
 	
@@ -27,9 +28,13 @@ class TournamentsViewController: UIViewController, UITableViewDataSource, UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
 		
+		tableView.hideEmptyCells()
+		
 		if Identity.loadFromDefaults() {
 			//If the user was logged in previously, start the data load
 			self.loggedIn()
+		} else {
+			self.logOut()
 		}
 		
 		Auth.auth().addStateDidChangeListener { (_, user) in
@@ -150,9 +155,10 @@ class TournamentsViewController: UIViewController, UITableViewDataSource, UITabl
     
     //MARK: Listeners
 	
-	@IBAction func logOut(_ sender: UIBarButtonItem) {
+	@IBAction func logOut(_ sender: UIBarButtonItem? = nil) {
 		try? Auth.auth().signOut()
 		Identity.user = nil
+		loginButton.title = "Login"
 		presentLoginViewController()
 	}
 	    
@@ -190,6 +196,9 @@ class TournamentsViewController: UIViewController, UITableViewDataSource, UITabl
 	
 	private func loggedIn() {
 		guard let user = Identity.user else { return }
+		
+		loginButton.title = "Logout"
+		
 		//If they are an admin, they can create tournaments. Give them the button
 		if user.admin {
 			navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped(_:)))
@@ -201,7 +210,6 @@ class TournamentsViewController: UIViewController, UITableViewDataSource, UITabl
     
     private func setupTableView() {
 		refreshControl = tableView.addDefaultRefreshControl(target: self, action: #selector(loadTournaments(_:)))
-        tableView.hideEmptyCells()
         tableView.registerNib(nibName: "TournamentTableViewCell")
         tableView.variableHeightForRows()
     }
