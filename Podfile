@@ -9,6 +9,10 @@ target 'BracketChallenge' do
   inhibit_all_warnings!
 
   # Pods for BracketChallenge
-  pod 'FacebookLogin'
-
+  pod 'Firebase/Auth'
+  pod 'FirebaseUI/Auth'
+  pod 'FirebaseUI/Google'
+  pod 'FirebaseUI/Facebook'
+  pod 'FirebaseUI/OAuth' # Used for Sign in with Apple, Twitter, etc
+  pod 'FirebaseUI/Email'
 end

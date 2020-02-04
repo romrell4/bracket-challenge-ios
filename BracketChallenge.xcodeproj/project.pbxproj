@@ -26,7 +26,7 @@
 		0C5085C81F2E357D00C4A04D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C5085BF1F2E357D00C4A04D /* LaunchScreen.storyboard */; };
 		0C5085C91F2E357D00C4A04D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C5085C01F2E357D00C4A04D /* Main.storyboard */; };
 		0C5085CA1F2E357D00C4A04D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5085C21F2E357D00C4A04D /* AppDelegate.swift */; };
-		0C5085CB1F2E357D00C4A04D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5085C41F2E357D00C4A04D /* LoginViewController.swift */; };
+		0C55B7ED23DCB2DD00A3B638 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0C55B7EC23DCB2DD00A3B638 /* GoogleService-Info.plist */; };
 		0C81A2C720FBE2F400B8E817 /* BracketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C81A2C620FBE2F400B8E817 /* BracketViewController.swift */; };
 		0C8806B32030F78E001D7EB9 /* AddEditTournamentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8806B22030F78E001D7EB9 /* AddEditTournamentViewController.swift */; };
 		0C8806B520333D88001D7EB9 /* TableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8806B420333D88001D7EB9 /* TableData.swift */; };
@@ -73,7 +73,7 @@
 		0C5085BF1F2E357D00C4A04D /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0C5085C01F2E357D00C4A04D /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		0C5085C21F2E357D00C4A04D /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0C5085C41F2E357D00C4A04D /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		0C55B7EC23DCB2DD00A3B638 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0C81A2C620FBE2F400B8E817 /* BracketViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BracketViewController.swift; sourceTree = "<group>"; };
 		0C8806B22030F78E001D7EB9 /* AddEditTournamentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditTournamentViewController.swift; sourceTree = "<group>"; };
 		0C8806B420333D88001D7EB9 /* TableData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableData.swift; sourceTree = "<group>"; };
@@ -165,6 +165,7 @@
 		0C5085BB1F2E357D00C4A04D /* res */ = {
 			isa = PBXGroup;
 			children = (
+				0C55B7EC23DCB2DD00A3B638 /* GoogleService-Info.plist */,
 				0C5085BC1F2E357D00C4A04D /* Info.plist */,
 			);
 			path = res;
@@ -207,7 +208,6 @@
 		0C5085C31F2E357D00C4A04D /* controller */ = {
 			isa = PBXGroup;
 			children = (
-				0C5085C41F2E357D00C4A04D /* LoginViewController.swift */,
 				0C15EB261F2E548500E6E4A5 /* TournamentsViewController.swift */,
 				0C8806B22030F78E001D7EB9 /* AddEditTournamentViewController.swift */,
 				0C42A1001F33DE6000BF26CE /* TournamentTabBarViewController.swift */,
@@ -263,6 +263,7 @@
 				0C5085A31F2E34E300C4A04D /* Frameworks */,
 				0C5085A41F2E34E300C4A04D /* Resources */,
 				C6D41C221CE55F6B17C88C8E /* [CP] Embed Pods Frameworks */,
+				CB04B337D50F0BC3C3A92833 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -327,6 +328,7 @@
 				0C9FD77D1F2FE498005174F4 /* TournamentTableViewCell.xib in Resources */,
 				0CA1C09E20FC02B40072656B /* RoundView.xib in Resources */,
 				0C5085C81F2E357D00C4A04D /* LaunchScreen.storyboard in Resources */,
+				0C55B7ED23DCB2DD00A3B638 /* GoogleService-Info.plist in Resources */,
 				0C5085C71F2E357D00C4A04D /* Assets.xcassets in Resources */,
 				0CA1C0A020FC13D70072656B /* MatchView.xib in Resources */,
 			);
@@ -360,23 +362,55 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-BracketChallenge/Pods-BracketChallenge-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/AppAuth/AppAuth.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
-				"${BUILT_PRODUCTS_DIR}/FacebookCore/FacebookCore.framework",
-				"${BUILT_PRODUCTS_DIR}/FacebookLogin/FacebookLogin.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMAppAuth/GTMAppAuth.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AppAuth.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookCore.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookLogin.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMAppAuth.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BracketChallenge/Pods-BracketChallenge-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CB04B337D50F0BC3C3A92833 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BracketChallenge/Pods-BracketChallenge-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseAuthUI.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseEmailAuthUI.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseFacebookAuthUI.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseGoogleAuthUI.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseOAuthUI.bundle",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseAuthUI.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseEmailAuthUI.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseFacebookAuthUI.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseGoogleAuthUI.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseOAuthUI.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BracketChallenge/Pods-BracketChallenge-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -414,7 +448,6 @@
 				0C9DAB851F54BCC4009268D6 /* StandingsViewController.swift in Sources */,
 				0C8806B720338C05001D7EB9 /* TextFieldTableViewCell.swift in Sources */,
 				0C15EB2B1F2EAAA300E6E4A5 /* User.swift in Sources */,
-				0C5085CB1F2E357D00C4A04D /* LoginViewController.swift in Sources */,
 				0C49AB451F3554900074FAD0 /* MatchTableViewCell.swift in Sources */,
 				0C213FB51F2FCEC3007F25CA /* BCResponse.swift in Sources */,
 			);

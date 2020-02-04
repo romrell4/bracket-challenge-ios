@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import FacebookCore
+import Firebase
+import FirebaseUI
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,18 +17,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        SDKApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+		FirebaseApp.configure()
         return true
     }
 	
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        if let scheme = url.scheme, scheme.hasPrefix("fb\(SDKSettings.appId)"), url.host == "authorize" {
-            return SDKApplicationDelegate.shared.application(app, open: url, options: options)
-        }
+		if FUIAuth.defaultAuthUI()?.handleOpen(url, sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String) ?? false {
+			return true
+		}
         
         return false
     }
-    
-    
 }
 

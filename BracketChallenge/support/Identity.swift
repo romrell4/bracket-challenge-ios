@@ -11,11 +11,9 @@ import Foundation
 private let USER_KEY = "USER_KEY"
 
 class Identity {
-	static var user: User! {
+	static var user: User? {
 		didSet {
-			if let data = try? JSONEncoder().encode(user) {
-				UserDefaults.standard.set(data, forKey: USER_KEY)
-			}
+			UserDefaults.standard.set(try? JSONEncoder().encode(user), forKey: USER_KEY)
 		}
 	}
 	

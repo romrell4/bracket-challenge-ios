@@ -7,8 +7,7 @@
 //
 
 import UIKit
-import FacebookLogin
-import FacebookCore
+import FirebaseAuth
 
 private let TOURNAMENT_SEGUE_ID = "tournament"
 private let ADD_EDIT_SEGUE_ID = "addEditTournament"
@@ -28,11 +27,27 @@ class TournamentsViewController: UIViewController, UITableViewDataSource, UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
 		
-		if AccessToken.current != nil, Identity.loadFromDefaults() {
-			loggedIn(segue: nil)
-		} else {
-			LoginManager().logOut()
-			performSegue(withIdentifier: "logIn", sender: nil)
+		if Identity.loadFromDefaults() {
+			//If the user was logged in previously, start the data load
+			self.loggedIn()
+		}
+		
+		Auth.auth().addStateDidChangeListener { (_, user) in
+			if user != nil {
+				//If the are currently logged out, log them in
+				if Identity.user == nil {
+					BCClient.login { (user, error) in
+						if let user = user {
+							Identity.user = user
+							self.loggedIn()
+						} else {
+							self.displayAlert(error: error)
+						}
+					}
+				}
+			} else {
+				self.presentLoginViewController()
+			}
 		}
     }
     
@@ -86,7 +101,7 @@ class TournamentsViewController: UIViewController, UITableViewDataSource, UITabl
 	
 	@available(iOS 11.0, *)
 	func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-		if Identity.user.admin {
+		if Identity.user?.admin == true {
 			return UISwipeActionsConfiguration(actions: [UIContextualAction(style: .destructive, title: "Delete", handler: { (_, _, completionHandler) in
 				self.spinner.startAnimating()
 				
@@ -109,7 +124,7 @@ class TournamentsViewController: UIViewController, UITableViewDataSource, UITabl
 	
 	@available(iOS 11.0, *)
 	func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-		if Identity.user.admin {
+		if Identity.user?.admin == true {
 			return UISwipeActionsConfiguration(actions: [
 				UIContextualAction(style: .normal, title: "Edit", color: .blue) { (_, _, _) in
 					self.performSegue(withIdentifier: ADD_EDIT_SEGUE_ID, sender: self.tournaments[indexPath.row])
@@ -138,22 +153,11 @@ class TournamentsViewController: UIViewController, UITableViewDataSource, UITabl
     //MARK: Listeners
 	
 	@IBAction func logOut(_ sender: UIBarButtonItem) {
-		LoginManager().logOut()
-		performSegue(withIdentifier: "logIn", sender: nil)
+		try? Auth.auth().signOut()
+		Identity.user = nil
+		presentLoginViewController()
 	}
-	
-	@IBAction func loggedIn(segue: UIStoryboardSegue?) {
-		print(AccessToken.current?.authenticationToken ?? "")
-		
-		//If they are an admin, they can create tournaments. Give them the button
-		if Identity.user.admin {
-			navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped(_:)))
-		}
-		
-		setupTableView()
-		loadTournaments(nil)
-	}
-    
+	    
     @IBAction func tournamentAdded(segue: UIStoryboardSegue?) {
         if let vc = segue?.source as? AddEditTournamentViewController, let tournament = vc.tournament {
 			if let existingIndex = tournaments.firstIndex(where: { $0.tournamentId == tournament.tournamentId }) {
@@ -169,7 +173,7 @@ class TournamentsViewController: UIViewController, UITableViewDataSource, UITabl
         performSegue(withIdentifier: ADD_EDIT_SEGUE_ID, sender: nil)
     }
 	
-	@objc func loadTournaments(_ sender: Any?) {
+	@objc func loadTournaments(_ sender: Any? = nil) {
 		//If a sender is passed in, this is a refresh. Otherwise, it's the first load
 		sender == nil ? spinner.startAnimating() : refreshControl.beginRefreshing()
 		BCClient.getTournaments { (tournaments, error) in
@@ -185,6 +189,17 @@ class TournamentsViewController: UIViewController, UITableViewDataSource, UITabl
 	}
     
     //MARK: Private functions
+	
+	private func loggedIn() {
+		guard let user = Identity.user else { return }
+		//If they are an admin, they can create tournaments. Give them the button
+		if user.admin {
+			navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped(_:)))
+		}
+		
+		setupTableView()
+		loadTournaments()
+	}
     
     private func setupTableView() {
 		refreshControl = tableView.addDefaultRefreshControl(target: self, action: #selector(loadTournaments(_:)))

@@ -15,6 +15,6 @@ class ResultsViewController: BracketViewController {
     }
 	
 	override func areCellsClickable() -> Bool {
-		return Identity.user.admin
+		return Identity.user?.admin == true
 	}
 }

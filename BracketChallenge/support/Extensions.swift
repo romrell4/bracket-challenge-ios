@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseUI
 
 //MARK: Basic data types
 
@@ -164,4 +165,22 @@ extension UIViewController {
     func popBack() {
         navigationController?.popViewController(animated: true)
     }
+	
+	func presentLoginViewController(loggedInListener: ((FirebaseUI.User) -> Void)? = nil) {
+		if let listener = loggedInListener {
+			Auth.auth().addStateDidChangeListener { (_, user) in
+				if let user = user {
+					listener(user)
+				}
+			}
+		}
+		
+		guard let authUI = FUIAuth.defaultAuthUI() else { return }
+		authUI.providers = [
+			FUIGoogleAuth(),
+			FUIFacebookAuth(),
+			FUIEmailAuth()
+		]
+		present(authUI.authViewController(), animated: true)
+	}
 }
