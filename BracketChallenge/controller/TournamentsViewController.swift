@@ -173,7 +173,7 @@ class TournamentsViewController: UIViewController, UITableViewDataSource, UITabl
         performSegue(withIdentifier: ADD_EDIT_SEGUE_ID, sender: nil)
     }
 	
-	@objc func loadTournaments(_ sender: Any?) {
+	@objc func loadTournaments(_ sender: Any? = nil) {
 		//If a sender is passed in, this is a refresh. Otherwise, it's the first load
 		sender == nil ? spinner.startAnimating() : refreshControl.beginRefreshing()
 		BCClient.getTournaments { (tournaments, error) in
@@ -198,7 +198,7 @@ class TournamentsViewController: UIViewController, UITableViewDataSource, UITabl
 		}
 		
 		setupTableView()
-		loadTournaments(nil)
+		loadTournaments()
 	}
     
     private func setupTableView() {
