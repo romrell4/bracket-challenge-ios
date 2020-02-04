@@ -12,7 +12,7 @@ target 'BracketChallenge' do
   pod 'Firebase/Auth'
   pod 'FirebaseUI/Auth'
   pod 'FirebaseUI/Google'
-#  pod 'FirebaseUI/Facebook'
+  pod 'FirebaseUI/Facebook'
   pod 'FirebaseUI/OAuth' # Used for Sign in with Apple, Twitter, etc
   pod 'FirebaseUI/Email'
 end
